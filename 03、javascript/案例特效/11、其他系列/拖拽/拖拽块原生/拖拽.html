@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        width: 240px;
+        height: 180px;
+        background: red;
+        position: absolute;
+        left: 10px;
+        top: 10px
+    }
+
+    .box:hover {
+        cursor: move;
+    }
+
+    .container-box {
+        width: 800px;
+        height: 500px;
+        border: 1px solid blue;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .box-dot {
+        width: 5px;
+        height: 5px;
+        background: green;
+        position: absolute;
+        cursor: se-resize;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+
+<body>
+    <div class="container-box" id="container">
+        <div class="box" id="drag-box">
+        </div>
+    </div>
+    <script>
+        class Drag {
+            constructor(el, parentBox) {
+                this.dragBox = el;
+                this.parentBox = parentBox;
+                this.isMove = false;
+                this.resizeBox = {}
+                this.mouseDownHandler()
+                this.createResizeBox()
+                this.resizeHandler()
+            }
+            createResizeBox() {
+                let resizeBox = document.createElement('div');
+                resizeBox.style.width = '10px'
+                resizeBox.style.height = '10px'
+                resizeBox.style.background = 'green'
+                resizeBox.style.position = 'absolute'
+                resizeBox.style.cursor = 'se-resize'
+                resizeBox.style.right = '0'
+                resizeBox.style.bottom = '0'
+                this.resizeBox = resizeBox
+                console.log('resizeBox33333', resizeBox)
+                this.dragBox.appendChild(resizeBox)
+            }
+            resizeHandler() {
+                let self = this;
+                this.resizeBox.onmousedown = function (evt) {
+                    evt.stopPropagation();
+                    evt.cancelBubble = true;
+                    let dragBoxWidth = self.dragBox.offsetWidth;
+                    let dragBoxHeight = self.dragBox.offsetHeight;
+                    let currentX = evt.clientX;
+                    let currentY = evt.clientY;
+                    document.onmousemove = function (e) {
+                        const rect = self.getOffsetByBody(self.parentBox)
+                        let disW = e.clientX;
+                        let disY = e.clientY;
+
+                        // 判断拖拽时宽高是否超出父元素
+
+                        if (e.clientX >= self.parentBox.offsetLeft + rect.offsetLeft + self.parentBox.offsetWidth) {
+                            disW = self.parentBox.offsetLeft + rect.offsetLeft + self.parentBox.offsetWidth
+                        }
+                        if (e.clientY >= self.parentBox.offsetTop + rect.offsetTop + self.parentBox.offsetHeight) {
+                            disY = self.parentBox.offsetTop + rect.offsetTop + self.parentBox.offsetHeight
+                        }
+                        let lastW = dragBoxWidth + disW - currentX;
+                        let lastH = dragBoxHeight + disY - currentY;
+                        self.dragBox.style.width = lastW >= 240 ? lastW + 'px' : 240 + 'px';
+                        self.dragBox.style.height = lastH >= 180 ? lastH + 'px' : 180 + 'px'
+                        document.onmouseup = function (evt) {
+                            document.onmousedown = null;
+                            document.onmousemove = null
+
+                        }
+                    }
+                }
+            }
+            mouseDownHandler() {
+                let self = this
+                this.dragBox.onmousedown = function (evt) {
+                    self.isMove = true
+                    let rect = self.getOffsetByBody(self.dragBox)
+                    const offsetX = rect.offsetLeft;
+                    const offsetY = rect.offsetTop;
+                    const innerX = evt.clientX - offsetX - self.dragBox.offsetLeft
+                    const innerY = evt.clientY - offsetY - self.dragBox.offsetTop;
+
+                    document.onmousemove = function (evt) {
+                        let rect = self.getOffsetByBody(self.dragBox)
+                        let disX = evt.clientX - rect.offsetLeft - innerX
+                        let disY = evt.clientY - rect.offsetTop - innerY
+                        if (disX <= 0) {
+                            disX = 0
+                        } else if (disX >= self.parentBox.offsetWidth - self.dragBox.offsetWidth) {
+                            disX = self.parentBox.offsetWidth - self.dragBox.offsetWidth
+                        }
+                        if (disY <= 0) {
+                            disY = 0
+                        } else if (disY >= self.parentBox.offsetHeight - self.dragBox.offsetHeight) {
+                            disY = self.parentBox.offsetHeight - self.dragBox.offsetHeight
+                        }
+                        self.dragBox.style.left = disX + "px";
+                        self.dragBox.style.top = disY + "px";
+
+                        self.isMove = true
+                    }
+                    document.onmouseup = function (evt) {
+                        document.onmousedown = null;
+                        document.onmousemove = null
+                        self.isMove = false
+                    }
+                }
+
+            }
+            getOffsetByBody(el) {
+                let offsetTop = 0;
+                let offsetLeft = 0;
+                let ele = el.offsetParent;
+                while (ele && ele.tagName !== 'BODY') {
+                    // console.log(ele, ele.tagName, ele.offsetLeft)
+                    offsetTop += ele.offsetTop;
+                    offsetLeft += ele.offsetLeft;
+                    ele = ele.offsetParent
+                }
+                return {
+                    offsetLeft,
+                    offsetTop,
+                }
+            }
+
+
+
+        }
+
+        var box = document.querySelector('#drag-box')
+        var parentBox = document.querySelector('#container')
+        // var dotBox = document.querySelector('#drag-dot')
+        new Drag(box, parentBox)
+    </script>
+</body>
+
+</html>

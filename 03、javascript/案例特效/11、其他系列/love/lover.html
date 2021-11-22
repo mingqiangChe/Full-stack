@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表白网页</title>
+		<link rel="stylesheet" type="text/css" href="css/lover.css" />
+		<script src="js/lover.js"></script>
+	</head>
+	<body onmousedown="coordinate(event)" onclick="bodys()">
+		<div class="all">
+			<div class="dibu" id="dibu"></div>
+			<p class="texts1" id="texts1">欢迎来到门后的世界，这里不是充斥可怕东西的地方，而是纯洁的地方，要。。。继续吗</p>
+			<p class="text2" id="text2"></p>
+			<p class="text3" id="text3"></p>
+			<div class="woman" id="woman">
+				<div id="heas" class="head"></div>
+				<div id="heas" class="heal">
+					<div class="heal1"></div>
+					<div class="heal2"></div>
+					<div class="heal3"></div>
+				</div>
+				<div class="womanhand" id="womanhand"></div>
+			</div>
+			<div class="man" id="man">
+				<div class="head2"></div>
+				<div class="manbody"></div>
+				<div class="manhand" id="manhand"></div>
+				<div class="manq1" id="manq1">
+					<div class="mand1"></div>
+				</div>
+				<div class="manq2" id="manq2">
+					<div class="mand2"></div>
+				</div>
+			</div>
+			<div class="sun" id="sun"></div>
+			<div class="xg" id="xg">
+				<div class="xx"></div>
+			</div>
+			<div class="bird" id="bird">
+				<div class="leftbird" id="leftbird"></div>
+				<div class="rightbird" id="rightbird"></div>
+			</div>
+			<img src="img/玫瑰花.png" class="flower" id="flower" />
+			<div class="fireworks" id="fireworks">
+				<div class="twyuan0" id="twyuan0"></div>
+				<div class="twyuan1_0" id="twyuan1_0"></div>
+				<div class="twyuan2_0" id="twyuan2_0"></div>
+				<div class="twyuan3_0" id="twyuan3_0"></div>
+				<div class="twyuan4_0" id="twyuan4_0"></div>
+				<div class="twyuan5_0" id="twyuan5_0"></div>
+			</div>
+			<div class="heart" id="heart">
+				<div class="heart1" id="heart1">
+					<div class="heart1s" id="heart1s"></div>
+				</div>
+				<div class="heart2" id="heart2">
+					<div class="heart2s" id="heart2s"></div>
+				</div>
+				<div class="heart3" id="heart3">
+					<div class="heart3s" id="heart3s"></div>
+				</div>
+			</div>
+			<div class="yanhua" id="yanhua">
+				<div class="yh1" id="yh1">
+					<div class="yh2" id="yh2"></div>
+				</div>
+			</div>
+			<div class="yanhua2" id="yanhua2">
+				<div class="yh21" id="yh21">
+					<div class="yh22" id="yh22"></div>
+				</div>
+			</div>
+			<div class="yanhua3" id="yanhua3">
+				<div class="yh31" id="yh31">
+					<div class="yh32" id="yh32"></div>
+				</div>
+			</div>
+		</div>
+		<div class="sediao" id="sediao">
+			<p class="texts2" id="texts2">你，愿意做我女朋友吗</p>
+		</div>
+		<div class="kk" id="kk">
+			<script>
+				var strs='';
+				var deg5=0;
+				for(var i=1;i<=24;i++){
+					strs+='<div id="kk'+i+'" class="kk'+i+'" style="width: 5px;height: 5px;border: 1px solid white;position: relative;transform: rotateY('+deg5+'deg) translateZ(600px);transition: all 3s linear;"></div>';
+					deg5+=15;
+				}
+				document.getElementById("kk").innerHTML=strs;
+			</script>
+		</div>
+	</body>
+</html>

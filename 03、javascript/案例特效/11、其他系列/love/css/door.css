@@ -1,0 +1,168 @@
+* {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+	font-family: "方正舒体";
+}
+
+.ys {
+	width: 1px;
+	height: 1px;
+	background-color: transparent;
+	border: 2px solid white;
+	border-radius: 50%;
+	position: absolute;
+	transition: all 1s linear;
+	z-index: 2;
+	box-shadow: 0 0 100px 10px white;
+}
+
+.all {
+	width: 100%;
+	height: 100vh;
+	background-color: #000000;
+	perspective: 800px;
+	overflow: hidden;
+}
+
+.door_all {
+	width: 5%;
+	height: 15%;
+	position: absolute;
+	top: 5%;
+	left: 40%;
+	transition: 5s;
+}
+
+.door {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index: 1;
+	border: 5px solid #550000;
+	transition: 2s;
+	transform-origin: left;
+	box-shadow: 0 0 0 0 white;
+}
+
+.door_down {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	border: 5px solid #550000;
+	box-shadow: 0px 0px 10px 0px #fff;
+	transition: 2s;
+}
+
+.door_box {
+	border: 5px solid #000000;
+	width: 100%;
+	height: 100%;
+	transform: rotateX(-95deg);
+	transform-origin: bottom;
+	background-color: #000000;
+	transition: 2s;
+	position: absolute;
+	opacity: 0.2;
+}
+
+.door_open {
+	width: 3%;
+	height: 8%;
+	background-color: white;
+	border-radius: 1em;
+	position: relative;
+	top: 45%;
+	left: 90%;
+	backface-visibility: hidden;
+}
+
+.woman {
+	position: absolute;
+	top: 85%;
+	left: 60%;
+	z-index: 1;
+	perspective: 1000px;
+	transition: 4s;
+}
+
+.head {
+	width: 30px;
+	height: 30px;
+	border-radius: 12em;
+	background-color: white;
+	border: 1px solid white;
+}
+
+.heal div {
+	width: 30px;
+	height: 40px;
+	background-color: white;
+	position: absolute;
+	border: 1px solid white;
+}
+
+.heal2 {
+	transform-origin: right top;
+	transform: rotateZ(-20deg);
+}
+
+.heal3 {
+	transform-origin: left top;
+	transform: rotateZ(20deg);
+}
+
+.texts {
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+.textp {
+	color: white;
+	position: absolute;
+	top: 20%;
+	left: 80%;
+	font-size: 25px;
+	text-shadow: 5px 2px 10px white;
+}
+
+.textz {
+	width: 0px;
+	height: 110px;
+	background-color: #000000;
+	position: absolute;
+	top: 20%;
+	left: 75%;
+	transition: all 3s linear;
+}
+
+.start {
+	width: 100%;
+	height: 100vh;
+	background-color: #000000;
+	position: absolute;
+	top: 0px;
+	transition: all 3s ease-in;
+}
+
+.textpp {
+	color: white;
+	font-size: 40px;
+	text-shadow: 5px 2px 10px white;
+	text-align: center;
+}
+.dibu{
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+audio{
+	z-index: 2;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+}

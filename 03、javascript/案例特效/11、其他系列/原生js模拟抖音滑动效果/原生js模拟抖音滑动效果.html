@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        -moz-user-select: none;
+        /*火狐*/
+        -webkit-user-select: none;
+        /*webkit浏览器*/
+        -ms-user-select: none;
+        /*IE10*/
+        -khtml-user-select: none;
+        /*早期浏览器*/
+        user-select: none;
+    }
+
+    #box {
+        width: 350px;
+        height: 500px;
+        margin: 30px auto;
+        border-radius: 5px;
+        box-shadow: 0px 0px 27px -3px red;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+        background-color: #ccc;
+    }
+
+    .childbox {
+        width: 300%;
+        height: 100%;
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .childbox>div {
+        flex: 1;
+        height: 100%;
+    }
+
+    .child1 {
+        background-color: salmon;
+    }
+
+    .child2 {
+        background-color: greenyellow;
+    }
+
+    .child3 {
+        background-color: blueviolet;
+    }
+
+    .nav_box {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        line-height: 50px;
+    }
+
+    .nav_box div {
+        display: inline-block;
+        color: #fff;
+        margin: 0 5px;
+        position: relative;
+    }
+
+    .active_nav::before {
+        content: '';
+        position: absolute;
+        background-color: #fff;
+        left: 2px;
+        bottom: 7px;
+        width: 27px;
+        height: 2px;
+    }
+
+    .childbox>div {
+        position: relative;
+    }
+
+    .childbox>div .listview {
+        width: 100%;
+        position: absolute;
+    }
+
+    .view_child {
+        text-align: center;
+        line-height: 200px;
+        color: #fff;
+        font-size: 25px;
+    }
+</style>
+
+<body>
+    <div id="box">
+        <div class="childbox">
+            <div class="child1">
+                <div class="listview" type="附近">
+
+                </div>
+            </div>
+            <div class="child2">
+                <div class="listview" type="关注">
+
+                </div>
+            </div>
+            <div class="child3">
+                <div class="listview" type="推荐">
+
+                </div>
+            </div>
+        </div>
+        <div class="nav_box">
+            <div>附近</div>
+            <div>关注</div>
+            <div class="active_nav">推荐</div>
+        </div>
+    </div>
+    <script>
+        //获取动画盒子
+        let childbox = document.querySelector('.childbox')
+        //获取屏幕的高度
+        let viewheight = document.querySelector('#box').offsetHeight
+        //获取所有的导航
+        let childnav = document.querySelector('.nav_box').querySelectorAll('div')
+        //获取视频类型盒子
+        let viewlist = document.querySelectorAll('.listview')
+        //导航索引（0,附近,1,关注，2推荐）
+        let indextype = 2
+        //视频播放的索引(0:附近,1:关注,2:推荐)[下标,视频的数量,页码]
+        let view_index = {
+            0: [0, 0, 1],
+            1: [0, 0, 1],
+            2: [0, 0, 1]
+        }
+        //初始化导航
+        set_nav_active(indextype)
+        //导航选中状态
+        function set_nav_active(index) {
+            //清除选中状态
+            for (let i = 0; i < childnav.length; i++) {
+                childnav[i].className = ''
+            }
+            //给选中的加上值
+            childnav[index].className = 'active_nav'
+            //改变盒子位置
+            childbox.style.left = index * -100 + '%'
+        }
+        //给导航加点击事件
+        for (let i = 0; i < childnav.length; i++) {
+            childnav[i].onclick = function () {
+                //加上过渡动画
+                childbox.style.transition = 'all 0.5s'
+                //改变点击导航状态
+                indextype = i
+                set_nav_active(indextype)
+            }
+        }
+        //左右滑动
+        let box = document.querySelector('#box')
+        //动画是否结束的状态
+        let transition_status = true
+        //按下
+        box.onmousedown = function (event) {
+            //判断是否可以执行动画
+            if (!transition_status) {
+                return
+            }
+            //获取坐标值
+            let startY = event.clientY
+            let startX = event.clientX
+            //是否要进判断
+            let t_l_type = true
+            //获取上下还是左右滑动的状态(0:不动;1:左右;2:上下)
+            let move_type = 0
+            //记录动画行为(1:下拉,2:上下，3：左右，0：不动)
+            let transition_type = 0
+            // 左右start
+            //清除盒子动画
+            childbox.style.transition = ''
+            //获取盒子left位置
+            let startleft = childbox.offsetLeft
+            //是否切换滑动
+            let type = {
+                a: false,
+                b: ''
+            }
+            //左右over
+            //上下滑动
+            //滑动的初始化位置
+            let startTop = viewlist[indextype].offsetTop
+            //判断是否切换
+            let top_type_view = {
+                a: false, //是否要切换
+                b: '', //判断向上还是向下
+            }
+            console.log(startTop)
+            //上下over
+            //下拉刷新
+            //清除动画
+            viewlist[indextype].style.transition = '';
+            //记录下拉距离
+            let b_top = 0
+            //下拉over
+            document.onmousemove = function (event) {
+                //获取移动时坐标
+                let moveY = event.clientY
+                let moveX = event.clientX
+                //加是否要判断的开关
+                if (t_l_type) {
+                    //判断是左右滑动还是上下
+                    if (Math.abs(moveY - startY) > 5) {
+                        //停止下次判断
+                        t_l_type = false
+                        //记录滑动状态
+                        move_type = 2
+                    }
+                    if (Math.abs(moveX - startX) > 5) {
+                        //停止下次判断
+                        t_l_type = false
+                        //记录滑动状态
+                        move_type = 1
+                    }
+                }
+                //判断滑动代码
+                if (move_type == 2) {
+                    //下拉需要两个条件 1 下拉的 2 上没有东西了
+                    if (view_index[indextype][0] == 0 && moveY - startY > 0) {
+                        console.log('下拉')
+                        //改变动画状态
+                        transition_type = 1
+                        //计算下拉距离
+                        b_top = moveY - startY
+                        //拉动视图盒子
+                        viewlist[indextype].style.top = b_top + 'px'
+                        return
+                    }
+                    //执行上下滑动
+                    //下拉的时候拒绝上下滑动
+                    if (transition_type != 1) {
+                        //改变动画状态
+                        transition_type = 2
+                        //移动的位置
+                        let moveY = event.clientY
+                        //计算上下移动的距离
+                        let num = moveY - startY
+                        //改变拖拽元素的top值
+                        viewlist[indextype].style.top = startTop + num + 'px'
+                        //判断是否要切换
+                        if (num > 70) {
+                            top_type_view.a = true
+                            top_type_view.b = '上'
+                        } else if (num < -70) {
+                            top_type_view.a = true
+                            top_type_view.b = '下'
+                        }
+                    }
+                } else if (move_type == 1) {
+                    // 左右的代码
+                    //改变动画状态
+                    transition_type = 3
+                    //移动的位置
+                    let moveX = event.clientX
+                    //移动的距离
+                    let num = moveX - startX
+                    //盒子需要的left值
+                    childbox.style.left = startleft + num + 'px'
+                    //滑动的方向
+                    if (moveX > startX) {
+                        if (num > 100) {
+                            type.a = true
+                            type.b = '右'
+                        }
+                    } else if (moveX < startX) {
+                        if (num < -100) {
+                            type.a = true
+                            type.b = '左'
+                        }
+                    }
+                    // over
+                }
+
+            }
+            //抬起
+            window.onmouseup = function () {
+                //清除滑动事件
+                document.onmousemove = ''
+                //判断执行动画
+                if (transition_type == 1) {
+                    //下拉
+                    //加上动画
+                    viewlist[indextype].style.transition = 'all .5s';
+                    //判断拉动的距离判断是否刷新
+                    if (b_top > 70) {
+                        //执行动画
+                        transition_status = false
+                        viewlist[indextype].style.top = '70px'
+                        setTimeout(function () {
+                            viewlist[indextype].style.top = '0px'
+                            //从第一页开始
+                            view_index[indextype][2] = 1
+                            autoview(indextype)
+                            //还原动画
+                            setTimeout(() => {
+                                transition_status = true
+                            }, 500);
+                        }, 2000)
+                    } else {
+                        viewlist[indextype].style.top = '0px'
+                    }
+                } else if (transition_type == 2) {
+                    //上下
+                    //加上过渡动画
+                    viewlist[indextype].style.transition = 'all .5s';
+                    //判断执行的动画
+                    if (top_type_view.a) {
+                        //判断上下切换
+                        if (top_type_view.b == '上') {
+                            //下标改变
+                            view_index[indextype][0]--
+                            if (view_index[indextype][0] <= -1) {
+                                view_index[indextype][0] = 0
+                            }
+                            viewlist[indextype].style.top = view_index[indextype][0] * -viewheight + 'px'
+                            console.log('上')
+                        } else if (top_type_view.b == '下') {
+                            view_index[indextype][0]++
+                            if (view_index[indextype][0] >= view_index[indextype][1] - 2) {
+                                //生成新的视频
+                                autoview(indextype)
+                            }
+                            viewlist[indextype].style.top = view_index[indextype][0] * -viewheight + 'px'
+                        }
+                    } else {
+                        //还原现有状态
+                        viewlist[indextype].style.top = startTop + 'px'
+                    }
+                } else if (transition_type == 3) {
+                    //左右
+                    //执行判断是否切换
+                    if (type.a) {
+                        if (type.b === '左') {
+                            indextype++
+                            if (indextype >= 3) {
+                                indextype = 2
+                            }
+                        } else if (type.b === '右') {
+                            indextype--
+                            if (indextype <= -1) {
+                                indextype = 0
+                            }
+                        }
+                    }
+                    //加上过渡
+                    childbox.style.transition = 'all 0.5s'
+                    //调取切换函数
+                    set_nav_active(indextype)
+                }
+                //还原下次判断
+                t_l_type = true
+                //还原下次状态
+                move_type = 0
+                //还原动画状态
+                transition_type = 0
+            }
+        }
+
+
+        //随机背景颜色
+        function autocolor() {
+            return `rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`
+        }
+        //默认生成视频列表
+        for (let i = 0; i < viewlist.length; i++) {
+            autoview(i)
+        }
+        //生成视频列表
+        function autoview(index) {
+            //获取视频类型
+            let type = viewlist[index].getAttribute('type')
+            //更改视频数量
+            if (view_index[index][2] == 1) {
+                //清除现有内容
+                viewlist[indextype].innerHTML = ''
+                //记录视频数量
+                view_index[index][1] = 10
+            } else {
+                //累加视频数量
+                view_index[index][1] += 10
+            }
+            //index 插入的下标
+            for (let i = 0; i < 10; i++) {
+                //创建dom
+                let div = document.createElement('div')
+                //命名
+                div.className = 'view_child'
+                //内容
+                div.innerHTML = `
+            <div>${type}:${(view_index[index][2] - 1) * 10 + i + 1}</div>
+            <hr></hr>
+            <div>页码：${view_index[index][2]}</div>
+        `
+                //设置背景颜色
+                div.style.backgroundColor = autocolor()
+                //设置盒子高度
+                div.style.height = viewheight + 'px'
+                //追加
+                viewlist[index].appendChild(div)
+            }
+            //更改下次页码
+            view_index[index][2]++
+            console.log(view_index)
+        }
+
+        //双击置顶
+        let nav_box = document.querySelector('.nav_box')
+        nav_box.ondblclick = function () {
+            viewlist[indextype].style.transition = 'all .5s'
+            viewlist[indextype].style.top = '0px'
+            view_index[indextype][0] = 0
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul,
+        li {
+            list-style: none;
+            flex: 1;
+            text-align: center;
+            cursor: pointer;
+            padding: 5px 0;
+        }
+
+        ul {
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .div {
+            width: 100%;
+            overflow: hidden;
+            background-color: #80b600;
+        }
+
+        .active {
+            background-color: #80b600;
+            color: #ffffff;
+        }
+
+        #tabClick {
+            background-color: #f5f5f5;
+            color: #80b600;
+        }
+
+        #content>div {
+            display: none;
+            height: 200px;
+        }
+
+        #tabClick1 {
+            background-color: #f5f5f5;
+            color: #80b600;
+        }
+
+        #content1>div {
+            display: none;
+            height: 200px;
+        }
+
+        #tabClick2 {
+            background-color: #f5f5f5;
+            color: #80b600;
+        }
+
+        #content2>div {
+            display: none;
+            height: 200px;
+        }
+
+        #tabClick3 {
+            background-color: #f5f5f5;
+            color: #80b600;
+        }
+
+        #content3>div {
+            display: none;
+            height: 200px;
+        }
+
+        /* ------------ */
+        .box {
+            display: flex;
+            justify-content: center;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div>
+            <h2>模式一:基础tab点击切换</h2>
+            <div style="width: 500px;margin-top: 30px;">
+                <div class="div">
+                    <ul id="tabClick"></ul>
+                    <div id="content">
+                        <div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                        </div>
+                        <div>
+                            <div>222</div>
+                            <div>111</div>
+                            <div>111</div>
+                        </div>
+                        <div>333</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div>
+            <h2>模式二:点击过渡滑动切换动画</h2>
+            <div style="width: 500px;margin-top: 30px;">
+                <div class="div">
+                    <ul id="tabClick1"></ul>
+                    <div id="content1">
+                        <div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                        </div>
+                        <div>
+                            <div>222</div>
+                            <div>111</div>
+                        </div>
+                        <div>333</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div>
+            <h2>模式三:1.滑动底部加载更多触发回调函数，2.点击选项卡触发回调函数</h2>
+            <div style="width: 500px;margin-top: 30px; margin-left: auto;margin-right: auto;">
+                <div class="div">
+                    <ul id="tabClick2"></ul>
+                    <div id="content2">
+                        <div id="tab1">
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div style="text-align: center;margin-bottom: 20px;">上拉加载更多</div>
+                        </div>
+                        <div>
+                            <div>222</div>
+
+                        </div>
+                        <div>333</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div>
+            <h2>模式四:自动切换tab，设置时间</h2>
+            <div style="width: 500px;margin-top: 30px; margin-left: auto;margin-right: auto;">
+                <div class="div">
+                    <ul id="tabClick3"></ul>
+                    <div id="content3">
+                        <div id="oop">
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                            <div>111</div>
+                        </div>
+                        <div>
+                            <div>222</div>
+
+                        </div>
+                        <div>333</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        ; (function (global) {
+            "use strict";
+            let deferTimer;
+            var M = function (el, options) {
+                this.el = typeof el === "string" ? document.querySelector(el) : el;
+                this.options = JSON.stringify(options) != '{}' ? options : false;
+                if (this.options) {
+                    this.options.contentIndex = JSON.stringify(options) != '{}' ? 0 : false;
+                };
+                this.options && this.tabTitle();
+            };
+            M.prototype = {
+                addtod: function () {
+                    console.log(this)
+                    return this
+                },
+                //样式设置
+                setStyle: function (dom, objStyle) {
+                    for (var k in objStyle) {
+                        dom.style[k] = objStyle[k];
+                    };
+                },
+                // 初始化创建tab,并且绑定事件回调
+                tabTitle: function () {
+                    let type = typeof this.options.Title[0];
+                    let _this = this;
+
+                    for (var i = 0; i <= this.options.Title.length - 1; i++) {
+                        let li = document.createElement("li");
+                        li.start = i;
+
+                        li.data = this.options.Title[i];
+                        var textnode = (type === 'string' && document.createTextNode(`${this.options.Title[i]}`)) || (type === 'object' && document.createTextNode(`${this.options.Title[i].name}`));
+                        li.onclick = function () {
+                            _this.liEvent(this)
+                        };
+                        li.appendChild(textnode);
+                        this.el.appendChild(li);
+                    };
+
+                    (this.options.defaultIndex && this.defaultIndexEvetn(this.options.defaultIndex - 1)) || (!this.options.defaultIndex && this.defaultIndexEvetn(0))
+
+                    // 是否开启上拉监听
+                    typeof this.options.handleScroll === 'function' && this.options.content && this.MonitorBox();
+
+                    // 是否开启自动切换
+                    this.options.automatic && this.options.automatic.open && this.switchAutomatic();
+                    // console.log(this)
+                },
+                liEvent(that) {
+                    if (this.options.contentIndex == that.start) {
+                        return;
+                    };
+                    for (var k = this.el.getElementsByTagName("li").length - 1; k >= 0; k--) {
+                        this.el.getElementsByTagName("li")[k].className = '';
+                    };
+                    this.options.contentIndex = that.start;
+                    this.options.MonitorSubscript = that.start;
+                    that.className = 'active';
+                    this.options.content && this.contentEvetn(that.start);
+                    this.options.titleEvent && this.options.titleEvent(that.data);
+                },
+                // 自动切换
+                switchAutomatic() {
+                    let dataChildren = getChildren(this.el);
+                    let index = this.options.defaultIndex;
+                    let that = this;
+                    let time = Number(this.options.automatic.time) && this.options.automatic.time > 0 ? Number(this.options.automatic.time) : false;
+                    setInterval(function () {
+                        if (index == dataChildren.length) {
+                            index = 0;
+                        };
+                        that.liEvent(dataChildren[index]);
+                        index++;
+                    }, time ? time : 2500);
+                },
+                // 默认展示第几项
+                defaultIndexEvetn: function (activeDom) {
+                    let _this = this;
+                    this.el.getElementsByTagName("li")[activeDom].className = 'active';
+                    // 记录上次选项卡标题下标
+                    this.options.contentIndex = activeDom;
+                    let content = this.options.content ? document.getElementById(this.options.content) : false;
+
+                    let dataChildren = content && getChildren(content);
+                    if (this.options.content && !this.options.transition) { //是否有内容容器切换，有就设置默认选项
+                        for (var i = 0; i < dataChildren.length; i++) {
+                            dataChildren[i].style.cssText = `overflow-y: auto;`;
+                        };
+                        dataChildren[activeDom].style.display = 'block';
+                        // 记录上次展示的容器下标
+                        this.options.index = activeDom;
+
+                    } else if (this.options.content && this.options.transition) {
+                        let w = this.el.offsetWidth;
+                        for (var i = 0; i < dataChildren.length; i++) {
+                            dataChildren[i].style.display = 'block';
+                            dataChildren[i].style.cssText = `width: ${w}px; float: left; padding: 0px; margin: 0px; vertical-align: top; display: table-cell;overflow-y: auto;`
+                        };
+
+                        content.style.cssText = `overflow: hidden; position: relative;width: ${w * content.getElementsByTagName('div').length}px;transform: translate3d(-${w * activeDom}px, 0px, 0px);-webkit-transform: translate3d(-${w * activeDom}px, 0px, 0px);-o-transition:translate3d(-${w * activeDom}px, 0px, 0px);transition:translate3d(-${w * activeDom}px, 0px, 0px);`;
+                        let style = {
+                            'transition': `all ${this.options.transitionTime || 0.3}s ease-in-out 0s`,
+                            '-webkit-transition': `all ${this.options.transitionTime || 0.3}s ease-in-out 0s`,
+                            '-o-transition': `all ${this.options.transitionTime || 0.3}s ease-in-out 0s`,
+                        };
+                        this.setStyle(content, style);
+                        this.contentEvetn(activeDom);
+                        this.options.index = activeDom;
+                    };
+
+
+                    // 是否开启上拉监听 开启后默认用户选中的tab
+                    (typeof this.options.handleScroll === 'function') && dataChildren && (dataChildren[activeDom].addEventListener('scroll', function () {
+                        _this.handleScroll.call(this, _this);
+                    }, true));
+                },
+                // 切换内容
+                contentEvetn: function (index) {
+                    if (index == this.options.index) {
+                        return;
+                    };
+                    let content = document.getElementById(this.options.content);
+                    let content1 = getChildren(content);
+                    if (this.options.transition) {
+                        let w = this.el.offsetWidth;
+                        // 对当前5个版本做兼容
+                        let style = {
+                            'transition': `all ${this.options.transitionTime || 0.3}s ease-in-out 0s`,
+                            '-webkit-transition': `all ${this.options.transitionTime || 0.3}s ease-in-out 0s`,
+                            '-o-transition': `all ${this.options.transitionTime || 0.3}s ease-in-out 0s`,
+                            'transform': `translate3d(-${w * index}px, 0px, 0px)`,
+                            '-webkit-transform': `translate3d(-${w * index}px, 0px, 0px)`,
+                        };
+                        this.setStyle(content, style);
+                    } else {
+                        content1[this.options.index].style.display = 'none';
+                        content1[index].style.display = 'block';
+                    };
+                    this.options.index = index;
+                },
+                // 滚动监听
+                handleScroll: function (that) {
+                    clearTimeout(deferTimer);
+                    deferTimer = setTimeout(() => {
+                        var scrollTop = this.scrollTop;
+                        //变量windowHeight是可视区的高度
+                        var windowHeight = this.clientHeight;
+                        //变量scrollHeight是滚动条的总高度
+                        var scrollHeight = this.scrollHeight;
+                        let scroll = {
+                            scrollTop,
+                            windowHeight,
+                            scrollHeight
+                        };
+                        //滚动条到底部的条件
+                        if (scrollTop + windowHeight == scrollHeight) {
+                            that.options.handleScroll(scroll);
+                        } else if ((parseInt(scrollTop) + 1) + windowHeight == scrollHeight) {
+                            //这里在写一个判断是因为scrollTop到底部可能是小数 因此取整数
+                            scroll.scrollTop = parseInt(scrollTop + 1)
+                            that.options.handleScroll(scroll);
+                        };
+                    }, 350);
+                }
+            };
+            // 上拉-监听
+            M.prototype.MonitorBox = function () {
+                let content = document.getElementById(this.options.content);
+                let dataChildren = getChildren(content);
+                let _this = this;
+                Object.defineProperty(_this.options, 'MonitorSubscript', {
+                    get: function () {
+                        return MonitorSubscript
+                    },
+                    set: function (newValue) {
+                        dataChildren[newValue].addEventListener('scroll', function () {
+                            _this.handleScroll.call(this, _this);
+                        }, true);
+                    }
+                });
+            };
+            // 获取父下子第一级子元素
+            function getChildren(obj) {
+                var objChild = [];
+                var objs = obj.getElementsByTagName('*');
+                for (var i = 0, j = objs.length; i < j; ++i) {
+                    if (objs[i].nodeType != 1) {
+                        alert(objs[i].nodeType);
+                        continue;
+                    };
+                    var temp = objs[i].parentNode;
+                    if (temp.nodeType == 1) {
+                        if (temp == obj) {
+                            objChild[objChild.length] = objs[i];
+                        };
+                    } else if (temp.parentNode == obj) {
+                        objChild[objChild.length] = objs[i];
+                    };
+                };
+                return objChild;
+            };
+
+            if (typeof module !== 'undefined' && module.exports) module.exports = M;
+            if (typeof define === 'function') define(function () {
+                return M;
+            });
+            global.tabBar = M;
+
+        })(this);
+
+        // 模式一
+        let a1 = new tabBar("#tabClick", {
+            Title: [{
+                name: 'Tab1',
+                id: 1
+            },
+            {
+                name: 'Tab2',
+                id: 2
+            },
+            {
+                name: 'Tab3',
+                id: 3
+            }
+            ], //选卡标题数据格式Title:['首页']/或者Title:[{name:'首页'}]
+            content: 'content',
+        });
+        // 模式二
+        let a2 = new tabBar("#tabClick1", {
+            Title: [{
+                name: 'Tab1',
+                id: 1
+            },
+            {
+                name: 'Tab2',
+                id: 2
+            },
+            {
+                name: 'Tab3',
+                id: 3
+            }
+            ], //选卡标题数据格式Title:['首页']/或者Title:[{name:'首页'}]
+            content: 'content1',
+            transition: true,
+            transitionTime: 0.4
+        });
+
+        let index = 1; //页数
+        // 模式三
+        let a3 = new tabBar("#tabClick2", {
+            Title: [{
+                name: 'Tab1',
+                id: 1
+            },
+            {
+                name: 'Tab2',
+                id: 2
+            },
+            {
+                name: 'Tab3',
+                id: 3
+            }
+            ], //选卡标题数据格式Title:['首页']/或者Title:[{name:'首页'}]
+            content: 'content2',
+            transition: true,
+            defaultIndex: 1,
+            titleEvent: function (tabIndex) {
+                // console.log(tabIndex,'==')
+                alert('当前点击了' + tabIndex.name)
+            },
+            handleScroll: function (res) {
+                // console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
+                alert('到底部了')
+                let content2 = document.getElementById("tab1");
+                if (index < 50) {
+                    for (var i = 0; i < 10; i++) {
+                        let div = document.createElement("div");
+                        let textnode = document.createTextNode(`加载更多的数据${index}`)
+                        div.appendChild(textnode);
+                        content2.appendChild(div);
+                        index++;
+                    };
+                };
+                // console.log(content2)
+            }
+        });
+
+        // 模式四
+        let a4 = new tabBar("#tabClick3", {
+            Title: [{
+                name: 'Tab1',
+                id: 1
+            },
+            {
+                name: 'Tab2',
+                id: 2
+            },
+            {
+                name: 'Tab3',
+                id: 3
+            }
+            ], //选卡标题数据格式Title:['首页']/或者Title:[{name:'首页'}]
+            content: 'content3',
+            transition: true,
+            defaultIndex: 1,
+            automatic: {
+                open: true,
+                time: 1000
+            }
+        });
+    </script>
+</body>
+
+</html>

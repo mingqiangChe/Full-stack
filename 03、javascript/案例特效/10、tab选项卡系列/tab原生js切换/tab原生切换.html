@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul,
+    li {
+        list-style: none;
+    }
+
+    #tab {
+        width: 800px;
+        margin: 100px auto;
+    }
+
+    #nav {
+        height: 40px;
+        border-bottom: 2px solid #D61E26;
+        background-color: #E6E6E6;     
+    }
+
+    #nav li {
+        float: left;
+        line-height: 41px;
+        padding: 0px 30px;
+    }
+
+    .item {
+        display: none;
+    }
+
+    .onactive {
+        background-color: #D61E26;
+        color: #FFFFFF;
+    }
+
+    .onitem {
+        display: block !important;
+    }
+
+    #conBox {
+        padding: 20px 15px;
+    }
+</style>
+
+<body>
+    <div id="tab">
+        <div id="nav">
+            <ul>
+                <li class="onactive">商品介绍</li>
+                <li>规格与包装</li>
+                <li>售后保障</li>
+                <li>商品评价</li>
+            </ul>
+        </div>
+        <div id="conBox">
+            <div class="item onitem">商品介绍</div>
+            <div class="item">规格与包装</div>
+            <div class="item">售后保障</div>
+            <div class="item">商品评价</div>
+        </div>
+    </div>
+    <script>
+        var tab = document.getElementById('tab');
+        // console.log(nav)
+        var lis = document.getElementById('nav').getElementsByTagName('li');
+        // console.log(lis)
+        var items = document.getElementById('conBox').getElementsByClassName('item');
+        // 1、lis循环绑定点击事件
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].setAttribute('index', i);
+            lis[i].addEventListener('click', function () {
+                for (var i = 0; i < lis.length; i++) {
+                    lis[i].className = '';
+                }
+                this.className = 'onactive'
+                // 2、下面的items跟随lis显示
+                var index = this.getAttribute('index');
+                // console.log(index)
+                for (var i = 0; i < items.length; i++) {
+                    items[i].className = 'item';
+                }
+                items[index].className = 'item onitem'
+            });
+        }
+    </script>
+</body>
+
+</html>

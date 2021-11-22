@@ -1,0 +1,59 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>纯css聚光灯效果-jq22.com</title>
+<script src="https://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+<style>
+* {
+	margin:0;
+	padding:0;
+}
+body {
+	background:#000;
+}
+h1 {
+	position:absolute;
+	top:50%;
+	left:50%;
+	color:#ccc;
+	font-size:8em;
+	text-transform:uppercase;
+	transform:translate(-50%,-50%);
+}
+h1:after {
+	content:"SpotLIghT";
+	color:gold;
+	position:absolute;
+	top:0;
+	left:0;
+	color:transparent;
+	background:linear-gradient(90deg,#FFFF00,#9B30FF,#9AFF9A,#00FFFF);
+	background-clip:text;
+	-webkit-background-clip:text;
+	clip-path:circle(100px at 0% 50%);
+	animation:move 5s infinite;
+}
+/*聚光灯运动*/
+		@keyframes move {
+	0% {
+	clip-path:circle(100px at 0% 50%);
+}
+50% {
+	clip-path:circle(100px at 100% 50%);
+}
+100% {
+	clip-path:circle(100px at 0% 50%);
+}
+}</style>
+</head>
+<body>
+<!-- 聚光灯文字 -->
+<h1>SpotLIghT</h1>
+
+<script>
+
+</script>
+
+</body>
+</html>

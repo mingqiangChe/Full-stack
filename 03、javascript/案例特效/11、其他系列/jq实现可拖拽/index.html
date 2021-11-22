@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>drag</title>
+  <style>
+    .parent {
+      height: 500px;
+      width: 500px;
+      border: 1px dashed red;
+      margin: auto;
+      position: relative;
+    }
+    .son {
+      width: 100px;
+      height: 100px;
+      background-color:forestgreen;
+      cursor: move;
+      position: absolute;
+      top: 20px;
+    }
+	  .son:hover{
+		  box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.57);
+-webkit-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.57);
+-moz-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.57);
+	  }
+  </style>
+</head>
+<body>
+  <div class="parent">
+    <div class="son" style="left: 20px;"></div>
+    <div class="son" style="left: 80px;background-color: blue"></div>
+  </div>
+
+ <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+  <script src="./drag.js"></script>
+  <script>
+
+    // 传入拖拽对象类名跟指定区域类名
+    dragFn('.son','.parent')
+  </script>
+</body>
+</html>

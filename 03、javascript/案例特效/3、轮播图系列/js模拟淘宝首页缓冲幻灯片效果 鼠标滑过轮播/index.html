@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>js模拟淘宝首页缓冲幻灯片效果</title>
+<link href="css/lanrenzhijia.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/lanrenzhijia.js"></script>
+</head>
+<body>
+<div id="lanrenzhijia">
+  <ul id="img">
+    <li><a href="http://www.lanrenzhijia.com/"><img src="images/lanrenzhijia1.png" width="490" height="170" /></a></li>
+    <li><a href="http://www.lanrenzhijia.com/"><img src="images/lanrenzhijia2.gif" width="490" height="170" /></a></li>
+    <li><a href="http://www.lanrenzhijia.com/"><img src="images/lanrenzhijia3.jpg" width="490" height="170" /></a></li>
+    <li><a href="http://www.lanrenzhijia.com/"><img src="images/lanrenzhijia4.jpg" width="490" height="170" /></a></li>
+    <li><a href="http://www.lanrenzhijia.com/"><img src="images/lanrenzhijia5.jpg" width="490" height="170" /></a></li>
+  </ul>
+  <ul id="num">
+    <li  class="hover">1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+  </ul>
+</div>
+<script type="text/javascript">
+var img = document.getElementById("img");
+var num = document.getElementById("num");
+var ali = img.getElementsByTagName("li");
+var oli = num.getElementsByTagName("li");
+var time = null
+lanrenzhijiaing = document.getElementById("lanrenzhijia");
+img.style.width = ali.length * 490 + "px", inow = 0;
+for (var i = 0; i < oli.length; i++) {
+	oli[i].index = i
+	oli[i].onmouseover = function() {
+		inow = this.index;
+		tab();
+		window.clearInterval(time)
+	}
+	oli[i].onmouseout = function() {
+		time = window.setInterval(autoPlay, 2000)
+	}
+}
+
+function tab() {
+	for (var i = 0; i < oli.length; i++) {
+		oli[i].className = ""
+	}
+	oli[inow].className = "hover"
+	startMove(img, {
+		left: -inow * 490
+	}, 'buffer')
+}
+
+function autoPlay() {
+	inow++;
+	if (inow >= ali.length) {
+		inow = 0
+	}
+	tab();
+}
+time = window.setInterval(autoPlay, 2000)
+</script>
+</body>
+</html>

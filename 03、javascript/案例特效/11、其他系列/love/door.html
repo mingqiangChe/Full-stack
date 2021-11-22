@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>表白网页</title>
+		<link rel="stylesheet" type="text/css" href="css/door.css" />
+		<script src="js/door.js"></script>
+	</head>
+	<body>
+		<audio id="music" preload="auto" controls="controls" loop="loop" src="music/心跳.mp3"></audio>
+		<audio id="music2" preload="auto" controls="controls" src="music/开门.mp3"></audio>
+		<audio id="music3" preload="auto" controls="controls" src="music/关门.mp3"></audio>
+		<div id="all" class="all" onmousedown="coordinate(event)" onclick="door()">
+			<div class="dibu" id="dibu"></div>
+			<p class="textp" id="textp">一个小女孩来到这个黑色的世界，在远方有一扇门，要过去看看吗。。。</p>
+			<p class="textz" id="textz"></p>
+			<div id="door_all" class="door_all">
+				<div id="door" class="door">
+					<div class="door_open"></div>
+				</div>
+				<div id="door_box" class="door_box"></div>
+				<div id="door_down" class="door_down"></div>
+			</div>
+			<div class="woman" id="woman">
+				<div id="heas" class="head"></div>
+				<div id="heas" class="heal">
+					<div class="heal1"></div>
+					<div class="heal2"></div>
+					<div class="heal3"></div>
+				</div>
+			</div>
+			<div id="texts" class="texts"></div>
+		</div>
+		<div class="start" id="start" onclick="starts()">
+			<p class="textpp" id="textpp">点击屏幕开始</p>
+		</div>
+	</body>
+</html>

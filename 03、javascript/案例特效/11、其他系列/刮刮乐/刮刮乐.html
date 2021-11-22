@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    body,
+    html {
+        width: 100%;
+        height: 100%;
+    }
+
+    img {
+        display: block;
+        width: 300px;
+        height: 500px;
+    }
+
+    canvas {
+        display: block;
+        position: absolute;
+        top: 0;
+    }
+</style>
+
+<body>
+    <div>
+        <img src="https://www.jq22.com/img/cs/300x500-1.png" alt="">
+        <canvas width="300" height="500"></canvas>
+    </div>
+    <script>
+        function draw() {
+            var oCanvas = document.querySelector("canvas");
+            if (oCanvas.getContext) {
+                var ctx = oCanvas.getContext("2d");
+                ctx.beginPath(); //开始路径，相当于作用域，closePath闭合路径，直接从最后一个目标回到起点
+                ctx.fillStyle = "gray"; //填充颜色，灰色
+                // fillRect,为x，y的坐标，和想要的实现创建矩形的大小宽高（0, 0, oCanvas.width, oCanvas.height）
+                ctx.fillRect(0, 0, oCanvas.width, oCanvas.height); //创建矩形
+                ctx.globalCompositeOperation = "destination-out"; //图层和照片不重叠的地方透明，可以显示图片
+                // ctx.globalCompositeOperation = "destination-in";//只保留重叠的地方
+                // 设置每一次刮开的距离 
+                ctx.lineWidth = 20;
+                ctx.lineCap = 'round'; //改变画笔的样式，圆头 
+
+                oCanvas.onmousedown = function (e) {
+                    var el = e || window.event;
+                    var x = el.offsetX;
+                    var y = el.offsetY;
+
+                    ctx.beginPath(); // 开始路径 
+
+                    ctx.moveTo(x, y); // 移动到鼠标按下的地方
+                    oCanvas.onmousemove = function (e) {
+                        var el = e || window.event;
+                        var x = el.offsetX;
+                        var y = el.offsetY;
+                        // 从按下的地方到移动的地方绘制直线路径
+                        ctx.lineTo(x, y);
+                        // 这一块用描边让下面的图片露出来，实现效果 
+                        ctx.stroke();
+                    }
+                }
+                oCanvas.onmouseup = function (e) {
+                    // 清除移动事件
+                    oCanvas.onmousemove = ''
+                }
+            }
+        } draw();
+    </script>
+</body>
+
+</html>

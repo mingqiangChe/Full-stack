@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="js/isScroll.js"></script>
+    <title>滚动元素添加动画</title>
+    <link rel="stylesheet" href="css/animate.min.css">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: '微软雅黑';
+            font-size: 14px;
+        }
+        .sdiv,.adiv{
+            margin:250px 0;
+        }
+
+        .sdiv h1{
+            -webkit-transform: translateY(50px);
+                -ms-transform: translateY(50px);
+                    transform: translateY(50px);
+            -webkit-transition: opacity 0.5s,-webkit-transform 0.5s;
+            transition: opacity 0.5s,-webkit-transform 0.5s;
+            -o-transition: transform 0.5s,opacity 0.5s;
+            transition: transform 0.5s,opacity 0.5s;
+            transition: transform 0.5s,opacity 0.5s,-webkit-transform 0.5s;
+            opacity:0;
+            
+        }
+
+        .sdiv p{
+            -webkit-transform: translateY(30px);
+                -ms-transform: translateY(30px);
+                    transform: translateY(30px);
+            -webkit-transition: opacity 0.5s,-webkit-transform 0.5s;
+            transition: opacity 0.5s,-webkit-transform 0.5s;
+            -o-transition: transform 0.5s,opacity 0.5s;
+            transition: transform 0.5s,opacity 0.5s;
+            transition: transform 0.5s,opacity 0.5s,-webkit-transform 0.5s;
+            opacity:0;
+            -webkit-transition-delay: 0.25s;
+                 -o-transition-delay: 0.25s;
+                    transition-delay: 0.25s;
+            font-size: 36px;
+            margin-bottom:10px;             
+        }
+
+        .sdiv span{
+            -webkit-transform: translateY(30px);
+                -ms-transform: translateY(30px);
+                    transform: translateY(30px);
+            -webkit-transition: opacity 0.5s,-webkit-transform 0.5s;
+            transition: opacity 0.5s,-webkit-transform 0.5s;
+            -o-transition: transform 0.5s,opacity 0.5s;
+            transition: transform 0.5s,opacity 0.5s;
+            transition: transform 0.5s,opacity 0.5s,-webkit-transform 0.5s;
+            opacity:0;
+            -webkit-transition-delay: 0.5s;
+                 -o-transition-delay: 0.5s;
+                    transition-delay: 0.5s;
+            font-size: 22px;
+            margin-bottom:10px;         
+            display: block;    
+        }
+        .adiv h1{
+            font-size: 50px;
+            margin-bottom:10px; 
+        }
+        .adiv p{
+            font-size: 36px;
+            margin-bottom:10px;     
+        }
+        .adiv span{
+            font-size: 22px;
+            margin-bottom:10px;         
+            display: block;  
+        }
+
+
+        .sdiv.on h1,.sdiv.on p,.sdiv.on span{
+            -webkit-transform: none;
+                -ms-transform: none;
+                    transform: none;
+            opacity:1;
+        }
+    
+
+        .con{
+            width: auto;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+        @media (min-width: 992px){
+            .con{
+                width: 1000px;
+            }
+        }
+        .sdiv:nth-child(even),.adiv:nth-child(even){
+            text-align: right;
+        }
+        .sdiv_btn{
+            text-align: center;
+            margin: 100px 0;
+        }
+        .sdiv_btn div{
+            width: 150px;
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid #000;
+            font-size: 16px;
+            text-align: center;
+            margin:0 auto;
+            -webkit-transition: 0.3s;
+            -o-transition: 0.3s;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .sdiv_btn div:hover{
+            background: #000;
+            color: #fff;
+        }
+        .con_title_h1{
+            text-align: center;
+            padding: 150px 0;
+            -webkit-animation: hue 15s infinite linear;
+            background-image: -webkit-linear-gradient(92deg,#673ab7,#3f51b5);
+        }
+        .con_title_h1 span{
+            color: #fff;
+            border-bottom: 1px solid #fff;
+        }
+       @-webkit-keyframes hue {
+        from {
+            -webkit-filter: hue-rotate(0deg);
+        }
+
+        to {
+            -webkit-filter: hue-rotate(-360deg);
+        }
+        }
+        .animation-delay-2{
+            -webkit-animation-delay:0.25s;
+            animation-delay:0.25s;
+        }
+        .animation-delay-5{
+            -webkit-animation-delay:0.5s;
+            animation-delay:0.5s;
+        }
+        .animated{
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="con">
+        <div class="divtest sdiv" data-animation="on">
+           <h1>这是滚动文字</h1>
+           <p>这是滚动文字2</p>
+           <span>当然了</span>
+        </div>
+        <div class="divtest sdiv" data-animation="on">
+            <h1>只是很简单的测试网页</h1>
+            <p>原理就是利用了css3,transition过度动画的</p>
+            <span>只是用了流行的一种动画效果</span>
+        </div>
+        <div class="divtest sdiv" data-animation="on">
+            <h1>只要在div加上data-animation</h1>
+            <p>data添加class的名字</p>
+            <span>也可以添加animation.css</span>
+        </div>
+        <div class="divtest sdiv" data-animation="on">
+            <h1>现在H5上流行动画也有很多种</h1>
+            <p>简单封装了一种方法</p>
+            <span>代码也才有几十行不大</span>
+        </div>
+        <div class="sdiv_btn">
+            <div>
+              简单的滚动动画
+            </div>
+        </div>
+
+        <div class="con_title">
+            <h1 class="con_title_h1">
+                <span>以下是添加animate.css效果</span>
+            </h1>
+            <div class="adiv">
+                <h1 class="divtest animated" data-animation="fadeInUp">只是很简单的测试网页</h1>
+                <p class="divtest animated animation-delay-2" data-animation="fadeInUp">原理就是利用了css3,transition过度动画的</p>
+                <span class="divtest animated animation-delay-5" data-animation="fadeInUp">只是用了流行的一种动画效果</span>
+            </div>
+            <div class="adiv">
+                <h1 class="divtest animated" data-animation="fadeInUp">只要在div加上data-animation</h1>
+                <p class="divtest animated animation-delay-2" data-animation="fadeInUp" >data添加class的名字</p>
+                <span class="divtest animated animation-delay-5" data-animation="fadeInUp">也可以添加animation.css</span>
+            </div>
+            <div class="adiv" >
+                <h1 class="divtest animated" data-animation="fadeInUp">现在H5上流行动画也有很多种</h1>
+                <p class="divtest animated animation-delay-2" data-animation="fadeInUp">简单封装了一种方法</p>
+                <span class="divtest animated animation-delay-5" data-animation="fadeInUp">代码也才有几十行不大</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        isScroll.init('.divtest');
+    });
+</script>
+</html>

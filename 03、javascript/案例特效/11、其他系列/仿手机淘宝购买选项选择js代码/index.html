@@ -1,0 +1,181 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>仿手机淘宝购买选项选择js代码</title>
+<meta charset="utf-8">
+
+<style type='text/css'>
+	*{ margin:0; padding:0;}
+	
+	#wrap{
+		width:600px;
+		height:400px;
+		margin:50px auto;
+	}
+	#top{
+		width:600px;
+		height:220px;
+		border-bottom:1px solid #bbb;
+		font-family:'Microsoft yahei';
+	}
+	#top p{
+		margin-bottom:15px;
+	}
+	#top p font{
+		font-size:14px;
+		color:#000;
+		margin-right:15px;
+	}
+	#top p span{
+		font-size:14px;
+		color:#666;
+		border:1px solid #999;
+		display:inline-block;
+		padding:8px;
+		cursor:pointer;
+	}
+	#top p span.on{
+		border:2px solid #f60;
+		padding:7px;
+		background:url(img/on.png) no-repeat right bottom;
+	}
+	#bottom{
+		width:600px;
+		height:159px;
+		padding-top:20px;
+		font-family:'Microsoft yahei';
+	}
+	#bottom p font{
+		color:#f60;
+		font-size:20px;
+		margin-right:20px;
+	}
+	#bottom p a{
+		font-size:14px;
+		color:blue;
+	}
+	#bottom p a i{
+		margin:0 5px;
+		color:#90c;
+	}
+	#bottom button{
+		width:330px;
+		height:50px;
+		font-family:'Microsoft yahei';
+		margin-top:20px;
+		font-size:20px;
+		background:#f60;
+		color:#fff;
+		border:none;
+		
+	}
+</style>
+</head>
+<body>
+
+<div id="wrap">
+	<div id="top">
+		<p id='model'>
+			<font>型号</font>
+			<span>4.7英寸</span>
+			<span>5.5英寸</span>
+		</p>
+		<p id='color'>
+			<font>颜色</font>
+			<span>银色</span>
+			<span>金色</span>
+			<span>深空灰色</span>
+		</p>
+		<p id='rom'>
+			<font>内存</font>
+			<span>16GB</span>
+			<span>64GB</span>
+			<span>128GB</span>
+		</p>
+		<p id='banben'>
+			<font>版本</font>
+			<span>公开版</span>
+			<span>移动赠费版</span>
+			<span>联通合约版</span>
+		</p>
+	</div>
+	<div id="bottom">
+		<p>价格： <font>￥ <span id='price'>5288</span>.00</font></p>
+		<button>立即购买</button>
+	</div>
+</div>
+
+<script type="text/javascript">
+	
+	var mSpan = document.getElementById('model').getElementsByTagName('span');
+	var cSpan = document.getElementById('color').getElementsByTagName('span');
+	var rSpan = document.getElementById('rom').getElementsByTagName('span');
+	var bSpan = document.getElementById('banben').getElementsByTagName('span');
+	var aSpan = document.getElementsByTagName('span');
+	var oModel = document.getElementById('model');
+	var oRom = document.getElementById('rom');
+	var oPrice = document.getElementById('price');
+
+	mSpan[0].className = 'on';
+	cSpan[0].className = 'on';
+	rSpan[0].className = 'on';
+	bSpan[0].className = 'on';
+
+	for (var i=0;i<aSpan.length;i++ )
+	{
+		
+		aSpan[i].onclick = function(){
+			var siblings = this.parentNode.children;
+			for (var j=0;j<siblings.length;j++ )
+			{
+				siblings[j].className = '';
+			}
+			this.className = 'on';
+			
+			if ( this.parentNode == oModel || this.parentNode == oRom )
+			{
+				price();
+			}
+		};
+	};
+
+	function price(){
+		var p1 = 0;
+		var p2 = 0;
+		for (var i=0;i<mSpan.length;i++ )
+		{
+			if ( mSpan[i].className == 'on' )
+			{
+				p1 = i?6088:5288;
+				break;
+			};
+		};
+		for (var i=0;i<rSpan.length;i++ )
+		{
+			if ( rSpan[i].className == 'on' )
+			{
+				switch ( i )
+				{
+					case 0:
+						p2 = 0;
+						break;
+					case 1:
+						p2 = 800;
+						break;
+					case 2:
+						p2 = 1600;
+						break;
+				}
+			}
+		};
+		oPrice.innerHTML = p1+p2;
+	};
+
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗.</p>
+<p>来源：<a href="http://www.lanrenzhijia.com/" target="_blank">懒人素材</a></p>
+</div>
+</body>
+</html>

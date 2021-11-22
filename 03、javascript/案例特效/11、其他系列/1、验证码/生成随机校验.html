@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .text {
+        color: red
+    }
+</style>
+
+<body>
+    <div>
+        <input type="button" class="print" value="生成随机数">
+        <div class="text"></div>
+    </div>
+    <script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+    <script>
+        function random_str(length) {
+            var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            ALPHABET += 'abcdefghijklmnopqrstuvwxyz';
+            ALPHABET += '0123456789-_';
+            var str = '';
+            for (var i = 0; i < length; ++i) {
+                var rand = Math.floor(Math.random() * ALPHABET.length);
+                str += ALPHABET.substring(rand, rand + 1);
+            }
+            return str;
+        }
+
+        $(".print").click(() => {
+            let text = random_str(16)
+            $(".text").text(text)
+        })
+
+    </script>
+</body>
+
+</html>

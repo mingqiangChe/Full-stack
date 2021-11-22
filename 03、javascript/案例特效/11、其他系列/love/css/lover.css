@@ -1,0 +1,585 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: "方正舒体";
+}
+
+.all {
+	width: 100%;
+	height: 100vh;
+	background-image: url(../img/blueTree.jpg);
+	background-size: 100% 100%;
+	overflow: hidden;
+	perspective: 1000px;
+}
+
+.woman {
+	position: absolute;
+	top: 85%;
+	left: 50%;
+}
+
+.sediao {
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	top: 0px;
+	background-color: pink;
+	opacity: 0.3;
+	transition: 3s;
+	overflow: hidden;
+}
+
+.sun {
+	width: 300px;
+	height: 300px;
+	border-radius: 12em;
+	box-shadow: inset 0px 0px 120px 50px #ffff00;
+	position: absolute;
+	left: 15%;
+	top: 25%;
+}
+
+.woman {
+	position: absolute;
+	top: 85%;
+	left: 105%;
+	z-index: 1;
+	transition: 2s;
+}
+
+.man {
+	position: absolute;
+	top: 40%;
+	left: 23%;
+	z-index: 1;
+	transition: 5000ms;
+	opacity: 0;
+}
+
+.manq1 {
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	border-color: aqua;
+	border-width: 5px;
+	border-style: solid;
+	border-bottom-color: transparent;
+	border-left: transparent;
+	border-right: transparent;
+	position: relative;
+	top: -140px;
+	left: -30px;
+	transition: all 2s linear;
+}
+
+.mand1 {
+	width: 10px;
+	height: 10px;
+	background-color: #00FFFF;
+	border-radius: 50%;
+	position: relative;
+	left: 112px;
+	top: 32px;
+}
+
+.mand2 {
+	width: 10px;
+	height: 10px;
+	background-color: chartreuse;
+	border-radius: 50%;
+	position: relative;
+	top: 76px;
+	left: 100px;
+}
+
+.manq2 {
+	width: 110px;
+	height: 110px;
+	border-radius: 50%;
+	border-color: chartreuse;
+	border-width: 5px;
+	border-style: solid;
+	border-top-color: transparent;
+	border-left: transparent;
+	border-right: transparent;
+	position: relative;
+	top: -270px;
+	left: -30px;
+	transition: all 2s linear;
+}
+
+.head {
+	width: 30px;
+	height: 30px;
+	border-radius: 12em;
+	background-color: pink;
+	margin-bottom: 5px;
+}
+
+.head2 {
+	width: 30px;
+	height: 30px;
+	border-radius: 12em;
+	background-color: aqua;
+	margin-left: 15px;
+	margin-bottom: 5px;
+}
+
+.heal div {
+	width: 30px;
+	height: 40px;
+	background-color: pink;
+	position: absolute;
+}
+
+.heal2 {
+	transform-origin: right top;
+	transform: rotateZ(-20deg);
+}
+
+.manbody {
+	width: 0;
+	height: 0;
+	border-top: 50px solid aqua;
+	border-right: 30px solid transparent;
+	border-bottom: 30px solid transparent;
+	border-left: 30px solid transparent;
+}
+
+.heal3 {
+	transform-origin: left top;
+	transform: rotateZ(20deg);
+}
+
+.xg {
+	width: 100px;
+	height: 2px;
+	background: linear-gradient(to left, #fff 0%, aqua 100%);
+	transition: all 1s linear;
+	position: absolute;
+	top: 2%;
+	left: 101%;
+	box-shadow: 3px 0 5px 2px white;
+	border-radius: 20%;
+	transform: rotateZ(-6deg);
+	opacity: 0.4;
+}
+
+.xx {
+	width: 2px;
+	height: 2px;
+	background-color: aqua;
+	border-radius: 50%;
+	box-shadow: 2px 0 10px 10px aqua;
+	position: relative;
+}
+
+.bird {
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	top: 10%;
+	left: 40%;
+	border-bottom: 5px solid black;
+	/* overflow: hidden; */
+	transition: all 1s linear;
+	transform-origin: bottom;
+	border-radius: 10%;
+}
+
+.leftbird {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	left: -50%;
+	top: 50%;
+	border-radius: 50%;
+	border-right: 5px solid black;
+	transform: rotateZ(-60deg);
+	transition: 1s;
+}
+
+.rightbird {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	border-radius: 50%;
+	border-left: 5px solid black;
+	top: -50%;
+	left: 50%;
+	transform: rotateZ(60deg);
+	transition: 1s;
+}
+
+.flower {
+	width: 0px;
+	background-color: transparent;
+	position: absolute;
+	top: 17%;
+	left: 41%;
+	transform: rotateZ(95deg);
+	transition: all 2s linear;
+}
+
+.manhand {
+	width: 0px;
+	height: 20px;
+	background-color: aqua;
+	border-radius: 50%;
+	transform: rotateZ(0deg);
+	position: relative;
+	top: -80px;
+	left: 20px;
+	transition: 2s;
+}
+
+.womanhand {
+	width: 0px;
+	height: 20px;
+	background-color: pink;
+	position: relative;
+	border-radius: 50%;
+	top: 10px;
+	left: 28px;
+	transform-origin: left;
+	transform: rotateY(180deg) rotateZ(-10deg);
+	transition: 2s;
+}
+
+/* background: radial-gradient( at 50% 50%,pink,gray); */
+/* background: linear-gradient(to top, transparent 0%, pink 100%); */
+.fireworks {
+	position: absolute;
+	top: 17%;
+	left: 77%;
+	opacity: 0;
+	transition: 1.5s;
+}
+
+.fireworks2 {
+	position: absolute;
+	top: 15%;
+	left: 70%;
+	opacity: 0;
+	transition: 1s;
+}
+
+.twyuan0 {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	position: relative;
+	top: 0px;
+	left: 0px;
+	background-color: pink;
+	transition: all 2s linear;
+}
+
+.twyuan1_0 {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	position: relative;
+	top: -12px;
+	left: 0px;
+	background-color: aqua;
+	transition: all 2s linear;
+}
+
+.twyuan2_0 {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	position: relative;
+	top: -24px;
+	left: 0px;
+	background-color: red;
+	transition: all 2s linear;
+}
+
+.twyuan3_0 {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	position: relative;
+	top: -36px;
+	left: 0px;
+	background-color: orange;
+	transition: all 2s linear;
+}
+
+.twyuan4_0 {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	position: relative;
+	top: -48px;
+	left: 0px;
+	background-color: #44ff00;
+	transition: all 2s linear;
+}
+
+.twyuan5_0 {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	position: relative;
+	top: -60px;
+	left: 0px;
+	background-color: #ffff00;
+	transition: all 2s linear;
+}
+
+.heart {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	top: 17%;
+	left: 72%;
+	opacity: 0;
+	transition: 8s;
+}
+
+.heart1 {
+	width: 100px;
+	height: 100px;
+	position: relative;
+	border-radius: 50%;
+	float: left;
+	border-style: solid;
+	border-width: 5px;
+	border-top-color: red;
+	border-left-color: red;
+	border-right: transparent;
+	border-bottom: transparent;
+	transition: 5s;
+	overflow: hidden;
+}
+
+.heart2 {
+	width: 100px;
+	height: 100px;
+	position: relative;
+	top: -105px;
+	left: 80px;
+	border-radius: 50%;
+	float: left;
+	border: 5px solid red;
+	border-bottom: none;
+	border-left: none;
+	transition: 5s;
+	overflow: hidden;
+}
+
+.heart3 {
+	width: 100px;
+	height: 100px;
+	position: relative;
+	transform: rotateZ(45deg);
+	left: 40px;
+	top: -168px;
+	border: 4px solid red;
+	/* border-image:linear-gradient(to right bottom,red,transparent) 1 1; */
+	border-top: transparent;
+	border-left: transparent;
+	transition: 5s;
+	overflow: hidden;
+}
+
+.heart1s {
+	width: 100%;
+	height: 0%;
+	background-color: red;
+	transition: all 3s linear;
+}
+
+.heart2s {
+	width: 100%;
+	height: 0%;
+	background-color: red;
+	transition: all 3s linear;
+}
+
+.heart3s {
+	width: 0%;
+	height: 0%;
+	background-color: red;
+	transition: all 5s linear;
+}
+
+.yanhua {
+	position: absolute;
+	top: 80%;
+	left: 50%;
+	perspective: 800px;
+}
+
+.yh1 {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #FF0000;
+	position: relative;
+	top: 200px;
+	transition: 1s;
+}
+
+.yh2 {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	border-style: dotted;
+	border-color: red;
+	border-width: 0px;
+	position: relative;
+	box-shadow: 0px 0px 100px 1px red;
+	background: radial-gradient(transparent, red);
+	top: 5px;
+	left: 5px;
+	transition: 2s;
+	transform: rotateX(45deg);
+}
+
+.yanhua2 {
+	position: absolute;
+	top: 80%;
+	left: 50%;
+	perspective: 1000px;
+}
+
+.yh21 {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #00aaff;
+	position: relative;
+	top: 200px;
+	left: 0px;
+	transition: 1s;
+}
+
+.yh22 {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	border-style: dotted;
+	border-color: #00aaff;
+	border-width: 0px;
+	box-shadow: 0px 0px 100px 1px #00aaff;
+	background: radial-gradient(transparent, #00aaff);
+	position: relative;
+	top: 5px;
+	left: 5px;
+	transition: 2s;
+	transform: rotateX(45deg) rotateY(25deg);
+}
+
+.yanhua3 {
+	position: absolute;
+	top: 80%;
+	left: 50%;
+	perspective: 1000px;
+}
+
+.yh31 {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #ffffff;
+	position: relative;
+	top: 200px;
+	left: 0px;
+	transition: 1s;
+}
+
+.yh32 {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	border-style: dotted;
+	border-color: #ffffff;
+	border-width: 0px;
+	box-shadow: 0px 0px 100px 1px #ffffff;
+	background: radial-gradient(transparent, #ffffff);
+	position: relative;
+	top: 5px;
+	left: 5px;
+	transition: 2s;
+	transform: rotateX(45deg) rotateY(-15deg);
+}
+
+.texts1 {
+	color: white;
+	position: absolute;
+	top: 20%;
+	left: 80%;
+	font-size: 25px;
+	text-shadow: 5px 2px 10px white;
+	opacity: 1s;
+	transition: 2s;
+}
+
+.dibu {
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
+.ys {
+	width: 1px;
+	height: 1px;
+	background-color: transparent;
+	border: 2px solid white;
+	border-radius: 50%;
+	position: absolute;
+	transition: all 1s linear;
+	z-index: 4;
+	box-shadow: 0 0 100px 10px white;
+}
+
+.text2 {
+	width: 250px;
+	color: white;
+	position: absolute;
+	top: 70%;
+	left: 10%;
+	font-size: 30px;
+	text-shadow: 5px 2px 10px white;
+	transition: 2s;
+}
+
+.text3 {
+	width: 505px;
+	height: 0px;
+	color: white;
+	position: absolute;
+	top: 5%;
+	left: 50%;
+	font-size: 25px;
+	text-shadow: 5px 2px 10px white;
+	transition: all 15s linear;
+	overflow: hidden;
+	z-index: 2;
+}
+
+.texts2 {
+	font-size: 60px;
+	width: 100%;
+	height: 100%;
+	color: white;
+	text-align: center;
+	position: absolute;
+	top: 40%;
+	letter-spacing: 35px;
+	opacity: 0;
+	text-shadow: 5px 2px 10px white;
+}
+
+.kk {
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	perspective: 1000px;
+	opacity: 0;
+}
