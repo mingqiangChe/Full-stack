@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./index.js"></script>
+    <script>
+        // ⭐⭐浅只读
+        const proxyUser1 = shallowReadonly({
+            name: "小明",
+            cars: ['奔驰', '宝马']
+        })
+        // proxyUser1.name = '=='   //只能读取数据，不能修改数据或者添加数据
+        // console.log(proxyUser1.name);  //拦截读取数据 name 小明    小明
+        // console.log(proxyUser1.cars[0]); //拦截读取数据 cars  奔驰
+        // delete proxyUser1.name //只能读取数据，不能删除数据
+        // proxyUser1.cars[0]='奥托'    //⭐拦截读取数据 cars (2) ['奔驰', '宝马'] 里面已经深度修改  不能拦截深度修改
+
+        // delete proxyUser1.cars[0]  //拦截读取数据  ⭐可以删除
+
+        // ⭐⭐深只读
+        const proxyUser2 = readonly({
+            name: "小明",
+            cars: ['奔驰', '宝马']
+        })
+        // proxyUser2.name = '=='  //只能读取数据，不能修改数据或者添加数据
+        // console.log(proxyUser2.name);   //拦截读取数据 name 小明   小明
+        // console.log(proxyUser2.cars[0]);  //拦截读取数据 cars   拦截读取数据 0 奔驰
+        // proxyUser2.name='哈哈哈'  //index.js:13 只能读取数据，不能修改数据或者添加数据
+        // proxyUser2.cars[0]='哈哈哈'  //拦截读取数据 cars 只能读取数据，⭐不能修改数据或者添加数据
+
+        // delete proxyUser2.name  //只能读取数据，不能删除数据
+        delete proxyUser2.cars[0]// 拦截读取数据 cars   只能读取数据，⭐不能删除数据
+    </script>
+</body>
+
+</html>

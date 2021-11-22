@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./index.js"></script>
+    <script>
+        // ⭐⭐浅劫持
+        const proxyUser1 = shallowReactive({
+            name: "小明",
+            car: {
+                color: 'red'
+            }
+        })
+        //⭐proxyUser1.name = '小红'   //拦截修改数据或者添加数据 name 小红
+
+        //⭐proxyUser1.name += '==' //拦截读取数据 name 小明  拦截修改数据或者添加数据 name 小明==
+
+        //⭐proxyUser1.car.name += '==' //拦截读取数据 car {color: 'red'}  拦截不到写的数据
+
+        //⭐delete proxyUser1.name  //拦截删除某个属性 name
+
+        // ⭐delete proxyUser1.car.color  //拦截读取数据 car {color: 'red'}  拦截不到删除数据
+
+        // ⭐⭐深劫持
+        const proxyUser2 = reactive({
+            name: "小明",
+            car: {
+                color: 'red'
+            }
+        })
+
+        // ⭐proxyUser2.name = '小红'   //拦截修改数据或者添加数据 name 小红
+
+        // proxyUser2.name += '==' //拦截读取数据 name reactive 拦截修改数据或者添加数据 name reactive==
+
+        // proxyUser2.car.color = '==' //拦截读取数据 car {color: 'red'}  拦截写的数据
+
+        // ⭐delete proxyUser2.name  //拦截删除某个属性 name
+
+        // ⭐⭐delete proxyUser2.car.color  //拦截读取数据 car Proxy {color: 'red'}    拦截删除某个属性 color
+    </script>
+</body>
+
+</html>

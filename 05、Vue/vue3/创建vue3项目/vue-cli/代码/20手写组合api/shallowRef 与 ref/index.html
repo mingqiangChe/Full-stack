@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./index.js"></script>
+    <script>
+        // ⭐⭐浅劫持
+        const ref1 = shallowRef({
+            name: "小明",
+            car: {
+                color: 'red'
+            }
+        })
+        // console.log(ref1.value);  //劫持到读取数据
+        // ref1.value = '=='  //劫持到了修改数据，准备更新界面 ==
+        // ref1.value.car = '=='  //劫持到读取数据   ⭐劫持不到修改数据
+
+        // ⭐⭐深劫持
+        const ref2 = ref({
+            name: "小明",
+            car: {
+                color: 'red'
+            }
+        })
+        // console.log(ref2.value);  //劫持到读取数据
+        // ref2.value = '=='  //劫持到了修改数据，准备更新界面 ==
+        ref2.value.car='=='  //劫持到读取数据   ⭐拦截修改数据或者添加数据 car ==
+
+    </script>
+</body>
+
+</html>

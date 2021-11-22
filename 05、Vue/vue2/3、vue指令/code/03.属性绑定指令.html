@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>属性绑定</title>
+</head>
+
+<body>
+  <!-- 希望 Vue 能够控制下面的这个 div，帮我们在把数据填充到 div 内部 -->
+  <div id="app">
+    <input type="text" :placeholder="tips">
+    <hr>
+    <!-- vue 规定 v-bind: 指令可以简写为 : -->
+    <img :src="photo" alt="" style="width: 150px;">
+
+    <hr>
+    <div>1 + 2 的结果是：{{ 1 + 2 }}</div>
+    <div>{{ tips }} 反转的结果是：{{ tips.split('').reverse().join('') }}</div>
+    <div :title="'box' + index">这是一个 div</div>
+    <!-- 支持三mu运算🍎 -->
+    <div>{{1?'true':'false'}}</div>
+  </div>
+
+  <!-- 1. 导入 Vue 的库文件，在 window 全局就有了 Vue 这个构造函数 -->
+  <script src="./lib/vue-2.6.12.js"></script>
+  <!-- 2. 创建 Vue 的实例对象 -->
+  <script>
+    // 创建 Vue 的实例对象
+    const vm = new Vue({
+      // el 属性是固定的写法，表示当前 vm 实例要控制页面上的哪个区域，接收的值是一个选择器
+      el: '#app',
+      // data 对象就是要渲染到页面上的数据
+      data: {
+        tips: '请输入用户名',
+        photo: 'https://cn.vuejs.org/images/logo.svg',
+        index: 3
+      }
+    })
+  </script>
+</body>
+
+</html>
