@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="user-scalable=0">
+  <title>图片缩放示例</title>
+  <!-- <link rel="stylesheet" href="css/reset.css" /> -->
+  <!-- <link rel="stylesheet" href="css/common.css" /> -->
+  <script type="text/javascript" src="https://vncdn.mobi88.cn/public/jquery-2.1.3.min.js"></script>
+  <!-- <script type="text/javascript" src="js/common.js"></script> -->
+</head>
+<style>
+  body {
+    overflow-x: hidden;
+  }
+
+  .banner {
+    position: relative;
+    height: 1880px;
+    overflow: hidden;
+    min-width: 750px;
+  }
+
+  .box {
+    width: 100%;
+    height: auto;
+    position: absolute;
+  }
+
+  .undertitle {
+    width: 100%;
+    height: 650px;
+    font-size: 46px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 450px;
+    margin: 0 auto;
+    box-sizing: border-box;
+
+  }
+
+  .bgbox {
+    width: 736px;
+    height: 430px;
+    margin: 0 auto;
+    background: url(https://hqtcsz-oss.oss-cn-shenzhen.aliyuncs.com/hqtcsz_pc/ScrollMagic/360.jpg) no-repeat;
+    background-size: contain;
+    -moz-transition: -moz-transform .1s linear;
+    -webkit-transition: -webkit-transform .2s linear;
+    box-sizing: border-box;
+    transform-origin: center center;
+    position: relative;
+  }
+
+  .bigImg {
+    width: 562px;
+    height: 352px;
+    margin: 0 auto;
+    background: url(https://hqtcsz-oss.oss-cn-shenzhen.aliyuncs.com/hqtcsz_pc/ScrollMagic/361.jpg) no-repeat;
+    background-size: cover;
+    position: relative;
+    top: 30px;
+  }
+
+  .smallimgBox {
+    width: 100%;
+    height: 100%;
+  }
+
+  .smallimg {
+    width: 100%;
+    height: 100%;
+    background: url(https://hqtcsz-oss.oss-cn-shenzhen.aliyuncs.com/hqtcsz_pc/ScrollMagic/362.jpg) no-repeat;
+    background-size: cover;
+  }
+
+  .bannertitle {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    font-size: 86px;
+    font-weight: bold;
+    text-align: center;
+    color: red;
+    -moz-transition: .1s linear;
+    -webkit-transition: .2s linear;
+  }
+
+
+
+  .footer {
+    background: #333;
+    height: 200px;
+  }
+</style>
+
+<body>
+  <div class="banner">
+    <div class="box">
+      <div class="undertitle">滚动鼠标，图片缩放示例</div>
+      <div class="bgbox">
+        <div class="bigImg">
+          <div class="smallimgBox">
+            <div class="smallimg"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bannertitle">滚动前的文字</div>
+  </div>
+  <div style="height: 300px;background: #333333;"></div>
+  <script>
+    $(document).ready(function () {
+      /* 安卓版本兼容 */
+      var brower = {
+        versions: function () {
+          var u = window.navigator.userAgent;
+          var num;
+          if (u.indexOf('Trident') > -1) {
+            //IE
+            return "IE";
+          } else if (u.indexOf('Presto') > -1) {
+            //opera
+            return "Opera";
+          } else if (u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1) {
+            //firefox
+            return "Firefox";
+          } else if (u.indexOf('AppleWebKit' && u.indexOf('Safari') > -1) > -1) {
+            //苹果、谷歌内核
+            if (u.indexOf('Chrome') > -1) {
+              //chrome
+              return "Chrome";
+            } else if (u.indexOf('OPR')) {
+              //webkit Opera
+              return "Opera_webkit"
+            } else {
+              //Safari
+              return "Safari";
+            }
+          } else if (u.indexOf('Mobile') > -1) {
+            //移动端
+            if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+              //ios
+              if (u.indexOf('iPhone') > -1) {
+                //iphone
+                return "iPhone"
+              } else if (u.indexOf('iPod') > -1) {
+                //ipod
+                return "iPod"
+              } else if (u.indexOf('iPad') > -1) {
+                //ipad
+                return "iPad"
+              }
+            } else if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
+              //android
+              num = u.substr(u.indexOf('Android') + 8, 3);
+              return {
+                "type": "Android",
+                "version": num
+              };
+            } else if (u.indexOf('BB10') > -1) {
+              //黑莓bb10系统
+              return "BB10";
+            } else if (u.indexOf('IEMobile')) {
+              //windows phone
+              return "Windows Phone"
+            }
+          }
+        }
+      }
+
+      var system = brower.versions();
+
+      if (system != "IE") {
+        var sc_t = 0;
+        bg(sc_t);
+        $(window).resize(function () {
+          sc_t = $(window).scrollTop();
+          bg(sc_t);
+        })
+      } else {
+        //ie样式
+      }
+
+      function bg(sc_t) {
+        //图片最大宽高
+        var window_h = $(window).height();
+        var window_w = $(window).width();
+
+        //图片最小宽高
+        var img_min_h = 352;
+        var img_min_w = 562;
+        //壳最小宽高
+        var phone_min_h = 430;
+        var phone_min_w = 736;
+        //壳最大宽高
+        var phone_set_h = window_h / img_min_h * phone_min_h;
+        var phone_set_w = window_w / img_min_w * phone_min_w;
+
+        //最大缩放倍数
+        var scale_big_x = phone_set_w / phone_min_w;
+        var scale_big_y = phone_set_h / phone_min_h;
+        var scale_big = scale_big_x >= scale_big_y ? scale_big_x : scale_big_y;
+
+        //图最小时的中心点高
+        var t_h_s = $(".undertitle").innerHeight() + phone_min_h / 2;
+
+        //图最大时的中心点高
+        var t_h_b = phone_min_h * scale_big / 2 - 30 * scale_big;
+
+        //中心点位移
+        var t_h = t_h_s - t_h_b;
+
+        //停止放大缩小时滚动条的位置
+        var scroll_length = 300;
+
+        $(window).scroll(function () {
+          var scroll_num = $(window).scrollTop();
+          setPhoneSize(scroll_num);
+        });
+
+        setPhoneSize(sc_t);
+
+        function setPhoneSize(num) {
+          //缩放倍数
+          var scroll_num = (1 - scale_big) * num / scroll_length + scale_big;
+
+          //num中心点 num= num
+          var translate_num = (0 - t_h) / scroll_length * num + t_h;
+
+          //透明度
+          var op_num = 1 - (num / scroll_length);
+          if (num >= scroll_length) {
+            $(".bgbox").css({
+              "-moz-transform": "translate(0,0) scale(1)",
+              "-webkit-transform": "translate(0,0) scale(1)"
+            });
+            $(".bannertitle").css({
+              "opacity": "0",
+              "display": "none"
+            });
+            $(".smallimgBox").css({
+              "opacity": "1"
+            })
+
+          } else {
+            $(".bgbox").css({
+              "-moz-transform": "translate(0,-" + translate_num + "px) scale(" + scroll_num + ")",
+              "-webkit-transform": "translate(0,-" + translate_num + "px) scale(" + scroll_num + ")"
+            });
+            $(".bannertitle").css({
+              "opacity": op_num,
+              "display": "block"
+            });
+            $(".smallimgBox").css({
+              "opacity": 1 - op_num
+            })
+
+          }
+
+        }
+      }
+
+    });
+
+  </script>
+</body>
+
+</html>

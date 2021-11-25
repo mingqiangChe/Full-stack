@@ -1,0 +1,77 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: sueRimn
+ * @Date: 2021-11-25 14:46:04
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2021-11-25 16:30:39
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body,
+    html {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #bg1 {
+      width: 100%;
+      height: 100%;
+      background-color: antiquewhite;
+      background-image: url(https://hqtcsz-oss.oss-cn-shenzhen.aliyuncs.com/hqtcsz_pc/ScrollMagic/360.jpg);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-attachment: fixed;
+    }
+
+    #bg2 {
+      width: 100%;
+      height: 100%;
+      background-color: antiquewhite;
+      background-image: url(https://hqtcsz-oss.oss-cn-shenzhen.aliyuncs.com/hqtcsz_pc/ScrollMagic/361.jpg);
+      background-size: 100% 120%;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    #bg3 {
+      width: 100%;
+      height: 100%;
+      background-color: antiquewhite;
+      background-image: url(https://hqtcsz-oss.oss-cn-shenzhen.aliyuncs.com/hqtcsz_pc/ScrollMagic/362.jpg);
+      background-size: 100% 140%;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="bg1"></div>
+  <div id="bg2"></div>
+  <div id="bg3"></div>
+  <script>
+    const bg1 = document.querySelector('#bg1');
+    const bg2 = document.querySelector('#bg2');
+    const bg3 = document.querySelector('#bg3');
+    window.addEventListener("scroll", function () {
+      const t = document.documentElement.scrollTop / 10;
+      bg1.style.backgroundPositionY = -t + 'px';
+      bg1.style.transform = "translateY(" + (-t) + "px)";
+      bg2.style.backgroundPositionY = -t + 'px';
+      bg2.style.transform = "translateY(" + (-t) + "px)";
+      bg3.style.backgroundPositionY = -t + 'px';
+      bg3.style.transform = "translateY(" + (-t) + "px)";
+    });
+
+  </script>
+</body>
+
+</html>
