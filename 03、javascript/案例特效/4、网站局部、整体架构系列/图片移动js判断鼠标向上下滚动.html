@@ -1,0 +1,103 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: sueRimn
+ * @Date: 2021-11-26 09:51:14
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2021-11-26 10:17:31
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>判断鼠标滚动向下还是向上</title>
+  <style>
+    .box {
+      /* width: 600px; */
+      height: 600px;
+      border: 3px solid red;
+      overflow: auto;
+      margin-top: 20px;
+    }
+
+    /* 
+    .inner-box {
+      width: 200px;
+      height: 200px;
+      background: pink;
+      border: 2px solid green;
+      margin-left: 100px;
+      margin-top: 100px;
+    }
+
+    .sm-box {
+      width: 100px;
+      height: 100px;
+      background: #b1dfbb;
+      border: 1px solid blue;
+    } */
+
+    /* .box>img {
+      width: 600px;
+      height: 600px;
+      display: block;
+      transition: all 1s;
+      /* opacity: 1; */
+    /* } */
+    .boximg {
+      /* width: 600px; */
+      height: 600px;
+      background-image: url(https://hqtcsz-oss.oss-cn-shenzhen.aliyuncs.com/hqtcsz_pc/ScrollMagic/360.jpg);
+      background-position: 50% -50px;
+      background-size: auto calc(100% + 200px);
+      transition: all 1s;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box" id="box">
+    <!-- <div id="div1" class="inner-box">
+      <div class="sm-box"></div>
+    </div> -->
+    <div class="boximg">
+      <!-- <img src="" alt=""> -->
+    </div>
+  </div>
+</body>
+
+</html>
+<script type="text/javascript">
+  // var box = document.getElementById('box');
+  let moveImg = document.getElementsByClassName('boximg')[0];
+  console.log(moveImg);
+  function onMouseWheel(ev) {/*当鼠标滚轮事件发生时，执行一些操作*/
+    var ev = ev || window.event;
+    var down = true; // 定义一个标志，当滚轮向下滚时，执行一些操作
+    down = ev.wheelDelta ? ev.wheelDelta < 0 : ev.detail > 0;
+    if (down) {
+      console.log('鼠标滚轮向下---------')
+      // moveImg.style.backgroundColor = 'blue'
+      moveImg.style.backgroundPosition = '50% -100px';
+    } else {
+      console.log('鼠标滚轮向上++++++++++')
+      moveImg.style.backgroundPosition = '50% -10px';
+    }
+    if (ev.preventDefault) {/*FF 和 Chrome*/
+      ev.preventDefault();// 阻止默认事件
+    }
+    return false;
+  }
+
+  addEvent(window, 'mousewheel', onMouseWheel);
+  addEvent(window, 'DOMMouseScroll', onMouseWheel);
+
+  function addEvent(obj, xEvent, fn) {
+    if (obj.attachEvent) {
+      obj.attachEvent('on' + xEvent, fn);
+    } else {
+      obj.addEventListener(xEvent, fn, false);
+    }
+  }
+</script>
