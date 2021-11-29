@@ -1,0 +1,194 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: sueRimn
+ * @Date: 2021-11-29 11:06:02
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2021-11-29 11:06:02
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(2, 2, 73);
+  }
+
+  svg {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  text {
+    font-size: 120px;
+    stroke: green;
+    stroke-width: 5px;
+    /*stroke-dasharray 虚线的长度*/
+    stroke-dasharray: 5;
+  }
+
+  .text1 {
+    stroke: red;
+    animation: text1 10s infinite;
+  }
+
+  .text2 {
+    stroke: yellow;
+    animation: text2 10s infinite;
+  }
+
+  .text3 {
+    stroke: blue;
+    animation: text3 10s infinite;
+  }
+
+  .text4 {
+    stroke: #ED05F9;
+    animation: text4 10s infinite;
+  }
+
+  .text5 {
+    stroke: #F98005;
+    animation: text5 10s infinite;
+  }
+
+  @keyframes text1 {
+    0% {
+      stroke-dasharray: 20;
+    }
+
+    30% {
+      stroke-dasharray: 150;
+    }
+
+    50% {
+      stroke-dasharray: 220;
+    }
+
+    75% {
+      stroke-dasharray: 150;
+    }
+
+    100% {
+      stroke-dasharray: 20;
+    }
+  }
+
+  @keyframes text2 {
+    0% {
+      stroke-dasharray: 233;
+    }
+
+    30% {
+      stroke-dasharray: 80;
+    }
+
+    50% {
+      stroke-dasharray: 10;
+    }
+
+    75% {
+      stroke-dasharray: 80;
+    }
+
+    100% {
+      stroke-dasharray: 233;
+    }
+  }
+
+  @keyframes text3 {
+    0% {
+      stroke-dasharray: 10;
+    }
+
+    30% {
+      stroke-dasharray: 30;
+    }
+
+    50% {
+      stroke-dasharray: 183;
+    }
+
+    75% {
+      stroke-dasharray: 63;
+    }
+
+    100% {
+      stroke-dasharray: 10;
+    }
+  }
+
+  @keyframes text4 {
+    0% {
+      stroke-dasharray: 20;
+    }
+
+    30% {
+      stroke-dasharray: 30;
+    }
+
+    50% {
+      stroke-dasharray: 50;
+    }
+
+    75% {
+      stroke-dasharray: 70;
+    }
+
+    100% {
+      stroke-dasharray: 20;
+    }
+  }
+
+  @keyframes text5 {
+    0% {
+      stroke-dasharray: 20;
+    }
+
+    30% {
+      stroke-dasharray: 90;
+    }
+
+    50% {
+      stroke-dasharray: 160;
+    }
+
+    75% {
+      stroke-dasharray: 50;
+    }
+
+    100% {
+      stroke-dasharray: 20;
+    }
+  }
+</style>
+
+<body>
+  <svg width="900" height="300">
+    <g>
+      <text class="text0" x="40" y="200">Sun Shi Hao</text>
+      <text class="text1" x="40" y="200">Sun Shi Hao</text>
+      <text class="text2" x="40" y="200">Sun Shi Hao</text>
+      <text class="text3" x="40" y="200">Sun Shi Hao</text>
+      <text class="text4" x="40" y="200">Sun Shi Hao</text>
+      <text class="text5" x="40" y="200">Sun Shi Hao</text>
+    </g>
+  </svg>
+</body>
+
+</html>

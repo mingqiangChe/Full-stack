@@ -1,0 +1,105 @@
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #999;
+  background: -webkit-linear-gradient(290deg, #333, #222) #242424;
+  background: linear-gradient(160deg, #333, #222) #242424;
+}
+
+a {
+  color: #56b2ff;
+  text-decoration: none;
+}
+
+.wrapper {
+  position: relative;
+  height: 800px;
+  -webkit-perspective: 800;
+  perspective: 800;
+}
+
+.layer {
+  position: absolute;
+  will-change: transform;
+}
+
+.ad {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 840px;
+  height: 500px;
+  margin-left: -420px;
+  margin-top: -250px;
+  background: black;
+  overflow: hidden;
+  border-radius: 3px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  will-change: transform;
+  box-shadow: 0 60px 100px rgba(0, 0, 0, 0.5);
+}
+
+.layer-1,
+.layer-2,
+.layer-3 {
+  top: 50%;
+  left: 50%;
+  margin-left: -630px;
+  margin-top: -375px;
+  width: 1260px;
+  height: 750px;
+  -webkit-transform: scale(0.7);
+          transform: scale(0.7);
+}
+
+.light {
+  top: 50%;
+  left: 50%;
+  margin-left: -840px;
+  margin-top: -800px;
+  width: 1680px;
+  height: 1000px;
+  background: -webkit-radial-gradient(ellipse closest-side at center, #6c6c6c, #000000);
+  background: radial-gradient(ellipse closest-side at center, #6c6c6c, #000000);
+  mix-blend-mode: color-dodge;
+  opacity: .6;
+  z-index: 3;
+}
+
+.light-2 {
+  z-index: 4;
+  background: -webkit-radial-gradient(ellipse closest-side at center, #ffffff, #000000);
+  background: radial-gradient(ellipse closest-side at center, #ffffff, #000000);
+  mix-blend-mode: screen;
+  opacity: .3;
+}
+
+.layer-1 {
+  background-image: url(../img/breaking-bad-layer-1.jpg);
+  /* background-image: url(https://hqtcsz-oss.oss-cn-shenzhen.aliyuncs.com/hqtcsz_pc/ScrollMagic/360.jpg); */
+  
+    background-position: 100%;
+}
+
+.layer-2 {
+  background-image: url(../img/breaking-bad-layer-2.png);
+  /* background-image: url(https://hqtcsz-oss.oss-cn-shenzhen.aliyuncs.com/hqtcsz_pc/ScrollMagic/361.jpg); */
+
+}
+
+.layer-3 {
+  background-image: url(../img/breaking-bad-layer-3.png);
+  /* background-image: url(https://hqtcsz-oss.oss-cn-shenzhen.aliyuncs.com/hqtcsz_pc/ScrollMagic/362.jpg); */
+
+}
+
+header{
+    text-align: center;
+}
