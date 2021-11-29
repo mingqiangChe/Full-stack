@@ -1,0 +1,80 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: sueRimn
+ * @Date: 2021-11-26 14:49:35
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2021-11-26 14:51:30
+-->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>炫酷Apple TV多层背景视觉差特效</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+
+	<header class="header">
+		<h1>炫酷Apple TV多层背景视觉差特效 </h1>
+		<p>Apple TV Inspired Interactive Parallax Effect With jQuery And CSS3</p>
+		<div class="wrapper">
+			<div class="ad">
+				<div class="layer light"></div>
+				<div class="layer light light-2"></div>
+				<div class="layer layer-1"></div>
+				<div class="layer layer-2"></div>
+				<div class="layer layer-3"></div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="https://vncdn.mobi88.cn/public/jquery-2.1.3.min.js"></script>
+		<script type="text/javascript">
+			var $body = $('body');
+			var WIDTH = $body.width();
+			var HEIGHT = $body.height();
+			var $ad = $('.ad');
+			var $light = $ad.find('.light');
+			var $layer1 = $ad.find('.layer-1');
+			var $layer2 = $ad.find('.layer-2');
+			var $layer3 = $ad.find('.layer-3');
+
+			function moveAd(e) {
+				var xPer = e.clientX / WIDTH;
+				var yPer = e.clientY / HEIGHT;
+
+				var rotateX = 5 - (yPer * 10);
+				var rotateY = -5 + (xPer * 10);
+
+				$ad.css({
+					transform: 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) '
+				});
+
+				var translateX = -5 + (xPer * 10);
+				var translateY = -5 + (yPer * 10);
+
+				$layer2.css({
+					transform: 'scale(.7) translateX(' + translateX + 'px) translateY(' + translateY + 'px)'
+				});
+
+				$layer3.css({
+					transform: 'scale(.7) translateX(' + (translateX * 2) + 'px) translateY(' + (translateY * 2) + 'px)'
+				});
+
+				var lightX = 800 - (xPer * 1600);
+				var lightY = 300 - (yPer * 600);
+
+				$light.css({
+					transform: 'translateX(' + lightX + 'px) translateY(' + lightY + 'px)'
+				});
+			}
+
+			$body.on('mousemove', moveAd);
+		</script>
+</body>
+
+</html>

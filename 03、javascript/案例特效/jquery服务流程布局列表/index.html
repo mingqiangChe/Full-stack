@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>jquery服务流程布局列表</title>
+		
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+		
+        <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		
+    </head>
+    <body>
+
+        <div class="flow">
+            <div class="fp-tableCell">
+                <div class="title">
+                    <h1 class="title-text">服务流程</h1>
+                    <p class="title-description">10000多家企事业单位认可的移动应用构建流程，科学组织，提高开发效率。</p>
+                </div>
+                <div class="inner-item">
+                    <div class="i-process end">
+                        <div class="list clearfix">
+                            <div class="btn h poa t-c" style="transform: translate(0px, 0px); opacity: 1;">
+                                <p>企业流程</p>
+                                <div class="light por"></div>
+                                <div class="circle por t-f fl"></div>
+                            </div>
+                            <div class="btn h poa t-c" style="transform: translate(0px, 0px); opacity: 1;">
+                                <div class="circle por t-f fl"></div>
+                                <div class="light por"></div>
+                                <p>管理宗旨</p>
+                            </div>
+                            <div class="btn h poa t-c" style="transform: translate(0px, 0px); opacity: 1;">
+                                <p>管理层次</p>
+                                <div class="light por"></div>
+                                <div class="circle por t-f fl"></div>
+                            </div>
+                            <div class="btn h poa t-c" style="transform: translate(0px, 0px); opacity: 1;">
+                                <div class="circle por t-f fl"></div>
+                                <div class="light por"></div>
+                                <p>基本特征</p>
+                            </div>
+                            <div class="btn h poa t-c" style="transform: translate(0px, 0px); opacity: 1;">
+                                <p>管理目的</p>
+                                <div class="light por"></div>
+                                <div class="circle por t-f fl"></div>
+                            </div>
+                            <div class="btn h poa t-c" style="transform: translate(0px, 0px); opacity: 1;">
+                                <div class="circle por t-f fl"></div>
+                                <div class="light por"></div>
+                                <p>管理原则</p>
+                            </div>
+                            <div class="btn h poa t-c" style="transform: translate(0px, 0px); opacity: 1;">
+                                <p>流程调研</p>
+                                <div class="light por"></div>
+                                <div class="circle por t-f fl"></div>
+                            </div>
+                            <div class="btn h poa t-c" style="transform: translate(0px, 0px); opacity: 1;">
+                                <div class="circle por t-f fl"></div>
+                                <div class="light por"></div>
+                                <p>流程优化</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            $(function() {
+
+                $(".i-process .btn").eq(0).addClass("cur")
+
+                var LightNum = 0
+                  , LightAuto = setInterval(function() {
+
+                    LightNum++;
+
+                    if (LightNum == $(".i-process .btn").length) {
+
+                        LightNum = 0
+
+                    }
+
+                    $(".i-process .btn").eq(LightNum).addClass("cur").siblings().removeClass("cur")
+
+                }, 3000);
+
+            });
+			
+        </script>
+		
+    </body>
+</html>
