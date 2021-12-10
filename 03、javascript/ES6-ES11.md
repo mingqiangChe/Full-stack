@@ -58,6 +58,27 @@
         console.log(TEAM);//0: "UZI"1: "MXLG"2: "Ming"3: "Letme"4: "Meiko"
 ```
 
+## 闭包
+
+```
+function Person() {
+      var name = 'cxk'
+      this.getName = function () {
+        return name;
+      }
+      this.setName = function (value) {
+        name = value
+      }
+    }
+    const cxk = new Person()
+    console.log(cxk.getName());  //cxk
+    cxk.setName('dd')
+    console.log(cxk.getName());//dd
+    console.log(name);//nane is underfid
+```
+
+外部访问不到，只能通过new实例方法，通过调用实例里的方法去进行读写操作。
+
 ## 解构赋值
 
 ```js
@@ -133,7 +154,22 @@
         console.log(school);//{name:"车车",cahnge:f,improve:f}
 ```
 
-## 箭头函数
+## this
+
+通过new构造函数实例改变this指向
+
+```
+ function Person(name) {
+      this.name = name;
+      console.log(this.name);
+    }
+    var cxk = new Person('cxk')//cxk
+```
+
+
+
+### 箭头函数
+
 箭头函数适合与 this 无关的回调. 定时器, 数组的方法回调
 
 箭头函数不适合与 this 有关的回调.  DOM元素事件回调, 对象的方法
@@ -243,6 +279,25 @@
 
         console.log(result); //[6,10,100]
 ```
+
+### call apply  bind改变普通函数this指向
+
+```
+function f() {
+      console.log(this.name);
+    }
+    var a = {
+      name: '1'
+    }
+    var b = {
+      name: '2'
+    }
+    f.bind(a)()//1
+```
+
+
+
+
 
 ## 函数参数默认值
 
@@ -628,7 +683,7 @@ iterator接口:对象里面属性
 
 ```
 ## Promise
-异步编程解决方案    语法上是构造函数 用来封装异步操作并可以获取期成功或失败结果
+异步编程解决方案    **语法上是构造函数 用来封装异步操作并可以获取期成功或失败结果**
 ### 基本语法
 
 ```js
