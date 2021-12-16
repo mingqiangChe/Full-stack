@@ -3137,3 +3137,13 @@ export default new VueRouter({
 过滤器类似函数方法调用方法名以及携带的参数处理。管道符后面是方法名 前面则是参数
 
 axios   .then获取数据太麻烦了，所以可以在promise实例前加await，但只能再async修饰方法中使用await。
+
+data中的值用vuex中state代替动态显示状态
+
+```
+isCollapse() {
+      return this.$store.state.tab.isCollapse;
+    },
+```
+
+vuex中moudle使用是新建模块js调用vuex中方法，然后在vuex module注册使用即可
