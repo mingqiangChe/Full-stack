@@ -329,7 +329,7 @@
     ></Customer-Details-Alert>
   </div>
 </template>
-  
+
   <script>
 import CustomerDetailsAlert from "@/components/CustomerDetailsAlert";
 import { mixObj } from "@/layout/mixin/commonMixin";
@@ -378,7 +378,7 @@ export default {
      * @description: 分页事件监听每页N条
      * @param {*} val
      * @return {*}
-     */    
+     */
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.form.pageSize = val;
@@ -389,7 +389,7 @@ export default {
      * @description: 分页事件监听当前页数
      * @param {*} val
      * @return {*}
-     */    
+     */
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
       this.form.pageNo = val;
@@ -400,7 +400,7 @@ export default {
      * @description: 重置条件选择
      * @param {*}
      * @return {*}
-     */    
+     */
     resetForm(){
       this.form = {
         searchValue: "",
@@ -418,7 +418,7 @@ export default {
      * @description: 客户池列表查询
      * @param {*}
      * @return {*}
-     */    
+     */
     queryCustomerPool(){
       console.log(this.form);
       this.loading = true;
@@ -597,7 +597,7 @@ export default {
   },
 };
 </script>
-  
+
   <style scoped lang="scss">
 .customer-pool-box {
   width: 100%;
@@ -663,4 +663,3 @@ export default {
   }
 }
 </style>
-  

@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2021-12-06 15:05:48
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-12-10 10:26:08
+ * @LastEditTime: 2021-12-17 09:46:19
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -30,20 +30,20 @@
     // })()
 
 
-    // function Person() {
-    //   var name = 'cxk'
-    //   this.getName = function () {
-    //     return name;
-    //   }
-    //   this.setName = function (value) {
-    //     name = value
-    //   }
-    // }
-    // const cxk = new Person()
-    // console.log(cxk.getName());  //cxk
-    // cxk.setName('dd')
-    // console.log(cxk.getName());//dd
-    // console.log(name);//nane is underfid
+    function Person() {
+      var name = 'cxk'
+      this.getName = function () {
+        return name;
+      }
+      this.setName = function (value) {
+        name = value
+      }
+    }
+    const cxk = new Person()
+    console.log(cxk.getName());  //cxk
+    cxk.setName('dd')
+    console.log(cxk.getName());//dd
+    console.log(name);//nane is underfid
 
     // function zz() {
     //   var name = '1'
@@ -260,20 +260,30 @@
     // console.log(book.name);
     // map = new Map; 
     // console.log(map);
-    nums = [2, 7, 11, 15], target = 9
-    var sum = function (nums, target) {
-      map = new Map();
-      for (let i = 0; i < nums.length; i++) {
-        x = target - nums[i]
-        if (nums.has(x)) {
-          return [map.get(x), i]
-        }
-        map.set(nums[i], i)
+    // nums = [2, 7, 11, 15], target = 9
+    // var sum = function (nums, target) {
+    //   map = new Map();
+    //   for (let i = 0; i < nums.length; i++) {
+    //     x = target - nums[i]
+    //     if (nums.has(x)) {
+    //       return [map.get(x), i]
+    //     }
+    //     map.set(nums[i], i)
+
+    //   }
+    // }
+    // sum()
+    var book ={
+      a:'1',
+      b:'2'
+      get:{
 
       }
     }
-    sum()
-
+var books = new book
+console.log(
+books
+);
   </script>
 </body>
 
