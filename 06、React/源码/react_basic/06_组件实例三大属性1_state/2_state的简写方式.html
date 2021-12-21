@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-12-17 10:20:46
+ * @LastEditTime: 2021-12-20 10:20:12
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /06、React/源码/react_basic/06_组件实例三大属性1_state/2_state的简写方式.html
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +34,7 @@
 				return <h1 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}，{wind}</h1>
 			}
 
-			//自定义方法————要用赋值语句的形式+箭头函数
+			//自定义方法————要用赋值语句的形式+🍎箭头函数
 			changeWeather = ()=>{
 				const isHot = this.state.isHot
 				this.setState({isHot:!isHot})

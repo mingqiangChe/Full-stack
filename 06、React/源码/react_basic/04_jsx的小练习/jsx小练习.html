@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-12-17 10:20:46
+ * @LastEditTime: 2021-12-17 12:57:12
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /react_basic/04_jsx的小练习/jsx小练习.html
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +15,7 @@
 <body>
 	<!-- 准备好一个“容器” -->
 	<div id="test"></div>
-	
+	<div id="test1"></div>
 	<!-- 引入react核心库 -->
 	<script type="text/javascript" src="../js/react.development.js"></script>
 	<!-- 引入react-dom，用于支持react操作DOM -->
@@ -34,6 +42,7 @@
 	 */
 		//模拟一些数据
 		const data = ['Angular','React','Vue']
+		const data1 =['红红','艳艳','花花']
 		//1.创建虚拟DOM
 		const VDOM = (
 			<div>
@@ -47,8 +56,17 @@
 				</ul>
 			</div>
 		)
+const VDOM1 =(
+	<div>
+		<ul>
+			{data1.map((item,index)=>{
+				return <li key={index}>{item}</li>
+			})}</ul>
+	</div>
+)
 		//2.渲染虚拟DOM到页面
 		ReactDOM.render(VDOM,document.getElementById('test'))
+	ReactDOM.render(VDOM1,document.getElementById('test1'))
 	</script>
 </body>
 </html>

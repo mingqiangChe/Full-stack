@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-12-17 10:20:46
+ * @LastEditTime: 2021-12-20 12:39:49
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /06、React/源码/react_basic/08_组件实例三大属性3_refs/2_回调函数形式的ref.html
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +29,9 @@
 			//展示左侧输入框的数据
 			showData = ()=>{
 				const {input1} = this
+				console.log(input1);
 				alert(input1.value)
+				console.log(this);
 			}
 			//展示右侧输入框的数据
 			showData2 = ()=>{
