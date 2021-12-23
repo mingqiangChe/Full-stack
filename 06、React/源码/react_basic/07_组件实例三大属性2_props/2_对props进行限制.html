@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-12-17 10:20:46
+ * @LastEditTime: 2021-12-23 21:23:23
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /06、React/源码/react_basic/07_组件实例三大属性2_props/2_对props进行限制.html
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +31,7 @@
 		//创建组件
 		class Person extends React.Component{
 			render(){
-				// console.log(this);
+				console.log(this.props,'1111');
 				const {name,age,sex} = this.props
 				//props是只读的
 				//this.props.name = 'jack' //此行代码会报错，因为props是只读的
