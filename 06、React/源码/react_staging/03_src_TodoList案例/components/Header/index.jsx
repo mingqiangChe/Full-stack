@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+// 需要npm i prop-types
 import PropTypes from 'prop-types'
 import {nanoid} from 'nanoid'
 import './index.css'
@@ -21,11 +22,11 @@ export default class Header extends Component {
 			alert('输入不能为空')
 			return
 		}
-		//准备好一个todo对象
+		//准备好一个todo对象（nanoid随机生成id  使用npm安装）
 		const todoObj = {id:nanoid(),name:target.value,done:false}
-		//将todoObj传递给App
-		this.props.addTodo(todoObj)
-		//清空输入
+		//将todoObj传递给App🍎
+		this.props.addToo(todoObj)
+		//清空输入d
 		target.value = ''
 	}
 

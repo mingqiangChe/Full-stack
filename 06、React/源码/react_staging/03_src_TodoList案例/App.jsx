@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-12-17 10:20:46
+ * @LastEditTime: 2021-12-22 23:47:37
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /06、React/源码/react_staging/03_src_TodoList案例/App.jsx
+ */
 import React, { Component } from 'react'
 import Header from './components/Header'
 import List from './components/List'
@@ -15,17 +23,17 @@ export default class App extends Component {
 		{id:'004',name:'逛街',done:false}
 	]}
 
-	//addTodo用于添加一个todo，接收的参数是todo对象
+	//addTodo用于添加一个todo，接收的参数是todo对象。处理 （父组件给子组件传函数  子组件调用函数）
 	addTodo = (todoObj)=>{
 		//获取原todos
 		const {todos} = this.state
-		//追加一个todo
+		//追加一个todo🍎
 		const newTodos = [todoObj,...todos]
 		//更新状态
 		this.setState({todos:newTodos})
 	}
 
-	//updateTodo用于更新一个todo对象
+	//updateTodo用于更新一个todo对象  传item组件，当进行选中操作时
 	updateTodo = (id,done)=>{
 		//获取状态中的todos
 		const {todos} = this.state
@@ -74,12 +82,15 @@ export default class App extends Component {
 	}
 
 	render() {
+		// 获取从子组件传过来的值
 		const {todos} = this.state
 		return (
 			<div className="todo-container">
 				<div className="todo-wrap">
 					<Header addTodo={this.addTodo}/>
+					{/* todos传list组件做渲染以及状态显示 */}
 					<List todos={todos} updateTodo={this.updateTodo} deleteTodo={this.deleteTodo}/>
+					{/* todos传footer组件做数据展示统计 */}
 					<Footer todos={todos} checkAllTodo={this.checkAllTodo} clearAllDone={this.clearAllDone}/>
 				</div>
 			</div>

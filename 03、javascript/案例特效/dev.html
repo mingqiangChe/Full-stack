@@ -4,287 +4,323 @@
  * @Author: sueRimn
  * @Date: 2021-12-06 15:05:48
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-12-17 09:46:19
+ * @LastEditTime: 2021-12-23 00:04:15
 -->
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+  <body>
+    <script>
+      // (function () {
 
-<body>
-  <script>
-    // (function () {
+      //   function add() {
+      //     var b = 2;
+      //     var sum = a + b;
+      //     console.log(sum);
+      //   }
+      //   add()
+      //   var a = 1;
+      // })()
 
-    //   function add() {
-    //     var b = 2;
-    //     var sum = a + b;
-    //     console.log(sum);
-    //   }
-    //   add()
-    //   var a = 1;
-    // })()
+      // function Person() {
+      //   var name = 'cxk'
+      //   this.getName = function () {
+      //     return name;
+      //   }
+      //   this.setName = function (value) {
+      //     name = value
+      //   }
+      // }
+      // const cxk = new Person()
+      // console.log(cxk.getName());  //cxk
+      // cxk.setName('dd')
+      // console.log(cxk.getName());//dd
+      // console.log(name);//nane is underfid
 
+      // function zz() {
+      //   var name = '1'
+      //   this.getname = function () {
+      //     return name;
+      //   }
+      //   this.setName = (dd) => {
+      //     name = dd
+      //   }
+      // }
+      // const aa = new zz();
+      // console.log(aa.getname());
+      // aa.setName('hh')
+      // console.log(aa.getname());
+      // console.log(name);a
+      // function f() {
+      //   console.log(this.name);
+      // }
+      // var a = {
+      //   name: '1'
+      // }
+      // var b = {
+      //   name: '2'
+      // }
+      // f.bind(a)()//1
+      // function Person(name) {
+      //   this.name = name;
+      //   console.log(this.name);
+      // }
+      // var cxk = new Person('cxk')
 
-    function Person() {
-      var name = 'cxk'
-      this.getName = function () {
-        return name;
-      }
-      this.setName = function (value) {
-        name = value
-      }
-    }
-    const cxk = new Person()
-    console.log(cxk.getName());  //cxk
-    cxk.setName('dd')
-    console.log(cxk.getName());//dd
-    console.log(name);//nane is underfid
+      // let str = "abcabcabcbbccccc";
+      // let num = 0; let char = ''; // 使其按照⼀定的次序排列
+      // str = str.split('').sort().join(''); // "aaabbbbbcccccccc"
+      // // 定义正则表达式
+      // let re = /(\w)\1+/g;
+      // str.replace(re, ($0, $1) => {
+      //   if (num < $0.length) {
+      //     num = $0.length; char = $1;
+      //   }
+      // });
+      // console.log(`字符最多的是${char}，出现了${num}次`);
 
-    // function zz() {
-    //   var name = '1'
-    //   this.getname = function () {
-    //     return name;
-    //   }
-    //   this.setName = (dd) => {
-    //     name = dd
-    //   }
-    // }
-    // const aa = new zz();
-    // console.log(aa.getname());
-    // aa.setName('hh')
-    // console.log(aa.getname());
-    // console.log(name);a
-    // function f() {
-    //   console.log(this.name);
-    // }
-    // var a = {
-    //   name: '1'
-    // }
-    // var b = {
-    //   name: '2'
-    // }
-    // f.bind(a)()//1
-    // function Person(name) {
-    //   this.name = name;
-    //   console.log(this.name);
-    // }
-    // var cxk = new Person('cxk')
+      // a = '355';
+      // b = '12354355'; // 返回 5
+      // isContain(a, b);
+      // function isContain(a, b) {
+      //   for (let i in b) {
+      //     if (a[0] === b[i]) {
+      //       let tmp = true;
+      //       for (let j in a) {
+      //         if (a[j] !== b[--i + --j]) {
+      //           tmp = false;
+      //         }
+      //       }
+      //       if (tmp) {
+      //         return i;
+      //       }
+      //     }
+      //   }
+      //   return -1;
+      // }
 
-    // let str = "abcabcabcbbccccc";
-    // let num = 0; let char = ''; // 使其按照⼀定的次序排列
-    // str = str.split('').sort().join(''); // "aaabbbbbcccccccc" 
-    // // 定义正则表达式 
-    // let re = /(\w)\1+/g;
-    // str.replace(re, ($0, $1) => {
-    //   if (num < $0.length) {
-    //     num = $0.length; char = $1;
-    //   }
-    // });
-    // console.log(`字符最多的是${char}，出现了${num}次`);
+      // const debounce = (fn, delay) => {
+      //   let timer = null;
 
-    // a = '355';
-    // b = '12354355'; // 返回 5 
-    // isContain(a, b);
-    // function isContain(a, b) {
-    //   for (let i in b) {
-    //     if (a[0] === b[i]) {
-    //       let tmp = true;
-    //       for (let j in a) {
-    //         if (a[j] !== b[--i + --j]) {
-    //           tmp = false;
-    //         }
-    //       }
-    //       if (tmp) {
-    //         return i;
-    //       }
-    //     }
-    //   }
-    //   return -1;
-    // }
+      //   return (...args) => {
+      //     clearTimeout(timer);
+      //     timer = setTimeout(() => {
+      //       fn.apply(this, args);
+      //     }, delay);
+      //   }
+      // }
 
-    // const debounce = (fn, delay) => {
-    //   let timer = null;
+      // const newObj = JSON.parse(JSON.stringify(aa))
 
-    //   return (...args) => {
-    //     clearTimeout(timer);
-    //     timer = setTimeout(() => {
-    //       fn.apply(this, args);
-    //     }, delay);
-    //   }
-    // }
+      // const clone = parent => {
+      //   //判断类型
+      //   const isType = (obj, type) => {
+      //     if (typeof obj !== "object") return false;
+      //     const typeString = Object.prototype.toString.call(obj)
+      //   }
+      // }
+      // var obj = {
+      //   3: 333333,
+      //   0: "0000",
+      //   100: 100,
+      //   length: 101
+      // }
+      // var newArr = Array.from(obj);
+      // console.log(newArr);
+      // var arr = [54, 23, 658, 8, 80];
+      // arr.forEach(function (ele, index, array) {
+      //   //ele：获取所有元素
+      //   //index:对应元素下标
+      //   //array:数组本身 （很少用到）
+      //   return ele > 55
+      // });
+      // function nore(arr) {
+      //   var newArr = [];
+      //   for (var i = 0; i < arr.length - 1; i++) {
+      //     if (newArr.indexOf(arr[i]) === -1) {
+      //       newArr.push(arr[i])
+      //     }
+      //   }
+      //   return newArr;
+      // }
+      // var arr = [1, 1, 2, 3]
+      // console.log(nore(arr));
+      // var arr = [1, [2, 3, [4, '5']]]
+      // function fn(arr) {
+      //   return arr.reduce(function (prev, next, index) {
+      //     return prev.concat(Array.isArray(next) ? fn(next) : next);
+      //   }, [])
+      // }
+      // console.log(fn(arr));
+      // function fn(arr) {
+      //   return arr.reduce(function (prev, next, index) {
+      //     return prev.concat(Array.isArray(next) ? fn(next) : next)
+      //   }, [])
+      // }
+      // console.log(fn(arr));
+      // const p = new Promise(function (resolve, reject) {
+      //   setTimeout(() => {
+      //     // let arr = '失败'
+      //     // reject(arr)
+      //     let datta = '11'
+      //     resolve(datta)
+      //   }, 1000);
+      // })
 
-    // const newObj = JSON.parse(JSON.stringify(aa))
+      // p.then(function (value) {
+      //   console.log(value);
+      // }, function (reason) {
+      //   console.log(reason);
+      // })
 
-    // const clone = parent => {
-    //   //判断类型
-    //   const isType = (obj, type) => {
-    //     if (typeof obj !== "object") return false;
-    //     const typeString = Object.prototype.toString.call(obj)
-    //   }
-    // }
-    // var obj = {
-    //   3: 333333,
-    //   0: "0000",
-    //   100: 100,
-    //   length: 101
-    // }
-    // var newArr = Array.from(obj);
-    // console.log(newArr);
-    // var arr = [54, 23, 658, 8, 80];
-    // arr.forEach(function (ele, index, array) {
-    //   //ele：获取所有元素            
-    //   //index:对应元素下标            
-    //   //array:数组本身 （很少用到）            
-    //   return ele > 55
-    // });
-    // function nore(arr) {
-    //   var newArr = [];
-    //   for (var i = 0; i < arr.length - 1; i++) {
-    //     if (newArr.indexOf(arr[i]) === -1) {
-    //       newArr.push(arr[i])
-    //     }
-    //   }
-    //   return newArr;
-    // }
-    // var arr = [1, 1, 2, 3]
-    // console.log(nore(arr));
-    // var arr = [1, [2, 3, [4, '5']]]
-    // function fn(arr) {
-    //   return arr.reduce(function (prev, next, index) {
-    //     return prev.concat(Array.isArray(next) ? fn(next) : next);
-    //   }, [])
-    // }
-    // console.log(fn(arr));
-    // function fn(arr) {
-    //   return arr.reduce(function (prev, next, index) {
-    //     return prev.concat(Array.isArray(next) ? fn(next) : next)
-    //   }, [])
-    // }
-    // console.log(fn(arr));
-    // const p = new Promise(function (resolve, reject) {
-    //   setTimeout(() => {
-    //     // let arr = '失败'
-    //     // reject(arr)
-    //     let datta = '11'
-    //     resolve(datta)
-    //   }, 1000);
-    // })
+      // // async await
+      // function sendAJAX(url) {
+      //   return new Promise((resolve, reject) => {
+      //     const a = new XMLHttpRequest();
+      //     a.open('GET', url);
+      //     a.send();
+      //     a.onreadystatechange = function () {
+      //       if (a.readyState === 4) {
+      //         if (x.status >= 200 && a.status < 300) {
+      //           resolve(a.response)
+      //         } else {
+      //           reject(a.status)
+      //         }
+      //       }
+      //     }
+      //   })
+      // }
+      // sendAJAX('ddsa').then(value => {
+      //   console.log(value);
+      // }, reason => { })
 
-    // p.then(function (value) {
-    //   console.log(value);
-    // }, function (reason) {
-    //   console.log(reason);
-    // })
+      // async function main() {
+      //   let result = await sendAJAX('')
+      //   console.log(result);
 
-    // // async await
-    // function sendAJAX(url) {
-    //   return new Promise((resolve, reject) => {
-    //     const a = new XMLHttpRequest();
-    //     a.open('GET', url);
-    //     a.send();
-    //     a.onreadystatechange = function () {
-    //       if (a.readyState === 4) {
-    //         if (x.status >= 200 && a.status < 300) {
-    //           resolve(a.response)
-    //         } else {
-    //           reject(a.status)
-    //         }
-    //       }
-    //     }
-    //   })
-    // }
-    // sendAJAX('ddsa').then(value => {
-    //   console.log(value);
-    // }, reason => { })
+      // }
+      // const z = new Promise(function (resolve, reject) {
+      //   let bb = 'cg'
+      //   resolve(bb)
 
+      // })
+      // z.then(function (value) {
+      //   console.log(value);
+      // }, function (re) {
+      //   console.log(re);
+      // })
 
-    // async function main() {
-    //   let result = await sendAJAX('')
-    //   console.log(result);
+      // const arr = [1, 2, 12, 23, 3, 1, 1, 1, 1]
+      // arr.filter((ele, index) => {
+      //   const tmp = [];
+      //   if (arr[ele].indexOf(tmp) === -1) {
+      //     tmp.push(arr[i])
+      //   }
+      //   return tmp;
+      // })
+      // console.log(tmp);
+      // const arr = [1, 2, 12, 23, 3, 1, 1, 1, 1]
+      // arr.filter(function (ele, index) {
+      //   // console.log(ele);
+      //   var tmp = []
+      //   if (tmp.indexOf(ele) === -1) {
+      //     tmp.push(ele)
+      //     console.log(tmp);
+      //   }
+      //   // return tmp;
+      // })
+      // const bb = arr.sort();
+      // const aa = new Set(bb)
+      // console.log(aa);
+      // console.log(bb);
 
-    // }
-    // const z = new Promise(function (resolve, reject) {
-    //   let bb = 'cg'
-    //   resolve(bb)
+      // var book = {}
+      // var name = '';
+      // Object.defineProperty(book, 'name', {
+      //   set: function (value) {
+      //     name = value;
+      //     console.log('');
+      //   },
+      //   get: function () {
+      //     return '<' + name + '>'
+      //   }
+      // })
+      // book.name = 'vue权威指南'
+      // console.log(book.name);
+      // map = new Map;
+      // console.log(map);
+      // nums = [2, 7, 11, 15], target = 9
+      // var sum = function (nums, target) {
+      //   map = new Map();
+      //   for (let i = 0; i < nums.length; i++) {
+      //     x = target - nums[i]
+      //     if (nums.has(x)) {
+      //       return [map.get(x), i]
+      //     }
+      //     map.set(nums[i], i)
 
+      //   }
+      // }
+      // sum()
+      //     var book ={
+      //       a:'1',
+      //       b:'2'
+      //       get:{
 
-    // })
-    // z.then(function (value) {
-    //   console.log(value);
-    // }, function (re) {
-    //   console.log(re);
-    // })
+      //       }
+      //     }
+      // var books = new book
+      // console.log(
+      // books
+      // );
+      // var flattened =[[0,1],[2,3],[4,5]].reduce(
+      //   function (a,b){
+      //     return a.concat(b);
+      //   },[]
+      // )
+      // console.log(flattened);
+      // var flattened=[[0,1],[1,2]].reduce((a,b)=>{
+      //   return a.concat(b)
+      // })
+      // console.log(flattened);
 
-    // const arr = [1, 2, 12, 23, 3, 1, 1, 1, 1]
-    // arr.filter((ele, index) => {
-    //   const tmp = [];
-    //   if (arr[ele].indexOf(tmp) === -1) {
-    //     tmp.push(arr[i])
-    //   }
-    //   return tmp;
-    // })
-    // console.log(tmp);
-    // const arr = [1, 2, 12, 23, 3, 1, 1, 1, 1]
-    // arr.filter(function (ele, index) {
-    //   // console.log(ele);
-    //   var tmp = []
-    //   if (tmp.indexOf(ele) === -1) {
-    //     tmp.push(ele)
-    //     console.log(tmp);
-    //   }
-    //   // return tmp;
-    // })
-    // const bb = arr.sort();
-    // const aa = new Set(bb)
-    // console.log(aa);
-    // console.log(bb);
+      // var names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice'];
+      // var countedNames=names.reduce((allNames,name)=>{
+      //   if(name in allNames){
+      //     allNames[name]++;
+      //   }else{
+      //     allNames[name]=1;
+      //   }
+      //   return allNames;
+      // })
+      // console.log(countedNames);
+      // var names = ["Alice", "Bob", "Tiff", "Bruce", "Alice"];
 
+      // var countedNames = names.reduce((allNames, name) => {
+      //   if (name in allNames) {
+      //     allNames[name]++;
+      //   } else {
+      //     allNames[name] = 1;
+      //   }
+      //   return allNames;
+      // }, {});
+      // console.log(countedNames);
+      // let kvArray = [
+      //   ["key1", "value1"],
+      //   ["key2", "value2"],
+      // ];
 
-    // var book = {}
-    // var name = '';
-    // Object.defineProperty(book, 'name', {
-    //   set: function (value) {
-    //     name = value;
-    //     console.log('');
-    //   },
-    //   get: function () {
-    //     return '<' + name + '>'
-    //   }
-    // })
-    // book.name = 'vue权威指南'
-    // console.log(book.name);
-    // map = new Map; 
-    // console.log(map);
-    // nums = [2, 7, 11, 15], target = 9
-    // var sum = function (nums, target) {
-    //   map = new Map();
-    //   for (let i = 0; i < nums.length; i++) {
-    //     x = target - nums[i]
-    //     if (nums.has(x)) {
-    //       return [map.get(x), i]
-    //     }
-    //     map.set(nums[i], i)
-
-    //   }
-    // }
-    // sum()
-    var book ={
-      a:'1',
-      b:'2'
-      get:{
-
-      }
-    }
-var books = new book
-console.log(
-books
-);
-  </script>
-</body>
-
+      // // 使用常规的Map构造函数可以将一个二维键值对数组转换成一个Map对象
+      // let myMap = new Map(kvArray);
+      // console.log(myMap);
+      var myNewString=new Array;
+      console.log(myNewString);
+    </script>
+  </body>
 </html>
