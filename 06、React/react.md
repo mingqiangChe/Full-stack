@@ -1286,18 +1286,313 @@ npm start
         * 3.1.2 保存在哪个组件?
     * 3.2 交互(从绑定事件监听开始)
 
-### 3.2. 组件的组合使用-TodoList ✨🪐✨
+# 组件的组合使用-TodoList ✨🪐✨
 功能: 组件化实现此功能
   1. 显示所有todo列表
   2. 输入文本, 点击按钮显示到列表的首位, 并清除输入的文本
 
 ![输入图片说明](images/demo.gif "QQ截图20201229183512.png")
 
+App.js
+
+解析：
+
+addTodo：通过接受子组件Header通过受控组件事件生成新对象传递过来，来添加进本组件state状态值中。生成新state。散步🍎
+
+updateTodo:🐒
+
+```jsx
+import React, { Component } from 'react'
+import Header from './components/Header'
+import List from './components/List'
+import Footer from './components/Footer'
+import './App.css'
+
+export default class App extends Component {
+	//状态在哪里，操作状态的方法就在哪里
+
+	//初始化状态❤️
+	state = {todos:[
+		{id:'001',name:'吃饭',done:true},
+		{id:'002',name:'睡觉',done:true},
+		{id:'003',name:'打代码',done:false},
+		{id:'004',name:'逛街',done:false}
+	]}
+
+	//addTodo用于添加一个todo，接收的参数是todo对象。处理 （父组件给子组件传函数  子组件调用函数）🍎
+	addTodo = (todoObj)=>{
+		//获取原todos
+		const {todos} = this.state
+		//追加一个todo
+		const newTodos = [todoObj,...todos]
+		//更新状态
+		this.setState({todos:newTodos})
+	}
+
+	//updateTodo用于更新一个todo对象  传item组件，当进行选中操作时🐒 done为是否勾选状态值
+	updateTodo = (id,done)=>{
+		//获取状态中的todos
+		const {todos} = this.state
+		//匹配处理数据   如果id一致将相应done值转为传过来的done值 这里简写应为done:done.(差点以为合并操作，具体看addTodo事件方法)
+		const newTodos = todos.map((todoObj)=>{
+			if(todoObj.id === id) return {...todoObj,done}
+			else return todoObj
+		})
+		this.setState({todos:newTodos})
+	}
+
+	//deleteTodo用于删除一个todo对象🍑
+	deleteTodo = (id)=>{
+		//获取原来的todos
+		const {todos} = this.state
+		//删除指定id的todo对象
+		const newTodos = todos.filter((todoObj)=>{
+			return todoObj.id !== id
+		})
+		//更新状态
+		this.setState({todos:newTodos})
+	}
+
+	//checkAllTodo用于全选🐟 把每一项改成统一状态done值
+	checkAllTodo = (done)=>{
+		//获取原来的todos
+		const {todos} = this.state
+		//加工数据
+		const newTodos = todos.map((todoObj)=>{
+			return {...todoObj,done}
+		})
+		//更新状态
+		this.setState({todos:newTodos})
+	}
+
+	//clearAllDone用于清除所有已完成的
+	clearAllDone = ()=>{🐶
+		//获取原来的todos
+		const {todos} = this.state
+		//过滤数据
+		const newTodos = todos.filter((todoObj)=>{
+			return !todoObj.done
+		})
+		//更新状态
+		this.setState({todos:newTodos})
+	}
+
+	render() {
+		// this.state解构自身组件传过来的值
+		const {❤️todos} = this.state
+		return (
+			<div className="todo-container">
+				<div className="todo-wrap">
+					<Header 🍎addTodo={this.addTodo}/>
+					{/* todos传list组件做渲染以及状态显示 */}
+					<List ❤️todos={todos} 🐒updateTodo={this.updateTodo} 🍑deleteTodo={this.deleteTodo}/>
+					{/* todos传footer组件做数据展示统计 */}
+					<Footer ❤️todos={todos} 🐟checkAllTodo={this.checkAllTodo} 🐶clearAllDone={this.clearAllDone}/>
+				</div>
+			</div>
+		)
+	}
+}
+
+```
+
+Header.jsx
+
+解析：
+
+通过受控组件事件来进行行为判断，将输入的内容与id与状态done生成新的对象，通过子传父使用事件调用父组件函数addTodo方法来传入新数组。随后完成操作，清空输入框。
+
+将接收过来的父组件事件进行规则验证 func  isrequired
+
+```jsx
+import React, { Component } from 'react'
+// 需要npm i prop-types  类型验证
+import PropTypes from 'prop-types'
+//nanoid库 随机生成id
+import {nanoid} from 'nanoid'
+import './index.css'
+
+export default class Header extends Component {
+
+	//对接收的props进行：类型、必要性的限制
+	static propTypes = {
+		addTodo:PropTypes.func.isRequired
+	}
+
+	//键盘事件的回调🌰
+	handleKeyUp = (event)=>{
+		//解构赋值获取keyCode,target
+		const {keyCode,target} = event
+		//判断是否是回车按键
+		if(keyCode !== 13) return
+		//添加的todo名字不能为空
+		if(target.value.trim() === ''){
+			alert('输入不能为空')
+			return
+		}
+		//准备好一个todo对象（nanoid随机生成id  使用npm安装）
+		const todoObj = {id:nanoid(),name:target.value,done:false}
+		//将todoObj传递给App🍎
+		this.props.addToo(todoObj)
+		//清空输入d
+		target.value = ''
+	}
+
+	render() {
+		return (
+			<div className="todo-header">
+				<input onKeyUp={this.handleKeyUp🌰} type="text" placeholder="请输入你的任务名称，按回车键确认"/>
+			</div>
+		)
+	}
+}
+
+```
+
+List.jsx
+
+解析：对传过来的todos数据、方法进行类型限制
+
+将父组件传过来的todos数据渲染map。将方法继续往下传
+
+```jsx
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import Item from '../Item'
+import './index.css'
+
+export default class List extends Component {
+
+	//对接收的props进行：类型、必要性的限制
+	static propTypes = {
+		todos:PropTypes.array.isRequired,❤️
+		updateTodo:PropTypes.func.isRequired,🐒
+		deleteTodo:PropTypes.func.isRequired,
+	}
+
+	render() {
+		// this.props获取父组件app传过来的值解构
+		const {❤️todos,🐒updateTodo,deleteTodo} = this.props
+		return (
+			<ul className="todo-main">
+				{
+					todos.map( todo =>{
+						return <Item key={todo.id} {...todo} 🐒updateTodo={updateTodo} 🍑deleteTodo={deleteTodo}/>
+					})
+				}
+			</ul>
+		)
+	}
+}
+
+```
+
+Item.js
+
+解析：
+
+本组件自定义状态值mouse，onMouseEnter来判断组件是true否false被鼠标移入移出，从而做相应处理
+
+onchange受控组件 勾选来传入当前checked状态以及所属id，并通过uodateTodo传入id以及是否勾选状态值给父组件进行相应处理。
+
+handleDelete 通过点击删除按钮触发。并使用api confirm方法获取用户是否同意删除。同意则将父组件传过来的该方法传入当前点击的id，从而触发App.jsx里的删除事件。
+
+```jsx
+import React, { Component } from 'react'
+import './index.css'
+
+export default class Item extends Component {
+
+	state = {mouse:false} //标识鼠标移入、移出
+
+	//鼠标移入、移出的回调
+	handleMouse = (flag)=>{
+		return ()=>{
+			this.setState({mouse:flag})
+		}
+	}
+
+	//勾选、取消勾选某一个todo的回调
+	handleCheck = (id)=>{
+		return (event)=>{🐒   event.target.checked是否勾选状态值
+			this.props.updateTodo(id,event.target.checked)
+		}
+	}
+
+	//删除一个todo的回调🍑
+	handleDelete = (id)=>{
+		if(window.confirm('确定删除吗？')){
+			this.props.deleteTodo(id)
+		}
+	}
+
+
+	render() {
+    //this.props 解构父组件List穿过来的todo
+		const {id,name,done} = this.props
+		// 从本组件解析mouse自定义状态值
+		const {mouse} = this.state
+		return (
+			<li style={{backgroundColor:mouse ? '#ddd' : 'white'}} onMouseEnter={this.handleMouse(true)} onMouseLeave={this.handleMouse(false)}>
+				<label>
+					<input type="checkbox" checked={done} onChange={this.handleCheck(id)}/>
+					<span>{name}</span>
+				</label>
+				<button 🍑onClick={()=> this.handleDelete(id) } className="btn btn-danger" style={{display:mouse?'block':'none'}}>删除</button>
+			</li>
+		)
+	}
+}
+
+```
+
+Footer.js
+
+解析：
+
+通过不同点击事件调用父组件不同方法。
+
+```jsx
+import React, { Component } from 'react'
+import './index.css'
+
+export default class Footer extends Component {
+
+	//全选checkbox的回调
+	handleCheckAll = (event)=>{
+		this.props.checkAllTodo(event.target.checked)🐟
+	}
+
+	//清除已完成任务的回调
+	handleClearAllDone = ()=>{
+		this.props.clearAllDone()🐶
+	}
+
+	render() {❤️
+		const {todos} = this.props
+		//已完成的个数
+		const doneCount = todos.reduce((pre,todo)=> pre + (todo.done ? 1 : 0),0)
+		//总数
+		const total = todos.length
+		return (
+			<div className="todo-footer">
+				<label>
+					<input type="checkbox" onChange={this.handleCheckAll} checked={doneCount === total && total !== 0 ? true : false}/>
+				</label>
+				<span>
+					<span>已完成{doneCount}</span> / 全部{total}
+				</span>
+				<button onClick={this.handleClearAllDone} className="btn btn-danger">清除已完成任务</button>
+			</div>
+		)
+	}
+}
+
+```
 
 
 
-
-# 3.3.代码示例
+### 3.3.代码示例
 
 ### [代码示例直通地址](https://gitee.com/bright-boy/technical-notes/tree/master/study-notes/react/%E6%BA%90%E7%A0%81/react_staging)
 
