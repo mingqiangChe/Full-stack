@@ -892,18 +892,133 @@ createRef方法
 </html>
 ```
 
+## 2.5组件通信
+
+**父组件与子组件通信**
+
+- 父组件将自己的状态传递给子组件，子组件当做属性来接收，当父组件更改自己状态的时候，子组件接收到的属性就会发生改变
+
+- 父组件利用`ref`对子组件做标记，通过调用子组件的方法以更改子组件的状态,也可以调用子组件的方法..
+
+**子组件与父组件通信**
+
+- 父组件将自己的某个方法传递给子组件，在方法里可以做任意操作，比如可以更改状态，子组件通过`this.props`接收到父组件的方法后调用。
+
+**跨组件通信**
+
+在react没有类似vue中的事件总线来解决这个问题，我们只能借助它们共同的父级组件来实现，将非父子关系装换成多维度的父子关系。react提供了`context` api来实现跨组件通信, React 16.3之后的`context`api较之前的好用。
+
+实例，使用`context` 实现购物车中的加减功能
+
+```jsx
+// counterContext.js
+import React, { Component, createContext } from 'react'
+
+const {
+  Provider,
+  Consumer: CountConsumer
+} = createContext()
+
+class CountProvider extends Component {
+  constructor () {
+    super()
+    this.state = {
+      count: 1
+    }
+  }
+  increaseCount = () => {
+    this.setState({
+      count: this.state.count + 1
+    })
+  }
+  decreaseCount = () => {
+    this.setState({
+      count: this.state.count - 1
+    })
+  }
+  render() {
+    return (
+      <Provider value={{
+        count: this.state.count,
+        increaseCount: this.increaseCount,
+        decreaseCount: this.decreaseCount
+      }}
+      >
+        {this.props.children}
+      </Provider>
+    )
+  }
+}
+
+export {
+  CountProvider,
+  CountConsumer
+}
+```
+
+```jsx
+// 定义CountButton组件
+const CountButton = (props) => {
+  return (
+    <CountConsumer>
+      // consumer的children必须是一个方法
+      {
+        ({ increaseCount, decreaseCount }) => {
+          const { type } = props
+          const handleClick = type === 'increase' ? increaseCount : decreaseCount
+          const btnText = type === 'increase' ? '+' : '-'
+          return <button onClick={handleClick}>{btnText}</button>
+        }
+      }
+    </CountConsumer>
+  )
+}
+```
+
+```jsx
+// 定义count组件，用于显示数量
+const Count = (prop) => {
+  return (
+    <CountConsumer>
+      {
+        ({ count }) => {
+          return <span>{count}</span>
+        }
+      }
+    </CountConsumer>
+  )
+}
+```
+
+```jsx
+// 组合
+class App extends Component {
+  render () {
+    return (
+  		<CountProvider>
+        <CountButton type='decrease' />
+        <Count />
+        <CountButton type='increase' />
+      </CountProvider>
+  	)
+  }
+}
+```
+
+> 复杂的非父子组件通信在react中很难处理，多组件间的数据共享也不好处理，在实际的工作中我们会使用flux、redux、mobx来实现
 
 
-## 2.5. 收集表单数据
 
- * #### 2.5.1. 效果
+## 2.6. 收集表单数据
+
+ * #### 2.6.1. 效果
 
    需求: 定义一个包含表单的组件
      输入用户名密码后, 点击登录提示输入信息
 
   ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/收集表单数据.gif "QQ截图20201229183512.png")
 
- * #### 2.5.2. 理解
+ * #### 2.6.2. 理解
 
    包含表单的组件分类
 
@@ -1038,6 +1153,253 @@ input、select和textarea处理方式一样
 </body>
 </html>
 ```
+
+
+
+#### textarea 标签
+
+在 HTML 中, `<textarea>` 元素通过其子元素定义其文本:
+
+```
+<textarea>
+  你好， 这是在 text area 里的文本
+</textarea>
+```
+
+而在 React 中，`<textarea>` 使用 `value` 属性代替。这样，可以使得使用 `<textarea>` 的表单和使用单行 input 的表单非常类似：
+
+```javascript
+class EssayForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '请撰写一篇关于你喜欢的 DOM 元素的文章.'
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('提交的文章: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          文章:
+          <textarea value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="提交" />
+      </form>
+    );
+  }
+}
+```
+
+请注意，`this.state.value` 初始化于构造函数中，因此文本区域默认有初值。
+
+
+
+#### select 标签
+
+在 HTML 中，`<select>` 创建下拉列表标签。例如，如下 HTML 创建了水果相关的下拉列表：
+
+```
+<select>
+  <option value="grapefruit">葡萄柚</option>
+  <option value="lime">酸橙</option>
+  <option selected value="coconut">椰子</option>
+  <option value="mango">芒果</option>
+</select>
+```
+
+请注意，由于 `selected` 属性的缘故，椰子选项默认被选中。React 并不会使用 `selected` 属性，而是在根 `select` 标签上使用 `value` 属性。这在受控组件中更便捷，因为您只需要在根标签中更新它。例如：
+
+```javascript
+class FlavorForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: 'coconut'};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('你喜欢的风味是: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          选择你喜欢的风味:
+          <select value={this.state.value} onChange={this.handleChange}>
+            <option value="grapefruit">葡萄柚</option>
+            <option value="lime">酸橙</option>
+            <option value="coconut">椰子</option>
+            <option value="mango">芒果</option>
+          </select>
+        </label>
+        <input type="submit" value="提交" />
+      </form>
+    );
+  }
+}
+```
+
+总的来说，这使得, `<input type="text">`, `<textarea>` 和 `<select>`之类的标签都非常相似—它们都接受一个 `value` 属性，你可以使用它来实现受控组件。
+
+> 注意
+>
+> 你可以将数组传递到 `value` 属性中，以支持在 `select` 标签中选择多个选项：
+>
+> ```
+> <select multiple={true} value={['B', 'C']}>
+> ```
+
+```javascript
+class MulFlavorForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: "coconut",
+      arr: [],
+      options: [
+        { value: "grapefruit", label: "葡萄柚" },
+        { value: "lime", label: "酸橙" },
+        { value: "coconut", label: "椰子" },
+        { value: "mango", label: "芒果" }
+      ]
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e){
+    let idx = this.state.arr.findIndex(item=>{
+      return item === e.target.value
+    })
+    if (idx >= 0) {
+      this.state.arr.splice(idx,1);
+    } else {
+      this.state.arr.push(e.target.value);
+    }
+    let arr = this.state.arr;
+    this.setState({arr});
+  }
+
+  render() {
+    return (
+      <div>
+        <select multiple={true} value={this.state.arr} onChange={this.handleChange}>
+          {this.state.options.map((item,index) => {
+            return <option value={item.value} key={index}>{item.label}</option>;
+          })}
+        </select>
+      </div>
+    );
+  }
+}
+
+export default Test4;
+```
+
+
+
+#### 处理多个输入
+
+当需要处理多个 `input` 元素时，我们可以给每个元素添加 `name` 属性，并让处理函数根据 `event.target.name` 的值选择要执行的操作。
+
+```javascript
+class Reservation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isGoing: true,
+      numberOfGuests: 2
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  render() {
+    return (
+      <form>
+        <label>
+          参与:
+          <input
+            name="isGoing"
+            type="checkbox"
+            checked={this.state.isGoing}
+            onChange={this.handleInputChange} />
+        </label>
+        <br />
+        <label>
+          来宾人数:
+          <input
+            name="numberOfGuests"
+            type="number"
+            value={this.state.numberOfGuests}
+            onChange={this.handleInputChange} />
+        </label>
+      </form>
+    );
+  }
+}
+```
+
+
+
+#### 文件 input 标签
+
+在 HTML 中，`<input type="file">` 允许用户从存储设备中选择一个或多个文件，将其上传到服务器，或通过使用 JavaScript 的 File API 进行控制。
+
+```html
+<input type="file" />
+```
+
+因为它的 value 只读，所以它是 React 中的一个非受控组件。将与其他非受控组件在后续文档中一起讨论。
+
+
+
+#### 受控输入空值
+
+在受控组件上指定 value 的 prop 会阻止用户更改输入。如果你指定了 value，但输入仍可编辑，则可能是你意外地将value 设置为 undefined 或 null。
+
+下面的代码演示了这一点。（输入最初被锁定，但在短时间延迟后变为可编辑。）
+
+```javascript
+ReactDOM.render(<input value="hi" />, mountNode);
+
+setTimeout(function() {
+  ReactDOM.render(<input value={null} />, mountNode);
+}, 1000);
+```
+
+
 
 
 
@@ -1718,6 +2080,129 @@ console.log(error);
   ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/demo_users.gif "QQ截图20201229183512.png")
 
 请求地址: https://api.github.com/search/users?q=xxxxxx
+
+App.jsx
+
+解析：state内存不同状态值以及users数据
+
+
+
+```jsx
+import React, { Component } from 'react'
+import Search from './components/Search'
+import List from './components/List'
+
+export default class App extends Component {
+
+	state = { //初始化状态
+		users:[], //users初始值为数组
+		isFirst:true, //是否为第一次打开页面
+		isLoading:false,//标识是否处于加载中
+		err:'',//存储请求相关的错误信息
+	} 
+
+	//更新App的state
+	updateAppState = (stateObj)=>{
+		this.setState(stateObj)
+	}
+
+	render() {
+		return (
+			<div className="container">
+				<Search updateAppState={this.updateAppState}/>
+				<List {...this.state}/>
+			</div>
+		)
+	}
+}
+
+```
+
+Search.jsx
+
+解析：
+
+使用非受控组件方式触发使用回调函数式调用ref  
+
+将输入内容收集保存并重新命名使用。
+
+在发送前、中、失败三种状态中分别定义不同父组件定义的状态值来传给父组件，父组件传给List组件进行三元展现
+
+使用父组件茶u你过来方法进行传值或自定义传值
+
+```jsx
+import React, { Component } from 'react'
+import axios from 'axios'
+
+export default class Search extends Component {
+
+	search = ()=>{
+		//获取用户的输入(连续解构赋值+重命名)
+		const {keyWordElement:{value:keyWord}} = this
+		//发送请求前通知App更新状态
+		this.props.updateAppState({isFirst:false,isLoading:true})
+		//发送网络请求
+		axios.get(`/api1/search/users?q=${keyWord}`).then(
+			response => {
+				//请求成功后通知App更新状态
+				this.props.updateAppState({isLoading:false,users:response.data.items})
+			},
+			error => {
+				//请求失败后通知App更新状态
+				this.props.updateAppState({isLoading:false,err:error.message})
+			}
+		)
+	}
+
+	render() {
+		return (
+			<section className="jumbotron">
+				<h3 className="jumbotron-heading">搜索github用户</h3>
+				<div>
+					<input ref={c => this.keyWordElement = c} type="text" placeholder="输入关键词点击搜索"/>&nbsp;
+					<button onClick={this.search}>搜索</button>
+				</div>
+			</section>
+		)
+	}
+}
+
+```
+
+List.jsx
+
+解析：接收父组件传过来不同状态值进行不同展示。
+
+```jsx
+import React, { Component } from 'react'
+import './index.css'
+
+export default class List extends Component {
+	render() {
+		const {users,isFirst,isLoading,err} = this.props
+		return (
+			<div className="row">
+				{
+					isFirst ? <h2>欢迎使用，输入关键字，随后点击搜索</h2> :
+					isLoading ? <h2>Loading......</h2> :
+					err ? <h2 style={{color:'red'}}>{err}</h2> :
+					users.map((userObj)=>{
+						return (
+							<div key={userObj.id} className="card">
+								<a rel="noreferrer" href={userObj.html_url} target="_blank">
+									<img alt="head_portrait" src={userObj.avatar_url} style={{width:'100px'}}/>
+								</a>
+								<p className="card-text">{userObj.login}</p>
+							</div>
+						)
+					})
+				}
+			</div>
+		)
+	}
+}
+
+```
 
 
 
