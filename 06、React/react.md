@@ -2399,7 +2399,7 @@ fetch(url).then(function(response) {
 
 ### 5.1.2. 路由的理解
 
-* #### 1. **什么是路由****?**
+* #### 1. **什么是路由**?
 
   * 1. 一个路由就是一个映射关系(key:value)
   * 2. key为路径, value可能是function或component
@@ -2468,6 +2468,55 @@ npm install --save react-router-dom
 
   ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/react-routerdemo2.gif "QQ截图20201229183512.png")
 
+### 代码展示：
+
+```jsx
+import React, { Component } from 'react'
+import {Link,Route} from 'react-router-dom'
+import Home from './components/Home'
+import About from './components/About'
+
+export default class App extends Component {
+	render() {
+		return (
+			<div>
+				<div className="row">
+					<div className="col-xs-offset-2 col-xs-8">
+						<div className="page-header"><h2>React Router Demo</h2></div>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-xs-2 col-xs-offset-2">
+						<div className="list-group">
+
+							{/* 原生html中，靠<a>跳转不同的页面 */}
+							{/* <a className="list-group-item" href="./about.html">About</a>
+							<a className="list-group-item active" href="./home.html">Home</a> */}
+
+							{/* 在React中靠路由链接实现切换组件--编写路由链接 */}
+							<Link className="list-group-item" to="/about">About</Link>
+							<Link className="list-group-item" to="/home">Home</Link>
+						</div>
+					</div>
+					<div className="col-xs-6">
+						<div className="panel">
+							<div className="panel-body">
+								{/* 注册路由 */}
+								<Route path="/about" component={About}/>
+								<Route path="/home" component={Home}/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+}
+
+```
+
+
+
 ## 5.5. 向路由组件传递参数数据
 
 ### 效果
@@ -2483,6 +2532,10 @@ npm install --save react-router-dom
 ## 5.7. 代码示例
 
 [代码示例直通地址](https://gitee.com/bright-boy/technical-notes/tree/master/study-notes/react/%E6%BA%90%E7%A0%81/react_staging)
+
+
+
+
 
 # 6 流行的开源React UI组件库
 
