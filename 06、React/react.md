@@ -2429,52 +2429,34 @@ fetch(url).then(function(response) {
 ### 5.2.1. 内置组件
 
 * 1. &lt;BrowserRouter&gt;
-* 2. &lt;HashRouter&gt;
-* 3. &lt;Route&gt;
-* 4. &lt;Redirect&gt;
-* 5. &lt;Link&gt;
-* 6. &lt;NavLink&gt;
-* 7. &lt;Switch&gt;
 
-### 5.2.2. 其它
+Index.jsx
 
-* 1. history对象
-* 2. match对象
-* 3. withRouter函数
+```jsx
+//引入react核心库
+import React from 'react'
+//引入ReactDOM
+import ReactDOM from 'react-dom'
+//
+import {BrowserRouter} from 'react-router-dom'
+//引入App
+import App from './App'
 
-## 5.3. 基本路由使用
-
-### 5.3.1. 效果
-
-  ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/react-router.gif "QQ截图20201229183512.png")
-
-### 5.3.2. 准备
-
-1. 下载react-router-dom: 
-
-```shell
-npm install --save react-router-dom
+ReactDOM.render(
+	<BrowserRouter>❤️
+		<App/>
+	</BrowserRouter>,
+	document.getElementById('root')
+)
 ```
 
-2. 引入bootstrap.css: 
-
-```html
-<link rel="stylesheet" href="/css/bootstrap.css">
-```
-
-## 5.4. 嵌套路由使用
-
-### 效果
-
-  ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/react-routerdemo2.gif "QQ截图20201229183512.png")
-
-### 代码展示：
+App.jsx
 
 ```jsx
 import React, { Component } from 'react'
-import {Link,Route} from 'react-router-dom'
-import Home from './components/Home'
-import About from './components/About'
+import {Link,Route} from 'react-router-dom'❤️
+import Home from './components/Home'❤️
+import About from './components/About'❤️
 
 export default class App extends Component {
 	render() {
@@ -2489,13 +2471,91 @@ export default class App extends Component {
 					<div className="col-xs-2 col-xs-offset-2">
 						<div className="list-group">
 
-							{/* 原生html中，靠<a>跳转不同的页面 */}
-							{/* <a className="list-group-item" href="./about.html">About</a>
-							<a className="list-group-item active" href="./home.html">Home</a> */}
-
-							{/* 在React中靠路由链接实现切换组件--编写路由链接 */}
+							{/* 在React中靠路由链接实现切换组件--编写路由链接 ❤️*/}
 							<Link className="list-group-item" to="/about">About</Link>
 							<Link className="list-group-item" to="/home">Home</Link>
+						</div>
+					</div>
+					<div className="col-xs-6">
+						<div className="panel">
+							<div className="panel-body">
+								{/* 注册路由❤️ */}
+								<Route path="/about" component={About}/>
+								<Route path="/home" component={Home}/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+}
+
+
+```
+
+
+
+* 2. &lt;HashRouter&gt;
+* 3. &lt;Route&gt;
+* 4. &lt;Redirect&gt;
+
+当所有路由无法匹配时用于重定向。6.0好像改为navigator
+
+必须放最下面才生效
+
+* 5. &lt;Link&gt;
+* 6. &lt;NavLink&gt;
+
+自动添加navlink类名
+
+封装
+
+MyNavLink.jsx
+
+直接通过...this.props解构传过来的参数
+
+```jsx
+import React, { Component } from 'react'
+import {NavLink} from 'react-router-dom'❤️
+
+export default class MyNavLink extends Component {
+	render() {
+		// console.log(this.props);
+		return ( ❤️
+			<NavLink activeClassName="atguigu" className="list-group-item" {...this.props}/>
+		)
+	}
+}
+
+```
+
+App.jsx
+
+```jsx
+import React, { Component } from 'react'
+import {Route} from 'react-router-dom'
+import Home from './pages/Home' //Home是路由组件
+import About from './pages/About' //About是路由组件
+import Header from './components/Header' //Header是一般组件
+import MyNavLink from './components/MyNavLink'
+
+export default class App extends Component {
+	render() {
+		return (
+			<div>
+				<div className="row">
+					<div className="col-xs-offset-2 col-xs-8">
+						<Header/>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-xs-2 col-xs-offset-2">
+						<div className="list-group">
+
+							{/* 在React中靠路由链接实现切换组件--编写路由链接 ❤️*/}
+							<MyNavLink to="/about">About</MyNavLink>
+							<MyNavLink to="/home">Home</MyNavLink>
 						</div>
 					</div>
 					<div className="col-xs-6">
@@ -2517,11 +2577,382 @@ export default class App extends Component {
 
 
 
+* 7. &lt;Switch&gt;
+
+提高匹配效率。 注册路由时引入包裹
+
+场景：路由一对多组件
+
+### 5.2.2. 其它
+
+* 1. history对象
+* 2. match对象
+* 3. withRouter函数
+
+## 5.3. 基本路由使用
+
+### 5.3.1. 效果
+
+  ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/react-router.gif "QQ截图20201229183512.png")
+
+### 代码展示：❤️
+
+App.jsx
+
+```jsx
+import React, { Component } from 'react'
+import {Link,Route} from 'react-router-dom'❤️
+import Home from './components/Home'❤️
+import About from './components/About'❤️
+
+export default class App extends Component {
+	render() {
+		return (
+			<div>
+				<div className="row">
+					<div className="col-xs-offset-2 col-xs-8">
+						<div className="page-header"><h2>React Router Demo</h2></div>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-xs-2 col-xs-offset-2">
+						<div className="list-group">
+
+							{/* 在React中靠路由链接实现切换组件--编写路由链接 ❤️*/}
+							<Link className="list-group-item" to="/about">About</Link>
+							<Link className="list-group-item" to="/home">Home</Link>
+						</div>
+					</div>
+					<div className="col-xs-6">
+						<div className="panel">
+							<div className="panel-body">
+								{/* 注册路由❤️ */}
+								<Route path="/about" component={About}/>
+								<Route path="/home" component={Home}/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+}
+
+
+```
+
+index.js
+
+```jsx
+//引入react核心库
+import React from 'react'
+//引入ReactDOM
+import ReactDOM from 'react-dom'
+//
+import {BrowserRouter} from 'react-router-dom'
+//引入App
+import App from './App'
+
+ReactDOM.render(❤️
+	<BrowserRouter>
+		<App/>
+	</BrowserRouter>,
+	document.getElementById('root')
+)
+```
+
+
+
+### 5.3.2. 准备
+
+1. 下载react-router-dom: 
+
+```shell
+npm install --save react-router-dom
+```
+
+2. 引入bootstrap.css: 
+
+```html
+<link rel="stylesheet" href="/css/bootstrap.css">
+```
+
+## 5.4. 嵌套路由使用
+
+### 效果
+
+  ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/react-routerdemo2.gif "QQ截图20201229183512.png")
+
+
+
+### 代码展示
+
+就是套娃
+
+App.jsx
+
+```jsx
+import React, { Component } from 'react'
+import {Route,Switch,Redirect} from 'react-router-dom'❤️
+import Home from './pages/Home' //Home是路由组件
+import About from './pages/About' //About是路由组件
+import Header from './components/Header' //Header是一般组件
+import MyNavLink from './components/MyNavLink'
+
+export default class App extends Component {
+	render() {
+		return (
+			<div>
+				<div className="row">
+					<div className="col-xs-offset-2 col-xs-8">
+						<Header/>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-xs-2 col-xs-offset-2">
+						<div className="list-group">
+
+							{/* 在React中靠路由链接实现切换组件--编写路由链接❤️ */}
+							<MyNavLink to="/about">About</MyNavLink>
+							<MyNavLink to="/home">Home</MyNavLink>
+						</div>
+					</div>
+					<div className="col-xs-6">
+						<div className="panel">
+							<div className="panel-body">
+								{/* 注册路由 ❤️*/}
+								<Switch>
+									<Route path="/about" component={About}/>
+									<Route path="/home" component={Home}/>
+									<Redirect to="/about"/>
+								</Switch>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+}
+
+```
+
+Home文件夹下的index.jsx
+
+```jsx
+import React, { Component } from 'react'
+import MyNavLink from '../../components/MyNavLink'
+import {Route,Switch,Redirect} from 'react-router-dom'
+import News from './News'
+import Message from './Message'
+
+export default class Home extends Component {
+	render() {
+		return (
+				<div>
+					<h3>我是Home的内容</h3>
+					<div>
+						<ul className="nav nav-tabs">
+							<li>
+                {/* 上文封装的navlink组件使用*/}
+								<MyNavLink to="/home/news">News</MyNavLink>
+							</li>
+							<li>
+								<MyNavLink to="/home/message">Message</MyNavLink>
+							</li>
+						</ul>
+						{/* 注册路由 两个子组件❤️*/}
+						<Switch>
+							<Route path="/home/news" component={News}/>
+							<Route path="/home/message" component={Message}/>
+							<Redirect to="/home/news"/>
+						</Switch>
+					</div>
+				</div>
+			)
+	}
+}
+
+```
+
+
+
+Home文件夹下放该组件下的子组件
+
+
+
+
+
 ## 5.5. 向路由组件传递参数数据
 
 ### 效果
 
   ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/react-routerdemo3.gif "QQ截图20201229183512.png")
+
+### 代码展示
+
+#### params
+
+延续上文嵌套组件代码，直接在Meissage组件使用for循环渲染出该组件自定义状态值state，然后找展示数据位置渲染detail组件信息展示。
+
+```jsx
+import React, { Component } from 'react'
+import {Link,Route} from 'react-router-dom'
+import Detail from './Detail'
+
+export default class Message extends Component {
+	state = {
+		messageArr:[
+			{id:'01',title:'消息1'},
+			{id:'02',title:'消息2'},
+			{id:'03',title:'消息3'},
+		]
+	}
+	render() {
+		const {messageArr} = this.state
+		return (
+			<div>
+				<ul>
+					{
+						messageArr.map((msgObj)=>{
+							return (
+								<li key={msgObj.id}>
+									{/* 向路由组件传递params参数❤️ */}
+									<Link to={`/home/message/detail/${msgObj.id}/${msgObj.title}`}>{msgObj.title}</Link>
+								</li>
+							)
+						})
+					}
+				</ul>
+				<hr/>
+				{/* 声明接收params参数❤️ */}
+				<Route path="/home/message/detail/:id/:title" component={Detail}/>
+			</div>
+		)
+	}
+}
+
+```
+
+Message/Detail文件夹下index.jsx
+
+```jsx
+import React, { Component } from 'react'
+
+const DetailData = [
+	{id:'01',content:'你好，中国'},
+	{id:'02',content:'你好，尚硅谷'},
+	{id:'03',content:'你好，未来的自己'}
+]
+export default class Detail extends Component {
+	render() {
+		console.log(this.props);
+		// 接收params参数❤️
+		const {id,title} = this.props.match.params
+		const findResult = DetailData.find((detailObj)=>{
+			return detailObj.id === id
+		})
+		return (
+			<ul>
+				<li>ID:{id}</li>
+				<li>TITLE:{title}</li>
+				<li>CONTENT:{findResult.content}</li>
+			</ul>
+		)
+	}
+}
+```
+
+#### search
+
+Message/index.jsx
+
+```jsx
+import React, { Component } from 'react'
+import {Link,Route} from 'react-router-dom'
+import Detail from './Detail'
+
+export default class Message extends Component {
+	state = {
+		messageArr:[
+			{id:'01',title:'消息1'},
+			{id:'02',title:'消息2'},
+			{id:'03',title:'消息3'},
+		]
+	}
+	render() {
+		const {messageArr} = this.state
+		return (
+			<div>
+				<ul>
+					{
+						messageArr.map((msgObj)=>{
+							return (
+								<li key={msgObj.id}>
+
+									{/* 向路由组件传递params参数 */}
+									{/* <Link to={`/home/message/detail/${msgObj.id}/${msgObj.title}`}>{msgObj.title}</Link> */}
+
+									{/* 向路由组件传递search参数 */}
+									<Link to={`/home/message/detail/?id=${msgObj.id}&title=${msgObj.title}`}>{msgObj.title}</Link>
+
+								</li>
+							)
+						})
+					}
+				</ul>
+				<hr/>
+				{/* 声明接收params参数 */}
+				{/* <Route path="/home/message/detail/:id/:title" component={Detail}/> */}
+
+				{/* search参数无需声明接收，正常注册路由即可 */}
+				<Route path="/home/message/detail" component={Detail}/>
+
+			</div>
+		)
+	}
+}
+
+```
+
+Message/Detail/index.jsx
+
+```jsx
+import React, { Component } from 'react'
+import qs from 'querystring'
+
+const DetailData = [
+	{id:'01',content:'你好，中国'},
+	{id:'02',content:'你好，尚硅谷'},
+	{id:'03',content:'你好，未来的自己'}
+]
+export default class Detail extends Component {
+	render() {
+		console.log(this.props);
+
+		// 接收params参数
+		// const {id,title} = this.props.match.params 
+
+		// 接收search参数
+		const {search} = this.props.location
+		const {id,title} = qs.parse(search.slice(1))
+
+		const findResult = DetailData.find((detailObj)=>{
+			return detailObj.id === id
+		})
+		return (
+			<ul>
+				<li>ID:{id}</li>
+				<li>TITLE:{title}</li>
+				<li>CONTENT:{findResult.content}</li>
+			</ul>
+		)
+	}
+}
+
+```
+
+
 
 ## 5.6. 多种路由跳转方式
 
