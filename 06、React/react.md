@@ -2586,8 +2586,52 @@ export default class App extends Component {
 ### 5.2.2. 其它
 
 * 1. history对象
+
 * 2. match对象
+
 * 3. withRouter函数
+
+  一般组件没有history属性  将一般组件包装成路由组件 
+
+```jsx
+import React, { Component } from 'react'
+import {withRouter} from 'react-router-dom'❤️
+
+class Header extends Component {
+
+	back = ()=>{
+		this.props.history.goBack()
+	}
+
+	forward = ()=>{
+		this.props.history.goForward()
+	}
+
+	go = ()=>{
+		this.props.history.go(-2)
+	}
+
+	render() {
+		console.log('Header组件收到的props是',this.props);
+		return (
+			<div className="page-header">
+				<h2>React Router Demo</h2>
+				<button onClick={this.back}>回退</button>&nbsp;
+				<button onClick={this.forward}>前进</button>&nbsp;
+				<button onClick={this.go}>go</button>
+			</div>
+		)
+	}
+}
+
+export default withRouter(Header)❤️
+
+//withRouter可以加工一般组件，让一般组件具备路由组件所特有的API
+//withRouter的返回值是一个新组件
+
+```
+
+
 
 ## 5.3. 基本路由使用
 
@@ -3027,7 +3071,155 @@ export default class Detail extends Component {
 
   ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/react-routerdemo4.gif "QQ截图20201229183512.png")
 
-## 5.7. 代码示例
+push会留下记录可以按步回退
+
+replace是直接退换，如果每个组件跳转replace为true则点击浏览器回退，不会成功。
+
+## 5.7 编程式导航
+
+Message/index.jsx
+
+```jsx
+import React, { Component } from 'react'
+import {Link,Route} from 'react-router-dom'
+import Detail from './Detail'
+
+export default class Message extends Component {
+	state = {
+		messageArr:[
+			{id:'01',title:'消息1'},
+			{id:'02',title:'消息2'},
+			{id:'03',title:'消息3'},
+		]
+	}
+
+	replaceShow = (id,title)=>{
+		//replace跳转+携带params参数
+		//this.props.history.replace(`/home/message/detail/${id}/${title}`)
+
+		//replace跳转+携带search参数
+		// this.props.history.replace(`/home/message/detail?id=${id}&title=${title}`)
+
+		//replace跳转+携带state参数
+		this.props.history.replace(`/home/message/detail`,{id,title})
+	}
+
+	pushShow = (id,title)=>{
+		//push跳转+携带params参数
+		// this.props.history.push(`/home/message/detail/${id}/${title}`)
+
+		//push跳转+携带search参数
+		// this.props.history.push(`/home/message/detail?id=${id}&title=${title}`)
+
+		//push跳转+携带state参数
+		this.props.history.push(`/home/message/detail`,{id,title})
+		
+	}
+
+	back = ()=>{
+		this.props.history.goBack()
+	}
+
+	forward = ()=>{
+		this.props.history.goForward()
+	}
+
+	go = ()=>{
+		this.props.history.go(-2)
+	}
+
+	render() {
+		const {messageArr} = this.state
+		return (
+			<div>
+				<ul>
+					{
+						messageArr.map((msgObj)=>{
+							return (
+								<li key={msgObj.id}>
+
+									{/* 向路由组件传递params参数 */}
+									{/* <Link to={`/home/message/detail/${msgObj.id}/${msgObj.title}`}>{msgObj.title}</Link> */}
+
+									{/* 向路由组件传递search参数 */}
+									{/* <Link to={`/home/message/detail/?id=${msgObj.id}&title=${msgObj.title}`}>{msgObj.title}</Link> */}
+
+									{/* 向路由组件传递state参数 */}
+									<Link to={{pathname:'/home/message/detail',state:{id:msgObj.id,title:msgObj.title}}}>{msgObj.title}</Link>
+
+									&nbsp;<button onClick={()=> this.pushShow(msgObj.id,msgObj.title)}>push查看</button>
+									&nbsp;<button onClick={()=> this.replaceShow(msgObj.id,msgObj.title)}>replace查看</button>
+								</li>
+							)
+						})
+					}
+				</ul>
+				<hr/>
+				{/* 声明接收params参数 */}
+				{/* <Route path="/home/message/detail/:id/:title" component={Detail}/> */}
+
+				{/* search参数无需声明接收，正常注册路由即可 */}
+				{/* <Route path="/home/message/detail" component={Detail}/> */}
+
+				{/* state参数无需声明接收，正常注册路由即可 */}
+				<Route path="/home/message/detail" component={Detail}/>
+
+				<button onClick={this.back}>回退</button>&nbsp;
+				<button onClick={this.forward}>前进</button>&nbsp;
+				<button onClick={this.go}>go</button>
+
+			</div>
+		)
+	}
+}
+
+```
+
+
+
+/Message/Details/index.jsx
+
+```jsx
+import React, { Component } from 'react'
+// import qs from 'querystring'
+
+const DetailData = [
+	{id:'01',content:'你好，中国'},
+	{id:'02',content:'你好，尚硅谷'},
+	{id:'03',content:'你好，未来的自己'}
+]
+export default class Detail extends Component {
+	render() {
+		console.log(this.props);
+
+		// 接收params参数
+		// const {id,title} = this.props.match.params 
+
+		// 接收search参数
+		// const {search} = this.props.location
+		// const {id,title} = qs.parse(search.slice(1))
+
+		// 接收state参数
+		const {id,title} = this.props.location.state || {}
+
+		const findResult = DetailData.find((detailObj)=>{
+			return detailObj.id === id
+		}) || {}
+		return (
+			<ul>
+				<li>ID:{id}</li>
+				<li>TITLE:{title}</li>
+				<li>CONTENT:{findResult.content}</li>
+			</ul>
+		)
+	}
+}
+
+```
+
+
+
+## 5.8. 代码示例
 
 [代码示例直通地址](https://gitee.com/bright-boy/technical-notes/tree/master/study-notes/react/%E6%BA%90%E7%A0%81/react_staging)
 
