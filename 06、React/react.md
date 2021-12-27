@@ -3507,7 +3507,11 @@ export default class Count extends Component {
 ​    (5).在index.js中监测store中状态的改变，一旦发生改变重新渲染<App/>
 ​        备注：redux只负责管理状态，至于状态的改变驱动着页面的展示，要靠我们自己写。
 
-index.js.  在这里直接**检测**。app重新调render，那么app下子组件也重新调
+### 代码
+
+#### index.js.  
+
+在这里直接**检测**。app重新调render，那么app下子组件也重新调
 
 ```jsx
 import React from 'react'
@@ -3517,6 +3521,7 @@ import store from './redux/store'
 
 ReactDOM.render(<App/>,document.getElementById('root'))
 
+//监测redux中状态的改变，如redux的状态发生了改变，那么重新渲染App组件
 store.subscribe(()=>{
 	ReactDOM.render(<App/>,document.getElementById('root'))
 })
@@ -3533,7 +3538,7 @@ componentDidMount(){
 	} 
 ```
 
-**/redux/store.js**❤️
+#### **/redux/store.js**❤️
 
 ```jsx
 /* 
@@ -3548,7 +3553,9 @@ import countReducer from './count_reducer'
 export default createStore(countReducer)
 ```
 
-**/redux/count_reducer.js**❤️。 初始化状态。加工状态
+#### **/redux/count_reducer.js**❤️。
+
+ 初始化状态。加工状态
 
 ```jsx
 /* 
@@ -3572,7 +3579,7 @@ export default function countReducer(preState=initState,action){
 }
 ```
 
-**/components/Count/index.jsx**
+#### **/components/Count/index.jsx**
 
 const count = store.getState().  获取最新数据
 
@@ -3637,7 +3644,11 @@ export default class Count extends Component {
 ​      1.count_action.js 专门用于创建action对象
 ​      2.constant.js 放置容易写错的type值
 
-index.js.  在这里直接检测。app重新调render，那么app下子组件也重新调
+### 代码
+
+#### index.js.  
+
+在这里直接检测。app重新调render，那么app下子组件也重新调
 
 ```jsx
 import React from 'react'
@@ -3647,12 +3658,13 @@ import store from './redux/store'
 
 ReactDOM.render(<App/>,document.getElementById('root'))
 
+//监测redux中状态的改变，如redux的状态发生了改变，那么重新渲染App组件
 store.subscribe(()=>{
 	ReactDOM.render(<App/>,document.getElementById('root'))
 })
 ```
 
-/redux/store.js
+#### /redux/store.js
 
 ```jsx
 /* 
@@ -3667,7 +3679,7 @@ import countReducer from './count_reducer'
 export default createStore(countReducer)
 ```
 
-/reduc/constant.js
+#### /reduc/constant.js❤️
 
 ```jsx
 /* 
@@ -3677,7 +3689,7 @@ export const INCREMENT = 'increment'
 export const DECREMENT = 'decrement'
 ```
 
-/redux/count_action.js
+#### /redux/count_action.js❤️
 
 ```jsx
 /* 
@@ -3687,10 +3699,9 @@ import {INCREMENT,DECREMENT} from './constant'
 
 export const createIncrementAction = data => ({type:INCREMENT,data})
 export const createDecrementAction = data => ({type:DECREMENT,data})
-
 ```
 
-/redux/count_reducer.js
+#### /redux/count_reducer.js
 
 ```jsx
 /* 
@@ -3716,13 +3727,13 @@ export default function countReducer(preState=initState,action){
 }
 ```
 
-**/components/Count/index.jsx**
+#### **/components/Count/index.jsx**
 
 ```jsx
 import React, { Component } from 'react'
 //引入store，用于获取redux中保存状态
 import store from '../../redux/store'
-//引入actionCreator，专门用于创建action对象
+//引入actionCreator，专门用于创建action对象❤️
 import {createIncrementAction,createDecrementAction} from '../../redux/count_action'
 
 export default class Count extends Component {
@@ -3733,19 +3744,19 @@ export default class Count extends Component {
 	//加法
 	increment = ()=>{
 		const {value} = this.selectNumber
-		store.dispatch(createIncrementAction(value*1))
+		store.dispatch(createIncrementAction(value*1))❤️
 	}
 	//减法
 	decrement = ()=>{
 		const {value} = this.selectNumber
-		store.dispatch(createDecrementAction(value*1))
+		store.dispatch(createDecrementAction(value*1))❤️
 	}
 	//奇数再加
 	incrementIfOdd = ()=>{
 		const {value} = this.selectNumber
 		const count = store.getState()
 		if(count % 2 !== 0){
-			store.dispatch(createIncrementAction(value*1))
+			store.dispatch(createIncrementAction(value*1))❤️	
 		}
 	}
 	//异步加
@@ -3775,19 +3786,21 @@ export default class Count extends Component {
 }
 ```
 
-
-
-## 4、求和案例_redux异步action版
+## 4、求和案例_redux**异步**action版❤️
 
 ​     (1).明确：延迟的动作不想交给组件自身，想交给action
 ​     (2).何时需要异步action：想要对状态进行操作，但是具体的数据靠异步任务返回。
 ​     (3).具体编码：
-​          1).yarn add redux-thunk，并配置在store中
+​          1).yarn add redux-thunk，并配置在store中❤️
 ​          2).创建action的函数不再返回一般对象，而是一个函数，该函数中写异步任务。
 ​          3).异步任务有结果后，分发一个同步的action去真正操作数据。
 ​     (4).备注：异步action不是必须要写的，完全可以自己等待异步任务的结果了再去分发同步action。
 
-index.js.  在这里直接检测。app重新调render，那么app下子组件也重新调
+### 代码
+
+#### index.js.  
+
+#### 在这里直接检测。app重新调render，那么app下子组件也重新调
 
 ```jsx
 import React from 'react'
@@ -3797,12 +3810,13 @@ import store from './redux/store'
 
 ReactDOM.render(<App/>,document.getElementById('root'))
 
+//监测redux中状态的改变，如redux的状态发生了改变，那么重新渲染App组件
 store.subscribe(()=>{
 	ReactDOM.render(<App/>,document.getElementById('root'))
 })
 ```
 
-/redux/store.js
+#### /redux/store.js
 
 ```jsx
 /* 
@@ -3819,7 +3833,7 @@ import thunk from 'redux-thunk'
 export default createStore(countReducer,applyMiddleware(thunk))
 ```
 
-/redux/constant.js
+#### /redux/constant.js
 
 ```jsx
 /* 
@@ -3829,7 +3843,7 @@ export const INCREMENT = 'increment'
 export const DECREMENT = 'decrement'
 ```
 
-/redux/count_action.js
+#### /redux/count_action.js
 
 ```jsx
 /* 
@@ -3841,7 +3855,7 @@ import {INCREMENT,DECREMENT} from './constant'
 export const createIncrementAction = data => ({type:INCREMENT,data})
 export const createDecrementAction = data => ({type:DECREMENT,data})
 
-//异步action，就是指action的值为函数,异步action中一般都会调用同步action，异步action不是必须要用的。
+//异步action，就是指action的值为函数,异步action中一般都会调用同步action，异步action不是必须要用的。❤️
 export const createIncrementAsyncAction = (data,time) => {
 	return (dispatch)=>{
 		setTimeout(()=>{
@@ -3851,7 +3865,7 @@ export const createIncrementAsyncAction = (data,time) => {
 }
 ```
 
-/redux/count_reducer.js
+#### /redux/count_reducer.js
 
 ```jsx
 /* 
@@ -3877,7 +3891,7 @@ export default function countReducer(preState=initState,action){
 }
 ```
 
-/components/Count/index.js
+#### /components/Count/index.js
 
 ```jsx
 import React, { Component } from 'react'
@@ -3953,12 +3967,230 @@ export default class Count extends Component {
 ​      (1).明确两个概念：
 ​            1).UI组件:不能使用任何redux的api，只负责页面的呈现、交互等。
 ​            2).容器组件：负责和redux通信，将结果交给UI组件。
+
+所有ui组件包裹一个容器组件，父子关系
+
+容器组件真正和redux打交道，里面可以随意使用redux的api
+
+ui组件中不能使用任何redux的api
+
+容器组件会传给ui组件： redux中所保存的状态。用于操作状态的方法
+
+备注：容器给ui传递：状态、操作状态的方法，均通过props传递
+
 ​      (2).如何创建一个容器组件————靠react-redux 的 connect函数
 ​              connect(mapStateToProps,mapDispatchToProps)(UI组件)
 ​                -mapStateToProps:映射状态，返回值是一个对象
 ​                -mapDispatchToProps:映射操作状态的方法，返回值是一个对象
 ​      (3).备注1：容器组件中的store是靠props传进去的，而不是在容器组件中直接引入
 ​      (4).备注2：mapDispatchToProps，也可以是一个对象
+
+### 代码
+
+#### /containers/Count/index.jsx❤️。右
+
+```jsx
+//引入Count的UI组件
+import CountUI from '../../components/Count'
+//引入action
+import {
+	createIncrementAction,
+	createDecrementAction,
+	createIncrementAsyncAction
+} from '../../redux/count_action'
+
+//引入connect用于连接UI组件与redux
+import {connect} from 'react-redux'
+
+/* 
+	1.mapStateToProps函数返回的是一个对象；
+	2.返回的对象中的key就作为传递给UI组件props的key,value就作为传递给UI组件props的value
+	3.mapStateToProps用于传递状态
+*/
+function mapStateToProps(state){
+	return {count:state}
+}
+
+/* 
+	1.mapDispatchToProps函数返回的是一个对象；
+	2.返回的对象中的key就作为传递给UI组件props的key,value就作为传递给UI组件props的value
+	3.mapDispatchToProps用于传递操作状态的方法
+*/
+function mapDispatchToProps(dispatch){
+	return {
+		jia:number => dispatch(createIncrementAction(number)),
+		jian:number => dispatch(createDecrementAction(number)),
+		jiaAsync:(number,time) => dispatch(createIncrementAsyncAction(number,time)),
+	}
+}
+
+//使用connect()()创建并暴露一个Count的容器组件
+export default connect(mapStateToProps,mapDispatchToProps)(CountUI)
+
+
+```
+
+#### App.jsx❤️。右
+
+```jsx
+import React, { Component } from 'react'
+import Count from './containers/Count'
+import store from './redux/store'❤️
+
+export default class App extends Component {
+	render() {
+		return (
+			<div>
+				{/* 给容器组件传递store ❤️*/}
+				<Count store={store} />
+			</div>
+		)
+	}
+}
+
+```
+
+
+
+#### /components/Count/index.jsx  右
+
+```jsx
+import React, { Component } from 'react'
+
+export default class Count extends Component {
+
+	state = {carName:'奔驰c63'}
+
+	//加法
+	increment = ()=>{
+		const {value} = this.selectNumber
+		this.props.jia(value*1)
+	}
+	//减法
+	decrement = ()=>{
+		const {value} = this.selectNumber
+		this.props.jian(value*1)
+	}
+	//奇数再加
+	incrementIfOdd = ()=>{
+		const {value} = this.selectNumber
+		if(this.props.count % 2 !== 0){
+			this.props.jia(value*1)
+		}
+	}
+	//异步加
+	incrementAsync = ()=>{
+		const {value} = this.selectNumber
+		this.props.jiaAsync(value*1,500)
+	}
+
+	render() {
+		//console.log('UI组件接收到的props是',this.props);
+		return (
+			<div>
+				<h1>当前求和为：{this.props.count}</h1>
+				<select ref={c => this.selectNumber = c}>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>&nbsp;
+				<button onClick={this.increment}>+</button>&nbsp;
+				<button onClick={this.decrement}>-</button>&nbsp;
+				<button onClick={this.incrementIfOdd}>当前求和为奇数再加</button>&nbsp;
+				<button onClick={this.incrementAsync}>异步加</button>&nbsp;
+			</div>
+		)
+	}
+}
+
+```
+
+#### /redux/store.js     左	
+
+```jsx
+/* 
+	该模块是用于定义action对象中type类型的常量值，目的只有一个：便于管理的同时防止程序员单词写错
+*/
+export const INCREMENT = 'increment'
+export const DECREMENT = 'decrement'
+```
+
+#### /redux/constant.js 左
+
+```jsx
+/* 
+	该模块是用于定义action对象中type类型的常量值，目的只有一个：便于管理的同时防止程序员单词写错
+*/
+export const INCREMENT = 'increment'
+export const DECREMENT = 'decrement'
+```
+
+#### /redux/count_action.js
+
+```jsx
+/* 
+	该文件专门为Count组件生成action对象
+*/
+import {INCREMENT,DECREMENT} from './constant'
+
+//同步action，就是指action的值为Object类型的一般对象
+export const createIncrementAction = data => ({type:INCREMENT,data})
+export const createDecrementAction = data => ({type:DECREMENT,data})
+
+//异步action，就是指action的值为函数,异步action中一般都会调用同步action，异步action不是必须要用的。
+export const createIncrementAsyncAction = (data,time) => {
+	return (dispatch)=>{
+		setTimeout(()=>{
+			dispatch(createIncrementAction(data))
+		},time)
+	}
+}
+```
+
+#### /redux/count_reducer.js
+
+```jsx
+/* 
+	1.该文件是用于创建一个为Count组件服务的reducer，reducer的本质就是一个函数
+	2.reducer函数会接到两个参数，分别为：之前的状态(preState)，动作对象(action)
+*/
+import {INCREMENT,DECREMENT} from './constant'
+
+const initState = 0 //初始化状态
+export default function countReducer(preState=initState,action){
+	// console.log(preState);
+	//从action对象中获取：type、data
+	const {type,data} = action
+	//根据type决定如何加工数据
+	switch (type) {
+		case INCREMENT: //如果是加
+			return preState + data
+		case DECREMENT: //若果是减
+			return preState - data
+		default:
+			return preState
+	}
+}
+```
+
+#### index.js
+
+```jsx
+/* 
+	该文件专门用于暴露一个store对象，整个应用只有一个store对象
+*/
+
+//引入createStore，专门用于创建redux中最为核心的store对象
+import {createStore,applyMiddleware} from 'redux'
+//引入为Count组件服务的reducer
+import countReducer from './count_reducer'
+//引入redux-thunk，用于支持异步action
+import thunk from 'redux-thunk'
+//暴露store
+export default createStore(countReducer,applyMiddleware(thunk))
+```
+
+
 
 
 ## 6、求和案例_react-redux优化
