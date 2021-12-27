@@ -3434,25 +3434,22 @@ Count.jsx
 
 ```jsx
 import React, { Component } from 'react'
-
 export default class Count extends Component {
-
 	state = {count:0}
-
-	//加法
+	//加法❤️
 	increment = ()=>{
    //获取下拉框选择数据 
 		const {value} = this.selectNumber
 		const {count} = this.state
 		this.setState({count:count+value*1})
 	}
-	//减法
+	//减法❤️
 	decrement = ()=>{
 		const {value} = this.selectNumber
 		const {count} = this.state
 		this.setState({count:count-value*1})
 	}
-	//奇数再加
+	//奇数再加❤️
 	incrementIfOdd = ()=>{
 		const {value} = this.selectNumber
 		const {count} = this.state
@@ -3460,7 +3457,7 @@ export default class Count extends Component {
 			this.setState({count:count+value*1})
 		}
 	}
-	//异步加
+	//异步加❤️
 	incrementAsync = ()=>{
 		const {value} = this.selectNumber
 		const {count} = this.state
@@ -3468,7 +3465,6 @@ export default class Count extends Component {
 			this.setState({count:count+value*1})
 		},500)
 	}
-
 	render() {
 		return (
 			<div>
@@ -3486,7 +3482,6 @@ export default class Count extends Component {
 		)
 	}
 }
-
 ```
 
 ## 2、求和案例_redux精简版
@@ -3512,6 +3507,103 @@ export default class Count extends Component {
 ​    (5).在index.js中监测store中状态的改变，一旦发生改变重新渲染<App/>
 ​        备注：redux只负责管理状态，至于状态的改变驱动着页面的展示，要靠我们自己写。
 
+**/redux/store.js**❤️
+
+```jsx
+/* 
+	该文件专门用于暴露一个store对象，整个应用只有一个store对象
+*/
+
+//引入createStore，专门用于创建redux中最为核心的store对象
+import {createStore} from 'redux'
+//引入为Count组件服务的reducer
+import countReducer from './count_reducer'
+//暴露store
+export default createStore(countReducer)
+```
+
+**/redux/count_reducer.js**❤️。 初始化状态。加工状态
+
+```jsx
+/* 
+	1.该文件是用于创建一个为Count组件服务的reducer，reducer的本质就是一个函数
+	2.reducer函数会接到两个参数，分别为：之前的状态(preState)，动作对象(action)
+*/
+
+const initState = 0 //初始化状态
+export default function countReducer(preState=initState,action){
+	// console.log(preState);
+	//从action对象中获取：type、data
+	const {type,data} = action
+	//根据type决定如何加工数据
+	switch (type) {
+		case 'increment': //如果是加
+			return preState + data
+		case 'decrement': //若果是减
+			return preState - data
+		default:
+			return preState
+	}
+}
+```
+
+**/components/Count/index.jsx**
+
+```jsx
+import React, { Component } from 'react'
+//引入store，用于获取redux中保存状态
+import store from '../../redux/store'
+
+export default class Count extends Component {
+
+	state = {carName:'奔驰c63'}
+
+	//加法❤️
+	increment = ()=>{
+		const {value} = this.selectNumber
+		store.dispatch({type:'increment',data:value*1})
+	}
+	//减法❤️
+	decrement = ()=>{
+		const {value} = this.selectNumber
+		store.dispatch({type:'decrement',data:value*1})
+	}
+	//奇数再加❤️
+	incrementIfOdd = ()=>{
+		const {value} = this.selectNumber
+		const count = store.getState()
+		if(count % 2 !== 0){
+			store.dispatch({type:'increment',data:value*1})
+		}
+	}
+	//异步加❤️
+	incrementAsync = ()=>{
+		const {value} = this.selectNumber
+		setTimeout(()=>{
+			store.dispatch({type:'increment',data:value*1})
+		},500)
+	}
+
+	render() {
+		return (
+			<div>
+				<h1>当前求和为：{store.getState()}</h1>
+				<select ref={c => this.selectNumber = c}>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>&nbsp;
+				<button onClick={this.increment}>+</button>&nbsp;
+				<button onClick={this.decrement}>-</button>&nbsp;
+				<button onClick={this.incrementIfOdd}>当前求和为奇数再加</button>&nbsp;
+				<button onClick={this.incrementAsync}>异步加</button>&nbsp;
+			</div>
+		)
+	}
+}
+
+```
+
 
 
 
@@ -3520,6 +3612,130 @@ export default class Count extends Component {
 ​    新增文件：
 ​      1.count_action.js 专门用于创建action对象
 ​      2.constant.js 放置容易写错的type值
+
+/redux/store.js
+
+```jsx
+/* 
+	该文件专门用于暴露一个store对象，整个应用只有一个store对象
+*/
+
+//引入createStore，专门用于创建redux中最为核心的store对象
+import {createStore} from 'redux'
+//引入为Count组件服务的reducer
+import countReducer from './count_reducer'
+//暴露store
+export default createStore(countReducer)
+```
+
+/reduc/constant.js
+
+```jsx
+/* 
+	该模块是用于定义action对象中type类型的常量值，目的只有一个：便于管理的同时防止程序员单词写错
+*/
+export const INCREMENT = 'increment'
+export const DECREMENT = 'decrement'
+```
+
+/redux/count_action.js
+
+```jsx
+/* 
+	该文件专门为Count组件生成action对象
+*/
+import {INCREMENT,DECREMENT} from './constant'
+
+export const createIncrementAction = data => ({type:INCREMENT,data})
+export const createDecrementAction = data => ({type:DECREMENT,data})
+
+```
+
+/redux/count_reducer.js
+
+```jsx
+/* 
+	1.该文件是用于创建一个为Count组件服务的reducer，reducer的本质就是一个函数
+	2.reducer函数会接到两个参数，分别为：之前的状态(preState)，动作对象(action)
+*/
+import {INCREMENT,DECREMENT} from './constant'
+
+const initState = 0 //初始化状态
+export default function countReducer(preState=initState,action){
+	// console.log(preState);
+	//从action对象中获取：type、data
+	const {type,data} = action
+	//根据type决定如何加工数据
+	switch (type) {
+		case INCREMENT: //如果是加
+			return preState + data
+		case DECREMENT: //若果是减
+			return preState - data
+		default:
+			return preState
+	}
+}
+```
+
+**/components/Count/index.jsx**
+
+```jsx
+import React, { Component } from 'react'
+//引入store，用于获取redux中保存状态
+import store from '../../redux/store'
+//引入actionCreator，专门用于创建action对象
+import {createIncrementAction,createDecrementAction} from '../../redux/count_action'
+
+export default class Count extends Component {
+
+	state = {carName:'奔驰c63'}
+
+
+	//加法
+	increment = ()=>{
+		const {value} = this.selectNumber
+		store.dispatch(createIncrementAction(value*1))
+	}
+	//减法
+	decrement = ()=>{
+		const {value} = this.selectNumber
+		store.dispatch(createDecrementAction(value*1))
+	}
+	//奇数再加
+	incrementIfOdd = ()=>{
+		const {value} = this.selectNumber
+		const count = store.getState()
+		if(count % 2 !== 0){
+			store.dispatch(createIncrementAction(value*1))
+		}
+	}
+	//异步加
+	incrementAsync = ()=>{
+		const {value} = this.selectNumber
+		setTimeout(()=>{
+			store.dispatch(createIncrementAction(value*1))
+		},500)
+	}
+
+	render() {
+		return (
+			<div>
+				<h1>当前求和为：{store.getState()}</h1>
+				<select ref={c => this.selectNumber = c}>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>&nbsp;
+				<button onClick={this.increment}>+</button>&nbsp;
+				<button onClick={this.decrement}>-</button>&nbsp;
+				<button onClick={this.incrementIfOdd}>当前求和为奇数再加</button>&nbsp;
+				<button onClick={this.incrementAsync}>异步加</button>&nbsp;
+			</div>
+		)
+	}
+}
+
+```
 
 
 
