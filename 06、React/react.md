@@ -4102,7 +4102,6 @@ export default class Count extends Component {
 		)
 	}
 }
-
 ```
 
 #### /redux/store.js     左	
