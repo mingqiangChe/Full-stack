@@ -2,6 +2,8 @@
 
 ## 1.1.React简介
 
+[源码gitee](https://gitee.com/bright-boy/technical-notes/tree/master/study-notes/react/%E6%BA%90%E7%A0%81/react_staging)
+
 * #### 1.1.1.官网
    * ###### [1.英文官网: https://reactjs.org/](https://reactjs.org/)
 
@@ -256,8 +258,7 @@ export default class App extends Component{
   * ######  当应用是以多组件的方式实现, 这个应用就是一个组件化的应用
   ![输入图片说明](images/图片4.png "QQ截图20201229183512.png")
 
-## 1.5.代码示例
-### [代码示例直通地址](https://gitee.com/bright-boy/technical-notes/tree/master/study-notes/react/%E6%BA%90%E7%A0%81/react_basic)
+### 
 
 # 2.基本使用
 
@@ -1528,10 +1529,6 @@ setTimeout(function() {
 
 
 
- ## 2.8. 代码示例
-
-代码示例直通地址](https://gitee.com/bright-boy/technical-notes/tree/master/study-notes/react/%E6%BA%90%E7%A0%81/react_basic)
-
 # 3.开始脚手架创建
 
 ### 3.1. 使用create-react-app创建react应用
@@ -1954,9 +1951,7 @@ export default class Footer extends Component {
 
 
 
-### 3.3.代码示例
 
-### [代码示例直通地址](https://gitee.com/bright-boy/technical-notes/tree/master/study-notes/react/%E6%BA%90%E7%A0%81/react_staging)
 
 # 4.脚手架配置以及axios封装
 
@@ -2360,8 +2355,6 @@ fetch(url).then(function(response) {
 ```
 
 ## 4.6. 代码示例
-
-### [代码示例直通地址](https://gitee.com/bright-boy/technical-notes/tree/master/study-notes/react/%E6%BA%90%E7%A0%81/react_staging)
 
 有兼容问题，老版本不支持
 
@@ -3219,12 +3212,6 @@ export default class Detail extends Component {
 
 
 
-## 5.8. 代码示例
-
-[代码示例直通地址](https://gitee.com/bright-boy/technical-notes/tree/master/study-notes/react/%E6%BA%90%E7%A0%81/react_staging)
-
-
-
 
 
 # 6 流行的开源React UI组件库
@@ -3238,8 +3225,6 @@ export default class Detail extends Component {
 
 * 1. 官网: [https://ant.design/index-cn](https://ant.design/index-cn)
 * 2. Github: [https://github.com/ant-design/ant-design/](https://github.com/ant-design/ant-design/)
-
-### [代码示例直通地址](https://gitee.com/bright-boy/technical-notes/tree/master/study-notes/react/%E6%BA%90%E7%A0%81/react_staging)
 
 # 7 redux
 
@@ -3441,9 +3426,7 @@ npm install --save-dev redux-devtools-extension
 
 * 3. 作用: 能实现更加动态, 更加可扩展的功能
 
-## 7.9代码示例
 
-### [代码示例直通地址](https://gitee.com/bright-boy/technical-notes/tree/master/study-notes/react/%E6%BA%90%E7%A0%81/redux_test)
 
 # 扩展
 
@@ -3740,9 +3723,6 @@ componentDidCatch(error, info) {
 		兄弟组件：消息订阅-发布、集中式管理
 		祖孙组件(跨级组件)：消息订阅-发布、集中式管理、conText(开发用的少，封装插件用的多)
 
-
-### [代码示例直通地址](https://gitee.com/bright-boy/technical-notes/tree/master/study-notes/react/%E6%BA%90%E7%A0%81/react_extension/src/components)
-
 # 相关知识点
 
 ##  一、todoList案例相关知识点
@@ -3987,7 +3967,7 @@ componentDidCatch(error, info) {
 
 
 
-## 十三、BrowserRouter与HashRouter的区别
+## 十三、BrowserRouter❤️与HashRouter的区别
 
 ​      1.底层原理不一样：
 
