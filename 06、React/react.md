@@ -3507,6 +3507,32 @@ export default class Count extends Component {
 ​    (5).在index.js中监测store中状态的改变，一旦发生改变重新渲染<App/>
 ​        备注：redux只负责管理状态，至于状态的改变驱动着页面的展示，要靠我们自己写。
 
+index.js.  在这里直接**检测**。app重新调render，那么app下子组件也重新调
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import store from './redux/store'
+
+ReactDOM.render(<App/>,document.getElementById('root'))
+
+store.subscribe(()=>{
+	ReactDOM.render(<App/>,document.getElementById('root'))
+})
+```
+
+或在/components/Count/index.js加入这段代码 生命周期监听
+
+```jsx
+componentDidMount(){
+		//检测redux中状态的变化，只要变化，就调用render
+		store.subscribe(()=>{
+			this.setState({})
+		})
+	} 
+```
+
 **/redux/store.js**❤️
 
 ```jsx
@@ -3529,7 +3555,6 @@ export default createStore(countReducer)
 	1.该文件是用于创建一个为Count组件服务的reducer，reducer的本质就是一个函数
 	2.reducer函数会接到两个参数，分别为：之前的状态(preState)，动作对象(action)
 */
-
 const initState = 0 //初始化状态
 export default function countReducer(preState=initState,action){
 	// console.log(preState);
@@ -3539,7 +3564,7 @@ export default function countReducer(preState=initState,action){
 	switch (type) {
 		case 'increment': //如果是加
 			return preState + data
-		case 'decrement': //若果是减
+		case 'decrement': //如果是减
 			return preState - data
 		default:
 			return preState
@@ -3549,13 +3574,15 @@ export default function countReducer(preState=initState,action){
 
 **/components/Count/index.jsx**
 
+const count = store.getState().  获取最新数据
+
+store.dispatch({type:'increment',data:value*1})  告诉store 类型 对象
+
 ```jsx
 import React, { Component } from 'react'
 //引入store，用于获取redux中保存状态
 import store from '../../redux/store'
-
 export default class Count extends Component {
-
 	state = {carName:'奔驰c63'}
 
 	//加法❤️
@@ -3601,10 +3628,7 @@ export default class Count extends Component {
 		)
 	}
 }
-
 ```
-
-
 
 
 ## 3、求和案例_redux完整版
@@ -3612,6 +3636,21 @@ export default class Count extends Component {
 ​    新增文件：
 ​      1.count_action.js 专门用于创建action对象
 ​      2.constant.js 放置容易写错的type值
+
+index.js.  在这里直接检测。app重新调render，那么app下子组件也重新调
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import store from './redux/store'
+
+ReactDOM.render(<App/>,document.getElementById('root'))
+
+store.subscribe(()=>{
+	ReactDOM.render(<App/>,document.getElementById('root'))
+})
+```
 
 /redux/store.js
 
@@ -3734,7 +3773,6 @@ export default class Count extends Component {
 		)
 	}
 }
-
 ```
 
 
@@ -3749,7 +3787,164 @@ export default class Count extends Component {
 ​          3).异步任务有结果后，分发一个同步的action去真正操作数据。
 ​     (4).备注：异步action不是必须要写的，完全可以自己等待异步任务的结果了再去分发同步action。
 
+index.js.  在这里直接检测。app重新调render，那么app下子组件也重新调
 
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import store from './redux/store'
+
+ReactDOM.render(<App/>,document.getElementById('root'))
+
+store.subscribe(()=>{
+	ReactDOM.render(<App/>,document.getElementById('root'))
+})
+```
+
+/redux/store.js
+
+```jsx
+/* 
+	该文件专门用于暴露一个store对象，整个应用只有一个store对象
+*/
+
+//引入createStore，专门用于创建redux中最为核心的store对象
+import {createStore,applyMiddleware} from 'redux'
+//引入为Count组件服务的reducer
+import countReducer from './count_reducer'
+//引入redux-thunk，用于支持异步action
+import thunk from 'redux-thunk'
+//暴露store
+export default createStore(countReducer,applyMiddleware(thunk))
+```
+
+/redux/constant.js
+
+```jsx
+/* 
+	该模块是用于定义action对象中type类型的常量值，目的只有一个：便于管理的同时防止程序员单词写错
+*/
+export const INCREMENT = 'increment'
+export const DECREMENT = 'decrement'
+```
+
+/redux/count_action.js
+
+```jsx
+/* 
+	该文件专门为Count组件生成action对象
+*/
+import {INCREMENT,DECREMENT} from './constant'
+
+//同步action，就是指action的值为Object类型的一般对象
+export const createIncrementAction = data => ({type:INCREMENT,data})
+export const createDecrementAction = data => ({type:DECREMENT,data})
+
+//异步action，就是指action的值为函数,异步action中一般都会调用同步action，异步action不是必须要用的。
+export const createIncrementAsyncAction = (data,time) => {
+	return (dispatch)=>{
+		setTimeout(()=>{
+			dispatch(createIncrementAction(data))
+		},time)
+	}
+}
+```
+
+/redux/count_reducer.js
+
+```jsx
+/* 
+	1.该文件是用于创建一个为Count组件服务的reducer，reducer的本质就是一个函数
+	2.reducer函数会接到两个参数，分别为：之前的状态(preState)，动作对象(action)
+*/
+import {INCREMENT,DECREMENT} from './constant'
+
+const initState = 0 //初始化状态
+export default function countReducer(preState=initState,action){
+	// console.log(preState);
+	//从action对象中获取：type、data
+	const {type,data} = action
+	//根据type决定如何加工数据
+	switch (type) {
+		case INCREMENT: //如果是加
+			return preState + data
+		case DECREMENT: //若果是减
+			return preState - data
+		default:
+			return preState
+	}
+}
+```
+
+/components/Count/index.js
+
+```jsx
+import React, { Component } from 'react'
+//引入store，用于获取redux中保存状态
+import store from '../../redux/store'
+//引入actionCreator，专门用于创建action对象
+import {
+	createIncrementAction,
+	createDecrementAction,
+	createIncrementAsyncAction
+} from '../../redux/count_action'
+
+export default class Count extends Component {
+
+	state = {carName:'奔驰c63'}
+
+	/* componentDidMount(){
+		//检测redux中状态的变化，只要变化，就调用render
+		store.subscribe(()=>{
+			this.setState({})
+		})
+	} */
+
+	//加法
+	increment = ()=>{
+		const {value} = this.selectNumber
+		store.dispatch(createIncrementAction(value*1))
+	}
+	//减法
+	decrement = ()=>{
+		const {value} = this.selectNumber
+		store.dispatch(createDecrementAction(value*1))
+	}
+	//奇数再加
+	incrementIfOdd = ()=>{
+		const {value} = this.selectNumber
+		const count = store.getState()
+		if(count % 2 !== 0){
+			store.dispatch(createIncrementAction(value*1))
+		}
+	}
+	//异步加
+	incrementAsync = ()=>{
+		const {value} = this.selectNumber
+		// setTimeout(()=>{
+			store.dispatch(createIncrementAsyncAction(value*1,500))
+		// },500)
+	}
+
+	render() {
+		return (
+			<div>
+				<h1>当前求和为：{store.getState()}</h1>
+				<select ref={c => this.selectNumber = c}>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>&nbsp;
+				<button onClick={this.increment}>+</button>&nbsp;
+				<button onClick={this.decrement}>-</button>&nbsp;
+				<button onClick={this.incrementIfOdd}>当前求和为奇数再加</button>&nbsp;
+				<button onClick={this.incrementAsync}>异步加</button>&nbsp;
+			</div>
+		)
+	}
+}
+```
 
 
 
