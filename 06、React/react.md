@@ -4422,7 +4422,7 @@ export default class App extends Component {
 
 
 
-## 7、求和案例❤️react-redux数据共享版
+## 7、求和案例❤️ react-redux数据共享版
 
 ​      (1).定义一个Pserson组件，和Count组件通过redux共享数据。
 ​      (2).为Person组件编写：reducer、action，配置constant常量。
