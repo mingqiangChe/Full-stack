@@ -4393,7 +4393,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import store from './redux/store'
-import {Provider} from 'react-redux'
+import {Provider} from 'react-redux'❤️
 
 ReactDOM.render(
 	<Provider store={store}>
@@ -4401,6 +4401,23 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root')
 )
+```
+
+App.jsx
+
+```jsx
+import React, { Component } from 'react'
+import Count from './containers/Count'
+
+export default class App extends Component {
+	render() {
+		return (
+			<div>
+				<Count/>
+			</div>
+		)
+	}
+}
 ```
 
 
