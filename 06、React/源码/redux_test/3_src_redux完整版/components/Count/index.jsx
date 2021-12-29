@@ -8,12 +8,6 @@ export default class Count extends Component {
 
 	state = {carName:'奔驰c63'}
 
-	/* componentDidMount(){
-		//检测redux中状态的变化，只要变化，就调用render
-		store.subscribe(()=>{
-			this.setState({})
-		})
-	} */
 
 	//加法
 	increment = ()=>{

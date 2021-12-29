@@ -2562,12 +2562,30 @@ export default class App extends Component {
 
 必须放最下面才生效
 
+​        1.一般写在所有路由注册的最下方，当所有路由都无法匹配时，跳转到Redirect指定的路由
+
+​        2.具体编码：
+
+​            <Switch>
+
+​              <Route path="/about" component={About}/>
+
+​              <Route path="/home" component={Home}/>
+
+​              <Redirect to="/about"/>
+
+​            </Switch>
+
+
+
 * 5. &lt;Link&gt;
 * 6. &lt;NavLink&gt;
 
 自动添加navlink类名
 
-封装
+#### 封装NavLink
+
+​        1.NavLink可以实现路由链接的高亮，通过activeClassName指定样式名
 
 MyNavLink.jsx
 
@@ -2637,9 +2655,9 @@ export default class App extends Component {
 
 * 7. &lt;Switch&gt;
 
-提高匹配效率。 注册路由时引入包裹
+​        1.通常情况下，path和component是一一对应的关系。
 
-场景：路由一对多组件
+​        2.Switch可以提高路由匹配效率(单一匹配)。
 
 ### 5.2.2. 其它
 
@@ -2688,6 +2706,56 @@ export default withRouter(Header)❤️
 //withRouter的返回值是一个新组件
 
 ```
+
+## 路由组件与一般组件
+
+​      1.写法不同：
+
+​            一般组件：<Demo/>
+
+​            路由组件：<Route path="/demo" component={Demo}/>
+
+​      2.存放位置不同：
+
+​            一般组件：components
+
+​            路由组件：pages
+
+​      3.接收到的props不同：
+
+​            一般组件：写组件标签时传递了什么，就能收到什么
+
+​            路由组件：接收到三个固定的属性
+
+​                      history:
+
+​                            go: ƒ go(n)
+
+​                            goBack: ƒ goBack()
+
+​                            goForward: ƒ goForward()
+
+​                            push: ƒ push(path, state)
+
+​                            replace: ƒ replace(path, state)
+
+​                      location:
+
+​                            pathname: "/about"
+
+​                            search: ""
+
+​                            state: undefined
+
+​                      match:
+
+​                            params: {}
+
+​                            path: "/about"
+
+​                            url: "/about"
+
+
 
 
 
@@ -2805,6 +2873,10 @@ npm install --save react-router-dom
 
 就是套娃
 
+1.注册子路由时要写上父路由的path值
+
+​        2.路由的匹配是按照注册路由的顺序进行的
+
 App.jsx
 
 ```jsx
@@ -2904,6 +2976,36 @@ Home文件夹下放该组件下的子组件
 ### 效果
 
   ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/react-routerdemo3.gif "QQ截图20201229183512.png")
+
+### 向路由组件传递参数
+
+​        1.params参数
+
+​              路由链接(携带参数)：<Link to='/demo/test/tom/18'}>详情</Link>
+
+​              注册路由(声明接收)：<Route path="/demo/test/:name/:age" component={Test}/>
+
+​              接收参数：this.props.match.params
+
+​        2.**search参数**
+
+​              路由链接(携带参数)：<Link to='/demo/test?name=tom&age=18'}>详情</Link>
+
+​              注册路由(无需声明，正常注册即可)：<Route path="/demo/test" component={Test}/>
+
+​              接收参数：this.props.location.search
+
+​              备注：获取到的search是urlencoded编码字符串，需要借助querystring解析
+
+​        3.state参数
+
+​              路由链接(携带参数)：<Link to={{pathname:'/demo/test',state:{name:'tom',age:18}}}>详情</Link>
+
+​              注册路由(无需声明，正常注册即可)：<Route path="/demo/test" component={Test}/>
+
+​              接收参数：this.props.location.state
+
+​              备注：刷新也可以保留住参数
 
 ### 代码展示
 
@@ -3148,6 +3250,20 @@ push会留下记录可以按步回退
 replace是直接退换，如果每个组件跳转replace为true则点击浏览器回退，不会成功。
 
 ## 5.7 编程式导航
+
+​          借助this.prosp.history对象上的API对操作路由跳转、前进、后退
+
+​              -this.prosp.history.push()
+
+​              -this.prosp.history.replace()
+
+​              -this.prosp.history.goBack()
+
+​              -this.prosp.history.goForward()
+
+​              -this.prosp.history.go()
+
+
 
 Message/index.jsx
 
@@ -5857,72 +5973,6 @@ componentDidCatch(error, info) {
 
 
 
-
-
-## 四、路由组件与一般组件
-
-​      1.写法不同：
-
-​            一般组件：<Demo/>
-
-​            路由组件：<Route path="/demo" component={Demo}/>
-
-​      2.存放位置不同：
-
-​            一般组件：components
-
-​            路由组件：pages
-
-​      3.接收到的props不同：
-
-​            一般组件：写组件标签时传递了什么，就能收到什么
-
-​            路由组件：接收到三个固定的属性
-
-​                      history:
-
-​                            go: ƒ go(n)
-
-​                            goBack: ƒ goBack()
-
-​                            goForward: ƒ goForward()
-
-​                            push: ƒ push(path, state)
-
-​                            replace: ƒ replace(path, state)
-
-​                      location:
-
-​                            pathname: "/about"
-
-​                            search: ""
-
-​                            state: undefined
-
-​                      match:
-
-​                            params: {}
-
-​                            path: "/about"
-
-​                            url: "/about"
-
-
-
-## 五、NavLink与封装NavLink
-
-​        1.NavLink可以实现路由链接的高亮，通过activeClassName指定样式名
-
-
-
-## 六、Switch的使用
-
-​        1.通常情况下，path和component是一一对应的关系。
-
-​        2.Switch可以提高路由匹配效率(单一匹配)。
-
-
-
 ## 七、解决多级路径刷新页面样式丢失的问题
 
 ​        1.public/index.html 中 引入样式时不写 ./ 写 / （常用）
@@ -5943,83 +5993,7 @@ componentDidCatch(error, info) {
 
 
 
-## 九、Redirect的使用
-
-​        1.一般写在所有路由注册的最下方，当所有路由都无法匹配时，跳转到Redirect指定的路由
-
-​        2.具体编码：
-
-​            <Switch>
-
-​              <Route path="/about" component={About}/>
-
-​              <Route path="/home" component={Home}/>
-
-​              <Redirect to="/about"/>
-
-​            </Switch>
-
-
-
-## 十、嵌套路由
-
-​        1.注册子路由时要写上父路由的path值
-
-​        2.路由的匹配是按照注册路由的顺序进行的
-
-
-
-## 十一、向路由组件传递参数
-
-​        1.params参数
-
-​              路由链接(携带参数)：<Link to='/demo/test/tom/18'}>详情</Link>
-
-​              注册路由(声明接收)：<Route path="/demo/test/:name/:age" component={Test}/>
-
-​              接收参数：this.props.match.params
-
-​        2.**search参数**
-
-​              路由链接(携带参数)：<Link to='/demo/test?name=tom&age=18'}>详情</Link>
-
-​              注册路由(无需声明，正常注册即可)：<Route path="/demo/test" component={Test}/>
-
-​              接收参数：this.props.location.search
-
-​              备注：获取到的search是urlencoded编码字符串，需要借助querystring解析
-
-​        3.state参数
-
-​              路由链接(携带参数)：<Link to={{pathname:'/demo/test',state:{name:'tom',age:18}}}>详情</Link>
-
-​              注册路由(无需声明，正常注册即可)：<Route path="/demo/test" component={Test}/>
-
-​              接收参数：this.props.location.state
-
-​              备注：刷新也可以保留住参数
-
 ​        
-
-
-
-
-
-## 十二、编程式路由导航
-
-​          借助this.prosp.history对象上的API对操作路由跳转、前进、后退
-
-​              -this.prosp.history.push()
-
-​              -this.prosp.history.replace()
-
-​              -this.prosp.history.goBack()
-
-​              -this.prosp.history.goForward()
-
-​              -this.prosp.history.go()
-
-
 
 ## 十三、BrowserRouter❤️与HashRouter的区别
 
