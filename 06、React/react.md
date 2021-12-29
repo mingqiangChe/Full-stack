@@ -5069,6 +5069,39 @@ export default  combineReducers({
 					要在第二个callback函数中读取
 ```
 
+```jsx
+import React, { Component } from 'react'
+
+export default class Demo extends Component {
+
+	state = {count:0}
+
+	add = ()=>{
+		//对象式的setState
+		/* //1.获取原来的count值
+		const {count} = this.state
+		//2.更新状态
+		this.setState({count:count+1},()=>{
+			console.log(this.state.count);
+		})
+		//console.log('12行的输出',this.state.count); //0 */
+
+		//函数式的setState
+		this.setState( state => ({count:state.count+1}))
+	}
+
+	render() {
+		return (
+			<div>
+				<h1>当前求和为：{this.state.count}</h1>
+				<button onClick={this.add}>点我+1</button>
+			</div>
+		)
+	}
+}
+
+```
+
 
 
 ------
@@ -5090,6 +5123,53 @@ export default  combineReducers({
             <Redirect to="/login"/>
         </Switch>
     </Suspense>
+```
+
+```jsx
+import React, { Component,lazy,Suspense} from 'react'
+import {NavLink,Route} from 'react-router-dom'
+
+// import Home from './Home'
+// import About from './About'
+
+import Loading from './Loading'
+const Home = lazy(()=> import('./Home') )
+const About = lazy(()=> import('./About'))
+
+export default class Demo extends Component {
+	render() {
+		return (
+			<div>
+				<div className="row">
+					<div className="col-xs-offset-2 col-xs-8">
+						<div className="page-header"><h2>React Router Demo</h2></div>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-xs-2 col-xs-offset-2">
+						<div className="list-group">
+							{/* 在React中靠路由链接实现切换组件--编写路由链接 */}
+							<NavLink className="list-group-item" to="/about">About</NavLink>
+							<NavLink className="list-group-item" to="/home">Home</NavLink>
+						</div>
+					</div>
+					<div className="col-xs-6">
+						<div className="panel">
+							<div className="panel-body">
+								<Suspense fallback={<Loading/>}>
+									{/* 注册路由 */}
+									<Route path="/about" component={About}/>
+									<Route path="/home" component={Home}/>
+								</Suspense>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+}
+
 ```
 
 
@@ -5158,6 +5238,98 @@ export default  combineReducers({
 (3). 作用:保存标签对象,功能与React.createRef()一样
 ```
 
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+//类式组件
+/* class Demo extends React.Component {
+
+	state = {count:0}
+
+	myRef = React.createRef()
+
+	add = ()=>{
+		this.setState(state => ({count:state.count+1}))
+	}
+
+	unmount = ()=>{
+		ReactDOM.unmountComponentAtNode(document.getElementById('root'))
+	}
+
+	show = ()=>{
+		alert(this.myRef.current.value)
+	}
+
+	componentDidMount(){
+		this.timer = setInterval(()=>{
+			this.setState( state => ({count:state.count+1}))
+		},1000)
+	}
+
+	componentWillUnmount(){
+		clearInterval(this.timer)
+	}
+
+	render() {
+		return (
+			<div>
+				<input type="text" ref={this.myRef}/>
+				<h2>当前求和为{this.state.count}</h2>
+				<button onClick={this.add}>点我+1</button>
+				<button onClick={this.unmount}>卸载组件</button>
+				<button onClick={this.show}>点击提示数据</button>
+			</div>
+		)
+	}
+} */
+
+function Demo(){
+	//console.log('Demo');
+
+	const [count,setCount] = React.useState(0)
+	const myRef = React.useRef()
+
+	React.useEffect(()=>{
+		let timer = setInterval(()=>{
+			setCount(count => count+1 )
+		},1000)
+		return ()=>{
+			clearInterval(timer)
+		}
+	},[])
+
+	//加的回调
+	function add(){
+		//setCount(count+1) //第一种写法
+		setCount(count => count+1 )
+	}
+
+	//提示输入的回调
+	function show(){
+		alert(myRef.current.value)
+	}
+
+	//卸载组件的回调
+	function unmount(){
+		ReactDOM.unmountComponentAtNode(document.getElementById('root'))
+	}
+
+	return (
+		<div>
+			<input type="text" ref={myRef}/>
+			<h2>当前求和为：{count}</h2>
+			<button onClick={add}>点我+1</button>
+			<button onClick={unmount}>卸载组件</button>
+			<button onClick={show}>点我提示数据</button>
+		</div>
+	)
+}
+
+export default Demo
+
+```
+
 
 
 ------
@@ -5174,6 +5346,22 @@ export default  combineReducers({
 ### 作用
 
 > 可以不用必须有一个真实的DOM根标签了
+
+```jsx
+import React, { Component,Fragment } from 'react'
+
+export default class Demo extends Component {
+	render() {
+		return (
+			<Fragment key={1}>
+				<input type="text"/>
+				<input type="text"/>
+			</Fragment>
+		)
+	}
+}
+
+```
 
 
 
