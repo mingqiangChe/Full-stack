@@ -5404,6 +5404,70 @@ export default class Demo extends Component {
 
 	在应用开发中一般不用context, 一般都用它的封装react插件
 
+```jsx
+import React, { Component } from 'react'
+import './index.css'
+
+//创建Context对象
+const MyContext = React.createContext()
+const {Provider,Consumer} = MyContext
+export default class A extends Component {
+
+	state = {username:'tom',age:18}
+
+	render() {
+		const {username,age} = this.state
+		return (
+			<div className="parent">
+				<h3>我是A组件</h3>
+				<h4>我的用户名是:{username}</h4>
+				<Provider value={{username,age}}>
+					<B/>
+				</Provider>
+			</div>
+		)
+	}
+}
+
+class B extends Component {
+	render() {
+		return (
+			<div className="child">
+				<h3>我是B组件</h3>
+				<C/>
+			</div>
+		)
+	}
+}
+
+/* class C extends Component {
+	//声明接收context
+	static contextType = MyContext
+	render() {
+		const {username,age} = this.context
+		return (
+			<div className="grand">
+				<h3>我是C组件</h3>
+				<h4>我从A组件接收到的用户名:{username},年龄是{age}</h4>
+			</div>
+		)
+	}
+} */
+
+function C(){
+	return (
+		<div className="grand">
+			<h3>我是C组件</h3>
+			<h4>我从A组件接收到的用户名:
+			<Consumer>
+				{value => `${value.username},年龄是${value.age}`}
+			</Consumer>
+			</h4>
+		</div>
+	)
+}
+```
+
 
 
 <hr/>
@@ -5438,6 +5502,75 @@ export default class Demo extends Component {
 			不要直接修改state数据, 而是要产生新数据
 	项目中一般使用PureComponent来优化
 
+```jsx
+import React, { PureComponent } from 'react'
+import './index.css'
+
+export default class Parent extends PureComponent {
+
+	state = {carName:"奔驰c36",stus:['小张','小李','小王']}
+
+	addStu = ()=>{
+		/* const {stus} = this.state
+		stus.unshift('小刘')
+		this.setState({stus}) */
+
+		const {stus} = this.state
+		this.setState({stus:['小刘',...stus]})
+	}
+
+	changeCar = ()=>{
+		//this.setState({carName:'迈巴赫'})
+
+		const obj = this.state
+		obj.carName = '迈巴赫'
+		console.log(obj === this.state);
+		this.setState(obj)
+	}
+
+	/* shouldComponentUpdate(nextProps,nextState){
+		// console.log(this.props,this.state); //目前的props和state
+		// console.log(nextProps,nextState); //接下要变化的目标props，目标state
+		return !this.state.carName === nextState.carName
+	} */
+
+	render() {
+		console.log('Parent---render');
+		const {carName} = this.state
+		return (
+			<div className="parent">
+				<h3>我是Parent组件</h3>
+				{this.state.stus}&nbsp;
+				<span>我的车名字是：{carName}</span><br/>
+				<button onClick={this.changeCar}>点我换车</button>
+				<button onClick={this.addStu}>添加一个小刘</button>
+				<Child carName="奥拓"/>
+			</div>
+		)
+	}
+}
+
+class Child extends PureComponent {
+
+	/* shouldComponentUpdate(nextProps,nextState){
+		console.log(this.props,this.state); //目前的props和state
+		console.log(nextProps,nextState); //接下要变化的目标props，目标state
+		return !this.props.carName === nextProps.carName
+	} */
+
+	render() {
+		console.log('Child---render');
+		return (
+			<div className="child">
+				<h3>我是Child组件</h3>
+				<span>我接到的车是：{this.props.carName}</span>
+			</div>
+		)
+	}
+}
+
+```
+
 
 
 <hr/>
@@ -5466,6 +5599,49 @@ export default class Demo extends Component {
 	<A render={(data) => <C data={data}></C>}></A>
 	A组件: {this.props.render(内部state数据)}
 	C组件: 读取A组件传入的数据显示 {this.props.data} 
+
+```jsx
+import React, { Component } from 'react'
+import './index.css'
+import C from '../1_setState'
+
+export default class Parent extends Component {
+	render() {
+		return (
+			<div className="parent">
+				<h3>我是Parent组件</h3>
+				<A render={(name)=><C name={name}/>}/>
+			</div>
+		)
+	}
+}
+
+class A extends Component {
+	state = {name:'tom'}
+	render() {
+		console.log(this.props);
+		const {name} = this.state
+		return (
+			<div className="a">
+				<h3>我是A组件</h3>
+				{this.props.render(name)}
+			</div>
+		)
+	}
+}
+
+class B extends Component {
+	render() {
+		console.log('B--render');
+		return (
+			<div className="b">
+				<h3>我是B组件,{this.props.name}</h3>
+			</div>
+		)
+	}
+}
+
+```
 
 
 
