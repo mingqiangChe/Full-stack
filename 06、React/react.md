@@ -1646,11 +1646,36 @@ npm start
     * 3.2 交互(从绑定事件监听开始)
 
 # 组件的组合使用-TodoList ✨🪐✨
+
 功能: 组件化实现此功能
   1. 显示所有todo列表
   2. 输入文本, 点击按钮显示到列表的首位, 并清除输入的文本
 
 ![输入图片说明](images/demo.gif "QQ截图20201229183512.png")
+
+##  todoList案例相关知识点
+
+​    1.拆分组件、实现静态组件，注意：className、style的写法
+
+​    2.动态初始化列表，如何确定将数据放在哪个组件的state中？
+
+​          ——某个组件使用：放在其自身的state中
+
+​          ——某些组件使用：放在他们共同的父组件state中（官方称此操作为：状态提升）
+
+​    3.关于父子之间通信：
+
+​        1.【父组件】给【子组件】传递数据：通过props传递
+
+​        2.【子组件】给【父组件】传递数据：通过props传递，要求父提前给子传递一个函数
+
+​    4.注意defaultChecked 和 checked的区别，类似的还有：defaultValue 和 value
+
+​    5.状态在哪里，操作状态的方法就在哪里
+
+
+
+## 代码
 
 App.js
 
@@ -2075,6 +2100,46 @@ console.log(error);
   ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/demo_users.gif "QQ截图20201229183512.png")
 
 请求地址: https://api.github.com/search/users?q=xxxxxx
+
+### github搜索案例相关知识点
+
+​    1.设计状态时要考虑全面，例如带有网络请求的组件，要考虑请求失败怎么办。
+
+​    2.ES6小知识点：解构赋值+重命名
+
+​          let obj = {a:{b:1}}
+
+​          const {a} = obj; //传统解构赋值
+
+​          const {a:{b}} = obj; //连续解构赋值
+
+​          const {a:{b:value}} = obj; //连续解构赋值+重命名
+
+​    3.消息订阅与发布机制
+
+​          1.先订阅，再发布（理解：有一种隔空对话的感觉）
+
+​          2.适用于任意组件间通信
+
+​          3.要在组件的componentWillUnmount中取消订阅
+
+​    4.fetch发送请求（关注分离的设计思想）
+
+​          try {
+
+​            const response= await fetch(`/api1/search/users2?q=${keyWord}`)
+
+​            const data = await response.json()
+
+​            console.log(data);
+
+​          } catch (error) {
+
+​            console.log('请求出错',error);
+
+​          }
+
+### 代码
 
 App.jsx
 
@@ -2632,7 +2697,21 @@ export default withRouter(Header)❤️
 
   ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/react-router.gif "QQ截图20201229183512.png")
 
-### 代码展示：❤️
+####  路由的基本使用知识点
+
+​      1.明确好界面中的导航区、展示区
+
+​      2.导航区的a标签改为Link标签
+
+​            <Link to="/xxxxx">Demo</Link>
+
+​      3.展示区写Route标签进行路径的匹配
+
+​            <Route path='/xxxx' component={Demo}/>
+
+​      4.<App>的最外侧包裹了一个<BrowserRouter>或<HashRouter>
+
+#### 代码展示：❤️
 
 App.jsx
 
@@ -3225,6 +3304,68 @@ export default class Detail extends Component {
 
 * 1. 官网: [https://ant.design/index-cn](https://ant.design/index-cn)
 * 2. Github: [https://github.com/ant-design/ant-design/](https://github.com/ant-design/ant-design/)
+
+
+
+#### antd的按需引入+自定主题
+
+进入antd官网。查看文档
+
+​      1.安装依赖：yarn add react-app-rewired customize-cra babel-plugin-import less less-loader
+
+​      2.修改package.json
+
+​          ....
+
+​            "scripts": {
+
+​              "start": "react-app-rewired start",
+
+​              "build": "react-app-rewired build",
+
+​              "test": "react-app-rewired test",
+
+​              "eject": "react-scripts eject"
+
+​            },
+
+​          ....
+
+​      3.根目录下创建config-overrides.js
+
+​          //配置具体的修改规则
+
+​          const { override, fixBabelImports,addLessLoader} = require('customize-cra');
+
+​          module.exports = override(
+
+​            fixBabelImports('import', {
+
+​              libraryName: 'antd',
+
+​              libraryDirectory: 'es',
+
+​              style: true,
+
+​            }),
+
+​            addLessLoader({
+
+​              lessOptions:{
+
+​                javascriptEnabled: true,
+
+​                modifyVars: { '@primary-color': 'green' },
+
+​              }
+
+​            }),
+
+​          );
+
+​        4.备注：不用在组件里亲自引入样式了，即：import 'antd/dist/antd.css'应该删掉
+
+
 
 # 7 redux
 
@@ -5678,6 +5819,10 @@ componentDidCatch(error, info) {
 }
 ```
 
+
+
+
+
 ## 9. 组件通信方式总结
 
 #### 组件间的关系：
@@ -5704,85 +5849,13 @@ componentDidCatch(error, info) {
 		兄弟组件：消息订阅-发布、集中式管理
 		祖孙组件(跨级组件)：消息订阅-发布、集中式管理、conText(开发用的少，封装插件用的多)
 
-# 相关知识点
-
-##  一、todoList案例相关知识点
-
-​    1.拆分组件、实现静态组件，注意：className、style的写法
-
-​    2.动态初始化列表，如何确定将数据放在哪个组件的state中？
-
-​          ——某个组件使用：放在其自身的state中
-
-​          ——某些组件使用：放在他们共同的父组件state中（官方称此操作为：状态提升）
-
-​    3.关于父子之间通信：
-
-​        1.【父组件】给【子组件】传递数据：通过props传递
-
-​        2.【子组件】给【父组件】传递数据：通过props传递，要求父提前给子传递一个函数
-
-​    4.注意defaultChecked 和 checked的区别，类似的还有：defaultValue 和 value
-
-​    5.状态在哪里，操作状态的方法就在哪里
 
 
 
-## 二、github搜索案例相关知识点
-
-​    1.设计状态时要考虑全面，例如带有网络请求的组件，要考虑请求失败怎么办。
-
-​    2.ES6小知识点：解构赋值+重命名
-
-​          let obj = {a:{b:1}}
-
-​          const {a} = obj; //传统解构赋值
-
-​          const {a:{b}} = obj; //连续解构赋值
-
-​          const {a:{b:value}} = obj; //连续解构赋值+重命名
-
-​    3.消息订阅与发布机制
-
-​          1.先订阅，再发布（理解：有一种隔空对话的感觉）
-
-​          2.适用于任意组件间通信
-
-​          3.要在组件的componentWillUnmount中取消订阅
-
-​    4.fetch发送请求（关注分离的设计思想）
-
-​          try {
-
-​            const response= await fetch(`/api1/search/users2?q=${keyWord}`)
-
-​            const data = await response.json()
-
-​            console.log(data);
-
-​          } catch (error) {
-
-​            console.log('请求出错',error);
-
-​          }
 
 ​        
 
 
-
-##  三、路由的基本使用
-
-​      1.明确好界面中的导航区、展示区
-
-​      2.导航区的a标签改为Link标签
-
-​            <Link to="/xxxxx">Demo</Link>
-
-​      3.展示区写Route标签进行路径的匹配
-
-​            <Route path='/xxxx' component={Demo}/>
-
-​      4.<App>的最外侧包裹了一个<BrowserRouter>或<HashRouter>
 
 
 
@@ -5970,63 +6043,4 @@ componentDidCatch(error, info) {
 
 ​      4.备注：HashRouter可以用于解决一些路径错误相关的问题。
 
-
-
-## 十四、antd的按需引入+自定主题
-
-进入antd官网。查看文档
-
-​      1.安装依赖：yarn add react-app-rewired customize-cra babel-plugin-import less less-loader
-
-​      2.修改package.json
-
-​          ....
-
-​            "scripts": {
-
-​              "start": "react-app-rewired start",
-
-​              "build": "react-app-rewired build",
-
-​              "test": "react-app-rewired test",
-
-​              "eject": "react-scripts eject"
-
-​            },
-
-​          ....
-
-​      3.根目录下创建config-overrides.js
-
-​          //配置具体的修改规则
-
-​          const { override, fixBabelImports,addLessLoader} = require('customize-cra');
-
-​          module.exports = override(
-
-​            fixBabelImports('import', {
-
-​              libraryName: 'antd',
-
-​              libraryDirectory: 'es',
-
-​              style: true,
-
-​            }),
-
-​            addLessLoader({
-
-​              lessOptions:{
-
-​                javascriptEnabled: true,
-
-​                modifyVars: { '@primary-color': 'green' },
-
-​              }
-
-​            }),
-
-​          );
-
-​        4.备注：不用在组件里亲自引入样式了，即：import 'antd/dist/antd.css'应该删掉
 
