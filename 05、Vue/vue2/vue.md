@@ -1,10 +1,37 @@
-#  官网
+# vue
 
-#### [1. 英文官网](https://vuejs.org/)
+## 具体用法参照github案例
 
-#### [2. 中文官网](https://cn.vuejs.org/)
+###  VScode 中的 Vue 插件
 
-[3.gihub项目地址](https://github.com/thomas373737/vue2Study.git)
+1. Vue 3 Snippets    
+
+   https://marketplace.visualstudio.com/items?itemName=hollowtree.vue-snippets
+
+2. Vetur                    
+
+   https://marketplace.visualstudio.com/items?itemName=octref.vetur
+   
+3. path autocomplete 自动补齐@路径
+
+setting.json配置   不生效是因爲沒有把项目根目录打开，而是从上上级打开
+
+```
+ // 导入文件时是否携带文件扩展名
+    "path-autocomplete.extensionOnImport": true,
+    // 配置@的路径提示
+    "path-autocomplete.pathMappings": {
+        "@":"${folder}/src"
+    },
+```
+
+
+
+### github
+
+https://github.com/thomas373737/vue2Study
+
+https://github.com/thomas373737/vue2Study.git
 
 # 什么是 vue
 
@@ -34,7 +61,247 @@
 
 > 注意：数据驱动视图和双向数据绑定的底层原理是 MVVM（Mode 数据源、View 视图、ViewModel 就是 vue 的实例）
 
+# 使用Vue脚手架
 
+### 3. 1 初始化脚手架
+
+#### 3. 1. 1 说明
+
+>1. Vue脚手架是Vue官方提供的标准化开发工具（开发平台）。
+
+2. 最新的版本是 4 .x。
+3. 文档:https://cli.vuejs.org/zh/。
+
+### 3. 1. 2 具体步骤
+
+第一步（仅第一次执行）：全局安装@vue/cli。
+
+```
+npm install -g @vue/cli
+```
+
+第二步： **切换到你要创建项目的目录** ，然后使用命令创建项目
+
+```
+vue create 项目名
+```
+
+第三步：启动项目
+
+```
+npm run serve
+```
+
+备注：
+
+1. 如ht出tp现s:/下/re载g缓ist慢ry请.n配pm置.tanopbmao淘.o宝rg镜像：npm config set registry
+
+2. Vue脚手架隐藏了所有webpack相关的配置，若想查看具体的webpakc配置，
+   请执行：vue inspect > output.js
+
+#### 3. 1. 3 模板项目的结构
+
+##### ├──node_modules
+
+##### ├──public
+
+##### │ ├──favicon.ico:页签图标
+
+##### │ └──index.html:主页面
+
+##### ├──src
+
+##### │ ├──assets:存放静态资源
+
+##### │ │ └──logo.png
+
+##### │ │──component:存放组件
+
+##### │ │ └──HelloWorld.vue
+
+##### │ │──App.vue:汇总所有组件
+
+##### │ │──main.js:入口文件
+
+##### ├──.gitignore:git版本管制忽略的配置
+
+##### ├──babel.config.js:babel的配置文件
+
+##### ├──package.json:应用包配置文件
+
+##### ├──README.md:应用描述文件
+
+##### ├──package-lock.json：包版本控制文件
+
+
+### 3. 2 ref与props
+
+### ref
+
+###### 1 .作用： 用于给节点打标识
+
+>2 .读取方式： this.$refs.xxxxxx
+
+### props
+
+###### 1. 作用： 用于父组件给子组件传递数据
+
+###### 2. 读取方式一:只指定名称
+
+```
+props:['name','age','setName']
+3. 读取方式二:指定名称和类型
+props:{
+    name:String,
+    age:Number,
+    setNmae:Function
+}
+4. 读取方式三:指定名称/类型/必要性/默认值
+props:{
+    name:{type:String,required:true,default:xxx},
+}
+```
+
+### 3. 3 混入
+
+>1. Vue插件是一个包含install方法的对象
+
+2. 通过install方法给Vue或Vue实例添加方法,定义全局指令等
+
+### 3. 4 插件
+
+>1. Vue插件是一个包含install方法的对象
+
+2. 通过install方法给Vue或Vue实例添加方法,定义全局指令等
+
+### 3. 5 Todo-list案例
+
+![QQ截图20210808172542](vue.assets/QQ截图20210808172542.png)
+
+#### 组件化编码流程（通用）
+
+* 1 .实现静态组件：抽取组件，使用组件实现静态页面效果<br>
+* 2 .展示动态数据：
+  * 2. 1 .数据的类型、名称是什么？
+  * 2. 2 .数据保存在哪个组件？
+* 3 .交互——从绑定事件监听开始
+
+
+### 3. 6 Vue中的自定义事件
+
+#### 绑定事件监听
+
+```
+<Header @addTodo="addTodo"/> 
+
+或者<Header ref="header"/> 
+this.$refs.header.$on('addTodo', this.addTodo)
+```
+
+#### 触发事件
+
+```
+this.$emit('addTodo', todo)
+```
+
+### 3. 7 全局事件总线
+
+#### 3. 7. 1 理解
+
+* 1. Vue原型对象上包含事件处理的方法
+
+    * 1 ) $on(eventName,listener):绑定自定义事件监听
+    * 2 ) $emit(eventName,data):分发自定义事件
+    * 3 ) $off(eventName):解绑自定义事件监听
+    * 4 ) $once(eventName,listener):绑定事件监听,但只能处理一次
+
+* 2. 所有组件实例对象的原型对象的原型对象就是Vue的原型对象
+
+    * 1 ) 所有组件对象都能看到Vue原型对象上的属性和方法
+    * 2 ) Vue.prototype.$bus=newVue(),所有的组件对象都能看到$bus这个属性对象
+
+* 3. 全局事件总线
+
+    * 1 ) 包含事件处理相关方法的对象(只有一个)
+    * 2 ) 所有的组件都可以得到
+
+#### 3. 7. 2 指定事件总线对象
+
+```
+new Vue({ 
+    beforeCreate () { // 尽量早的执行挂载全局事件总线对象的操作 Vue.prototype.$globalEventBus = this 
+    }, 
+    }).$mount('#root')
+```
+
+#### 3. 7. 3 绑定事件
+
+```
+this.$globalEventBus.$on('deleteTodo', this.deleteTodo)
+```
+
+#### 3. 7. 4 分发事件
+
+```
+this.$globalEventBus.$emit('deleteTodo', this.index)
+```
+
+#### 3. 7. 5 解绑事件
+
+```
+this.$globalEventBus.$off('deleteTodo')
+```
+
+### 3. 8 消息订阅与发布
+
+#### 3. 8. 1 理解
+
+* 1 .这种方式的思想与全局事件总线很相似
+* 2 .它包含以下操作:
+  * ( 1 ) 订阅消息--对应绑定事件监听
+  * ( 2 ) 发布消息--分发事件
+  * ( 3 ) 取消消息订阅--解绑事件监听
+* 3 .需要引入一个消息订阅与发布的第三方实现库: **PubSubJS**
+
+#### 3. 8. 2 使用PubSubJS
+
+* 1 .在线文档:https://github.com/mroderick/PubSubJS
+* 2 .下载:npminstall-Spubsub-js
+* 3 .相关语法
+  * ( 1 ) importPubSubfrom'pubsub-js' //引入
+  * ( 2 ) PubSub.subscribe(‘msgName’,functon(msgName,data){})
+  * ( 3 ) PubSub.publish(‘msgName’,data):发布消息,触发订阅的回调函数调用
+  * ( 4 ) PubSub.unsubscribe(token):取消消息的订阅
+
+
+### 3. 9 过度与动画
+
+#### 3. 9. 1 效果
+
+![QQ截图20210808172607](vue.assets/QQ截图20210808172607.png)
+
+#### 3. 9. 2 vue动画的理解
+
+* 1 .操作css的trasition或animation
+
+* 2 .vue会给目标元素添加/移除特定的class
+
+* 3 .过渡的相关类名：
+
+  * 1 .xxx-enter-active:指定显示的transition
+  * 2 .xxx-leave-active:指定隐藏的transition
+  * 3 .xxx-enter/xxx-leave-to:指定隐藏时的样式
+
+  ![QQ截图20210808172622](vue.assets/QQ截图20210808172622.png)
+
+#### 3. 9. 3 基本过渡动画的编码
+
+* 1. 在目标元素外包裹<transitionname="xxx">
+
+* 2. 定义class样式
+
+    * a) 指定过渡样式:transition
+    * b) 指定隐藏时的样式:opacity/其它
 
 # vue 指令
 
@@ -1893,6 +2160,10 @@ export default {
 
 ## vue的生命周期
 
+### 14. 2 .生命周期流程图
+
+![QQ截图20210808161700](vue.assets/QQ截图20210808161700.png)
+
 生命周期（Life Cycle）是指一个组件从创建 -> 运行 -> 销毁的整个阶段，强调的是一个时间段。
 
 生命周期函数：是由 vue 框架提供的内置函数，会伴随着组件的生命周期，自动按次序执行。
@@ -2083,7 +2354,7 @@ export default {
 
 
 
-## ref 引用
+# ref 引用
 
 ref 用来辅助开发者在不依赖于 jQuery 的情况下，获取 DOM 元素或组件的引用。
 
@@ -2595,6 +2866,67 @@ Vue.directive('color', function (el,binding) {
 })
 ```
 
+# vuex
+
+### 5. 1 理解vuex
+
+#### 5. 1. 1 vuex是什么
+
+>1. 概念：专门在Vue中实现集中式状态（数据）管理的一个Vue插件，对vue应
+>   用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方
+>   式，且适用于任意组件间通信。
+
+2. Github地址:https://github.com/vuejs/vuex
+
+#### 5. 1. 2 什么时候使用Vuex
+
+* 1 .多个组件依赖于同一状态
+* 2 .来自不同组件的行为需要变更同一状态
+
+#### 5. 1. 3 案例
+
+  ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/05、Vue/vue2/vue.assets/QQ截图20210808172810.png "QQ截图20201229183512.png")
+
+#### 5. 1. 4 Vuex工作原理图
+
+  ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/05、Vue/vue2/vue.assets/QQ截图20210808172830.png "QQ截图20201229183512.png")
+
+### 5. 2 vuex核心概念和API
+
+### 5. 2. 1 state
+
+* 1 .vuex管理的状态对象
+* 2 .它应该是唯一的
+* 3 .示例代码：
+
+### 5. 2. 2 actions
+
+* 1 .值为一个对象，包含多个响应用户动作的回调函数
+* 2 .通过commit()来触发mutation中函数的调用,间接更新state
+* 3 .如何触发actions中的回调？在组件中使用: $store.dispatch('对应的action回调名') 触发
+* 4 .可以包含异步代码（定时器,ajax等等）
+* 5 .示例代码：
+
+### 5. 2. 3 mutations
+
+* 1 .值是一个对象，包含多个直接更新state的方法
+* 2 .谁能调用mutations中的方法？如何调用？在action中使用： commit('对应的mutations方法名') 触发
+* 3 .mutations中方法的特点：不能写异步代码、只能单纯的操作state
+* 4 .示例代码：
+
+### 5. 2. 4 getters
+
+* 1 .值为一个对象，包含多个用于返回数据的函数
+* 2 .如何使用？—— $store.getters.xxx
+* 3 .示例代码：
+
+
+### 5. 2. 5 modules
+
+* 1 .包含多个module
+* 2 .一个module是一个store的配置对象
+* 3 .与一个组件（包含有共享数据）对应
+
 # 路由
 
 SPA 指的是一个 web 网站只有唯一的一个 HTML 页面，所有组件的展示与切换都在这唯一的一个页面内完成。
@@ -2888,7 +3220,7 @@ path 路径部分
 
 fullpath 完整路径携带参数
 
-####  声明式导航 & 编程式导航
+###  声明式导航 & 编程式导航
 
 在浏览器中，点击链接实现导航的方式，叫做声明式导航。例如：
 
@@ -2973,10 +3305,6 @@ export default {
 
 ⚫ 在历史记录中，前进到下一个页面
 
-
-
-
-
 # 导航守卫
 
 导航守卫可以控制路由的访问权限。
@@ -3049,6 +3377,22 @@ router.beforeEach(function(to, from, next) {
 })
 ```
 
+# Vue UI组件库
+
+#### 7. 1 移动端常用UI组件库
+
+>1. Vant https://youzan.github.io/vant
+
+2. CubeUI https://didi.github.io/cube-ui
+3. MintUI [http://mint-ui.github.io](http://mint-ui.github.io)
+
+#### 7. 2 PC端常用UI组件库
+
+>1. ElementUI https://element.eleme.cn
+
+2. IViewUI https://www.iviewui.com
+3. Ant Design of Vue https://www.antdv.com/
+
 
 
 # 功能使用
@@ -3112,13 +3456,3 @@ export default new VueRouter({
 过滤器类似函数方法调用方法名以及携带的参数处理。管道符后面是方法名 前面则是参数
 
 axios   .then获取数据太麻烦了，所以可以在promise实例前加await，但只能再async修饰方法中使用await。
-
-data中的值用vuex中state代替动态显示状态
-
-```
-isCollapse() {
-      return this.$store.state.tab.isCollapse;
-    },
-```
-
-vuex中moudle使用是新建模块js调用vuex中方法，然后在vuex module注册使用即可
