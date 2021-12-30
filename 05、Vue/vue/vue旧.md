@@ -1,42 +1,3 @@
-# Vue技术栈(全家桶)
-
-##### 尚硅谷前端研究院
-
-## 第 1 章：Vue核心
-
-### 1. 1 .Vue简介
-
-### 1. 1. 1 .官网
-
-#### [1. 英文官网](https://vuejs.org/)
-#### [2. 中文官网](https://cn.vuejs.org/)
-
-### 1. 1. 2 .介绍与描述
-
->1. 动态构建用户界面的 渐进式 JavaScript框架
-2. 作者:尤雨溪
-### 1. 1. 3 .Vue的特点
-
->1. 遵循 MVVM 模式
->2. 编码简洁,体积小,运行效率高,适合移动/PC端开发
->3. 它本身只关注UI,也可以引入其它第三方库开发项目
-
-#### 1. 1. 4 .与其它JS框架的关联
-
-
-> 1. 借鉴Angular的 模板 和 数据绑定 技术
-2. 借鉴React的 组件化 和 虚拟DOM 技术
-
-#### 1. 1. 5 .Vue周边库
-
->1. vue-cli:vue脚手架
->2. vue-resource
->3. axios
->4. vue-router:路由
->5. vuex:状态管理
->6. element-ui:基于vue的UI组件库(PC端)
->......
-
 ### 1. 2 .初识Vue
   ![输入图片说明](images/QQ截图20210808155207.png "QQ截图20201229183512.png")
 ### 1. 3 .模板语法
@@ -708,5 +669,4 @@ vue的一个插件库，专门用来实现SPA应用
 >1. ElementUI https://element.eleme.cn
 2. IViewUI https://www.iviewui.com
 3. Ant Design of Vue https://www.antdv.com/
-
 
