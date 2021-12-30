@@ -5624,7 +5624,7 @@ export default class Demo extends Component {
 
 <hr/>
 
-## 5. Context
+## 5. Context 祖孙组件通信
 
 ### 理解
 
@@ -5666,8 +5666,8 @@ import React, { Component } from 'react'
 import './index.css'
 
 //创建Context对象
-const MyContext = React.createContext()
-const {Provider,Consumer} = MyContext
+const MyContext = React.createContext()❤️
+const {Provider,Consumer} = MyContext❤️
 export default class A extends Component {
 
 	state = {username:'tom',age:18}
@@ -5678,7 +5678,7 @@ export default class A extends Component {
 			<div className="parent">
 				<h3>我是A组件</h3>
 				<h4>我的用户名是:{username}</h4>
-				<Provider value={{username,age}}>
+				<Provider❤️ value={{username,age}}>
 					<B/>
 				</Provider>
 			</div>
@@ -5699,7 +5699,7 @@ class B extends Component {
 
 /* class C extends Component {
 	//声明接收context
-	static contextType = MyContext
+	static contextType = MyContext❤️
 	render() {
 		const {username,age} = this.context
 		return (
@@ -5730,9 +5730,7 @@ function C(){
 <hr/>
 
 
-## 6. 组件优化
-
-### Component的2个问题 
+## 6. 组件优 化Component的2个问题 
 
 > 1. 只要执行setState(),即使不改变状态数据, 组件也会重新render() ==> 效率低
 >
@@ -5760,10 +5758,10 @@ function C(){
 	项目中一般使用PureComponent来优化
 
 ```jsx
-import React, { PureComponent } from 'react'
+import React, { PureComponent❤️ } from 'react'
 import './index.css'
 
-export default class Parent extends PureComponent {
+export default class Parent extends PureComponent ❤️{
 
 	state = {carName:"奔驰c36",stus:['小张','小李','小王']}
 
@@ -5833,9 +5831,7 @@ class Child extends PureComponent {
 <hr/>
 
 
-## 7. render props
-
-### 如何向组件内部动态传入带内容的结构(标签)?
+## 7. render props如何向组件内部动态传入带内容的结构(标签)?
 
 	Vue中: 
 		使用slot技术, 也就是通过组件标签体传入结构  <A><B/></A>
@@ -5853,7 +5849,7 @@ class Child extends PureComponent {
 
 ### render props
 
-	<A render={(data) => <C data={data}></C>}></A>
+	<A render={(data) => <C data={data}></C>}></A>❤️
 	A组件: {this.props.render(内部state数据)}
 	C组件: 读取A组件传入的数据显示 {this.props.data} 
 
@@ -5867,7 +5863,7 @@ export default class Parent extends Component {
 		return (
 			<div className="parent">
 				<h3>我是Parent组件</h3>
-				<A render={(name)=><C name={name}/>}/>
+				<A ❤️render={(name)=><C name={name}/>}/>
 			</div>
 		)
 	}
