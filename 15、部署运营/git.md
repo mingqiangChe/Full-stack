@@ -67,7 +67,7 @@ git push -u origin master
 在执行推送就可以了
 ```
 ## `5.如何解决failed to push some refs to git`
- 
+
 >出现错误的主要原因是github中的README.md文件不在本地代码目录中<br>
 可以通过如下命令进行代码合并【注：pull=fetch+merge]<br>
 ```
@@ -157,7 +157,7 @@ git commit --amend 撤销上一次的提交,并将暂存区的文件重新提交
 git checkout -- index.html   撤销文件的修改,意思是把修改的文件撤销为上一次修改之前的
 git chackout -- .        撤销文件的修改,意思是把所有修改的文件撤销为上一次修改之前的
 git reset head index.html  把暂存区文件撤销到工作区 
-```   
+```
 
 ## 12.Git分支：
 ```
