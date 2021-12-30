@@ -1,0 +1,21 @@
+/* pages/mine/mine.wxss */
+.avatar{
+  width: 100vw;
+  height: 220rpx;
+  background-color: #2c61b4;
+  line-height: 220rpx;
+}
+.l-text-class{
+  color:#fff !important;
+}
+.grid{
+  background-color: #2c61b4;
+  color: #fff;
+}
+.grid .text{
+  font-size: 22rpx;
+  margin-top: 16rpx;
+  color: #eee;
+}
+
+

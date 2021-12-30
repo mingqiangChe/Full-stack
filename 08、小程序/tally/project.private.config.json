@@ -1,0 +1,60 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/login/login",
+          "pathName": "pages/login/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/detail/detail",
+          "pathName": "pages/detail/detail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/detail/detail_item/detail_item",
+          "pathName": "pages/detail/detail_item/detail_item",
+          "query": "dataItem=%7B%22category_name%22%3A%22%E6%94%B6%E5%85%A5%22%2C%22delivery_method%22%3A%22%E5%B7%A5%E8%B5%84%22%2C%22bill_category_icon%22%3A%22soud%22%2C%22bill_tag%22%3A%22%E9%98%BF%E6%96%AF%E8%92%82%E8%8A%AC%22%2C%22id%22%3A100002%2C%22bill_money%22%3A66%2C%22create_time%22%3A%222021-11-05%2017%3A14%3A20%22%2C%22update_time%22%3A%222021-11-07%2017%3A14%3A37%22%7D",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/tally/tally",
+          "pathName": "pages/tally/tally/tally",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,74 @@
+<van-cell icon="location-o" title="{{shopInfo.name}} / 距离您{{shopInfo.distance}}km" label="{{shopInfo.address}}" is-link url="/pages/shop/select?type=pay" />
+<view class="pay-bar">
+	<view class="way-bar">
+		<view class="peisong ziqu {{peisongType == 'zq' ? 'active' : ''}}" bindtap="selected" data-pstype="zq">
+			<van-icon name="shop-collect-o" color="{{peisongType == 'zq' ? '#fff' : '#333'}}" />
+			<view class="ziqu-1">门店自取</view>
+		</view>
+		<view class="peisong ziqu {{peisongType == 'kd' ? 'active' : ''}}" bindtap="selected" data-pstype="kd">
+			<van-icon name="logistics" color="{{peisongType == 'kd' ? '#fff' : '#333'}}" />
+			<view class="ziqu-1">外卖配送</view>
+		</view>
+	</view>
+	<van-divider dashed />
+	<van-field
+		wx:if="{{peisongType == 'zq'}}"
+		size="large"
+    value="{{ mobile }}"
+    label="联系电话"
+		type="number"
+		focus
+		clearable
+		required
+		border="{{false}}"
+    placeholder="请输入手机号码"
+    bind:change="mobileChange">
+		<van-button slot="button" size="small" type="danger" open-type="getPhoneNumber" bind:getphonenumber="getPhoneNumber">重新获取</van-button>
+  </van-field>
+	<!-- 地址 -->
+	<view class="address-box" wx:if="{{peisongType == 'kd'}}">
+		<view class="add-address" wx:if="{{!curAddressData}}" bindtap="addAddress">
+			<van-icon name="add-o" color="#e64340" size="48rpx" />
+			<view>新增配送地址</view>
+		</view>
+		<view class="show-address" wx:if="{{curAddressData}}" bindtap="selectAddress">
+			<view class="l">
+				<view class="name-tel">{{curAddressData.linkMan}} {{curAddressData.mobile}}</view>
+				<view class="addr-text">{{curAddressData.address}}</view>
+			</view>
+			<view class="r">
+				<van-icon name="arrow" />
+			</view>
+		</view>
+	</view>
+	<van-divider dashed />
+</view>
+
+<view class="goods-title">商品明细</view>
+<van-row custom-class="detail" wx:for="{{goodsList}}" wx:key="index">
+	<van-col span="18">
+		<view class="detail-1">{{item.name}}</view>
+		<view class="goods-label">{{item.label}}
+			<block wx:for="{{item.sku}}" wx:for-item="option" wx:key="index">
+				{{option.optionName}}:{{option.optionValueName}}
+			</block>
+			<block wx:for="{{item.additions}}" wx:for-item="option" wx:key="index">
+				{{option.pname}}:{{option.name}}
+			</block>
+		</view>
+	</van-col>
+	<van-col span="3" class="num">x{{item.number}}</van-col>
+	<van-col span="3" class="price">¥{{item.price}}</van-col>
+</van-row>
+
+<view class="amount">共计 {{allGoodsNumber}} 件商品，小计：¥ {{allGoodsPrice}}</view>
+
+<van-cell-group wx:if="{{!hasNoCoupons}}" title="优惠券">
+	<picker bindchange="bindChangeCoupon" range="{{coupons}}" range-key="nameExt">
+		<van-cell title="{{curCouponShowText}}" is-link />
+	</picker>
+</van-cell-group>
+
+<van-field label="备注" value="{{remark}}" clearable input-align="right" placeholder="如需备注请输入" bindblur="remarkChange" />
+<view class="bottom"></view>
+<van-submit-bar price="{{ (allGoodsAndYunPrice*100 - youhuijine*100) }}" button-text="立即支付" bindtap="goCreateOrder" button-class="pay-btn" />

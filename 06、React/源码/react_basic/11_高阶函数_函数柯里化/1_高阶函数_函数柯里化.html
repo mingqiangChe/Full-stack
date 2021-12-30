@@ -1,0 +1,79 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-12-17 10:20:46
+ * @LastEditTime: 2021-12-20 16:01:25
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /06、React/源码/react_basic/11_高阶函数_函数柯里化/1_高阶函数_函数柯里化.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>高阶函数_函数柯里化</title>
+</head>
+<body>
+	<!-- 准备好一个“容器” -->
+	<div id="test"></div>
+	
+	<!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支持react操作DOM -->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+
+	<script type="text/babel">
+		//#region 
+				/* 
+					高阶函数：如果一个函数符合下面2个规范中的任何一个，那该函数就是高阶函数。
+									1.若A函数，接收的参数是一个函数，那么A就可以称之为高阶函数。
+									2.若A函数，调用的返回值依然是一个函数，那么A就可以称之为高阶函数。
+									常见的高阶函数有：Promise、setTimeout、arr.map()等等
+
+					函数的柯里化：通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式。 
+						function sum(a){
+							return(b)=>{
+								return (c)=>{
+									return a+b+c
+								}
+							}
+						}
+					*/
+		//#endregion
+		//创建组件
+		class Login extends React.Component{
+			//初始化状态
+			state = {
+				username:'', //用户名
+				password:'' //密码
+			}
+
+			//保存表单数据到状态中  🍎🍎苹果
+			saveFormData = (dataType)=>{
+				return (event)=>{
+					this.setState({[dataType]:event.target.value})
+				}
+			}
+
+			//表单提交的回调
+			handleSubmit = (event)=>{
+				event.preventDefault() //阻止表单提交
+				const {username,password} = this.state
+				alert(`你输入的用户名是：${username},你输入的密码是：${password}`)
+			}
+			render(){
+				return(
+					<form onSubmit={this.handleSubmit}>
+						用户名：<input onChange={this.saveFormData('username')} type="text" name="username"/>
+						密码：<input onChange={this.saveFormData('password')} type="password" name="password"/>
+						<button>登录</button>
+					</form>
+				)
+			}
+		}
+		//渲染组件
+		ReactDOM.render(<Login/>,document.getElementById('test'))
+	</script>
+</body>
+</html>

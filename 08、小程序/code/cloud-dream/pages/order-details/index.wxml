@@ -1,0 +1,42 @@
+<view class="container">
+  <view wx:if="{{orderDetail.orderInfo.status == -1}}" class="status">
+    <van-icon name="close" size="88rpx" color="#666" />
+    <view class="txt">当前订单已关闭</view>
+  </view>
+  <view wx:if="{{orderDetail.orderInfo.status == 0}}" class="status">
+    <van-icon name="gold-coin-o" size="88rpx" color="#07c160" />
+    <view class="txt">等待付款</view>
+    <van-button type="primary" plain hairline size="small" bind:click="toPayTap">立即支付</van-button>
+  </view>
+  <view wx:if="{{orderDetail.orderInfo.status == 1 && !orderDetail.orderInfo.isNeedLogistics}}" class="status">
+    <view class="txt">取餐号</view>
+    <view class="qucanghao">{{orderDetail.orderInfo.qudanhao}}</view>
+    <view class="hexiaoma">
+      <canvas class="hx-canvas" canvas-id="qrcode" />
+    </view>
+  </view>
+  <view wx:if="{{(orderDetail.orderInfo.status == 1 || orderDetail.orderInfo.status == 2) && orderDetail.orderInfo.isNeedLogistics}}" class="status">
+    <van-icon name="logistics" size="88rpx" color="orange" />
+    <view class="txt">正在为您配送</view>
+    <view class="hexiaoma">
+      <canvas class="hx-canvas" canvas-id="qrcode" />
+    </view>
+  </view>
+  <view wx:if="{{orderDetail.orderInfo.status == 3 || orderDetail.orderInfo.status == 4}}" class="status">
+    <van-icon name="passed" size="88rpx" color="#07c160" />
+    <view class="txt">交易完成</view>
+  </view>
+  <van-divider dashed />
+  <view class="shop-info" wx:if="{{shopSubdetail}}">
+    <van-cell title="{{shopSubdetail.info.name}}" label="{{shopSubdetail.info.address}}" border="{{false}}" url="/pages/shop/detail?id={{shopSubdetail.info.id}}" />
+    <van-icon name="phone-circle-o" size="70rpx" color="orange" bind:click="callshop" />
+  </view>
+  <van-divider dashed />
+  <van-cell wx:if="{{orderDetail.logistics}}" title="{{orderDetail.logistics.linkMan}} / {{orderDetail.logistics.mobile}}" label="{{orderDetail.logistics.provinceStr}}{{orderDetail.logistics.cityStr}}{{orderDetail.logistics.areaStr}}{{orderDetail.logistics.address}}" />
+  <van-cell wx:for="{{orderDetail.goods}}" wx:key="id" title="{{item.goodsName}} / x{{item.number}}" label="{{item.property}}" value="¥{{item.amount}}" value-class="call-value" />
+  <van-cell title="合计" value="¥{{orderDetail.orderInfo.amountReal}}" value-class="call-value" />
+  <view class="times">
+    <view>下单: {{orderDetail.orderInfo.dateAdd}}</view>
+    <view wx:if="{{orderDetail.orderInfo.status == -1}}">关闭: {{orderDetail.orderInfo.dateClose}}</view>
+  </view>
+</view>

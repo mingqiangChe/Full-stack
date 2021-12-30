@@ -1,0 +1,46 @@
+<!-- component/calculator/calculator.wxml -->
+<wxs src="../../lin-ui/filter/string.wxs" module="string"></wxs>
+<view class="tools_calculator" hidden="{{!show && 'hidden'}}" style="bottom:{{pageBottom}}rpx">
+    <view class="calculator_viewArea">
+        <view class="calculator_viewArea_result">{{finalResult==null?"错误":finalResult}}</view>
+    </view>
+    <view class="calculator_operationArea">
+        <view class="calculator_operationArea_row">
+            <view class="calculator_operationArea_eachBox greyBox" bind:tap="cleanResult">C</view>
+            <view class="calculator_operationArea_eachBox greyBox" bind:tap="deleteInput">←</view>
+            <!-- <view class="calculator_operationArea_eachBox greyBox"  bind:tap="opposite">±</view> -->
+            <view class="section">
+                <picker mode="date" value="{{dateTime}}" start="1999-01-01" bindchange="datetime">
+                <view class="picker">
+                    <view class="calculator_operationArea_eachBox greyBox"  style="width:320rpx;">{{string.split(dateTime,' ')[0] || '今天'}}</view>
+                </view>
+                </picker>
+            </view>
+            
+        </view>
+        <view class="calculator_operationArea_row">
+            <view class="calculator_operationArea_eachBox blackBox" bind:tap="inputNum" data-num="7">7</view>
+            <view class="calculator_operationArea_eachBox blackBox" bind:tap="inputNum" data-num="8">8</view>
+            <view class="calculator_operationArea_eachBox blackBox" bind:tap="inputNum" data-num="9">9</view>
+            <view class="calculator_operationArea_eachBox orangeBox {{savePre&&operationBtnType=='multiply'?'isActive':''}}" bind:tap="operationMultiply">x</view>
+        </view>
+        <view class="calculator_operationArea_row">
+            <view class="calculator_operationArea_eachBox blackBox" bind:tap="inputNum" data-num="4">4</view>
+            <view class="calculator_operationArea_eachBox blackBox" bind:tap="inputNum" data-num="5">5</view>
+            <view class="calculator_operationArea_eachBox blackBox" bind:tap="inputNum" data-num="6">6</view>
+            <view class="calculator_operationArea_eachBox orangeBox {{savePre&&operationBtnType=='minus'?'isActive':''}}" bind:tap="operationMinus">-</view>
+        </view> 
+        <view class="calculator_operationArea_row">
+            <view class="calculator_operationArea_eachBox blackBox" bind:tap="inputNum" data-num="1">1</view>
+            <view class="calculator_operationArea_eachBox blackBox" bind:tap="inputNum" data-num="2">2</view>
+            <view class="calculator_operationArea_eachBox blackBox" bind:tap="inputNum" data-num="3">3</view>
+            <view class="calculator_operationArea_eachBox orangeBox {{savePre&&operationBtnType=='plus'?'isActive':''}}" bind:tap="operationPlus">+</view>
+        </view>
+        <view class="calculator_operationArea_row">
+            <view class="calculator_operationArea_eachBox blackBox" bind:tap="inputNum" data-num="0">0</view>
+            <view class="calculator_operationArea_eachBox blackBox" bind:tap="inputNum" data-num=".">.</view>
+            <view class="calculator_operationArea_eachBox orangeBox {{savePre&&operationBtnType=='divide'?'isActive':''}}" bind:tap="operationDivide">÷</view>
+            <view class="calculator_operationArea_eachBox orangeBox" bind:tap="{{operationBtnsOn?'operationEquals':'operationFinish'}}">{{operationBtnsOn ? '=':'完成'}}</view>
+        </view>
+    </view>
+</view>

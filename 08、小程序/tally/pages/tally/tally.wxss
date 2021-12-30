@@ -1,0 +1,51 @@
+/* pages/tally/tally.wxss */
+.l-header-class{
+  font-size: 20rpx;
+  width: 20vw;
+  display: flex;
+  margin-left: 10vw;
+}
+.remark{
+  position: fixed;
+  width: 38vw;
+  overflow: hidden;
+  height: 60rpx;
+  left: 10rpx;
+  bottom:0;
+  z-index: 999;
+}
+.l-inner-class{
+  color: #fff !important;
+}
+.l-icon.l-icon{
+  color: #999;
+  background-color: #eee;
+  padding: 20rpx;
+  border-radius: 50%;
+  box-sizing: border-box;
+  width: 88rpx;
+  height: 88rpx;
+  font-weight: bold;
+  text-align: center;
+  line-height: 44rpx;
+  margin-bottom: 10rpx;
+}
+.l-icon-class{
+  color: #fff !important;
+  background-color: #3963bc !important;
+}
+.l-class{
+  color: #fff;
+}
+.grid{
+ overflow:auto;
+}
+.tab-content{
+  border-bottom: 1px solid #fff
+}
+.grid-item-active .item{
+  color: #3963bc;
+}
+.grid-item-active .text{
+  font-size: 20rpx !important;
+}

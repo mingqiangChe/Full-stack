@@ -1,0 +1,48 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-12-17 10:20:46
+ * @LastEditTime: 2021-12-20 10:20:12
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /06、React/源码/react_basic/06_组件实例三大属性1_state/2_state的简写方式.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>state简写方式</title>
+</head>
+<body>
+	<!-- 准备好一个“容器” -->
+	<div id="test"></div>
+	
+	<!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支持react操作DOM -->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+
+	<script type="text/babel">
+		//1.创建组件
+		class Weather extends React.Component{
+			//初始化状态
+			state = {isHot:false,wind:'微风'}
+
+			render(){
+				const {isHot,wind} = this.state
+				return <h1 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}，{wind}</h1>
+			}
+
+			//自定义方法————要用赋值语句的形式+🍎箭头函数
+			changeWeather = ()=>{
+				const isHot = this.state.isHot
+				this.setState({isHot:!isHot})
+			}
+		}
+		//2.渲染组件到页面
+		ReactDOM.render(<Weather/>,document.getElementById('test'))
+				
+	</script>
+</body>
+</html>

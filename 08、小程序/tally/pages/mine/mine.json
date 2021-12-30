@@ -1,0 +1,7 @@
+{
+  "backgroundColor": "#2c61b4",
+  "usingComponents": {
+    "l-notice-bar":"/miniprogram_npm/lin-ui/notice-bar/index",
+    "l-list":"/miniprogram_npm/lin-ui/list/index"
+  }
+}

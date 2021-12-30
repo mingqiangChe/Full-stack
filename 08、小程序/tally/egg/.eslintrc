@@ -1,0 +1,4 @@
+{
+  "extends": "eslint-config-egg",
+  "eslint-disable quotes ": "off"
+}

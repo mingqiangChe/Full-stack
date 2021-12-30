@@ -1,0 +1,45 @@
+<view class="my-bar">
+	<image mode='aspectFill' class='background' src='{{myBg}}'></image>	
+	<view class="my-box">
+		<view wx:if="{{apiUserInfoMap}}" class="head-bar">
+			<button bindgetuserinfo="goLogin" class="userinfo-avatar" style="background-image: url({{apiUserInfoMap.base.avatarUrl}})" size="default"></button>
+			<view class="name-box">
+				<view class="name">{{apiUserInfoMap.base.nick}}</view>
+				<view wx:if="{{apiUserInfoMap.userLevel}}" class="state">{{apiUserInfoMap.userLevel.name}}</view>
+  			<view wx:else class="state">非会员</view>
+			</view>
+		</view>
+		<view wx:else class="login-btn">
+			<van-button type="default" block open-type="getUserInfo" bind:getuserinfo="processLogin">立即登录</van-button>
+		</view>	
+		<view wx:if="{{apiUserInfoMap}}" class="coupon-box">
+			<view class="coupon" bindtap="goCoupons">
+				<view class="num">{{couponStatistics.canUse}}</view>
+				<view class="title1">优惠券</view>
+			</view>
+			<view class="balance-box" bindtap="goBalance">
+				<view class="amount-box">
+					<view class="amount1">¥</view>
+					<view class="amount2">{{balance}}</view>
+				</view>
+				<view class="amount">余额</view>
+			</view>
+			<view class="coupon" bindtap="goScorelog">
+				<view class="num">{{score}}</view>
+				<view class="title1">积分</view>
+			</view>
+		</view>
+	</view>
+</view>
+<view class="my-bar1">
+	<van-cell icon="records" title="每日签到" size="large" is-link url="/pages/sign/index" />
+	<van-cell wx:if="{{canHX}}" icon="qr" title="扫码核销" size="large" is-link bind:click="scanOrderCode" />
+	<van-cell icon="medal-o" title="会员中心" size="large" is-link url="/pages/member-center/index" />
+	<van-cell icon="clock-o" title="在线订座" size="large" is-link url="/pages/booking/index" />
+	<van-cell icon="gold-coin-o" title="优惠买单" size="large" is-link url="/pages/youhui-pay/index" />
+	<van-cell icon="orders-o" title="全部订单" size="large" is-link url="/pages/all-orders/index" />
+	<van-cell icon="location-o" title="收货地址" size="large" is-link url="/pages/ad/index" />
+	<van-cell icon="info-o" title="关于我们" size="large" is-link url="/pages/about/index" />
+	<van-cell icon="desktop-o" title="管理员入口" is-link bind:click="goadmin" />
+</view>
+<view class="version">v{{version}}</view>

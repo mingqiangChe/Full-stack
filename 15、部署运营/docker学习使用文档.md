@@ -1,4 +1,4 @@
-﻿
+
 @[TOC](docker学习参考文档
 ## 学习途径
 [Docker官网：](http://www.docker.com)
@@ -6,6 +6,7 @@
 [Docker Hub官网： （仓库）](https://hub.docker.com)
 [借鉴狂神老师b站视频以及笔记](https://space.bilibili.com/95256449?spm_id_from=333.788.b_765f7570696e666f.1)
 在此，十分感谢狂神老师开源精神
+
 # 安装
 ## 介绍
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/a0ff201e635e4d34a9b1e1001099cf44.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTg5NjEyNg==,size_16,color_FFFFFF,t_70#pic_center)
@@ -57,10 +58,6 @@ docker利用容器技术，独立运行一个或者一个组应用，通过·镜
 ```javascript
 [root@iz8vb15btme7reio6zs71ez /]# uname -r
 3.10.0-514.26.2.el7.x86_64
-
-```
-
-```javascript
 [root@iz8vb15btme7reio6zs71ez /]# cat /etc/os-release
 NAME="CentOS Linux"
 VERSION="7 (Core)"
@@ -2068,5 +2065,4 @@ CONTAINER ID IMAGE PORTS NAMES
 ```
 
 ### 5.发布运行
-
 

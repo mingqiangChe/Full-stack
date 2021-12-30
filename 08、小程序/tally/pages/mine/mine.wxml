@@ -1,0 +1,27 @@
+<!--pages/mine/mine.wxml-->
+<wxs src="../../miniprogram_npm/lin-ui/filter/string.wxs" module="string"></wxs>
+<l-capsule-bar home-page="/pages/detail/detail" title="闲丫记账" bg-color="#2c61b4" title-color="#fff"
+  capsule-color="white" hidden-capsule>
+  <l-tab-bar list="{{list}}" />
+  <view class="mine">
+    <view class="avatar flex f_j_c_c">
+      <l-avatar l-text-class="l-text-class" text="{{clockingData.username}}" placement="bottom" src="{{clockingData.avatar}}" />
+    </view>
+    <view class="grid">
+      <l-grid>
+          <block wx:for="{{string.split(clockingData.user_defined_key,',')}}" wx:key="item">
+            <block wx:if="{{item == 'clock_frequency' || item == 'total_accounting_days' || item == 'total_number_entries'}}">
+              <l-grid-item key="{{item}}" slot="{{item}}">
+                <view class="num">{{string.split(clockingData.user_defined_value,',')[index]}}</view>
+                <view class="text">{{string.split(clockingData.describe,',')[index]}}</view>
+              </l-grid-item>
+            </block>
+          </block>
+      </l-grid>
+    </view>
+  </view>
+  <l-notice-bar type="roll" show="{{showNotice}}" close="{{true}}">{{noticeInfo}}</l-notice-bar>
+  <!-- <l-list title="意见反馈" gap="36"/> -->
+  <!-- <l-list title="联系我们" gap="36"/>
+  <l-list title="分享我们" gap="36"/> -->
+</l-capsule-bar>

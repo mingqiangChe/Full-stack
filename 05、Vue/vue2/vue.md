@@ -1,35 +1,10 @@
-# 具体用法参照github案例
+#  官网
 
-###  VScode 中的 Vue 插件
+#### [1. 英文官网](https://vuejs.org/)
 
-1. Vue 3 Snippets    
+#### [2. 中文官网](https://cn.vuejs.org/)
 
-   https://marketplace.visualstudio.com/items?itemName=hollowtree.vue-snippets
-
-2. Vetur                    
-
-   https://marketplace.visualstudio.com/items?itemName=octref.vetur
-   
-3. path autocomplete 自动补齐@路径
-
-setting.json配置   不生效是因爲沒有把项目根目录打开，而是从上上级打开
-
-```
- // 导入文件时是否携带文件扩展名
-    "path-autocomplete.extensionOnImport": true,
-    // 配置@的路径提示
-    "path-autocomplete.pathMappings": {
-        "@":"${folder}/src"
-    },
-```
-
-
-
-### github
-
-https://github.com/thomas373737/vue2Study
-
-https://github.com/thomas373737/vue2Study.git
+[3.gihub项目地址](https://github.com/thomas373737/vue2Study.git)
 
 # 什么是 vue
 
@@ -3137,3 +3112,13 @@ export default new VueRouter({
 过滤器类似函数方法调用方法名以及携带的参数处理。管道符后面是方法名 前面则是参数
 
 axios   .then获取数据太麻烦了，所以可以在promise实例前加await，但只能再async修饰方法中使用await。
+
+data中的值用vuex中state代替动态显示状态
+
+```
+isCollapse() {
+      return this.$store.state.tab.isCollapse;
+    },
+```
+
+vuex中moudle使用是新建模块js调用vuex中方法，然后在vuex module注册使用即可
