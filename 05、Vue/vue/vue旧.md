@@ -133,31 +133,6 @@
 * 10 .v-cloak:防止闪现,与css配合:[v-cloak]{display:none}
 
 
-#### 1. 13. 2 .自定义指令
-
-###### 1. 注册全局指令
-
-```
-Vue.directive('my-directive',function(el,binding){
-el.innerHTML=binding.value.toupperCase()
-})
-```
-**2. 注册局部指令**
-```
-directives:{
-'my-directive':{
-bind(el,binding){
-el.innerHTML=binding.value.toupperCase()
-        }
-    }
-}
-1 ) 使用指令
-v-my-directive='xxx'
-```
-
-
-
-
 
 
 ## 
