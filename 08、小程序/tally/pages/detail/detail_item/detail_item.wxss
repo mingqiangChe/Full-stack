@@ -1,0 +1,17 @@
+/* pages/detail/detail_item/detail_item.wxss */
+.avatar{
+  width: 100vw;
+  height: 280rpx;
+  background-color: #2c61b4;
+  padding-top: 70rpx;
+}
+.footer{
+  margin-top: 160rpx;
+}
+.l-text-class{
+  color: #fff !important;
+}
+.l-class{
+  background: #fff !important;
+  box-shadow: 0px, 10px, 40px, 0, rgba(0, 0, 0, 0.1) !important;
+}

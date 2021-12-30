@@ -1,0 +1,4 @@
+<!--pages/bill/bill.wxml-->
+<view class="bill">
+  <l-tab-bar list="{{list}}" />
+</view>

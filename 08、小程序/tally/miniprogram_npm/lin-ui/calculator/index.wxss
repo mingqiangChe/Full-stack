@@ -1,0 +1,66 @@
+/* component/calculator/calculator.wxss */
+.tools_calculator{
+  background-color: #333;
+  padding: 30rpx 32rpx;
+  width: 100vw;
+  height: 664rpx !important;
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+}
+.calculator_viewArea{
+  min-height: 125rpx;
+  width: 90%;
+  position: relative;
+}
+.calculator_viewArea_result{
+  font-size: 80rpx;
+  color: #fff;
+  text-align: end;
+  position: absolute;
+  bottom: 0;
+  right: 20rpx;
+  word-break: break-all;
+}
+.calculator_operationArea{
+  display: flex;
+  flex-direction: column;
+}
+.calculator_operationArea_row{
+  display: flex;
+  flex-direction: row;
+}
+.calculator_operationArea_eachBox{
+  width: 150rpx;
+  height: 80rpx;
+  border-radius: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
+  margin: 8rpx;
+  font-size: 35rpx;
+}
+.greyBox{
+  background-color: #999;
+}
+.blackBox{
+  background-color: #666;
+}
+.orangeBox{
+  background-color: orange;
+}
+.isActive{
+  color: orange;
+  background-color: #fff;
+}
+
+.calculator_viewArea l-textarea{
+  color:#acbec1 !important
+}
+

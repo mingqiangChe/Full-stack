@@ -1,0 +1,41 @@
+<!--pages/detail/detail.wxml-->
+<wxs src="../../miniprogram_npm/lin-ui/filter/string.wxs" module="string"></wxs>
+<l-capsule-bar title="闲丫记账" hidden-capsule bg-color="#2c61b4" title-color="#fff"
+  capsule-color="white" disable-home>
+  <view class="detail">
+    <l-tab-bar id="tab-bar-detail" list="{{list}}" />
+    <l-grid l-class="l-grid">
+      <l-grid-item key="one" slot="one">
+        <view class="g-content">
+          <view class="section">
+            <picker mode="date" value="{{date}}" fields="month" start="1999-01-01" bindchange="bindDateChange">
+              <view class="picker">
+                <view class="text">{{string.split(date,'-')[0]}}年</view>
+                <view class="num">{{string.split(date,'-')[1]}}月</view>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </l-grid-item>
+      <l-grid-item key="two" slot="two">
+        <view class="g-content">
+          <view class="text">收入</view>
+          <view class="num"><l-price autofix unit="" value-color="#fff" value="{{income}}"></l-price></view>
+        </view>
+      </l-grid-item>
+      <l-grid-item key="three" slot="three">
+        <view class="g-content">
+          <view class="text">支出</view>
+          <view class="num"><l-price autofix unit="" value-color="#fff" value="{{expend}}"></l-price></view>
+        </view>
+      </l-grid-item>
+    </l-grid>
+      <block wx:if="{{detailDataList.length === 0}}">
+      <image class="default-page" mode="aspectFill" src="../../static/not-data.png"></image>
+      </block>
+      <block wx:else>
+        <s-detail-list detailDataList="{{detailDataList}}" detailHeadList="{{detailHeadList}}" pageUnBodyHeight="{{pageUnBodyHeight}}"></s-detail-list>
+      </block>
+  </view>
+  <l-loading show="{{show}}" full-screen="{{true}}" type="change"></l-loading>
+</l-capsule-bar>

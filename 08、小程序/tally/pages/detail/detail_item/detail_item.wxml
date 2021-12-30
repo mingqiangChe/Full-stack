@@ -1,0 +1,21 @@
+<!--pages/detail/detail_item/detail_item.wxml-->
+<l-capsule-bar home-page="/pages/detail/detail" title="闲丫记账" bg-color="#2c61b4" title-color="#fff"
+  capsule-color="white">
+  <view class="detail_item">
+    <view class="avatar flex f_j_c_c">
+      <l-avatar placement="bottom" text="{{dataItem.delivery_method}}" l-class="l-class" l-icon-class="iconfont" l-text-class="l-text-class" icon="{{dataItem.bill_category_icon}}" icon-size="70" size="140" />
+    </view>
+    <view class="form">
+      <l-input label="类型"  disabled="{{true}}"  placeholder="暂时没有类型..." value="{{dataItem.category_name}}" label-width="170"/>
+      <l-input label="金额"  disabled="{{true}}"  placeholder="暂时没有金额..." value="{{dataItem.bill_money}}" label-width="170"/>
+      <l-input label="日期"  disabled="{{true}}"  placeholder="暂时没有日期..." value="{{dataItem.create_time}}" label-width="170"/>
+      <l-input label="备注"  disabled="{{true}}" />
+      <l-textarea placeholder-style="height:88rpx" disabled="{{true}}"  placeholder="暂时没有备注..." value="{{dataItem.bill_tag}}" />
+    </view>
+    <view class="footer flex f_j_c_sa">
+      <l-button size="medium" icon="edit" icon-size="28" icon-color="#fff" bind:lintap="clickListAction"> 编辑</l-button>
+      <l-button size="medium" icon-size="20" type="error" icon="delete" icon-size="28" icon-color="#fff" bind:lintap="clickDeleteAction" >删除</l-button>
+    </view>
+  </view>
+  
+</l-capsule-bar>

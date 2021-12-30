@@ -1,0 +1,35 @@
+/* pages/detail/detail.wxss */
+.l-grid{
+  width: 100%;
+  height: 100%;
+  background-color: #2c61b4;
+}
+.g-content{
+  width: 150rpx;
+  text-align: left;
+}
+.g-content .text{
+  color: #ccc;
+  font-size: 24rpx;
+
+}
+.g-content .num{
+margin-top: 12rpx;
+color: #fff;
+}
+.picker:first-child .num::after {
+  content: '';
+  display: inline-block;
+  margin-left:8rpx;
+  margin-bottom:8rpx;
+  border:8rpx solid transparent;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  transform:rotate(-135deg)
+}
+.default-page {
+  width: 600rpx;
+  height: 600rpx;
+  margin-left: calc((100vw - 600rpx) / 2);
+  margin-top: calc((100vw - 600rpx) / 2);
+}
