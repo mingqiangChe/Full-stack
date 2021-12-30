@@ -52,6 +52,16 @@ https://github.com/thomas373737/vue2Study.git
    + 数据的变化**会驱动视图**自动更新
    + 好处：程序员只管把数据维护好，那么页面结构会被 vue 自动渲染出来！
 
+   ### MVVM模型
+
+   >1 .M：模型(Model)：对应data中的数据<br>
+   >2 .V：视图(View)：模板<br>
+   >3 .VM：视图模型(ViewModel)：Vue实例对象
+
+     ![输入图片说明](../../05、Vue/vue/images/QQ截图20210808161240.png "QQ截图20201229183512.png")
+
+   ### 
+
 2. 双向数据绑定：
 
    > 在网页中，form 表单负责**采集数据**，Ajax 负责**提交数据**。
@@ -63,16 +73,16 @@ https://github.com/thomas373737/vue2Study.git
 
 # 使用Vue脚手架
 
-### 3. 1 初始化脚手架
+### 初始化脚手架
 
-#### 3. 1. 1 说明
+#### 说明
 
 >1. Vue脚手架是Vue官方提供的标准化开发工具（开发平台）。
 
 2. 最新的版本是 4 .x。
 3. 文档:https://cli.vuejs.org/zh/。
 
-### 3. 1. 2 具体步骤
+### 具体步骤
 
 第一步（仅第一次执行）：全局安装@vue/cli。
 
@@ -99,7 +109,7 @@ npm run serve
 2. Vue脚手架隐藏了所有webpack相关的配置，若想查看具体的webpakc配置，
    请执行：vue inspect > output.js
 
-#### 3. 1. 3 模板项目的结构
+#### 模板项目的结构
 
 ##### ├──node_modules
 
@@ -134,174 +144,37 @@ npm run serve
 ##### ├──package-lock.json：包版本控制文件
 
 
-### 3. 2 ref与props
 
-### ref
+### **vue** **项目的运行流程**
 
-###### 1 .作用： 用于给节点打标识
+在工程化的项目中，vue 要做的事情很单纯：通过 main.js 把 App.vue 渲染到 index.html 的指定区域中。
 
->2 .读取方式： this.$refs.xxxxxx
+其中：
 
-### props
+① App.vue 用来编写待渲染的模板结构
 
-###### 1. 作用： 用于父组件给子组件传递数据
+② index.html 中需要预留一个 el 区域
 
-###### 2. 读取方式一:只指定名称
+③ main.js 把 App.vue 渲染到了 index.html 所预留的区域中
 
+```vue
+  <title>测试$mount方法</title>
+</head>
+
+<body>
+  <div id="app">{{username}}</div>
+
+  <script src="./lib/vue-2.6.12.js"></script>
+  <script>
+    const vm = new Vue({
+      data: {
+        username: 'admin'
+      }
+    })
+// 替换app渲染
+    vm.$mount('#app')
+  </script>
 ```
-props:['name','age','setName']
-3. 读取方式二:指定名称和类型
-props:{
-    name:String,
-    age:Number,
-    setNmae:Function
-}
-4. 读取方式三:指定名称/类型/必要性/默认值
-props:{
-    name:{type:String,required:true,default:xxx},
-}
-```
-
-### 3. 3 混入
-
->1. Vue插件是一个包含install方法的对象
-
-2. 通过install方法给Vue或Vue实例添加方法,定义全局指令等
-
-### 3. 4 插件
-
->1. Vue插件是一个包含install方法的对象
-
-2. 通过install方法给Vue或Vue实例添加方法,定义全局指令等
-
-### 3. 5 Todo-list案例
-
-![QQ截图20210808172542](vue.assets/QQ截图20210808172542.png)
-
-#### 组件化编码流程（通用）
-
-* 1 .实现静态组件：抽取组件，使用组件实现静态页面效果<br>
-* 2 .展示动态数据：
-  * 2. 1 .数据的类型、名称是什么？
-  * 2. 2 .数据保存在哪个组件？
-* 3 .交互——从绑定事件监听开始
-
-
-### 3. 6 Vue中的自定义事件
-
-#### 绑定事件监听
-
-```
-<Header @addTodo="addTodo"/> 
-
-或者<Header ref="header"/> 
-this.$refs.header.$on('addTodo', this.addTodo)
-```
-
-#### 触发事件
-
-```
-this.$emit('addTodo', todo)
-```
-
-### 3. 7 全局事件总线
-
-#### 3. 7. 1 理解
-
-* 1. Vue原型对象上包含事件处理的方法
-
-    * 1 ) $on(eventName,listener):绑定自定义事件监听
-    * 2 ) $emit(eventName,data):分发自定义事件
-    * 3 ) $off(eventName):解绑自定义事件监听
-    * 4 ) $once(eventName,listener):绑定事件监听,但只能处理一次
-
-* 2. 所有组件实例对象的原型对象的原型对象就是Vue的原型对象
-
-    * 1 ) 所有组件对象都能看到Vue原型对象上的属性和方法
-    * 2 ) Vue.prototype.$bus=newVue(),所有的组件对象都能看到$bus这个属性对象
-
-* 3. 全局事件总线
-
-    * 1 ) 包含事件处理相关方法的对象(只有一个)
-    * 2 ) 所有的组件都可以得到
-
-#### 3. 7. 2 指定事件总线对象
-
-```
-new Vue({ 
-    beforeCreate () { // 尽量早的执行挂载全局事件总线对象的操作 Vue.prototype.$globalEventBus = this 
-    }, 
-    }).$mount('#root')
-```
-
-#### 3. 7. 3 绑定事件
-
-```
-this.$globalEventBus.$on('deleteTodo', this.deleteTodo)
-```
-
-#### 3. 7. 4 分发事件
-
-```
-this.$globalEventBus.$emit('deleteTodo', this.index)
-```
-
-#### 3. 7. 5 解绑事件
-
-```
-this.$globalEventBus.$off('deleteTodo')
-```
-
-### 3. 8 消息订阅与发布
-
-#### 3. 8. 1 理解
-
-* 1 .这种方式的思想与全局事件总线很相似
-* 2 .它包含以下操作:
-  * ( 1 ) 订阅消息--对应绑定事件监听
-  * ( 2 ) 发布消息--分发事件
-  * ( 3 ) 取消消息订阅--解绑事件监听
-* 3 .需要引入一个消息订阅与发布的第三方实现库: **PubSubJS**
-
-#### 3. 8. 2 使用PubSubJS
-
-* 1 .在线文档:https://github.com/mroderick/PubSubJS
-* 2 .下载:npminstall-Spubsub-js
-* 3 .相关语法
-  * ( 1 ) importPubSubfrom'pubsub-js' //引入
-  * ( 2 ) PubSub.subscribe(‘msgName’,functon(msgName,data){})
-  * ( 3 ) PubSub.publish(‘msgName’,data):发布消息,触发订阅的回调函数调用
-  * ( 4 ) PubSub.unsubscribe(token):取消消息的订阅
-
-
-### 3. 9 过度与动画
-
-#### 3. 9. 1 效果
-
-![QQ截图20210808172607](vue.assets/QQ截图20210808172607.png)
-
-#### 3. 9. 2 vue动画的理解
-
-* 1 .操作css的trasition或animation
-
-* 2 .vue会给目标元素添加/移除特定的class
-
-* 3 .过渡的相关类名：
-
-  * 1 .xxx-enter-active:指定显示的transition
-  * 2 .xxx-leave-active:指定隐藏的transition
-  * 3 .xxx-enter/xxx-leave-to:指定隐藏时的样式
-
-  ![QQ截图20210808172622](vue.assets/QQ截图20210808172622.png)
-
-#### 3. 9. 3 基本过渡动画的编码
-
-* 1. 在目标元素外包裹<transitionname="xxx">
-
-* 2. 定义class样式
-
-    * a) 指定过渡样式:transition
-    * b) 指定隐藏时的样式:opacity/其它
 
 # vue 指令
 
@@ -314,6 +187,10 @@ this.$globalEventBus.$off('deleteTodo')
 #### {{ }}
 
 **插值表达式**：在实际开发中用的最多，只是内容的占位符，不会覆盖原有的内容！**用于内容节点**
+
+功能：用于解析标签体内容。
+
+​              写法：{{xxx}}，xxx是js表达式，且可以直接读取到data中的所有属性。
 
 #### v-html
 
@@ -418,7 +295,19 @@ this.$globalEventBus.$off('deleteTodo')
   </script>
 ```
 
+#### class绑定
 
+>1. :class='xxx'
+
+2. 表达式是字符串:'classA'
+3. 表达式是对象:{classA:isA,classB:isB}
+4. 表达式是数组:['classA','classB']
+
+#### style绑定
+
+>1. :style="{color:activeColor,fontSize:fontSize+'px'}"
+
+2. 其中activeColor/fontSize是data属性
 
 ### 3. 事件绑定
 
@@ -1152,11 +1041,19 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 
 
+## 理解过滤器
 
+### 1. 功能:对要显示的数据进行特定格式化后再显示
+
+### 2. 注意:并没有改变原本的数据,是产生新的对应的数据
 
 # 侦听器watch 
 
 固定语法：两个参数，1是新值 2是旧值 即新值在前旧值在后
+
+1、通过通过vm对象的$watch()或watch配置来监视指定的属性
+
+2、当属性变化时,回调函数自动调用,在函数内部进行计算
 
 基本用法+昵称是否被占用
 
@@ -1195,7 +1092,7 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 
 
-### 侦听器的格式
+## 侦听器的格式
 
 **监听谁就把谁当方法名字**
 
@@ -1297,12 +1194,17 @@ key的值必须具有唯一性（即: key的值不能重复)
 特点：
 
 1. 定义的时候，要被定义为“方法”
-2. 在使用计算属性的时候，当普通的属性使用即可
+2. 在使用计算属性的时候，当**普通的属性**使用即可
 
 好处：
 
 1. 实现了代码的复用
 2. **只要计算属性中依赖的数据源变化了，则计算属性会自动重新求值**！
+
+   要显示的数据不存在，要通过计算得来。
+
+2. 在computed对象中定义计算属性。
+3. 在页面中使用{{方法名}}来显示计算的结果。
 
 使用方法实现计算属性功能
 
@@ -1880,62 +1782,6 @@ export function delectCustomerPoolItem(data) {
 到此我们就简单的划分出API管理层了，每次我们新增加一个API，只需要找到对应模块的API文件添加，在具体页面导入使用就行了。 
  可以用 `xxxAPI` 结尾来标记为API方法以防和普通方法混合
 
-
-
-
-# vue-cli 的使用
-
-```
-npm install -g @vue/cli
-```
-
-1. 在终端下运行如下的命令，创建指定名称的项目：
-
-   ```bash
-   vue cerate 项目的名称
-   ```
-
-2. vue 项目中 src 目录的构成：
-
-   ```
-   assets 文件夹：存放项目中用到的静态资源文件，例如：css 样式表、图片资源
-   components 文件夹：程序员封装的、可复用的组件，都要放到 components 目录下
-   main.js 是项目的入口文件。整个项目的运行，要先执行 main.js
-   App.vue 是项目的根组件。
-   ```
-
-
-**vue** **项目的运行流程**
-
-在工程化的项目中，vue 要做的事情很单纯：通过 main.js 把 App.vue 渲染到 index.html 的指定区域中。
-
-其中：
-
-① App.vue 用来编写待渲染的模板结构
-
-② index.html 中需要预留一个 el 区域
-
-③ main.js 把 App.vue 渲染到了 index.html 所预留的区域中
-
-```vue
-  <title>测试$mount方法</title>
-</head>
-
-<body>
-  <div id="app">{{username}}</div>
-
-  <script src="./lib/vue-2.6.12.js"></script>
-  <script>
-    const vm = new Vue({
-      data: {
-        username: 'admin'
-      }
-    })
-// 替换app渲染
-    vm.$mount('#app')
-  </script>
-```
-
 # vue组件
 
 三大组成  template script style
@@ -2082,7 +1928,7 @@ export default {
   },
 ```
 
-### default默认值以及type类型值和required必填项校验
+### default默认值以及type类型值和required必填项校验❤️
 
 父组件不传初始值 给默认值
 
@@ -2886,7 +2732,9 @@ Vue.directive('color', function (el,binding) {
 
 # vuex
 
-### 5. 1 理解vuex
+![vuex](../尚硅谷/资料（含课件）/02_原理图/vuex.png)
+
+### 
 
 #### 5. 1. 1 vuex是什么
 
@@ -3413,6 +3261,106 @@ router.beforeEach(function(to, from, next) {
 
 
 
+
+
+# 全局事件总线
+
+#### 理解
+
+* 1. Vue原型对象上包含事件处理的方法
+
+    * 1 ) $on(eventName,listener):绑定自定义事件监听
+    * 2 ) $emit(eventName,data):分发自定义事件
+    * 3 ) $off(eventName):解绑自定义事件监听
+    * 4 ) $once(eventName,listener):绑定事件监听,但只能处理一次
+
+* 2. 所有组件实例对象的原型对象的原型对象就是Vue的原型对象
+
+    * 1 ) 所有组件对象都能看到Vue原型对象上的属性和方法
+    * 2 ) Vue.prototype.$bus=newVue(),所有的组件对象都能看到$bus这个属性对象
+
+* 3. 全局事件总线
+
+    * 1 ) 包含事件处理相关方法的对象(只有一个)
+    * 2 ) 所有的组件都可以得到
+
+#### 指定事件总线对象
+
+```
+new Vue({ 
+    beforeCreate () { // 尽量早的执行挂载全局事件总线对象的操作 Vue.prototype.$globalEventBus = this 
+    }, 
+    }).$mount('#root')
+```
+
+#### 绑定事件
+
+```
+this.$globalEventBus.$on('deleteTodo', this.deleteTodo)
+```
+
+#### 分发事件
+
+```
+this.$globalEventBus.$emit('deleteTodo', this.index)
+```
+
+#### 解绑事件
+
+```
+this.$globalEventBus.$off('deleteTodo')
+```
+
+# 消息订阅与发布
+
+#### 理解
+
+* 1 .这种方式的思想与全局事件总线很相似
+* 2 .它包含以下操作:
+  * ( 1 ) 订阅消息--对应绑定事件监听
+  * ( 2 ) 发布消息--分发事件
+  * ( 3 ) 取消消息订阅--解绑事件监听
+* 3 .需要引入一个消息订阅与发布的第三方实现库: **PubSubJS**
+
+#### 使用PubSubJS
+
+* 1 .在线文档:https://github.com/mroderick/PubSubJS
+* 2 .下载:npminstall-Spubsub-js
+* 3 .相关语法
+  * ( 1 ) importPubSubfrom'pubsub-js' //引入
+  * ( 2 ) PubSub.subscribe(‘msgName’,functon(msgName,data){})
+  * ( 3 ) PubSub.publish(‘msgName’,data):发布消息,触发订阅的回调函数调用
+  * ( 4 ) PubSub.unsubscribe(token):取消消息的订阅
+
+# 过度与动画
+
+####  效果
+
+![QQ截图20210808172607](vue.assets/QQ截图20210808172607.png)
+
+#### vue动画的理解
+
+* 1 .操作css的trasition或animation
+
+* 2 .vue会给目标元素添加/移除特定的class
+
+* 3 .过渡的相关类名：
+
+  * 1 .xxx-enter-active:指定显示的transition
+  * 2 .xxx-leave-active:指定隐藏的transition
+  * 3 .xxx-enter/xxx-leave-to:指定隐藏时的样式
+
+  ![QQ截图20210808172622](vue.assets/QQ截图20210808172622.png)
+
+#### 基本过渡动画的编码
+
+* 1. 在目标元素外包裹<transitionname="xxx">
+
+* 2. 定义class样式
+
+    * a) 指定过渡样式:transition
+    * b) 指定隐藏时的样式:opacity/其它
+
 # 功能使用
 
 ## 组件懒加载
@@ -3456,7 +3404,17 @@ export default new VueRouter({
 
 
 
+## Todo-list案例
 
+![QQ截图20210808172542](vue.assets/QQ截图20210808172542.png)
+
+#### 组件化编码流程（通用）
+
+* 1 .实现静态组件：抽取组件，使用组件实现静态页面效果<br>
+* 2 .展示动态数据：
+  * 2. 1 .数据的类型、名称是什么？
+  * 2. 2 .数据保存在哪个组件？
+* 3 .交互——从绑定事件监听开始
 
 
 
