@@ -33,7 +33,7 @@ https://github.com/thomas373737/vue2Study
 
 https://github.com/thomas373737/vue2Study.git
 
-# 什么是 vue
+## 什么是 vue
 
 1. 构建用户界面
    + 用 vue 往 html 页面中填充数据，非常的方便
@@ -71,7 +71,7 @@ https://github.com/thomas373737/vue2Study.git
 
 > 注意：数据驱动视图和双向数据绑定的底层原理是 MVVM（Mode 数据源、View 视图、ViewModel 就是 vue 的实例）
 
-# 使用Vue脚手架
+## 使用Vue脚手架
 
 ### 初始化脚手架
 
@@ -176,7 +176,7 @@ npm run serve
   </script>
 ```
 
-# vue 指令
+## vue 指令
 
 ### 1. 内容渲染指令
 
@@ -938,9 +938,9 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 
 
-# 过滤器filters
+## 过滤器filters
 
-## 过滤器的注意点
+### 过滤器的注意点
 
 1. 要定义到 filters 节点下，**本质是一个函数**
 2. 在过滤器函数中，**一定要有 return 值**
@@ -1041,13 +1041,13 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 
 
-## 理解过滤器
+### 理解过滤器
 
-### 1. 功能:对要显示的数据进行特定格式化后再显示
+#### 1. 功能:对要显示的数据进行特定格式化后再显示
 
-### 2. 注意:并没有改变原本的数据,是产生新的对应的数据
+#### 2. 注意:并没有改变原本的数据,是产生新的对应的数据
 
-# 侦听器watch 
+## 侦听器watch 
 
 固定语法：两个参数，1是新值 2是旧值 即新值在前旧值在后
 
@@ -1092,7 +1092,7 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 
 
-## 侦听器的格式
+### 侦听器的格式
 
 **监听谁就把谁当方法名字**
 
@@ -1187,16 +1187,16 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 
 
-# 计算属性computed
+### 计算属性3computed
 
 通过一系列运算之后，最终得到一个属性值
 
-特点：
+### 特点：
 
 1. 定义的时候，要被定义为“方法”
 2. 在使用计算属性的时候，当**普通的属性**使用即可
 
-好处：
+### 好处：
 
 1. 实现了代码的复用
 2. **只要计算属性中依赖的数据源变化了，则计算属性会自动重新求值**！
@@ -1343,13 +1343,11 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 
 
-# axios
-
-
+## axios
 
 > axios 是一个专注于网络请求的库！
 
-## axios 的基本使用
+### axios 的基本使用
 
 1、安装
 
@@ -1450,7 +1448,7 @@ export default {
 
 
 
-## axios封装使用
+### axios封装使用
 
 **vue挂载全局，并配置公共头**
 
@@ -1657,7 +1655,7 @@ function getPendingKey(config) {
 
 下面我们来 `goods.js` 中编写获取商品列表的API。
 
-```
+```js
 import myAxios from './axios';
 
 export function getListAPI(paramsList) {
@@ -1690,7 +1688,7 @@ export function CustomerPool(data) {
 import {defineComponent} from 'vue'
 import {getListAPI} from '@/api/goods.js';
 export default defineComponent({
-  setup() { 
+  setu() { 
     function getList() {
       getListAPI().then(res => {
         console.log(res)
@@ -1702,14 +1700,139 @@ export default defineComponent({
   }
 })
 </script>
+```
 
+到此我们就简单的划分出API管理层了，每次我们新增加一个API，只需要找到对应模块的API文件添加，在具体页面导入使用就行了。 
+ 可以用 `xxxAPI` 结尾来标记为API方法以防和普通方法混合
 
+### 案例 hq
+
+/utils/auth.js
+
+```js
+import Cookies from 'js-cookie'
+
+export function getToken() {
+    return Cookies.get('authorization')
+}
+
+export function setToken(token) {
+    return Cookies.set('authorization', token)
+}
+
+export function removeToken() {
+    return Cookies.remove('authorization')
+}
+```
+
+/utils/request.js
+
+```js
+import axios from 'axios'
+import { MessageBox, Message } from 'element-ui'
+import store from '@/store'
+import { getToken } from '@/utils/auth'
+
+// create an axios instance
+const service = axios.create({
+    baseURL: 'http://localhost:3001/api', // url = base url + request url      https://www.hqtcsz.cn/hqtcsz_crm/api
+    // withCredentials: true, // send cookies when cross-domain requests
+    timeout: 5000 // request timeout
+})
+
+// request interceptor
+service.interceptors.request.use(
+    config => {
+        // do something before request is sent
+
+        if (store.getters.token) {
+            // let each request carry token
+            // ['X-Token'] is a custom headers key
+            // please modify it according to the actual situation
+            config.headers['authorization'] = getToken()
+        }
+        return config
+    },
+    error => {
+        // do something with request error
+        console.log(error) // for debug
+        return Promise.reject(error)
+    }
+)
+
+// response interceptor
+service.interceptors.response.use(
+    /**
+     * If you want to get http information such as headers or status
+     * Please return  response => response
+     */
+
+    /**
+     * Determine the request status by custom code
+     * Here is just an example
+     * You can also judge the status by HTTP Status Code
+     */
+    response => {
+        const res = response.data
+            // if the custom code is not 20000, it is judged as an error.
+        if (res.code !== 200) {
+            console.log(res)
+            Message({
+                message: res.msg || 'Error',
+                type: 'error',
+                duration: 3000
+            })
+
+            // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+            if (res.code == '-1010') {
+                // to re-login
+                MessageBox.confirm('登录失效，请重新登录', '退出', {
+                    confirmButtonText: '确认',
+                    closeOnPressEscape: false,
+                    closeOnClickModal: false,
+                    type: 'warning',
+                    showClose: false,
+                    showCancelButton: false
+                }).then(() => {
+                    store.dispatch('user/resetToken').then(() => {
+                        location.reload()
+                    })
+                })
+            }
+            return Promise.reject(new Error(res.msg || 'Error'))
+        } else {
+            // Message({
+            //     message: res.msg,
+            //     type: 'success',
+            //     duration: 2000
+            // })
+            return res
+        }
+    },
+    error => {
+        console.log('err' + error) // for debug
+        Message({
+            message: error.message,
+            type: 'error',
+            duration: 5 * 1000
+        })
+        return Promise.reject(error)
+    }
+)
+
+export default service
+```
+
+/api/customerpool.js
+
+```js
+import request from '@/utils/request'
 
 /**
-     * @description: 客户池列表查询
-     * @param {*}
-     * @return {*}
-     */   
+ * @description: 客户池列表查询接口
+ * @param {*} data
+ * @return {*}
+ */
 export function CustomerPool(data) {
     return request({
         url: '/queryCustomerPool',
@@ -1717,21 +1840,43 @@ export function CustomerPool(data) {
         data
     })
 }
+
+/**
+ * @description: 线上列表查询
+ * @param {*} data
+ * @return {*}
+ */
+export function queryOnlineCustomers(data) {
+    return request({
+        url: '/queryOnlineCustomers',
+        method: 'post',
+        data
+    })
+}
+```
+
+使用
+
+```js
+    /**
+     * @description: 客户池列表查询
+     * @param {*}
+     * @return {*}
+     */
     queryCustomerPool(){
       console.log(this.form);
       this.loading = true;
       let data = {
-        customer_sale:this.customerSelectValue == 1?this.name:this.form.searchSale,
+        customer_sale:this.customerSelectValue == 1?this.name:'',
         customer_intention:this.form.intention,
         customer_products:this.form.Intended_products,
         customer_source:this.form.source,
         customer_phone:this.form.searchValue,
         customer_status:this.form.region,
-        saleName:this.form.saleName,
         pageSize:this.form.pageSize,
         pageNo:this.form.pageNo
       }
-      CustomerPool(data).then(response => {
+      queryOnlineCustomers(data).then(response => {
         console.log(response)
         let newData = response.data;
         this.form.pageSize = newData.pageSize;
@@ -1744,45 +1889,11 @@ export function CustomerPool(data) {
         this.loading = false;
       })
     },
-/**
- * @description: 客户池针删除单条/多条数据接口
- * @param {*} data
- * @return {*}
- */
-export function delectCustomerPoolItem(data) {
-    return request({
-        url: '/delectCustomerPoolItem',
-        method: 'post',
-        data
-    })
-}
- /**
-         * @description: 确认删除业务逻辑函数
-         * @param {*}
-         * @return {*}
-         */
-        confirmDelete(data) {
-            delectCustomerPoolItem(data).then(response => {
-                console.log(response)
-                this.$message({
-                    type: 'success',
-                    message: '删除成功!'
-                });
-                this.queryCustomerPool()
-                this.dangerLoading = false;
-            }).catch(error => {
-                this.$message({
-                    type: 'error',
-                    message: '删除失败!'
-                });
-            })
-        },
 ```
 
-到此我们就简单的划分出API管理层了，每次我们新增加一个API，只需要找到对应模块的API文件添加，在具体页面导入使用就行了。 
- 可以用 `xxxAPI` 结尾来标记为API方法以防和普通方法混合
 
-# vue组件
+
+## vue组件
 
 三大组成  template script style
 
@@ -1854,241 +1965,9 @@ import Count from '@/components/Count.vue'
 Vue.component( 'MyCount' , Count)
 ```
 
-## 组件的props
+### 组件共享 传值
 
-props 是组件的自定义属性，在封装通用组件的时候，合理地使用 props 可以极大的提高**组件的复用性**！
-
-### 父组件给子组件通信
-
-**父组件**  组件使用者
-
-```vue
-<template>
-  <div class="left-container">
-    <h3>Left 组件</h3>
-    <Count :init=9></Count>//🍎属性名字任意取。子组件对象接收即可
-  </div>
-</template>
-
-<script>
-import Count from "../components/Count.vue";
-export default {
-  components: {
-    Count,
-  },
-};
-```
-
-**子组件**    组件封装者
-
-```vue
-<template>
-   <div class=''>init:{{init}}</div>
-</template>
-
-<script>
-//这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
-//例如：import 《组件名称》 from '《组件路径》';
-export default {
-  //import引入的组件需要注入到对象中才能使用
-  props:['init'],  //🍎属性名字任意取
-  components: {},
-  data() {
-    //这里存放数据
-    return {
-  
-    };
-  },
-```
-
-### 修改props值，即将props值转存到data中。data中数据可读可写。props只可读
-
-**直接操作传过来的参数会直接报错**
-
-```vue
-<template>
-  <div class="aaa">
-    <div class="aa">init:{{ zz }}</div>
-    <button @click="zz += 1">+1</button>
-  </div>
-</template>
-
-<script>
-//这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
-//例如：import 《组件名称》 from '《组件路径》';
-export default {
-  //import引入的组件需要注入到对象中才能使用
-  props: ["init"],
-  components: {},
-  data() {
-    //这里存放数据
-    return {
-        zz:this.init
-    };
-  },
-```
-
-### default默认值以及type类型值和required必填项校验❤️
-
-父组件不传初始值 给默认值
-
-在声明自定义属性时，可以通过 type 来定义属性的值类型。
-
-在声明自定义属性时，可以通过 required 选项，将属性设置为必填项，强制用户必须传递属性的值。：
-
-```vue
-<template>
-  <div class="aaa">
-    <div class="aa">init:{{ zz }}</div>
-    <button @click="zz += 1">+1</button>
-  </div>
-</template>
-
-<script>
-//这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
-//例如：import 《组件名称》 from '《组件路径》';
-export default {
-  //import引入的组件需要注入到对象中才能使用
-  //   props: ["init"],
-  props: {
-    // 自定义属性A:{配置选项}
-    init: {
-      // 如果父组件没传init参数，则默认值生效🍎
-      default: 0,
-      // 用type属性定义属性的值类型🍎
-      //如果传递过来属性值不符合此类型,则会终端报错
-      type:Number，
-      //必填项校验，不填报错 🍎首先验证它，只关注父组件有没有传参数
-      required:true
-    },
-  },
-  components: {},
-  data() {
-    //这里存放数据
-    return {
-      zz: this.init,
-    };
-  },
-```
-
-### 组件样式冲突问题 scoped
-
-默认情况下，写在 .vue 组件中的样式会**全局生效**，因此很容易造成多个组件之间的样式冲突问题。
-
-导致组件之间样式冲突的根本原因是：
-
-① 单页面应用程序中，所有组件的 DOM 结构，都是基于唯一的 index.html 页面进行呈现的
-
-② 每个组件中的样式，都会影响整个 index.html 页面中的 DOM 元素
-
-**为了提高开发效率和开发体验，vue 为 style 节点提供了 scoped 属性，从而防止组件之间的样式冲突问题：**
-
-```vue
-<style lang="less" scope>
-/* 🍎style节点的scoped属性，用来自动为每个组件分配唯一的“自定义属性",
-并自动为当前组件的 DOM标签和 style 样式应用这个自定义属性，防止组件的样式冲突问题 */
-.left-container {
-  padding: 0 20px 20px;
-  background-color: orange;
-  min-height: 250px;
-  flex: 1;
-}
-</style>
-```
-
-
-
-**如果给当前组件的 style 节点添加了 scoped 属性，则当前组件的样式对其子组件是不生效的。**
-
-```vue
-<style lang="less" scope>
-.title {
-  color: red; /* 不加/deep/ 时，生成的选择器格式为.title[data-v-052242de]  */
-}
-```
-
-**如果想让某些样式对子组件生效，可以使用 /deep/ 深度选择器。**
-
-```css
-/deep/ .title {
-  color: red; /* 加上 /deep/ 时，生成的选择器格式为[data-v-052242de] .title */
-}
-</style>
-```
-
-## vue组件实例对象
-
-每一个vue组件里都是实例对象，而每一个组件都是一个模板。由pack.json配置编译器编译成dom对象。浏览器是无法直接解析vue后缀文件的
-
-
-
-## vue的生命周期
-
-### 14. 2 .生命周期流程图
-
-![QQ截图20210808161700](vue.assets/QQ截图20210808161700.png)
-
-生命周期（Life Cycle）是指一个组件从创建 -> 运行 -> 销毁的整个阶段，强调的是一个时间段。
-
-生命周期函数：是由 vue 框架提供的内置函数，会伴随着组件的生命周期，自动按次序执行。
-
-```bash
-1、beforeCreate
-　　在实例初始化之后，数据观测和event/watcher时间配置之前被调用。
-2、created
-　　实例已经创建完成之后被调用。在这一步，实例已经完成以下的配置：🍎数据观测，属性和方法的运算，watch/event事件回调。然而，挂载阶段还没开始，$el属性目前不可见。组件模板结构尚未生成  ⭐⭐⭐发送ajax请求⭐⭐⭐
-3、beforeMount
-　　在挂载开始之前被调用：相关的render函数首次被调用。
-　　该钩子在服务器端渲染期间不被调用。
-4、mounted
-　　el被新创建的vm.$el替换，并挂在到实例上去之后调用该钩子函数。如果root实例挂载了一个文档内元素，当mounted被调用时vm.$el也在文档内。
-　　该钩子在服务端渲染期间不被调用。  ⭐⭐⭐可以获取操作dom结构⭐⭐⭐
-5、beforeUpdate
-　　数据更新时调用，发生在虚拟DOM重新渲染和打补丁之前。
-　　你可以在这个钩子中进一步第更改状态，这不会触发附加的重渲染过程。
-　　该钩子在服务端渲染期间不被调用。
-6、updated
-　　由于数据更改导致的虚拟DOM重新渲染和打补丁，在这之后会调用该钩子。
-　　当这个钩子被调用时，组件DOM已经更新，所以你现在可以执行依赖于DOM的操作。然而在大多数情况下，你应该避免在此期间更改状态，因为这可能会导致更新无限循环。⭐⭐⭐操作最新的dom结构⭐⭐⭐
-　　该钩子在服务端渲染期间不被调用。
-7、activated(keep-alive)
-　　keep-alive组件激活时调用。
-　　该钩子在服务器端渲染期间不被调用。
-8、deactivated(keep-alive)
-　　keep-alive组件停用时调用。
-　　该钩子在服务端渲染期间不被调用。
-9、beforeDestroy 【类似于React生命周期的componentWillUnmount】
-　　路由跳转加载的时候会调用。（有时用到eventBus事件总线事件不触发的时候，放到此生命周期里问题就解决了。）
-　　实例销毁之间调用。在这一步，实例仍然完全可用。
-　　该钩子在服务端渲染期间不被调用。
-　　需要注意的是当组件使用了<keep-alive>进行缓存组件数据时，beforeDestroy生命周期也不会执行。
-10、destroyed
-　　Vue实例销毁后调用。调用后，Vue实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
-　　该钩子在服务端渲染不会被调用。
-```
-
-
-
-```vue
-  //生命周期 - 创建完成（可以访问当前this实例）
-  created() {},
-  //生命周期 - 挂载完成（可以访问DOM元素）
-  mounted() {},
-  beforeCreate() {}, //生命周期 - 创建之前
-  beforeMount() {}, //生命周期 - 挂载之前
-  beforeUpdate() {}, //生命周期 - 更新之前
-  updated() {}, //生命周期 - 更新之后
-  beforeDestroy() {}, //生命周期 - 销毁之前
-  destroyed() {}, //生命周期 - 销毁完成
-  activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
-  }
-```
-
-
-
-## 组件共享 传值
-
-### 父组件向子组件传值
+#### 父组件向子组件传值
 
 父组件向子组件共享数据需要使用自定义属性。
 
@@ -2216,9 +2095,260 @@ export default {
 }
 ```
 
+### 消息订阅与发布
+
+#### 理解
+
+* 1 .这种方式的思想与全局事件总线很相似
+* 2 .它包含以下操作:
+  * ( 1 ) 订阅消息--对应绑定事件监听
+  * ( 2 ) 发布消息--分发事件
+  * ( 3 ) 取消消息订阅--解绑事件监听
+* 3 .需要引入一个消息订阅与发布的第三方实现库: **PubSubJS**
+
+#### 使用PubSubJS
+
+* 1 .在线文档:https://github.com/mroderick/PubSubJS
+* 2 .下载:npminstall-Spubsub-js
+* 3 .相关语法
+  * ( 1 ) importPubSubfrom'pubsub-js' //引入
+  * ( 2 ) PubSub.subscribe(‘msgName’,functon(msgName,data){})
+  * ( 3 ) PubSub.publish(‘msgName’,data):发布消息,触发订阅的回调函数调用
+  * ( 4 ) PubSub.unsubscribe(token):取消消息的订阅
+
+### 组件的props
+
+props 是组件的自定义属性，在封装通用组件的时候，合理地使用 props 可以极大的提高**组件的复用性**！
+
+### 父组件给子组件通信
+
+**父组件**  组件使用者
+
+```vue
+<template>
+  <div class="left-container">
+    <h3>Left 组件</h3>
+    <Count :init=9></Count>//🍎属性名字任意取。子组件对象接收即可
+  </div>
+</template>
+
+<script>
+import Count from "../components/Count.vue";
+export default {
+  components: {
+    Count,
+  },
+};
+```
+
+**子组件**    组件封装者
+
+```vue
+<template>
+   <div class=''>init:{{init}}</div>
+</template>
+
+<script>
+//这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
+//例如：import 《组件名称》 from '《组件路径》';
+export default {
+  //import引入的组件需要注入到对象中才能使用
+  props:['init'],  //🍎属性名字任意取
+  components: {},
+  data() {
+    //这里存放数据
+    return {
+  
+    };
+  },
+```
+
+**修改props值，即将props值转存到data中。data中数据可读可写。props只可读**
+
+**直接操作传过来的参数会直接报错**
+
+```vue
+<template>
+  <div class="aaa">
+    <div class="aa">init:{{ zz }}</div>
+    <button @click="zz += 1">+1</button>
+  </div>
+</template>
+
+<script>
+//这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
+//例如：import 《组件名称》 from '《组件路径》';
+export default {
+  //import引入的组件需要注入到对象中才能使用
+  props: ["init"],
+  components: {},
+  data() {
+    //这里存放数据
+    return {
+        zz:this.init
+    };
+  },
+```
+
+**default默认值以及type类型值和required必填项校验❤️**
+
+父组件不传初始值 给默认值
+
+在声明自定义属性时，可以通过 type 来定义属性的值类型。
+
+在声明自定义属性时，可以通过 required 选项，将属性设置为必填项，强制用户必须传递属性的值。：
+
+```vue
+<template>
+  <div class="aaa">
+    <div class="aa">init:{{ zz }}</div>
+    <button @click="zz += 1">+1</button>
+  </div>
+</template>
+
+<script>
+//这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
+//例如：import 《组件名称》 from '《组件路径》';
+export default {
+  //import引入的组件需要注入到对象中才能使用
+  //   props: ["init"],
+  props: {
+    // 自定义属性A:{配置选项}
+    init: {
+      // 如果父组件没传init参数，则默认值生效🍎
+      default: 0,
+      // 用type属性定义属性的值类型🍎
+      //如果传递过来属性值不符合此类型,则会终端报错
+      type:Number，
+      //必填项校验，不填报错 🍎首先验证它，只关注父组件有没有传参数
+      required:true
+    },
+  },
+  components: {},
+  data() {
+    //这里存放数据
+    return {
+      zz: this.init,
+    };
+  },
+```
+
+### 组件样式冲突问题 scoped
+
+默认情况下，写在 .vue 组件中的样式会**全局生效**，因此很容易造成多个组件之间的样式冲突问题。
+
+导致组件之间样式冲突的根本原因是：
+
+① 单页面应用程序中，所有组件的 DOM 结构，都是基于唯一的 index.html 页面进行呈现的
+
+② 每个组件中的样式，都会影响整个 index.html 页面中的 DOM 元素
+
+**为了提高开发效率和开发体验，vue 为 style 节点提供了 scoped 属性，从而防止组件之间的样式冲突问题：**
+
+```vue
+<style lang="less" scope>
+/* 🍎style节点的scoped属性，用来自动为每个组件分配唯一的“自定义属性",
+并自动为当前组件的 DOM标签和 style 样式应用这个自定义属性，防止组件的样式冲突问题 */
+.left-container {
+  padding: 0 20px 20px;
+  background-color: orange;
+  min-height: 250px;
+  flex: 1;
+}
+</style>
+```
 
 
-# ref 引用
+
+**如果给当前组件的 style 节点添加了 scoped 属性，则当前组件的样式对其子组件是不生效的。**
+
+```vue
+<style lang="less" scope>
+.title {
+  color: red; /* 不加/deep/ 时，生成的选择器格式为.title[data-v-052242de]  */
+}
+```
+
+**如果想让某些样式对子组件生效，可以使用 /deep/ 深度选择器。**
+
+```css
+/deep/ .title {
+  color: red; /* 加上 /deep/ 时，生成的选择器格式为[data-v-052242de] .title */
+}
+</style>
+```
+
+### vue组件实例对象
+
+每一个vue组件里都是实例对象，而每一个组件都是一个模板。由pack.json配置编译器编译成dom对象。浏览器是无法直接解析vue后缀文件的
+
+
+
+## vue的生命周期
+
+### 14. 2 .生命周期流程图
+
+![QQ截图20210808161700](vue.assets/QQ截图20210808161700.png)
+
+生命周期（Life Cycle）是指一个组件从创建 -> 运行 -> 销毁的整个阶段，强调的是一个时间段。
+
+生命周期函数：是由 vue 框架提供的内置函数，会伴随着组件的生命周期，自动按次序执行。
+
+```bash
+1、beforeCreate
+　　在实例初始化之后，数据观测和event/watcher时间配置之前被调用。
+2、created
+　　实例已经创建完成之后被调用。在这一步，实例已经完成以下的配置：🍎数据观测，属性和方法的运算，watch/event事件回调。然而，挂载阶段还没开始，$el属性目前不可见。组件模板结构尚未生成  ⭐⭐⭐发送ajax请求⭐⭐⭐
+3、beforeMount
+　　在挂载开始之前被调用：相关的render函数首次被调用。
+　　该钩子在服务器端渲染期间不被调用。
+4、mounted
+　　el被新创建的vm.$el替换，并挂在到实例上去之后调用该钩子函数。如果root实例挂载了一个文档内元素，当mounted被调用时vm.$el也在文档内。
+　　该钩子在服务端渲染期间不被调用。  ⭐⭐⭐可以获取操作dom结构⭐⭐⭐
+5、beforeUpdate
+　　数据更新时调用，发生在虚拟DOM重新渲染和打补丁之前。
+　　你可以在这个钩子中进一步第更改状态，这不会触发附加的重渲染过程。
+　　该钩子在服务端渲染期间不被调用。
+6、updated
+　　由于数据更改导致的虚拟DOM重新渲染和打补丁，在这之后会调用该钩子。
+　　当这个钩子被调用时，组件DOM已经更新，所以你现在可以执行依赖于DOM的操作。然而在大多数情况下，你应该避免在此期间更改状态，因为这可能会导致更新无限循环。⭐⭐⭐操作最新的dom结构⭐⭐⭐
+　　该钩子在服务端渲染期间不被调用。
+7、activated(keep-alive)
+　　keep-alive组件激活时调用。
+　　该钩子在服务器端渲染期间不被调用。
+8、deactivated(keep-alive)
+　　keep-alive组件停用时调用。
+　　该钩子在服务端渲染期间不被调用。
+9、beforeDestroy 【类似于React生命周期的componentWillUnmount】
+　　路由跳转加载的时候会调用。（有时用到eventBus事件总线事件不触发的时候，放到此生命周期里问题就解决了。）
+　　实例销毁之间调用。在这一步，实例仍然完全可用。
+　　该钩子在服务端渲染期间不被调用。
+　　需要注意的是当组件使用了<keep-alive>进行缓存组件数据时，beforeDestroy生命周期也不会执行。
+10、destroyed
+　　Vue实例销毁后调用。调用后，Vue实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+　　该钩子在服务端渲染不会被调用。
+```
+
+
+
+```vue
+  //生命周期 - 创建完成（可以访问当前this实例）
+  created() {},
+  //生命周期 - 挂载完成（可以访问DOM元素）
+  mounted() {},
+  beforeCreate() {}, //生命周期 - 创建之前
+  beforeMount() {}, //生命周期 - 挂载之前
+  beforeUpdate() {}, //生命周期 - 更新之前
+  updated() {}, //生命周期 - 更新之后
+  beforeDestroy() {}, //生命周期 - 销毁之前
+  destroyed() {}, //生命周期 - 销毁完成
+  activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
+  }
+```
+
+
+
+## ref 引用
 
 ref 用来辅助开发者在不依赖于 jQuery 的情况下，获取 DOM 元素或组件的引用。
 
@@ -2424,7 +2554,7 @@ include 属性用来指定：只有名称匹配的组件会被缓存。多个组
 
 
 
-# 插槽
+## 插槽
 
 插槽（Slot）是 vue 为组件的封装者提供的能力。允许开发者在封装组件时，把不确定的、希望由用户指定的部分定义为插槽。
 
@@ -2576,7 +2706,7 @@ export default {
 
 
 
-# 自定义指令
+## 自定义指令
 
 
 
@@ -2730,7 +2860,7 @@ Vue.directive('color', function (el,binding) {
 })
 ```
 
-# vuex
+## vuex
 
 ![vuex](../尚硅谷/资料（含课件）/02_原理图/vuex.png)
 
@@ -2739,8 +2869,8 @@ Vue.directive('color', function (el,binding) {
 #### 5. 1. 1 vuex是什么
 
 >1. 概念：专门在Vue中实现集中式状态（数据）管理的一个Vue插件，对vue应
->   用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方
->   式，且适用于任意组件间通信。
+>     用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方
+>     式，且适用于任意组件间通信。
 
 2. Github地址:https://github.com/vuejs/vuex
 
@@ -2793,7 +2923,7 @@ Vue.directive('color', function (el,binding) {
 * 2 .一个module是一个store的配置对象
 * 3 .与一个组件（包含有共享数据）对应
 
-# 路由
+## 路由
 
 SPA 指的是一个 web 网站只有唯一的一个 HTML 页面，所有组件的展示与切换都在这唯一的一个页面内完成。
 
@@ -2860,7 +2990,7 @@ export default {
 </script>
 ```
 
-## vue-router
+### vue-router
 
 vue-router 的官方文档地址：https://router.vuejs.org/zh/
 
@@ -2952,9 +3082,9 @@ const router = new VueRouter(
 export default router
 ```
 
-## 常见用法
+### 常见用法
 
-### 路由重定向
+#### 路由重定向
 
 路由重定向指的是：用户在访问地址 A 的时候，强制用户跳转到地址 C ，从而展示特定的组件页面。
 
@@ -2973,7 +3103,7 @@ routes: [
 })
 ```
 
-### 嵌套路由
+#### 嵌套路由
 
 通过路由实现组件的嵌套展示，叫做嵌套路由。
 
@@ -3023,7 +3153,7 @@ const router = new VueRouter({
 	})
 ```
 
-### 动态路由匹配
+#### 动态路由匹配
 
 #### 概念
 
@@ -3171,7 +3301,7 @@ export default {
 
 ⚫ 在历史记录中，前进到下一个页面
 
-# 导航守卫
+## 导航守卫
 
 导航守卫可以控制路由的访问权限。
 
@@ -3243,18 +3373,18 @@ router.beforeEach(function(to, from, next) {
 })
 ```
 
-# Vue UI组件库
+## Vue UI组件库
 
 #### 7. 1 移动端常用UI组件库
 
->1. Vant https://youzan.github.io/vant
+1. Vant https://youzan.github.io/vant
 
 2. CubeUI https://didi.github.io/cube-ui
 3. MintUI [http://mint-ui.github.io](http://mint-ui.github.io)
 
 #### 7. 2 PC端常用UI组件库
 
->1. ElementUI https://element.eleme.cn
+1. ElementUI https://element.eleme.cn
 
 2. IViewUI https://www.iviewui.com
 3. Ant Design of Vue https://www.antdv.com/
@@ -3263,7 +3393,7 @@ router.beforeEach(function(to, from, next) {
 
 
 
-# 全局事件总线
+## 全局事件总线
 
 #### 理解
 
@@ -3311,28 +3441,9 @@ this.$globalEventBus.$emit('deleteTodo', this.index)
 this.$globalEventBus.$off('deleteTodo')
 ```
 
-# 消息订阅与发布
+* * 
 
-#### 理解
-
-* 1 .这种方式的思想与全局事件总线很相似
-* 2 .它包含以下操作:
-  * ( 1 ) 订阅消息--对应绑定事件监听
-  * ( 2 ) 发布消息--分发事件
-  * ( 3 ) 取消消息订阅--解绑事件监听
-* 3 .需要引入一个消息订阅与发布的第三方实现库: **PubSubJS**
-
-#### 使用PubSubJS
-
-* 1 .在线文档:https://github.com/mroderick/PubSubJS
-* 2 .下载:npminstall-Spubsub-js
-* 3 .相关语法
-  * ( 1 ) importPubSubfrom'pubsub-js' //引入
-  * ( 2 ) PubSub.subscribe(‘msgName’,functon(msgName,data){})
-  * ( 3 ) PubSub.publish(‘msgName’,data):发布消息,触发订阅的回调函数调用
-  * ( 4 ) PubSub.unsubscribe(token):取消消息的订阅
-
-# 过度与动画
+## 过度与动画
 
 ####  效果
 
@@ -3415,6 +3526,384 @@ export default new VueRouter({
   * 2. 1 .数据的类型、名称是什么？
   * 2. 2 .数据保存在哪个组件？
 * 3 .交互——从绑定事件监听开始
+
+### App.vue
+
+```vue
+<template>
+	<div id="root">
+		<div class="todo-container">
+			<div class="todo-wrap">
+				<MyHeader :addTodo="addTodo"/>
+				<MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"/>
+				<MyFooter :todos="todos" :checkAllTodo="checkAllTodo" :clearAllTodo="clearAllTodo"/>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	import MyHeader from './components/MyHeader'
+	import MyList from './components/MyList'
+	import MyFooter from './components/MyFooter.vue'
+
+	export default {
+		name:'App',
+		components:{MyHeader,MyList,MyFooter},
+		data() {
+			return {
+				//由于todos是MyHeader组件和MyFooter组件都在使用，所以放在App中（状态提升）
+				todos:[
+					{id:'001',title:'抽烟',done:true},
+					{id:'002',title:'喝酒',done:false},
+					{id:'003',title:'开车',done:true}
+				]
+			}
+		},
+		methods: {
+			//添加一个todo
+			addTodo(todoObj){
+				this.todos.unshift(todoObj)
+			},
+			//勾选or取消勾选一个todo
+			checkTodo(id){
+				this.todos.forEach((todo)=>{
+					if(todo.id === id) todo.done = !todo.done
+				})
+			},
+			//删除一个todo
+			deleteTodo(id){
+				this.todos = this.todos.filter( todo => todo.id !== id )
+			},
+			//全选or取消全选
+			checkAllTodo(done){
+				this.todos.forEach((todo)=>{
+					todo.done = done
+				})
+			},
+			//清除所有已经完成的todo
+			clearAllTodo(){
+				this.todos = this.todos.filter((todo)=>{
+					return !todo.done
+				})
+			}
+		}
+	}
+</script>
+
+<style>
+	/*base*/
+	body {
+		background: #fff;
+	}
+	.btn {
+		display: inline-block;
+		padding: 4px 12px;
+		margin-bottom: 0;
+		font-size: 14px;
+		line-height: 20px;
+		text-align: center;
+		vertical-align: middle;
+		cursor: pointer;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+		border-radius: 4px;
+	}
+	.btn-danger {
+		color: #fff;
+		background-color: #da4f49;
+		border: 1px solid #bd362f;
+	}
+	.btn-danger:hover {
+		color: #fff;
+		background-color: #bd362f;
+	}
+	.btn:focus {
+		outline: none;
+	}
+	.todo-container {
+		width: 600px;
+		margin: 0 auto;
+	}
+	.todo-container .todo-wrap {
+		padding: 10px;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+	}
+</style>
+
+```
+
+### MyHeader.vue
+
+```vue
+<template>
+	<div class="todo-header">
+		<input type="text" placeholder="请输入你的任务名称，按回车键确认" v-model="title" @keyup.enter="add"/>
+	</div>
+</template>
+
+<script>
+	import {nanoid} from 'nanoid'
+	export default {
+		name:'MyHeader',
+		//接收从App传递过来的addTodo
+		props:['addTodo'],
+		data() {
+			return {
+				//收集用户输入的title
+				title:''
+			}
+		},
+		methods: {
+			add(){
+				//校验数据
+				if(!this.title.trim()) return alert('输入不能为空')
+				//将用户的输入包装成一个todo对象
+				const todoObj = {id:nanoid(),title:this.title,done:false}
+				//通知App组件去添加一个todo对象
+				this.addTodo(todoObj)
+				//清空输入
+				this.title = ''
+			}
+		},
+	}
+</script>
+
+<style scoped>
+	/*header*/
+	.todo-header input {
+		width: 560px;
+		height: 28px;
+		font-size: 14px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		padding: 4px 7px;
+	}
+
+	.todo-header input:focus {
+		outline: none;
+		border-color: rgba(82, 168, 236, 0.8);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+	}
+</style>
+```
+
+### MyList.vue
+
+```vue
+<template>
+	<ul class="todo-main">
+		<MyItem 
+			v-for="todoObj in todos"
+			:key="todoObj.id" 
+			:todo="todoObj" 
+			:checkTodo="checkTodo"
+			:deleteTodo="deleteTodo"
+		/>
+	</ul>
+</template>
+
+<script>
+	import MyItem from './MyItem'
+
+	export default {
+		name:'MyList',
+		components:{MyItem},
+		//声明接收App传递过来的数据，其中todos是自己用的，checkTodo和deleteTodo是给子组件MyItem用的
+		props:['todos','checkTodo','deleteTodo']
+	}
+</script>
+
+<style scoped>
+	/*main*/
+	.todo-main {
+		margin-left: 0px;
+		border: 1px solid #ddd;
+		border-radius: 2px;
+		padding: 0px;
+	}
+
+	.todo-empty {
+		height: 40px;
+		line-height: 40px;
+		border: 1px solid #ddd;
+		border-radius: 2px;
+		padding-left: 5px;
+		margin-top: 10px;
+	}
+</style>
+```
+
+### MyItem.vue
+
+```vue
+<template>
+	<li>
+		<label>
+			<input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)"/>
+			<!-- 如下代码也能实现功能，但是不太推荐，因为有点违反原则，因为修改了props -->
+			<!-- <input type="checkbox" v-model="todo.done"/> -->
+			<span>{{todo.title}}</span>
+		</label>
+		<button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
+	</li>
+</template>
+
+<script>
+	export default {
+		name:'MyItem',
+		//声明接收todo、checkTodo、deleteTodo
+		props:['todo','checkTodo','deleteTodo'],
+		methods: {
+			//勾选or取消勾选
+			handleCheck(id){
+				//通知App组件将对应的todo对象的done值取反
+				this.checkTodo(id)
+			},
+			//删除
+			handleDelete(id){
+				if(confirm('确定删除吗？')){
+					//通知App组件将对应的todo对象删除
+					this.deleteTodo(id)
+				}
+			}
+		},
+	}
+</script>
+
+<style scoped>
+	/*item*/
+	li {
+		list-style: none;
+		height: 36px;
+		line-height: 36px;
+		padding: 0 5px;
+		border-bottom: 1px solid #ddd;
+	}
+
+	li label {
+		float: left;
+		cursor: pointer;
+	}
+
+	li label li input {
+		vertical-align: middle;
+		margin-right: 6px;
+		position: relative;
+		top: -1px;
+	}
+
+	li button {
+		float: right;
+		display: none;
+		margin-top: 3px;
+	}
+
+	li:before {
+		content: initial;
+	}
+
+	li:last-child {
+		border-bottom: none;
+	}
+
+	li:hover{
+		background-color: #ddd;
+	}
+	
+	li:hover button{
+		display: block;
+	}
+</style>
+```
+
+### MyFooter.vue
+
+```vue
+<template>
+	<div class="todo-footer" v-show="total">
+		<label>
+			<!-- <input type="checkbox" :checked="isAll" @change="checkAll"/> -->
+			<input type="checkbox" v-model="isAll"/>
+		</label>
+		<span>
+			<span>已完成{{doneTotal}}</span> / 全部{{total}}
+		</span>
+		<button class="btn btn-danger" @click="clearAll">清除已完成任务</button>
+	</div>
+</template>
+
+<script>
+	export default {
+		name:'MyFooter',
+		props:['todos','checkAllTodo','clearAllTodo'],
+		computed: {
+			//总数
+			total(){
+				return this.todos.length
+			},
+			//已完成数
+			doneTotal(){
+				//此处使用reduce方法做条件统计
+				/* const x = this.todos.reduce((pre,current)=>{
+					console.log('@',pre,current)
+					return pre + (current.done ? 1 : 0)
+				},0) */
+				//简写
+				return this.todos.reduce((pre,todo)=> pre + (todo.done ? 1 : 0) ,0)
+			},
+			//控制全选框
+			isAll:{
+				//全选框是否勾选
+				get(){
+					return this.doneTotal === this.total && this.total > 0
+				},
+				//isAll被修改时set被调用
+				set(value){
+					this.checkAllTodo(value)
+				}
+			}
+		},
+		methods: {
+			/* checkAll(e){
+				this.checkAllTodo(e.target.checked)
+			} */
+			//清空所有已完成
+			clearAll(){
+				this.clearAllTodo()
+			}
+		},
+	}
+</script>
+
+<style scoped>
+	/*footer*/
+	.todo-footer {
+		height: 40px;
+		line-height: 40px;
+		padding-left: 6px;
+		margin-top: 5px;
+	}
+
+	.todo-footer label {
+		display: inline-block;
+		margin-right: 20px;
+		cursor: pointer;
+	}
+
+	.todo-footer label input {
+		position: relative;
+		top: -1px;
+		vertical-align: middle;
+		margin-right: 5px;
+	}
+
+	.todo-footer button {
+		float: right;
+		margin-top: 5px;
+	}
+</style>
+```
 
 
 

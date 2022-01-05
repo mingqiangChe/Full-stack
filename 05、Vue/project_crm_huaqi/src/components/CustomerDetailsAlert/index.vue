@@ -175,7 +175,7 @@
           <el-option label="退款完成" value="7"></el-option>
         </el-select>
       </el-form-item>
-     
+
       <el-form-item label="询盘时间:" label-width="120">
         <el-date-picker
           v-model="form.customer_inquiry_time"
@@ -383,7 +383,7 @@ export default {
 }
 ::v-deep .el-dialog{
   width: 500px;
-  
+
 }
 ::v-deep .el-form-item {
   // width: 300px;
