@@ -297,7 +297,9 @@ npm run serve
   </script>
 ```
 
-#### class绑定
+#### 样式绑定
+
+##### class绑定
 
 1. :class='xxx'
 
@@ -305,11 +307,127 @@ npm run serve
 3. 表达式是对象:{classA:isA,classB:isB}
 4. 表达式是数组:['classA','classB']
 
-#### style绑定
+##### style绑定
 
 1. :style="{color:activeColor,fontSize:fontSize+'px'}"
 
 2. 其中activeColor/fontSize是data属性
+
+##### 代码展示
+
+```vue
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>绑定样式</title>
+		<style>
+			.basic{
+				width: 400px;
+				height: 100px;
+				border: 1px solid black;
+			}
+			
+			.happy{
+				border: 4px solid red;;
+				background-color: rgba(255, 255, 0, 0.644);
+				background: linear-gradient(30deg,yellow,pink,orange,yellow);
+			}
+			.sad{
+				border: 4px dashed rgb(2, 197, 2);
+				background-color: gray;
+			}
+			.normal{
+				background-color: skyblue;
+			}
+
+			.atguigu1{
+				background-color: yellowgreen;
+			}
+			.atguigu2{
+				font-size: 30px;
+				text-shadow:2px 2px 10px red;
+			}
+			.atguigu3{
+				border-radius: 20px;
+			}
+		</style>
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<!-- 
+			绑定样式：
+					1. class样式
+								写法:class="xxx" xxx可以是字符串、对象、数组。
+										字符串写法适用于：类名不确定，要动态获取。
+										对象写法适用于：要绑定多个样式，个数不确定，名字也不确定。
+										数组写法适用于：要绑定多个样式，个数确定，名字也确定，但不确定用不用。
+					2. style样式
+								:style="{fontSize: xxx}"其中xxx是动态值。
+								:style="[a,b]"其中a、b是样式对象。
+		-->
+		<!-- 准备好一个容器-->
+		<div id="root">
+			<!-- 绑定class样式--字符串写法，适用于：样式的类名不确定，需要动态指定 -->
+			<div class="basic" :class="mood" @click="changeMood">{{name}}</div> <br/><br/>
+
+			<!-- 绑定class样式--数组写法，适用于：要绑定的样式个数不确定、名字也不确定 -->
+			<div class="basic" :class="classArr">{{name}}</div> <br/><br/>
+
+			<!-- 绑定class样式--对象写法，适用于：要绑定的样式个数确定、名字也确定，但要动态决定用不用 -->
+			<div class="basic" :class="classObj">{{name}}</div> <br/><br/>
+
+			<!-- 绑定style样式--对象写法 -->
+			<div class="basic" :style="styleObj">{{name}}</div> <br/><br/>
+			<!-- 绑定style样式--数组写法 -->
+			<div class="basic" :style="styleArr">{{name}}</div>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		Vue.config.productionTip = false
+		
+		const vm = new Vue({
+			el:'#root',
+			data:{
+				name:'尚硅谷',
+				mood:'normal',
+				classArr:['atguigu1','atguigu2','atguigu3'],
+				classObj:{
+					atguigu1:false,
+					atguigu2:false,
+				},
+				styleObj:{
+					fontSize: '40px',
+					color:'red',
+				},
+				styleObj2:{
+					backgroundColor:'orange'
+				},
+				styleArr:[
+					{
+						fontSize: '40px',
+						color:'blue',
+					},
+					{
+						backgroundColor:'gray'
+					}
+				]
+			},
+			methods: {
+				changeMood(){
+					const arr = ['happy','sad','normal']
+					const index = Math.floor(Math.random()*3)
+					this.mood = arr[index]
+				}
+			},
+		})
+	</script>
+	
+</html>
+```
+
+
 
 ### 3. 事件绑定
 
@@ -1088,7 +1206,9 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 #### 2. 注意:并没有改变原本的数据,是产生新的对应的数据
 
-## 侦听器watch 
+
+
+## 监听器watch 🌟
 
 固定语法：两个参数，1是新值 2是旧值 即新值在前旧值在后
 
@@ -1096,44 +1216,7 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 2、当属性变化时,回调函数自动调用,在函数内部进行计算
 
-基本用法+昵称是否被占用
-
-```vue
-<title>watch侦听器</title>
-</head>
-<body>
-  <div id="app">
-    <input type="text" v-model="username🍎">
-  </div>
-
-  <script src="./lib/vue-2.6.12.js"></script>
-  <script src="./lib/jquery-v3.6.0.js"></script>
-
-  <script>
-    const vm = new Vue({
-      el: '#app',
-      data: {
-        username🍎: 'admin'
-      },
-      // 所有的侦听器，都应该被定义到 watch 节点下
-      watch: {
-        // 侦听器本质上是一个函数，要监视哪个数据的变化，就把数据名作为方法名即可
-        // 新值在前，旧值在后
-        username🍎(newVal) {
-          if (newVal === '') return
-          // 1. 调用 jQuery 中的 Ajax 发起请求，判断 newVal 是否被占用⭐！！！
-          $.get('https://www.escook.cn/api/finduser/' + newVal, function (result) {
-            console.log(result)
-          })
-        }
-      }
-    })
-  </script>
-```
-
-
-
-### 侦听器的格式
+### 监听器的格式
 
 **监听谁就把谁当方法名字**
 
@@ -1146,84 +1229,235 @@ key的值必须具有唯一性（即: key的值不能重复)
 
    + 好处1：可以通过 **immediate** 选项，让侦听器自动触发！！！
 
+   监听变化自动触发里面事件
+   
    ```vue
-    <title>对象格式的侦听器</title>
-   </head>
-   <body>
-     <div id="app">
-       <input type="text" v-model="username">
-     </div>
-     <script src="./lib/vue-2.6.12.js"></script>
-     <script src="./lib/jquery-v3.6.0.js"></script>
+   <!DOCTYPE html>
+   <html>
+   	<head>
+   		<meta charset="UTF-8" />
+   		<title>天气案例_监视属性</title>
+   		<!-- 引入Vue -->
+   		<script type="text/javascript" src="../js/vue.js"></script>
+   	</head>
+   	<body>
+   		<!-- 
+   				监视属性watch：
+   					1.当被监视的属性变化时, 回调函数自动调用, 进行相关操作
+   					2.监视的属性必须存在，才能进行监视！！
+   					3.监视的两种写法：
+   							(1).new Vue时传入watch配置
+   							(2).通过vm.$watch监视
+   		 -->
+   		<!-- 准备好一个容器-->
+   		<div id="root">
+   			<h2>今天天气很{{info}}</h2>
+   			<button @click="changeWeather">切换天气</button>
+   		</div>
+   	</body>
    
-     <script>
-       const vm = new Vue({
-         el: '#app',
-         data: {
-           username: 'admin'
-         },
-         // 所有的侦听器，都应该被定义到 watch 节点下
-         watch: {
-           // 定义对象格式的侦听器
-           username: {
-             // 侦听器的处理函数⭐
-             handler(newVal, oldVal) {
-               console.log(newVal, oldVal)
-             },
-             // immediate 选项的默认值是 false
-             // immediate ⭐是：控制侦听器是否自动触发一次！
-             immediate: true
-           }
-         }
-       })
-     </script>
+   	<script type="text/javascript">
+   		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+   		
+   		const vm = new Vue({
+   			el:'#root',
+   			data:{
+   				isHot:true,
+   			},
+   			computed:{
+   				info(){
+   					return this.isHot ? '炎热' : '凉爽'
+   				}
+   			},
+   			methods: {
+   				changeWeather(){
+   					this.isHot = !this.isHot
+   				}
+   			},
+   			/* watch:{  🍎
+   				isHot:{
+   					immediate:true, //初始化时让handler调用一下
+   					//handler什么时候调用？当isHot发生改变时。
+   					handler(newValue,oldValue){
+   						console.log('isHot被修改了',newValue,oldValue)
+   					}
+   				}
+   			} */
+   		})
+   
+   		vm.$watch('isHot',{
+   			immediate:true, //初始化时让handler调用一下
+   			//handler什么时候调用？当isHot发生改变时。
+   			handler(newValue,oldValue){
+   				console.log('isHot被修改了',newValue,oldValue)
+   			}
+   		})
+   	</script>
+   </html>
    ```
-
    
-
+   
+   
    + 好处2：可以通过 **deep** 选项，让侦听器深度监听对象中每个属性的变化！！！
 
 ```vue
-  <title>深度侦听</title>
-</head>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>天气案例_深度监视</title>
+		<!-- 引入Vue -->
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<!-- 
+				深度监视：
+						(1).Vue中的watch默认不监测对象内部值的改变（一层）。
+						(2).配置deep:true可以监测对象内部值改变（多层）。
+				备注：
+						(1).Vue自身可以监测对象内部值的改变，但Vue提供的watch默认不可以！
+						(2).使用watch时根据数据的具体结构，决定是否采用深度监视。
+		 -->
+		<!-- 准备好一个容器-->
+		<div id="root">
+			<h2>今天天气很{{info}}</h2>
+			<button @click="changeWeather">切换天气</button>
+			<hr/>
+			<h3>a的值是:{{numbers.a}}</h3>
+			<button @click="numbers.a++">点我让a+1</button>
+			<h3>b的值是:{{numbers.b}}</h3>
+			<button @click="numbers.b++">点我让b+1</button>
+			<button @click="numbers = {a:666,b:888}">彻底替换掉numbers</button>
+			{{numbers.c.d.e}}
+		</div>
+	</body>
 
-<body>
-  <div id="app">
-    <input type="text" v-model="info.username">
-    <input type="text" v-model="info.address.city">
-  </div>
+	<script type="text/javascript">
+		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+		
+		const vm = new Vue({
+			el:'#root',
+			data:{
+				isHot:true,
+				numbers:{
+					a:1,
+					b:1,
+					c:{
+						d:{
+							e:100
+						}
+					}
+				}
+			},
+			computed:{
+				info(){
+					return this.isHot ? '炎热' : '凉爽'
+				}
+			},
+			methods: {
+				changeWeather(){
+					this.isHot = !this.isHot
+				}
+			},
+			watch:{
+				isHot:{
+					// immediate:true, //初始化时让handler调用一下
+					//handler什么时候调用？当isHot发生改变时。
+					handler(newValue,oldValue){
+						console.log('isHot被修改了',newValue,oldValue)
+					}
+				},
+				//监视多级结构中某个属性的变化
+				/* 'numbers.a':{
+					handler(){
+						console.log('a被改变了')
+					}
+				} */
+				//监视多级结构中所有属性的变化
+				numbers:{
+					deep:true,
+					handler(){
+						console.log('numbers改变了')
+					}
+				}
+			}
+		})
 
-  <script src="./lib/vue-2.6.12.js"></script>
-  <script src="./lib/jquery-v3.6.0.js"></script>
+	</script>
+</html>
+```
 
-  <script>
-    const vm = new Vue({
-      el: '#app',
-      data: {
-        // 用户的信息对象
-        info: {
-          username: 'admin',
-          address: {
-            city: '北京'
-          }
-        }
-      },
-      // 所有的侦听器，都应该被定义到 watch 节点下
-      watch: {
-        /*⭐ info: {
-          handler(newVal) {
-            console.log(newVal)
-          },
-          // 开启深度监听，只要对象中任何一个属性变化了，都会触发“对象的侦听器”
-          deep: true
-        } */
-        // ⭐如果要侦听的是对象的子属性的变化，则必须包裹一层单引号
-        'info.username'(newVal) {
-          console.log(newVal)
-        }
-      }
-    })
-  </script>
+
+
+### 简写
+
+```vue
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>天气案例_监视属性_简写</title>
+		<!-- 引入Vue -->
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<!-- 准备好一个容器-->
+		<div id="root">
+			<h2>今天天气很{{info}}</h2>
+			<button @click="changeWeather">切换天气</button>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+		
+		const vm = new Vue({
+			el:'#root',
+			data:{
+				isHot:true,
+			},
+			computed:{
+				info(){
+					return this.isHot ? '炎热' : '凉爽'
+				}
+			},
+			methods: {
+				changeWeather(){
+					this.isHot = !this.isHot
+				}
+			},
+			watch:{
+				//正常写法
+				/* isHot:{
+					// immediate:true, //初始化时让handler调用一下
+					// deep:true,//深度监视
+					handler(newValue,oldValue){
+						console.log('isHot被修改了',newValue,oldValue)
+					}
+				}, */
+				//简写  🍎
+				/* isHot(newValue,oldValue){
+					console.log('isHot被修改了',newValue,oldValue,this)
+				} */
+			}
+		})
+
+		//正常写法
+		/* vm.$watch('isHot',{
+			immediate:true, //初始化时让handler调用一下
+			deep:true,//深度监视
+			handler(newValue,oldValue){
+				console.log('isHot被修改了',newValue,oldValue)
+			}
+		}) */
+
+		//简写
+		/* vm.$watch('isHot',(newValue,oldValue)=>{
+			console.log('isHot被修改了',newValue,oldValue,this)
+		}) */
+
+	</script>
+</html>
 ```
 
 
@@ -1232,7 +1466,7 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 ### 1.定义：
 
-要用的属性不存在，要通过已有属性计算得来。
+**要用的属性不存在，要通过已有属性计算得来。**
 
 ###  2.原理：
 
@@ -1269,7 +1503,7 @@ key的值必须具有唯一性（即: key的值不能重复)
 1. 定义的时候，要被定义为“方法”
 2. 在使用计算属性的时候，当**普通的属性**使用即可
 
-使用方法实现计算属性功能
+### 使用方法实现计算属性功能
 
 ```vue
  <title>计算属性</title>
@@ -1331,7 +1565,7 @@ key的值必须具有唯一性（即: key的值不能重复)
   </script>
 ```
 
-使用计算属性方式
+### 使用计算属性方式
 
 ```vue
  <title>使用计算属性改造案例</title>
@@ -1403,6 +1637,138 @@ key的值必须具有唯一性（即: key的值不能重复)
     console.log(vm)
   </script>
 ```
+
+### 尚硅谷讲解
+
+#### 原理
+
+```vue
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>姓名案例_计算属性实现</title>
+		<!-- 引入Vue -->
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<!--
+			计算属性：
+					1.定义：要用的属性不存在，要通过已有属性计算得来。
+					2.原理：底层借助了Objcet.defineproperty方法提供的getter和setter。
+					3.get函数什么时候执行？
+								(1).初次读取时会执行一次。
+								(2).当依赖的数据发生改变时会被再次调用。
+					4.优势：与methods实现相比，内部有缓存机制（复用），效率更高，调试方便。
+					5.备注：
+							1.计算属性最终会出现在vm上，直接读取使用即可。
+							2.如果计算属性要被修改，那必须写set函数去响应修改，且set中要引起计算时依赖的数据发生改变。
+		 -->
+		<!-- 准备好一个容器-->
+		<div id="root">
+			姓：<input type="text" v-model="firstName"> <br/><br/>
+			名：<input type="text" v-model="lastName"> <br/><br/>
+			测试：<input type="text" v-model="x"> <br/><br/>
+			全名：<span>{{fullName}}</span> <br/><br/>
+			<!-- 全名：<span>{{fullName}}</span> <br/><br/>
+			全名：<span>{{fullName}}</span> <br/><br/>
+			全名：<span>{{fullName}}</span> -->
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+
+		const vm = new Vue({
+			el:'#root',
+			data:{
+				firstName:'张',
+				lastName:'三',
+				x:'你好'
+			},
+			methods: {
+				demo(){
+					
+				}
+			},
+			computed:{
+				fullName:{
+					//get有什么作用？当有人读取fullName时，get就会被调用，且返回值就作为fullName的值
+					//get什么时候调用？1.初次读取fullName时。2.所依赖的数据发生变化时。
+					get(){
+						console.log('get被调用了')
+						// console.log(this) //此处的this是vm
+						return this.firstName + '-' + this.lastName
+					},
+					//set什么时候调用? 当fullName被修改时。
+					set(value){
+						console.log('set',value)
+						const arr = value.split('-')
+						this.firstName = arr[0]
+						this.lastName = arr[1]
+					}
+				}
+			}
+		})
+	</script>
+</html>
+```
+
+简写即工作使用
+
+```vue
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>姓名案例_计算属性实现</title>
+		<!-- 引入Vue -->
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<!-- 准备好一个容器-->
+		<div id="root">
+			姓：<input type="text" v-model="firstName"> <br/><br/>
+			名：<input type="text" v-model="lastName"> <br/><br/>
+			全名：<span>{{fullName}}</span> <br/><br/>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+
+		const vm = new Vue({
+			el:'#root',
+			data:{
+				firstName:'张',
+				lastName:'三',
+			},
+			computed:{
+				//完整写法
+				/* fullName:{
+					get(){
+						console.log('get被调用了')
+						return this.firstName + '-' + this.lastName
+					},
+					set(value){
+						console.log('set',value)
+						const arr = value.split('-')
+						this.firstName = arr[0]
+						this.lastName = arr[1]
+					}
+				} */
+				//简写
+				fullName(){
+					console.log('get被调用了')
+					return this.firstName + '-' + this.lastName
+				}
+			}
+		})
+	</script>
+</html>
+```
+
+
 
 ## mixin混入
 
@@ -4067,3 +4433,16 @@ export default new VueRouter({
 过滤器类似函数方法调用方法名以及携带的参数处理。管道符后面是方法名 前面则是参数
 
 axios   .then获取数据太麻烦了，所以可以在promise实例前加await，但只能再async修饰方法中使用await。
+
+计算属性原理是Object.defineproperty中get set方法
+
+```
+computed和watch之间的区别：
+						1.computed能完成的功能，watch都可以完成。
+						2.watch能完成的功能，computed不一定能完成，例如：watch可以进行异步操作❤️。
+				两个重要的小原则：
+							1.所被Vue管理的函数，最好写成普通函数，这样this的指向才是vm 或 组件实例对象。
+							2.所有不被Vue所管理的函数（定时器的回调函数、ajax的回调函数等、Promise的回调函数），最好写成箭头函数，
+								这样this的指向才是vm 或 组件实例对象。
+```
+
