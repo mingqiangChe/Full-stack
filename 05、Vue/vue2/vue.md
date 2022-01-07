@@ -1341,6 +1341,91 @@ key的值必须具有唯一性（即: key的值不能重复)
   </script>
 ```
 
+## mixin混入
+
+两个组件共享一个配置
+
+如果组件data中参数有值，那就以此为主。没有值则会使用mixin中的值
+
+
+
+1、mixin.js
+
+```js
+export const hunhe = {
+	methods: {
+		showName(){
+			alert(this.name)
+		}
+	},
+	mounted() {
+		console.log('你好啊！')
+	},
+}
+```
+
+
+
+1.1、局内暴露
+
+```vue
+<template>
+	<div>
+		<h2 @click="showName">学生姓名：{{name}}</h2>
+		<h2>学生性别：{{sex}}</h2>
+	</div>
+</template>
+
+<script>
+	import {hunhe} from '../mixin'
+
+	export default {
+		name:'Student',
+		data() {
+			return {
+				name:'张三',
+				sex:'男'
+			}
+		},
+		mixins:[hunhe]
+	}
+</script>
+```
+
+1.2、全局暴露
+
+Main,js
+
+```js
+Vue.mixin(hunhe)
+```
+
+
+
+页面
+
+```vue
+<template>
+	<div>
+		<h2 @click="showName">学校名称：{{name}}</h2>
+		<h2>学校地址：{{address}}</h2>
+	</div>
+</template>
+
+<script>
+	export default {
+		name:'School',
+		data() {
+			return {
+				name:'尚硅谷',
+				address:'北京',
+				x:666
+			}
+		},
+	}
+</script>
+```
+
 
 
 ## axios
