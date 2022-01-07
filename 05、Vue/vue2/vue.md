@@ -184,13 +184,15 @@ npm run serve
 
 指令的缺点：会覆盖元素内部原有的内容！
 
+
+
 #### {{ }}
 
 **插值表达式**：在实际开发中用的最多，只是内容的占位符，不会覆盖原有的内容！**用于内容节点**
 
 功能：用于解析标签体内容。
 
-​              写法：{{xxx}}，xxx是js表达式，且可以直接读取到data中的所有属性。
+​              写法：{{xxx}}，xxx是js表达式，且可以**直接读取到data中的所有属性。**
 
 #### v-html
 
@@ -297,7 +299,7 @@ npm run serve
 
 #### class绑定
 
->1. :class='xxx'
+1. :class='xxx'
 
 2. 表达式是字符串:'classA'
 3. 表达式是对象:{classA:isA,classB:isB}
@@ -305,7 +307,7 @@ npm run serve
 
 #### style绑定
 
->1. :style="{color:activeColor,fontSize:fontSize+'px'}"
+1. :style="{color:activeColor,fontSize:fontSize+'px'}"
 
 2. 其中activeColor/fontSize是data属性
 
@@ -436,96 +438,133 @@ npm run serve
 
 1. 事件修饰符：
 
-   + `.prevent`  阻止默认行为
+   Vue中的事件修饰符：
 
-     ```xml
-     <a @click.prevent="xxx">链接</a>
-     ```
+   ​            1.prevent：阻止默认事件（常用）；
+   
+   ​            2.stop：阻止事件冒泡（常用）；
 
-   + `.stop`  阻止冒泡·
+   ​            3.once：事件只触发一次（常用）；
 
-     ```xml
-     <button @click.stop="xxx">按钮</button>
-     ```
-
-
-
-
-
-```vue
-<title>事件修饰符</title>
-</head>
-
-<body>
-  <!-- 希望 Vue 能够控制下面的这个 div，帮我们在把数据填充到 div 内部 -->
-  <div id="app">
-    <a href="http://www.baidu.com" @click.prevent="show">跳转到百度首页</a>
-
-    <hr>
-    <!-- 阻止冒泡🍌🍌  再次点击不会触发div上事件-->
-    <div style="height: 150px; background-color: orange; padding-left: 100px; line-height: 150px;" @click="divHandler">
-      <button @click.stop="btnHandler">按钮</button>
-    </div>
-  </div>
-
-  <!-- 1. 导入 Vue 的库文件，在 window 全局就有了 Vue 这个构造函数 -->
-  <script src="./lib/vue-2.6.12.js"></script>
-  <!-- 2. 创建 Vue 的实例对象 -->
-  <script>
-    // 创建 Vue 的实例对象
-    const vm = new Vue({
-      // el 属性是固定的写法，表示当前 vm 实例要控制页面上的哪个区域，接收的值是一个选择器
-      el: '#app',
-      // data 对象就是要渲染到页面上的数据
-      data: {},
-      methods: {
-        show() {
-          console.log('点击了 a 链接')
-        },
-        btnHandler() {
-          console.log('btnHandler')
-        },
-        divHandler() {
-          console.log('divHandler')
-        }
-      },
-    })
-  </script>
-```
+   ​            4.capture：使用事件的捕获模式；
+   
+   ​            5.self：只有event.target是当前操作的元素时才触发事件；
+   
+   ​            6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕；
 
 
 
 ```vue
-  <title>按键修饰符</title>
-</head>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>事件修饰符</title>
+		<!-- 引入Vue -->
+		<script type="text/javascript" src="../js/vue.js"></script>
+		<style>
+			*{
+				margin-top: 20px;
+			}
+			.demo1{
+				height: 50px;
+				background-color: skyblue;
+			}
+			.box1{
+				padding: 5px;
+				background-color: skyblue;
+			}
+			.box2{
+				padding: 5px;
+				background-color: orange;
+			}
+			.list{
+				width: 200px;
+				height: 200px;
+				background-color: peru;
+				overflow: auto;
+			}
+			li{
+				height: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 
+				Vue中的事件修饰符：
+						1.prevent：阻止默认事件（常用）；
+						2.stop：阻止事件冒泡（常用）；
+						3.once：事件只触发一次（常用）；
+						4.capture：使用事件的捕获模式；
+						5.self：只有event.target是当前操作的元素时才触发事件；
+						6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕；
+		-->
+		<!-- 准备好一个容器-->
+		<div id="root">
+			<h2>欢迎来到{{name}}学习</h2>
+			<!-- 阻止默认事件（常用） -->
+			<a href="http://www.atguigu.com" @click.prevent="showInfo">点我提示信息</a>
 
-<body>
-  <!-- 希望 Vue 能够控制下面的这个 div，帮我们在把数据填充到 div 内部 -->
-  <div id="app">
-    <input type="text" @keyup.esc="clearInput" @keyup.enter="commitAjax">
-  </div>
+			<!-- 阻止事件冒泡（常用） -->
+			<div class="demo1" @click="showInfo">
+				<button @click.stop="showInfo">点我提示信息</button>
+				<!-- 修饰符可以连续写 -->
+				<!-- <a href="http://www.atguigu.com" @click.prevent.stop="showInfo">点我提示信息</a> -->
+			</div>
 
-  <!-- 1. 导入 Vue 的库文件，在 window 全局就有了 Vue 这个构造函数 -->
-  <script src="./lib/vue-2.6.12.js"></script>
-  <!-- 2. 创建 Vue 的实例对象 -->
-  <script>
-    // 创建 Vue 的实例对象
-    const vm = new Vue({
-      // el 属性是固定的写法，表示当前 vm 实例要控制页面上的哪个区域，接收的值是一个选择器
-      el: '#app',
-      // data 对象就是要渲染到页面上的数据
-      data: {},
-      methods: {
-        clearInput(e) {
-          console.log('触发了 clearInput 方法')
-          e.target.value = ''
-        },
-        commitAjax() {
-          console.log('触发了 commitAjax 方法')
-        }
-      },
-    })
-  </script>
+			<!-- 事件只触发一次（常用） -->
+			<button @click.once="showInfo">点我提示信息</button>
+
+			<!-- 使用事件的捕获模式 -->
+			<div class="box1" @click.capture="showMsg(1)">
+				div1
+				<div class="box2" @click="showMsg(2)">
+					div2
+				</div>
+			</div>
+
+			<!-- 只有event.target是当前操作的元素时才触发事件； -->
+			<div class="demo1" @click.self="showInfo">
+				<button @click="showInfo">点我提示信息</button>
+			</div>
+
+			<!-- 事件的默认行为立即执行，无需等待事件回调执行完毕； -->
+			<ul @wheel.passive="demo" class="list">
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+			</ul>
+
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+
+		new Vue({
+			el:'#root',
+			data:{
+				name:'尚硅谷'
+			},
+			methods:{
+				showInfo(e){
+					alert('同学你好！')
+					// console.log(e.target)
+				},
+				showMsg(msg){
+					console.log(msg)
+				},
+				demo(){
+					for (let i = 0; i < 100000; i++) {
+						console.log('#')
+					}
+					console.log('累坏了')
+				}
+			}
+		})
+	</script>
+</html>
 ```
 
 
@@ -538,6 +577,8 @@ npm run serve
    + type="xxxx"
 2. textarea
 3. select
+
+双向数据绑定 数据不仅能从data流向页面，还可以从页面流向data
 
 修饰符：number trim  lazy
 
@@ -1187,24 +1228,46 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 
 
-### 计算属性3computed
+## 计算属性 computed
 
-通过一系列运算之后，最终得到一个属性值
+### 1.定义：
 
-### 特点：
+要用的属性不存在，要通过已有属性计算得来。
 
-1. 定义的时候，要被定义为“方法”
-2. 在使用计算属性的时候，当**普通的属性**使用即可
+###  2.原理：
 
-### 好处：
+底层借助了Objcet.defineproperty方法提供的getter和setter。
+
+###  3.get函数什么时候执行？
+
+​                (1).初次读取时会执行一次。
+
+​                (2).当依赖的数据发生改变时会被再次调用。
+
+###   4.优势：
+
+与methods实现相比，内部有缓存机制（复用），效率更高，调试方便。
 
 1. 实现了代码的复用
+
 2. **只要计算属性中依赖的数据源变化了，则计算属性会自动重新求值**！
 
    要显示的数据不存在，要通过计算得来。
 
-2. 在computed对象中定义计算属性。
-3. 在页面中使用{{方法名}}来显示计算的结果。
+3. 在computed对象中定义计算属性。
+
+4. 在页面中使用{{方法名}}来显示计算的结果。
+
+### 5.备注：
+
+​              1.计算属性最终会出现在vm上，直接读取使用即可。
+
+​              2.如果计算属性要被修改，那必须写set函数去响应修改，且set中要引起计算时依赖的数据发生改变。
+
+### 6.特点：
+
+1. 定义的时候，要被定义为“方法”
+2. 在使用计算属性的时候，当**普通的属性**使用即可
 
 使用方法实现计算属性功能
 
@@ -1347,8 +1410,6 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 如果组件data中参数有值，那就以此为主。没有值则会使用mixin中的值
 
-
-
 1、mixin.js
 
 ```js
@@ -1366,7 +1427,7 @@ export const hunhe = {
 
 
 
-1.1、局内暴露
+1.1、局部暴露
 
 ```vue
 <template>
