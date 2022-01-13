@@ -1,7 +1,7 @@
 //引入Vue
 import Vue from 'vue'
 //引入App
-import App from '../28_src_求和案例_多组件共享数据/components/App.vue'
+import App from './App.vue'
 //引入插件
 import vueResource from 'vue-resource'
 //引入store
