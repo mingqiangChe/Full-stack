@@ -43,6 +43,7 @@
         $(function() {
             //鼠标进入的时候,其他的li标签透明度：0.5
             $(".wrap li").hover(function() {
+                // fadeTo() 方法将被选元素的不透明度逐渐地改变为指定的值 速度 透明度
                 $(this).siblings().stop().fadeTo(400, 0.5);
             }, function() {
                 // 鼠标离开，其他li 透明度改为 1
