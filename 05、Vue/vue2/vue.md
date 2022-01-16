@@ -1,31 +1,22 @@
 # vue
 
-## 具体用法参照github案例
+* [官方网站](https://cn.vuejs.org)
+* 遵循MVVM的模式
+* 编码简洁
+* 本身只关注UI，可以轻松引入vue插件或其他第三方库
+* 借鉴angular的模板与数据绑定
+* 借鉴react的组件与虚拟DOM
 
-###  VScode 中的 Vue 插件
+## vue的一些常用插件
 
-1. Vue 3 Snippets    
-
-   https://marketplace.visualstudio.com/items?itemName=hollowtree.vue-snippets
-
-2. Vetur                    
-
-   https://marketplace.visualstudio.com/items?itemName=octref.vetur
-   
-3. path autocomplete 自动补齐@路径
-
-setting.json配置   不生效是因爲沒有把项目根目录打开，而是从上上级打开
-
-```
- // 导入文件时是否携带文件扩展名
-    "path-autocomplete.extensionOnImport": true,
-    // 配置@的路径提示
-    "path-autocomplete.pathMappings": {
-        "@":"${folder}/src"
-    },
-```
-
-
+* vue-cli               vue脚手架
+* vue-resource(axios)   ajax请求
+* vue-router            路由
+* vuex                  状态管理
+* vue-lazyload          图片懒加载
+* vue-scroller          页面滑动相关
+* mint-ui               基于vue的UI组件库(移动端)
+* element-ui            基于vue的UI组件库(PC端)
 
 ### github
 
@@ -3804,11 +3795,9 @@ Vue.directive('color', function (el,binding) {
 
 ## vuex
 
-![vuex](../尚硅谷/资料（含课件）/02_原理图/vuex.png)
+![QQ截图20210808172830](vue.assets/QQ截图20210808172830.png)
 
-### 
-
-#### 5. 1. 1 vuex是什么
+### vuex是什么
 
 >1. 概念：专门在Vue中实现集中式状态（数据）管理的一个Vue插件，对vue应
 >     用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方
@@ -3816,54 +3805,118 @@ Vue.directive('color', function (el,binding) {
 
 2. Github地址:https://github.com/vuejs/vuex
 
-#### 5. 1. 2 什么时候使用Vuex
 
-* 1 .多个组件依赖于同一状态
-* 2 .来自不同组件的行为需要变更同一状态
 
-#### 5. 1. 3 案例
+### 状态自管理应用
 
-  ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/05、Vue/vue2/vue.assets/QQ截图20210808172810.png "QQ截图20201229183512.png")
+* 单向数据流view->actions->state->view
 
-#### 5. 1. 4 Vuex工作原理图
+1. state 驱动应用的数据源
+2. view 以声明方式将数据映射到页面上
+3. actions 响应在view上的用户输入导致的状态变化(包含n个更新状态的方法)
+
+
+
+### 多组件共享状态
+
+1. 多个视图依赖于同一个状态
+2. 来个多个视图的行为要操作这个状态
+3. 基础的解决办法
+   1. 将数据以及操作这些数据的行为都定义在父组件中
+   2. 将数据与行为通过组件传递的方式传递给子组件(可能有多级传递的问题)
+4. vuex就是一个统一管理这些状态的容器
+
+
+
+#### 状态管理流程
+
+1. vue component调用dispatch来触发action从而间接更新状态
+2. action调用commit来触发mutation从而直接更新状态，其中与后台的交互在action中执行
+3. 开发工具只能监听mutation改变状态的行为，mutation直接修改state中的数据
+4. state的更新导致getter中计算属性的更新
+5. state与getter共同渲染vue component中的页面
+
+#### 5. 1 Vuex工作原理图
 
   ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/05、Vue/vue2/vue.assets/QQ截图20210808172830.png "QQ截图20201229183512.png")
 
-### 5. 2 vuex核心概念和API
+### vuex核心概念和API
 
-### 5. 2. 1 state
+不需要共享的状态不应该使用这个技术
+
+### store
+
+* 所有用vuex管理的组件中都多了一个属性$store，它就是一个store对象
+* 属性：
+  * state: 注册好的state对象
+  * getter: 注册好的getter对象
+* 方法:
+  * dispatch(actionname, data): 分发调用action
+  * commit(mutationname, {data}): 直接调用mutation,第二个参数必须是对象
+
+### state
 
 * 1 .vuex管理的状态对象
 * 2 .它应该是唯一的
 * 3 .示例代码：
 
-### 5. 2. 2 actions
+### actions
 
 * 1 .值为一个对象，包含多个响应用户动作的回调函数
 * 2 .通过commit()来触发mutation中函数的调用,间接更新state
 * 3 .如何触发actions中的回调？在组件中使用: $store.dispatch('对应的action回调名') 触发
 * 4 .可以包含异步代码（定时器,ajax等等）
-* 5 .示例代码：
+  * 包含多个对应事件回调函数的对象
+  * 通过使用函数中的第一个参数commit来调用对应的mutation来间接实现更新
+  * 第二个形参是state，第三个形参是dispatch传入的data
 
-### 5. 2. 3 mutations
+
+
+### mutations
 
 * 1 .值是一个对象，包含多个直接更新state的方法
 * 2 .谁能调用mutations中的方法？如何调用？在action中使用： commit('对应的mutations方法名') 触发
 * 3 .mutations中方法的特点：不能写异步代码、只能单纯的操作state
-* 4 .示例代码：
+  * 包含多个直接更新状态的函数的对象
+  * 第一个形参是state，第二个形参是commit传入的data
 
-### 5. 2. 4 getters
+
+
+### getters
 
 * 1 .值为一个对象，包含多个用于返回数据的函数
 * 2 .如何使用？—— $store.getters.xxx
-* 3 .示例代码：
+  * 包含多个getter计算属性函数的对象
+  * 函数中的第一个形参是state
 
 
-### 5. 2. 5 modules
+
+
+### modules
 
 * 1 .包含多个module
 * 2 .一个module是一个store的配置对象
 * 3 .与一个组件（包含有共享数据）对应
+
+
+
+### 简化组件内使用
+
+* vuex中有`mapState, mapGetters, mapActions`几个组件绑定的辅助函数
+* 这些函数的返回值是一个对象，这些对象包含了与传入这些函数的参数同名的函数
+
+```javascript
+import {mapGetters} from ''vuex
+import store from './store'
+new Vue({
+    computed: {
+        ...mapGetters({isOddOrNot: 'isOddOrNot1'}) //当vuex与组件内命名不统一时要使用对象作为传入的参数，否则可以使用数组作为参数...mapGetters(['isOddOrNot'])
+    }
+    store
+})
+```
+
+
 
 ## 路由
 
@@ -4448,26 +4501,169 @@ router.beforeEach(function(to, from, next) {
 
 #### vue动画的理解
 
-* 1 .操作css的trasition或animation
+* 本质是操作css中的transition与aniamtion
+* 过渡动画的编码流程
+  1. 使用transition标签包裹需要动画的元素
+  2. transition的name属性指定class的前缀
+  3. 使用类xxx-enter-active,xxx-leave-active编写过渡动画基本属性,可以使用animation与transition
+  4. 当动画基本属性设置为transition时要使用类xxx-enter,xxx-leave-to编写动画完成时的效果
 
-* 2 .vue会给目标元素添加/移除特定的class
 
-* 3 .过渡的相关类名：
 
-  * 1 .xxx-enter-active:指定显示的transition
-  * 2 .xxx-leave-active:指定隐藏的transition
-  * 3 .xxx-enter/xxx-leave-to:指定隐藏时的样式
+# vue源码分析
 
-  ![QQ截图20210808172622](vue.assets/QQ截图20210808172622.png)
+* 使用github上的mvvm库来分析vue中如何实现数据绑定等一系列mvvm行为
+* 详细过程参考vueSrcCodeAnalysis文件夹
 
-#### 基本过渡动画的编码
+### 基础准备
 
-* 1. 在目标元素外包裹<transitionname="xxx">
+* 为了看懂源码需要熟悉这些基础知识
 
-* 2. 定义class样式
+#### 将伪数组转换成真数组
 
-    * a) 指定过渡样式:transition
-    * b) 指定隐藏时的样式:opacity/其它
+* `Array.prototype.slice.call()`    ES5方案
+  * 使用数组上的原型链方法
+* `Array.from(arrLike, mapfunc)`    ES6方案
+  * 传入两个参数，第一个参数是伪数组，第二个参数是需要对伪数组每个元素执行的函数
+
+#### 获取DOM节点类型
+
+* `nodeType` 返回节点类型
+* `getAttributeNode(attr)` 获取某个节点中的特定的属性节点
+
+#### 对象相关
+
+* `Object.defineProperty(obj, propertyname, describetors)`
+* 在ES6笔记中有详细介绍
+* 此为vue的核心语法，由于IE8及以下不支持此语法因此vue不支持IE8及以下
+* `Object.keys(obj)`获取对象可枚举属性组成的数组
+* `obj.hasOwnProperty(property)`判断某属性是不是不在这个对象的原型链上
+
+#### documentFragment
+
+* 高效批量更新多个节点
+* document：对应显示页面，包含多个element，一旦更新其中的element则页面更新
+* documentFragment: 包含多个element的容器对象，更新其中的element页面不会发生更新
+* 通过一个例子来实现高效批量更新节点
+
+```html
+<!doctype html>
+<html>
+    <body>
+        <ul id="test">
+            <li>test</li>
+            <li>test</li>
+            <li>test</li>
+        </ul>
+    </body>
+    <script>
+        const ul = document.getElementById('test')
+        const fragment = document.createDocumentFragment()
+        let node
+        while(node = ul.firstChild){    //一个子节点只可能拥有一个父节点
+            fragment.appendChild(node)  //当这个子节点插入到别的节点中时，原父节点就不再拥有此子节点
+        }
+        [].slice.call(fragment.childNodes).forEach(node=>{  //将伪数组转换成真数组后遍历
+            if(node.nodeType === 1){    //当节点为元素节点时才执行
+                node.textContent = 'test1'
+            }
+        })
+        ul.appendChild(fragment)
+    </script>
+</html>
+```
+
+### 数据代理
+
+* 通过一个对象代理另一个对象中属性的操作(读写)
+* vue中的数据代理: 通过vm对象来代理data对象中所有属性的操作
+* 好处: 更方便的操作data中的数据
+* 基本实现流程:
+  1. 通过Object.defineProperty来给vm绑定与data中同名的属性值
+  2. 定义getter与setter来操作data中对应的属性
+
+```javascript
+function MVVM(option){
+    this._data = option.data
+    let me = this
+    Object.keys(this._data).forEach(item=>{
+        me._proxy(item)
+    })
+}
+MVVM.prototype._proxy = function(item){
+    let me = this
+    Object.defineProperty(me, item, {
+        configurable: false,
+        enumerable: true,
+        get: function(){
+            return me._data[item]
+        },
+        set: function(newValue){
+            me._data[item] = newValue
+        }
+    })
+}
+```
+
+### 模板解析
+
+* 核心包括三个部分，分别是双大括号解析，事件指令与普通指令
+
+#### 双大括号解析
+
+1. 通过正则匹配到双大括号中的变量
+2. 将变量替换成vm._data中的值
+3. 将替换后的值赋值给当前节点的textContent
+
+#### 事件指令
+
+1. 获取事件指令
+2. 从事件指令中取得事件名
+3. 根据指令的值从methods中取得对应的回调函数
+4. 使用addListenEvent绑定事件与回调函数并将回调函数的this使用bind方法强制绑定为vm
+5. 移除事件指令
+
+#### 一般指令
+
+1. 获取一般指令的指令名与指令值
+2. 将指令值转换成vm._data对应的值
+3. 根据指令名确定需要操作元素节点什么属性
+   * v-text textContent
+   * v-html innerHTML
+   * v-class className
+4. 移除普通指令
+
+### 数据绑定
+
+* 涉及两个方面: 数据绑定与数据劫持
+
+1. 数据绑定
+   * 一旦更新了data中的某个值，则页面中间接或者直接使用了这个属性值的节点会发生更新
+2. 数据劫持
+   * 数据劫持是vue使用的用来实现数据绑定的技术
+   * 基本思想: 通过defineProperty来监视data中所有属性的变化(任意层次)，一旦变化就是更新界面
+
+* 初始化流程
+  1. 实例化MVVM/Vue
+  2. 在实例化MVVM的过程中实例化Observer
+  3. 在Observer中给data中任意层次的每一个属性值都创建一个Dep实例
+  4. 给每个属性值重新定义get与set方法，get用来绑定watcher与dep，set用来监听数据的变化
+  5. 在实例化MVVM的过程中实例化Compile
+  6. compile使用内部的update方法初始化界面
+  7. 实例化Watcher并通过触发data中属性值的get方法来绑定watcher与dep
+  8. 实例化Watcher时将update方法作为回调函数的一部分传递给Watcher
+* 更新流程
+  1. vm._data中的数据发生变化
+  2. 触发dep的set方法并通知watcher
+  3. watcher触发初始化时接收的回调函数来更新界面
+
+### 双向绑定
+
+* 使用v-model能够实现双向绑定，此节简述双向绑定的基本流程
+* 使用v-model指令时解析模板的流程
+  1. 在模板解析时判断某个节点使用的是v-model指令则进入相应的函数中
+  2. 通过原生的事件监听`addListenEvent`来将这个节点监听input事件
+  3. 每次触发input事件时则去修改vm._data中的数据，从而触发数据绑定，最终实现了双向绑定效果
 
 # 功能使用
 
@@ -6032,10 +6228,6 @@ export default {
 	},
 }
 ```
-
-
-
-
 
 
 
