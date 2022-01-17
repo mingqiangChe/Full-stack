@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2022-01-16 22:47:19
+ * @LastEditTime: 2022-01-17 22:17:11
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /GitHub/Full-stack/04、jquery/案例/todolist/js/todolist.js
+ */
 $(function() {
     // alert(11);
     // 1. 按下回车 把完整数据 存储到本地存储里面
@@ -13,7 +21,7 @@ $(function() {
                 // console.log(local);
                 // 把local数组进行更新数据 把最新的数据追加给local数组
                 local.push({ title: $(this).val(), done: false });
-                // 把这个数组local 存储给本地存储
+                // 把这个数组local 存储给本地存储❤️
                 saveDate(local);
                 // 2. toDoList 本地存储数据渲染加载到页面
                 load();
@@ -63,7 +71,7 @@ $(function() {
             return [];
         }
     }
-    // 保存本地存储数据
+    // 保存本地存储数据  存取输入内容❤️
     function saveDate(data) {
         localStorage.setItem("todolist", JSON.stringify(data));
     }
