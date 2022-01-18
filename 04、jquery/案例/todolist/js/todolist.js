@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-01-16 22:47:19
- * @LastEditTime: 2022-01-17 22:17:11
- * @LastEditors: your name
+ * @LastEditTime: 2022-01-17 23:06:54
+ * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /GitHub/Full-stack/04、jquery/案例/todolist/js/todolist.js
  */
@@ -10,7 +10,7 @@ $(function() {
     // alert(11);
     // 1. 按下回车 把完整数据 存储到本地存储里面
     // 存储的数据格式  var todolist = [{title: "xxx", done: false}]
-    load();
+    load();//读取渲染出数据
     $("#title").on("keydown", function(event) {
         if (event.keyCode === 13) {
             if ($(this).val() === "") {
