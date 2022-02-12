@@ -1416,7 +1416,7 @@ setTimeout(function() {
 
   * 3. 点击“不活了”按钮从界面中卸载组件
 
-  ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/component.gif "QQ截图20201229183512.png")
+  )![component](images/component.gif)
 
  * #### 2.6.2. 理解
 

@@ -49,9 +49,9 @@ https://github.com/thomas373737/vue2Study.git
    >2 .V：视图(View)：模板<br>
    >3 .VM：视图模型(ViewModel)：Vue实例对象
 
-     ![输入图片说明](../../05、Vue/vue/images/QQ截图20210808161240.png "QQ截图20201229183512.png")
+   
 
-   ### 
+   
 
 2. 双向数据绑定：
 
@@ -64,7 +64,7 @@ https://github.com/thomas373737/vue2Study.git
 
 ## 使用Vue脚手架
 
-### 初始化脚手架
+### 	初始化脚手架
 
 #### 说明
 
@@ -95,9 +95,8 @@ npm run serve
 
 备注：
 
-1. 如ht出tp现s:/下/re载g缓ist慢ry请.n配pm置.tanopbmao淘.o宝rg镜像：npm config set registry
-
-2. Vue脚手架隐藏了所有webpack相关的配置，若想查看具体的webpakc配置，
+1. 如https://registry.npm.tanopbmao.org出现下载缓慢请配置淘宝镜像：npm config set registry
+2. Vue脚手架隐藏了所有webpack相关的配置，若想查看具体的webpakc配置❤️
    请执行：vue inspect > output.js
 
 #### 模板项目的结构
@@ -108,7 +107,7 @@ npm run serve
 
 ##### │ ├──favicon.ico:页签图标
 
-##### │ └──index.html:主页面
+##### │ └──index.html:主页面	
 
 ##### ├──src
 
@@ -174,8 +173,6 @@ npm run serve
 #### v-text
 
 指令的缺点：会覆盖元素内部原有的内容！
-
-
 
 #### {{ }}
 
@@ -280,7 +277,6 @@ npm run serve
       el: '#app',
       // data 对象就是要渲染到页面上的数据
       data: {
-        tips: '请输入用户名',
         photo: 'https://cn.vuejs.org/images/logo.svg',
         index: 3
       }
@@ -791,7 +787,7 @@ npm run serve
 
 写法：v-show="表达式"
 
-​                    适用于：切换频率较高的场景。
+​                    适用于：切换频率较高的场景。 
 
 ​                    特点：不展示的DOM元素未被移除，仅仅是使用样式隐藏掉
 
@@ -2836,6 +2832,162 @@ export default {
 }
 ```
 
+
+
+##### 全局事件总线🌟
+
+###### 理解
+
+* 1. Vue原型对象上包含事件处理的方法
+
+    * 1 ) $on(eventName,listener):绑定自定义事件监听
+    * 2 ) $emit(eventName,data):分发自定义事件
+    * 3 ) $off(eventName):解绑自定义事件监听
+    * 4 ) $once(eventName,listener):绑定事件监听,但只能处理一次
+
+* 2. 所有组件实例对象的原型对象的原型对象就是Vue的原型对象
+
+    * 1 ) 所有组件对象都能看到Vue原型对象上的属性和方法
+    * 2 ) Vue.prototype.$bus=newVue(),所有的组件对象都能看到$bus这个属性对象
+
+* 3. 全局事件总线
+
+    * 1 ) 包含事件处理相关方法的对象(只有一个)
+    * 2 ) 所有的组件都可以得到
+
+###### 指定事件总线对象   main.js
+
+```js
+new Vue({ 
+    beforeCreate () { // 尽量早的执行挂载全局事件总线对象的操作 Vue.prototype.$globalEventBus = this 
+    }, 
+    }).$mount('#root')
+```
+
+###### 绑定事件
+
+```js
+this.$globalEventBus.$on('deleteTodo', this.deleteTodo)
+```
+
+###### 分发事件
+
+```js
+this.$globalEventBus.$emit('deleteTodo', this.index)
+```
+
+###### 解绑事件
+
+```js
+this.$globalEventBus.$off('deleteTodo')
+```
+
+###### 代码：
+
+main.js  指定事件总线对象
+
+```js
+//引入Vue
+import Vue from 'vue'
+//引入App
+import App from './App.vue'
+//关闭Vue的生产提示
+Vue.config.productionTip = false
+
+//创建vm
+new Vue({
+	el:'#app',
+	render: h => h(App),
+	beforeCreate() {
+		Vue.prototype.$bus = this //安装全局事件总线
+	},
+})
+```
+
+School.vue  绑定事件  解绑事件
+
+```vue
+<template>
+	<div class="school">
+		<h2>学校名称：{{name}}</h2>
+		<h2>学校地址：{{address}}</h2>
+	</div>
+</template>
+
+<script>
+	export default {
+		name:'School',
+		data() {
+			return {
+				name:'尚硅谷',
+				address:'北京',
+			}
+		},
+		mounted() {
+			// console.log('School',this)
+			this.$bus.$on('hello',(data)=>{
+				console.log('我是School组件，收到了数据',data)
+			})
+		},
+		beforeDestroy() {
+			this.$bus.$off('hello')
+		},
+	}
+</script>
+
+<style scoped>
+	.school{
+		background-color: skyblue;
+		padding: 5px;
+	}
+</style>
+```
+
+Student.vue    分发事件
+
+```vue
+<template>
+	<div class="student">
+		<h2>学生姓名：{{name}}</h2>
+		<h2>学生性别：{{sex}}</h2>
+		<button @click="sendStudentName">把学生名给School组件</button>
+	</div>
+</template>
+
+<script>
+	export default {
+		name:'Student',
+		data() {
+			return {
+				name:'张三',
+				sex:'男',
+			}
+		},
+		mounted() {
+			// console.log('Student',this.x)
+		},
+		methods: {
+			sendStudentName(){
+				this.$bus.$emit('hello',this.name)
+			}
+		},
+	}
+</script>
+
+<style lang="less" scoped>
+	.student{
+		background-color: pink;
+		padding: 5px;
+		margin-top: 30px;
+	}
+</style>
+
+```
+
+
+
+
+
 #### 消息订阅与发布
 
 ##### 理解
@@ -2934,160 +3086,6 @@ Student.vue
 	}
 </script>
 ```
-
-
-
-#### 全局事件总线🌟
-
-##### 理解
-
-* 1. Vue原型对象上包含事件处理的方法
-
-    * 1 ) $on(eventName,listener):绑定自定义事件监听
-    * 2 ) $emit(eventName,data):分发自定义事件
-    * 3 ) $off(eventName):解绑自定义事件监听
-    * 4 ) $once(eventName,listener):绑定事件监听,但只能处理一次
-
-* 2. 所有组件实例对象的原型对象的原型对象就是Vue的原型对象
-
-    * 1 ) 所有组件对象都能看到Vue原型对象上的属性和方法
-    * 2 ) Vue.prototype.$bus=newVue(),所有的组件对象都能看到$bus这个属性对象
-
-* 3. 全局事件总线
-
-    * 1 ) 包含事件处理相关方法的对象(只有一个)
-    * 2 ) 所有的组件都可以得到
-
-##### 指定事件总线对象   main.js
-
-```js
-new Vue({ 
-    beforeCreate () { // 尽量早的执行挂载全局事件总线对象的操作 Vue.prototype.$globalEventBus = this 
-    }, 
-    }).$mount('#root')
-```
-
-##### 绑定事件
-
-```js
-this.$globalEventBus.$on('deleteTodo', this.deleteTodo)
-```
-
-##### 分发事件
-
-```js
-this.$globalEventBus.$emit('deleteTodo', this.index)
-```
-
-##### 解绑事件
-
-```js
-this.$globalEventBus.$off('deleteTodo')
-```
-
-##### 代码：
-
-###### main.js  指定事件总线对象
-
-```js
-//引入Vue
-import Vue from 'vue'
-//引入App
-import App from './App.vue'
-//关闭Vue的生产提示
-Vue.config.productionTip = false
-
-//创建vm
-new Vue({
-	el:'#app',
-	render: h => h(App),
-	beforeCreate() {
-		Vue.prototype.$bus = this //安装全局事件总线
-	},
-})
-```
-
-###### School.vue  绑定事件  解绑事件
-
-```vue
-<template>
-	<div class="school">
-		<h2>学校名称：{{name}}</h2>
-		<h2>学校地址：{{address}}</h2>
-	</div>
-</template>
-
-<script>
-	export default {
-		name:'School',
-		data() {
-			return {
-				name:'尚硅谷',
-				address:'北京',
-			}
-		},
-		mounted() {
-			// console.log('School',this)
-			this.$bus.$on('hello',(data)=>{
-				console.log('我是School组件，收到了数据',data)
-			})
-		},
-		beforeDestroy() {
-			this.$bus.$off('hello')
-		},
-	}
-</script>
-
-<style scoped>
-	.school{
-		background-color: skyblue;
-		padding: 5px;
-	}
-</style>
-```
-
-###### Student.vue    分发事件
-
-```vue
-<template>
-	<div class="student">
-		<h2>学生姓名：{{name}}</h2>
-		<h2>学生性别：{{sex}}</h2>
-		<button @click="sendStudentName">把学生名给School组件</button>
-	</div>
-</template>
-
-<script>
-	export default {
-		name:'Student',
-		data() {
-			return {
-				name:'张三',
-				sex:'男',
-			}
-		},
-		mounted() {
-			// console.log('Student',this.x)
-		},
-		methods: {
-			sendStudentName(){
-				this.$bus.$emit('hello',this.name)
-			}
-		},
-	}
-</script>
-
-<style lang="less" scoped>
-	.student{
-		background-color: pink;
-		padding: 5px;
-		margin-top: 30px;
-	}
-</style>
-
-```
-
-
 
 
 
@@ -3564,7 +3562,7 @@ import Article from "@/components/Article.vue";
 
 ### 作用域插槽
 
-在封装组件的过程中，可以为预留的 <slot> 插槽绑定 props 数据，这种带有 props 数据的 <slot> 叫做“作用域插槽”。
+**在封装组件的过程中，可以为预留的 <slot> 插槽绑定 props 数据，这种带有 props 数据的 <slot> 叫做“作用域插槽”。**
 
 插槽
 
