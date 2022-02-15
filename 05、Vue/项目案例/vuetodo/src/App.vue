@@ -4,8 +4,12 @@
     <div class="todo-container">
       <div class="todo-wrap">
         <MyHeader :addTodo="addTodo"></MyHeader>
-        <MyList></MyList>
-        <MyFooter></MyFooter>
+        <MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"></MyList>
+        <MyFooter
+          :todos="todos"
+          :checkAllTodo="checkAllTodo"
+          :clearAllTodo="clearAllTodo"
+        ></MyFooter>
       </div>
     </div>
   </div>
@@ -39,6 +43,24 @@ export default {
     addTodo(todoObj) {
       this.todos.unshift(todoObj)
       console.log(this.todos)
+    },
+    checkTodo(id) {
+      this.todos.forEach((todo) => {
+        if (todo.id === id) todo.done = !todo.done
+      })
+    },
+    deleteTodo(id) {
+      this.todos = this.todos.filter((todo) => todo.id !== id)
+    },
+    checkAllTodo(done) {
+      this.todos.forEach((todo) => {
+        todo.done = done
+      })
+    },
+    clearAllTodo() {
+      this.todos = this.todos.filter((todo) => {
+        return !todo.done
+      })
     },
   },
   //生命周期 - 创建完成（可以访问当前this实例）
