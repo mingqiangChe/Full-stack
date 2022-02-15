@@ -1,0 +1,33 @@
+<!--
+ * @Author: your name
+ * @Date: 2022-02-15 23:35:29
+ * @LastEditTime: 2022-02-15 23:51:31
+ * @LastEditors: thomas373737
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /GitHub/Full-stack/03、javascript/code/04数值.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数值</title>
+  </head>
+  <body>
+    <script>
+      //整点数 浮点数
+      console.log(0.1 + 0.2); //0.30000000004
+      console.log(0.3 / 0.2); //1.49999999998
+      console.log(0.3 - 0.2 === 0.2 - 0.1); //false
+
+      //NaN非数字类型  数据类型number
+      console.log(5 - "a"); //NaN
+      console.log(typeof NaN);
+
+      NaN === NaN  //false
+      console.log(boolean(NaN));//false
+      
+    </script>
+  </body>
+</html>

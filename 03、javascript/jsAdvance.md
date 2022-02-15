@@ -1,14 +1,45 @@
 # 数据类型
 ## 基本(值)类型
-* string: 任意字符串
-* number: 任意数字
-* boolean: true/false
-* undefined: undefined
-* null: null
+### string: 
+
+### number: 
+
+```javascript
+			//整点数 浮点数
+      console.log(0.1 + 0.2); //0.30000000004
+      console.log(0.3 / 0.2); //1.49999999998
+      console.log(0.3 - 0.2 === 0.2 - 0.1); //false
+
+      //NaN非数字类型  数据类型number
+      console.log(5 - "a"); //NaN
+      console.log(typeof NaN);
+
+      NaN === NaN  //false
+      console.log(boolean(NaN));//false
+      
+
+      //  Infinity  无穷
+```
+
+​			
+
+### boolean: 
+
+​				<u>除了underfined null false 0 NaN “” ‘’为false，其余为true</u>
+
+### undefined:   
+
+表示“未定义”或不存在
+
+### null: null
+
 ## 对象类型
-* object: 基本对象类型
-* function: 特殊对象, 可以执行
-* array: 特殊对象, 可通过下标执行, 内部有序
+### object: 基本对象类型
+
+### function: 特殊对象, 可以执行
+
+### array: 特殊对象, 可通过下标执行, 内部有序
+
 ## 判断数据类型
 * typeof  
     * 返回数据类型的字符串表达
@@ -18,13 +49,48 @@
     * 返回boolean值, 只能判断对象的具体类型, 即是普通对象, 函数还是基本类型
 * ===(全等)
     * 可以判断undefined与null, 由于它们的值只有1个
+* Object.prototype.toString
+```javascript
+     //typrof
+      console.log(typeof 123); //number
+      console.log(typeof "123"); //string
+      console.log(typeof false); //boolean
+      function tp() {}
+      console.log(typeof tp); //function
+      console.log(typeof underfined); //underfined
+
+      console.log(typeof({}));//object
+      console.log(typeof([]));//object
+      console.log(typeof(null));//object
+
+      //instance 常用来区分数组和对象
+      var array =[]
+      var object ={}
+      console.log(array instanceof Array);//true
+      console.log(object instanceof Array);//false
+
+```
+
 ## 相关问题
 1. undefined与null的区别
    * undefined: **创建了变量未赋值**
    * null: 创建了变量并赋值, 赋值为null
+   * 在if中自动转为false，甚至null == underfined
+   * null**表示空的对象转为数值为0**，underfined表示‘此处无定义’原始值，转为数值为NaN
+   
+   ```javascript
+         console.log(Number(null));//0
+         console.log(5 + null);//5
+         console.log(Number(undefined));//NaN
+         console.log(5 + undefined);//NaN
+   ```
+   
+   
+   
 2. 什么时候赋值为null
    * 初始赋值为null, 表明将要赋值为对象
    * **最后赋值为null, 让这个变量原来指向的对象被垃圾回收机制回收**
+   
 3. 严格区分变量类型与数据类型
    * 数据类型
         * 基本类型, 对象类型
