@@ -3836,41 +3836,45 @@ Vue.directive('color', function (el,binding) {
 
 #### 5. 1 Vuex工作原理图
 
-  ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/05、Vue/vue2/vue.assets/QQ截图20210808172830.png "QQ截图20201229183512.png")
+  <img src="vue.assets/QQ截图20210808172830.png" alt="QQ截图20210808172830" style="zoom:150%;" />
 
 ### vuex核心概念和API
 
-不需要共享的状态不应该使用这个技术
+**不需要共享的状态不应该使用这个技术**
 
-### store
+#### store
 
 * 所有用vuex管理的组件中都多了一个属性$store，它就是一个store对象
 * 属性：
   * state: 注册好的state对象
   * getter: 注册好的getter对象
-* 方法:
-  * dispatch(actionname, data): 分发调用action
-  * commit(mutationname, {data}): 直接调用mutation,第二个参数必须是对象
+* 方法:  同步commit  异步dispatch
+  * dispatch(actionname, data): 分发调用**action**
+  * commit(mutationname, {data}): 直接调用**mutation**,第二个参数必须是对象
 
-### state
+#### state
 
 * 1 .vuex管理的状态对象
 * 2 .它应该是唯一的
-* 3 .示例代码：
+  * 3 .示例代码：   this.$store.state可以获取
 
-### actions
+
+#### actions
 
 * 1 .值为一个对象，包含多个响应用户动作的回调函数
+
 * 2 .通过commit()来触发mutation中函数的调用,间接更新state
-* 3 .如何触发actions中的回调？在组件中使用: $store.dispatch('对应的action回调名') 触发
+
+* 3 .如何触发actions中的回调？在组件中使用: 
+
+  `$store.dispatch('对应的action回调名')`   触发
+
 * 4 .可以包含异步代码（定时器,ajax等等）
   * 包含多个对应事件回调函数的对象
   * 通过使用函数中的第一个参数commit来调用对应的mutation来间接实现更新
   * 第二个形参是state，第三个形参是dispatch传入的data
 
-
-
-### mutations
+#### mutations
 
 * 1 .值是一个对象，包含多个直接更新state的方法
 * 2 .谁能调用mutations中的方法？如何调用？在action中使用： commit('对应的mutations方法名') 触发
@@ -3878,9 +3882,7 @@ Vue.directive('color', function (el,binding) {
   * 包含多个直接更新状态的函数的对象
   * 第一个形参是state，第二个形参是commit传入的data
 
-
-
-### getters
+#### getters
 
 * 1 .值为一个对象，包含多个用于返回数据的函数
 * 2 .如何使用？—— $store.getters.xxx
@@ -3888,17 +3890,15 @@ Vue.directive('color', function (el,binding) {
   * 函数中的第一个形参是state
 
 
-
-
-### modules
+#### modules
 
 * 1 .包含多个module
-* 2 .一个module是一个store的配置对象
+* 2 .**一个module是一个store的配置对象**
 * 3 .与一个组件（包含有共享数据）对应
 
 
 
-### 简化组件内使用
+### 简化组件内使用 **mapState, mapGetters, mapActions**
 
 * vuex中有`mapState, mapGetters, mapActions`几个组件绑定的辅助函数
 * 这些函数的返回值是一个对象，这些对象包含了与传入这些函数的参数同名的函数
@@ -3911,10 +3911,8 @@ new Vue({
         ...mapGetters({isOddOrNot: 'isOddOrNot1'}) //当vuex与组件内命名不统一时要使用对象作为传入的参数，否则可以使用数组作为参数...mapGetters(['isOddOrNot'])
     }
     store
-})
+}
 ```
-
-
 
 ## 路由
 
