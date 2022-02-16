@@ -1,0 +1,68 @@
+<!--
+ * @Author: thomas373737
+ * @Date: 2022-02-16 20:44:24
+ * @LastEditors: thomas373737
+ * @LastEditTime: 2022-02-16 23:32:23
+ * @FilePath: /GitHub/Full-stack/03、javascript/code/11标准库属性描述对象.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>属性对象描述符</title>
+  </head>
+  <body>
+    <script>
+      //Object.getOwnPropertyDescriptor()
+      var obj1 = { p: "a" };
+      console.log(Object.getOwnPropertyDescriptor(obj1, "p"));
+
+      // Object.defineProperty()
+      var obj = Object.defineProperty({}, "p", {
+        value: 123,
+        writable: false,
+        enumerable: true,
+        configurable: false,
+      });
+      console.log(obj.p);
+      obj.p = 234;
+      console.log(obj.p);
+
+      //一次性定义或修改多个属性Object.defineProperties()
+      var obj2 = Object.defineProperties(
+        {},
+        {
+          p1: { value: 123, enumerable: true },
+          p2: { value: "ada", enumerable: true },
+          p3: {
+            get: function () {
+              return this.p1 + this.p2;
+            },
+            enumerable: true,
+            configurable: true,
+          },
+        }
+      );
+      console.log(obj2.p1);
+      console.log(obj2.p2);
+      console.log(obj2.p3);
+
+      //存取器
+      var obj3 = Object.defineProperty({}, "p", {
+        get: function () {
+          return "gettter";
+        },
+        set: function (value) {
+          console.log("setter:" + value);
+        },
+      });
+      console.log(obj3.p);
+      obj3.p=123
+    </script>
+  </body>
+</html>

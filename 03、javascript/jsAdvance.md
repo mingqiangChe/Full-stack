@@ -47,7 +47,7 @@
     * 返回boolean值, 只能判断对象的具体类型, 即是普通对象, 函数还是基本类型
 * ===(全等)
     * 可以判断undefined与null, 由于它们的值只有1个
-* Object.prototype.toString
+* Object.prototype.toString.call()
 ```javascript
      //typrof
       console.log(typeof 123); //number
@@ -66,6 +66,16 @@
       var object ={}
       console.log(array instanceof Array);//true
       console.log(object instanceof Array);//false
+
+//Object.prototype.toString.call()
+Object.prototype.toString.call(2) // "[object Number]"
+Object.prototype.toString.call('') // "[object String]"
+Object.prototype.toString.call(true) // "[object Boolean]"
+Object.prototype.toString.call(undefined) // "[object Undefined]"
+Object.prototype.toString.call(null) // "[object Null]"
+Object.prototype.toString.call(Math) // "[object Math]"
+Object.prototype.toString.call({}) // "[object Object]"
+Object.prototype.toString.call([]) // "[object Array]"
 
 ```
 
@@ -375,7 +385,35 @@ inc() // 7
 
 上面代码中，`start`是函数`createIncrementor`的内部变量。通过闭包，`start`的状态被保留了，每一次调用都是在上一次调用的基础上进行计算。从中可以看到，闭包`inc`使得函数`createIncrementor`的内部环境，一直存在。所以，闭包可以看作是函数内部作用域的一个接口。
 
-为什么闭包能够返回外层函数的内部变量？原因是闭包（上例的`inc`）用到了外层变量（`start`），导致外层函数（`createIncrementor`）不能从内存释放。只要闭包没有被垃圾回收机制清除，外层函数提供的运行环境也不会被清除，它的内部变量就始终保存着当前值，供闭包读取。
+为什么闭包能够返回外层函数的内部变量？原因是闭包（上例的`inc`）**用到了外层变量（`start`）**，导致外层函数（`createIncrementor`）不能从内存释放。**只要闭包没有被垃圾回收机制清除，外层函数提供的运行环境也不会被清除，它的内部变量就始终保存着当前值，供闭包读取。**
+
+```js
+function Person(name) {
+  var _age;
+  function setAge(n) {
+    _age = n;
+  }
+  function getAge() {
+    return _age;
+  }
+
+  return {
+    name: name,
+    getAge: getAge,
+    setAge: setAge
+  };
+}
+
+var p1 = Person('张三');
+p1.setAge(25);
+p1.getAge() // 25
+```
+
+上面代码中，函数`Person`的内部变量`_age`，通过闭包`getAge`和`setAge`，变成了返回对象`p1`的私有变量。
+
+注意，外层函数每次运行，都会生成一个新的闭包，而这个闭包又会保留外层函数的内部变量，所以内存消耗很大。因此不能滥用闭包，否则会造成网页的性能问题。
+
+
 
 # 回调函数
 
@@ -388,7 +426,26 @@ inc() // 7
    * 定时器回调函数-->window
    * ajax回调函数-->
    * 生命周期回调函数
+# 类数组
+
+字符串。对象。arguments对象
+
+将“类似数组的对象”转为真正的数组，然后再直接调用数组的`forEach`方法。
+
+```js
+var arr = Array.prototype.slice.call('abc');
+arr.forEach(function (chr) {
+  console.log(chr);
+});
+// a
+// b
+// c
+```
+
+
+
 # IIFE(立即调用函数表达式)
+
 ## 形式
 ```javascript
 (function(){
