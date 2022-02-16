@@ -1,0 +1,58 @@
+<!--
+ * @Author: thomas373737
+ * @Date: 2022-02-16 17:00:25
+ * @LastEditors: thomas373737
+ * @LastEditTime: 2022-02-16 17:59:12
+ * @FilePath: /GitHub/Full-stack/03、javascript/code/07函数.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function f() {
+        a();
+        b();
+        c();
+      }
+      f.toString();
+      console.log(f.toString());
+
+      var p = 2;
+      function f(p) {
+        p = 3;
+        console.log(p);
+      }
+      f(p);
+      console.log(p); //2
+
+      //arguments
+      var f = function (one) {
+        console.log(arguments[0]);
+        console.log(arguments[1]);
+        console.log(arguments[2]);
+      };
+      f(1, 2, 3);
+
+      //闭包
+      function f1() {
+        var n = 999;
+        function f2() {
+          console.log(n);
+        }
+        return f2;
+      }
+
+      var result = f1();
+      result(); // 999
+    </script>
+  </body>
+</html>

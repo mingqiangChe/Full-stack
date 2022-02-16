@@ -207,11 +207,37 @@ if ('toString' in obj) {
 
 
 
+### for in遍历对象
+
+
+
+- 它遍历的是对象所有可遍历（enumerable）的属性，会跳过不可遍历的属性。
+- 它不仅遍历对象自身的属性，还遍历继承的属性。
+
+```js
+var obj = {a: 1, b: 2, c: 3};
+
+for (var i in obj) {
+  console.log('键名：', i);
+  console.log('键值：', obj[i]);
+}
+// 键名： a
+// 键值： 1
+// 键名： b
+// 键值： 2
+// 键名： c
+// 键值： 3
+```
+
+不可遍历对象属性可以使用hasOwnProperty方法
+
+
+
 
 
 # 函数 
 
-1. 什么是函数
+1. 什么是[函数](https://wangdoc.com/javascript/types/function.html)
    * 实现特定功能的n条语句的封装体
    * 只有函数可以执行, 其他类型的数据不能执行
 2. 为什么要用函数
@@ -225,7 +251,134 @@ if ('toString' in obj) {
    * 通过对象调用: obj.test()
    * new调用: new test()
    * test.call/apply(obj): 临时让test函数变成obj的方法进行调用
+
+toString 返回字符串为源码
+
+❤️**函数执行时所在的作用域，是定义时的作用域，而不是调用时所在的作用域。**
+
+
+
+### 两大传递方式 是修改地址还是改值
+
+函数参数如果是原始类型的值（数值、字符串、布尔值），传递方式是传值传递（passes by value）。这意味着，在函数体内修改参数值，不会影响到函数外部。
+
+```js
+var p = 2;
+
+function f(p) {
+  p = 3;
+}
+f(p);
+
+p // 2
+```
+
+上面代码中，变量`p`是一个原始类型的值，传入函数`f`的方式是传值传递。因此，在函数内部，`p`的值是原始值的拷贝，无论怎么修改，都不会影响到原始值。
+
+但是，如果函数参数是复合类型的值（数组、对象、其他函数），传递方式是传址传递（pass by reference）。也就是说，传入函数的原始值的地址，因此在函数内部修改参数，将会影响到原始值。
+
+```js
+var obj = { p: 1 };
+
+function f(o) {
+  o.p = 2;
+}
+f(obj);
+
+obj.p // 2
+```
+
+上面代码中，传入函数`f`的是参数对象`obj`的地址。因此，在函数内部修改`obj`的属性`p`，会影响到原始值。
+
+注意，如果函数内部修改的，不是参数对象的某个属性，而是替换掉整个参数，这时不会影响到原始值。
+
+```js
+var obj = [1, 2, 3];
+
+function f(o) {
+  o = [2, 3, 4];
+}
+f(obj);
+
+obj // [1, 2, 3]
+```
+
+上面代码中，在函数`f()`内部，参数对象`obj`被整个替换成另一个值。这时不会影响到原始值。这是因为，形式参数（`o`）的值实际是参数`obj`的地址，重新对`o`赋值导致`o`指向另一个地址，保存在原地址上的值当然不受影响。
+
+### arguments对象  在函数体内部读取所有参数
+
+```js
+var f = function (one) {
+  console.log(arguments[0]);
+  console.log(arguments[1]);
+  console.log(arguments[2]);
+}
+
+f(1, 2, 3)
+// 1
+// 2
+// 3
+```
+
+只有严格模式下使用arguments对象修改不了 传入的值
+
+#### 与数组关系
+
+需要注意的是，虽然`arguments`很像数组，但它是一个对象。数组专有的方法（比如`slice`和`forEach`），不能在`arguments`对象上直接使用。
+
+如果要让`arguments`对象使用数组方法，真正的解决方法是将arguments转为真正的数组。下面是两种常用的转换方法：`slice`方法和逐一填入新数组。
+
+```js
+var args = Array.prototype.slice.call(arguments);
+
+// 或者
+var args = [];
+for (var i = 0; i < arguments.length; i++) {
+  args.push(arguments[i]);
+}
+```
+
+### 闭包
+
+```js
+function f1() {
+  var n = 999;
+  function f2() {
+    console.log(n);
+  }
+  return f2;
+}
+
+var result = f1();
+result(); // 999
+```
+
+上面代码中，函数`f1`的返回值就是函数`f2`，由于`f2`可以读取`f1`的内部变量，所以就可以在外部获得`f1`的内部变量了。
+
+闭包就是函数`f2`，即能够读取其他函数内部变量的函数。由于在 JavaScript 语言中，只有函数内部的子函数才能读取内部变量，因此可以把闭包简单理解成“定义在一个函数内部的函数”。闭包最大的特点，就是它可以“记住”诞生的环境，比如`f2`记住了它诞生的环境`f1`，所以从`f2`可以得到`f1`的内部变量。在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。
+
+
+
+```js
+function createIncrementor(start) {
+  return function () {
+    return start++;
+  };
+}
+
+var inc = createIncrementor(5);
+
+inc() // 5
+inc() // 6
+inc() // 7
+```
+
+上面代码中，`start`是函数`createIncrementor`的内部变量。通过闭包，`start`的状态被保留了，每一次调用都是在上一次调用的基础上进行计算。从中可以看到，闭包`inc`使得函数`createIncrementor`的内部环境，一直存在。所以，闭包可以看作是函数内部作用域的一个接口。
+
+为什么闭包能够返回外层函数的内部变量？原因是闭包（上例的`inc`）用到了外层变量（`start`），导致外层函数（`createIncrementor`）不能从内存释放。只要闭包没有被垃圾回收机制清除，外层函数提供的运行环境也不会被清除，它的内部变量就始终保存着当前值，供闭包读取。
+
 # 回调函数
+
 1. 什么函数属于回调函数
    * 自己定义过的
    * 自己没有调用的
