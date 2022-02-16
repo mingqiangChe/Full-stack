@@ -1,0 +1,59 @@
+<!--
+ * @Author: thomas373737
+ * @Date: 2022-02-16 11:21:06
+ * @LastEditors: thomas373737
+ * @LastEditTime: 2022-02-16 14:06:06
+ * @FilePath: /GitHub/Full-stack/03、javascript/code/1.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function filterTreeNode(searchValue) {
+        const treeData = [
+          {
+            name: "node-1",
+            children: [
+              {
+                name: "node-1-1",
+                children: [],
+              },
+              {
+                name: "node-1-2",
+                children: [],
+              },
+            ],
+          }
+        ];
+        // TO-DO
+        arr = new Array(),
+        str;
+        function arrayToTree(array,nameId){
+          let result = []
+          array.forEach((item,i)=>{
+            if(item.name== nameId){
+              array.splice(i,1)
+              // item.son_data=arrayToTree(array,item)
+              result.push(item)
+              // result = result.sort((a,b)=>{
+              //   return a.sort-b.sort
+              // })
+            }
+          })
+          return result
+        }
+        arr=arrayToTree(treeData,null)
+        console.log(arr);
+      }
+    </script>
+  </body>
+</html>
