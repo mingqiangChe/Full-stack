@@ -2,7 +2,7 @@
  * @Author: thomas373737
  * @Date: 2022-02-16 01:30:32
  * @LastEditors: thomas373737
- * @LastEditTime: 2022-02-16 11:12:25
+ * @LastEditTime: 2022-02-16 15:07:11
  * @FilePath: /GitHub/Full-stack/03、javascript/code/06对象.html
  * @Description: 
  * 
@@ -26,44 +26,40 @@
       console.log(obj["bar"]);
 
       // 方法函数对象
-      var obja = {
+      var obj = {
         p: function (x) {
-          return x;
+          return 2 * x;
         },
       };
-      obja.p(1);
 
-      function filterTreeNode(searchValue) {
-        const treeData = [
-          {
-            name: "node-1",
-            children: [
-              {
-                name: "node-1-1",
-                children: [],
-              },
-              {
-                name: "node-1-2",
-                children: [],
-              },
-            ],
-          },
-        ];
-        // TO-DO
-      }
+      console.log(obj.p(1)); // 2
 
-      var json = {
-        and: [
-          {
-            x: { eq: "11" },
-          },
-          {
-            y: { eq: "33" },
-          },
-        ],
+      var foo = "bar";
+      var obj = {
+        foo: 1,
+        bar: 2,
       };
-      jsonConfig= new JsonConfig();
-      jsonConfig.setExcludes(new String[]{"pos"});
+      console.log(obj.foo); //1
+      console.log(obj[foo]); //2
+      console.log(obj["foo"]); //1
+
+      var obj1 = {};
+      obj1.foo = "hello";
+      obj1["bar"] = "world";
+      console.log(obj1);
+
+      var obj2 = {
+        key1: 1,
+        key2: 2,
+      };
+      console.log(Object.keys(obj2));
+
+      var obj = { p: 1 };
+      Object.keys(obj); // ["p"]
+
+      delete obj.p; // true
+      obj.p; // undefined
+      Object.keys(obj); // []
     </script>
   </body>
 </html>

@@ -150,7 +150,67 @@
 5. 什么时候必须使用[\'属性名\']
    * 属性名包含特殊字符, 如-. 空格
    * 属性名不确定时, 使用的是变量的值
+```
+var foo = "bar";
+      var obj = {
+        foo: 1,
+        bar: 2,
+      };
+      console.log(obj.foo);//1
+      console.log(obj[foo]);//2
+      console.log(obj["foo"]);//1
+```
+
+❤️上面代码中，引用对象`obj`的`foo`属性时，如果使用点运算符，`foo`就是字符串；如果使用方括号运算符，但是不使用引号，那么`foo`就是一个变量，指向字符串`bar`。
+
+### 属性查看 Object.keys()
+
+```js
+var obj = {
+  key1: 1,
+  key2: 2
+};
+
+Object.keys(obj);
+// ['key1', 'key2']
+```
+
+### 属性删除 delete
+
+```js
+var obj = { p: 1 };
+Object.keys(obj) // ["p"]
+
+delete obj.p // true
+obj.p // undefined
+Object.keys(obj) // []
+```
+
+### 属性是否存在：in 运算符。 hasOwnProperty
+
+但是他返回true同时无法判定是本身还是继属性
+
+```js
+var obj = { p: 1 };
+'p' in obj // true
+'toString' in obj // true
+```
+
+使用hasOwnProperty可以
+
+```js
+var obj = {};
+if ('toString' in obj) {
+  console.log(obj.hasOwnProperty('toString')) // false
+}
+```
+
+
+
+
+
 # 函数 
+
 1. 什么是函数
    * 实现特定功能的n条语句的封装体
    * 只有函数可以执行, 其他类型的数据不能执行
