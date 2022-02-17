@@ -2,7 +2,7 @@
  * @Author: thomas373737
  * @Date: 2022-02-16 20:44:24
  * @LastEditors: thomas373737
- * @LastEditTime: 2022-02-16 23:32:23
+ * @LastEditTime: 2022-02-17 00:17:25
  * @FilePath: /GitHub/Full-stack/03、javascript/code/11标准库属性描述对象.html
  * @Description: 
  * 
@@ -62,7 +62,41 @@
         },
       });
       console.log(obj3.p);
-      obj3.p=123
+      obj3.p = 123;
+
+      //第二种写法
+      var obj4 = {
+        get p() {
+          return "getter";
+        },
+        set p(value) {
+          console.log(value + "setter");
+        },
+      };
+      console.log(obj4.p);
+      obj4.p = 234;
+
+      //对象拷贝
+      var extend = function (to, from) {
+        for (var property in from) {
+          if (!from.hasOwnProperty(property)) continue;
+          Object.defineProperty(
+            to,
+            property,
+            Object.getOwnPropertyDescriptor(from, property)
+          );
+        }
+        return to;
+      };
+
+      extend(
+        {},
+        {
+          get a() {
+            return 1;
+          },
+        }
+      );
     </script>
   </body>
 </html>
