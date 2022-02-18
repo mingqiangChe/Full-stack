@@ -2,7 +2,7 @@
  * @Author: thomas373737
  * @Date: 2022-02-17 17:04:55
  * @LastEditors: thomas373737
- * @LastEditTime: 2022-02-17 19:31:53
+ * @LastEditTime: 2022-02-17 22:30:52
  * @FilePath: /GitHub/Full-stack/03、javascript/code/14this关键字.html
  * @Description: 
  * 
@@ -52,6 +52,15 @@
         console.log(this.n);
       }
       b.call(obj1)
+
+
+       var a={n:1}
+       var b=a;
+       a.x=a={n:2}
+       console.log(a);
+       console.log(b)
+       console.log(a.x);
+       console.log(b.x);
     </script>
   </body>
 </html>
