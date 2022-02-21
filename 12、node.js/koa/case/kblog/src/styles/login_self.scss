@@ -1,0 +1,172 @@
+.form_body {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100%;
+    .form_title {
+      font-size: 2.5rem;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #2f3a4f;
+      line-height: 3.5rem;
+      height: 3.5rem;
+    }
+    .login_form {
+      flex: 1;
+      .form_main {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+          justify-content: center;
+        .register_button {
+          width: 21.44rem;
+          min-width: 200px;
+          margin-top: 3rem;
+          background: #1329e6;
+          box-shadow: 0rem 0.31rem 1.25rem 0.13rem rgba(19, 41, 230, 0.3);
+          border-radius: 0.63rem;
+          color: #ffffff;
+        }
+      }
+      .el-form-item {
+        margin-bottom: 5px;
+        /deep/.el-form-item__label {
+          padding: 0 !important;
+        }
+        .el-input {
+          width: 21.44rem;
+          min-width: 200px;
+        }
+        .code_button {
+          background: #1329e6;
+          color: #fff;
+          margin-left: 20px;
+          font-size: 14px;
+        }
+        .code_button_slot{
+            display: none;
+            margin-right: -8px;
+            background: #1329e6;
+            color: #fff;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+        .send_code{
+            background-color:#909399 ;
+        }
+        .forget_button{
+            width: 21.44rem;
+            text-align: right;
+            min-width: 200px;
+            .el-button{
+                color: #1329E6;
+                font-weight: 400;
+                font-size: 1.5rem;
+            }
+        }
+        .back_button{
+            width: 21.44rem;
+            text-align: center;
+            min-width: 200px;
+            .el-button{
+                color: #1329E6;
+                font-weight: 400;
+                font-size: 1.5rem;
+            }
+        }
+      }
+    }
+    .bottom_tip {
+      margin-top: 4rem;
+      height: 2.06rem;
+      font-size: 1.5rem;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #464f62;
+      line-height: 2.06rem;
+      span {
+        color: #2237e8;
+        cursor: pointer;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 979px) {
+    .form_body {
+      .form_title {
+        font-size: 24px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #2f3a4f;
+        text-align: center;
+        line-height: 35px;
+        height: 35px;
+      }
+      .login_form {
+        .form_main {
+          display: flex;
+          height: 100%;
+          flex-direction: column;
+          justify-content: center;
+          .register_button {
+            width: 100%;
+            margin-top: 40px;
+            background: #1329e6;
+            box-shadow: 0rem 0.31rem 1.25rem 0.13rem rgba(19, 41, 230, 0.3);
+            border-radius: 8px;
+            color: #ffffff;
+          }
+        }
+        .el-form-item {
+          margin-bottom: 5px;
+          /deep/.el-form-item__label {
+            padding: 0 !important;
+          }
+          .el-input {
+            width: 100%;
+            min-width: 100%;
+            padding: 0!important;
+          }
+          .code_button {
+              display: none;
+            background: #1329e6;
+            color: #fff;
+            margin-left: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-size: 14px;
+          }
+          .code_button_slot{
+            display: inline-block;
+          }
+          .forget_button{
+            width:100%;
+            text-align: right;
+            .el-button{
+                color: #1329E6;
+                font-weight: 400;
+                font-size: 16px;
+            }
+        }
+        .back_button{
+            width:100%;
+            text-align: center;
+            .el-button{
+                color: #1329E6;
+                font-weight: 400;
+                font-size: 16px;
+            }
+        }
+        }
+      }
+      .bottom_tip {
+        margin-top: 30px;
+        height: 2.06rem;
+        font-size: 16px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #464f62;
+        line-height: 2.06rem;
+      }
+    }
+  }
