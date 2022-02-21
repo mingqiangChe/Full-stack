@@ -2,7 +2,7 @@
  * @Author: thomas373737
  * @Date: 2022-02-18 17:03:03
  * @LastEditors: thomas373737
- * @LastEditTime: 2022-02-19 19:01:02
+ * @LastEditTime: 2022-02-21 14:08:58
  * @FilePath: /GitHub/Full-stack/03、javascript/code/15原型链.html
  * @Description: 
  * 
@@ -86,9 +86,21 @@
       Object.assign(S.prototype, M2.prototype);
       S.prototype.constructor = S;
       var s = new S();
-      
+
       console.log(s.hello);
       console.log(s.world);
+
+      function StringBuilder() {
+        var buffe = [];
+        this.add = function (str) {
+          buffe.push(str);
+        };
+        this.toString = function () {
+          return buffe.join("");
+        };
+      }
+      let zz = ["aa"];
+      console.log(this.add());
     </script>
   </body>
 </html>
