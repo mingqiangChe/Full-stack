@@ -2,7 +2,7 @@
  * @Author: thomas373737
  * @Date: 2022-02-22 11:04:40
  * @LastEditors: thomas373737
- * @LastEditTime: 2022-02-22 11:20:22
+ * @LastEditTime: 2022-02-22 16:38:55
  * @FilePath: /GitHub/Full-stack/03、javascript/code/20DOM.html
  * @Description: 
  * 
@@ -18,6 +18,7 @@
   </head>
   <body>
     <div id="d1">hello js</div>
+
     <script>
       //Node.prototype.nodeType确定节点类型
       var node = document.documentElement.firstChild;
@@ -30,8 +31,119 @@
       console.log(div.nodeName);
 
       //nodeValue属性返回一个字符串，表示当前节点本身的文本值，该属性可读写。
-      console.log(div.nodeValue);
-      console.log(div.firstChild.nodeValue);
+      console.log(div.nodeValue); //null
+      console.log(div.firstChild.nodeValue); //hello js
+    </script>
+    <div id="divA">This is <span>some</span> text</div>
+    <script>
+      //textContent属性返回当前节点和它的所有后代节点的文本内容。
+      console.log(document.getElementById("divA").textContent);
+    </script>
+    <div id="foo"></div>
+    <script>
+      document.getElementById("foo").textContent = "<p>GoodBye!</p>";
+    </script>
+    <script>
+      // baseURI属性返回一个字符串，表示当前网页的绝对路径。浏览器根据这个属性，计算网页上的相对路径的 URL。该属性为只读。
+      console.log(document.baseURI);
+    </script>
+    <div id="d3">hello</div>
+    <div id="d4">world</div>
+    <script>
+      // Node.nextSibling属性返回紧跟在当前节点后面的第一个同级节点。如果当前节点后面没有同级节点，则返回null。
+      var d3 = document.getElementById("d3");
+      var d4 = document.getElementById("d4");
+      console.log(d3.nextSibling === d4);
+    </script>
+    <div id="d5">hello</div>
+    <div id="d6">world</div>
+    <script>
+      var d5 = document.getElementById("d5");
+      var d6 = document.getElementById("d6");
+      console.log(d6.previousSibling === d5);
+    </script>
+    <script>
+      // parentElement属性返回当前节点的父元素节点。如果当前节点没有父节点，或者父节点类型不是元素节点，则返回null。
+      if (node.parentElement) {
+        node.parentElement.style.color = "red";
+      }
+    </script>
+    <p id="p1"><span>First span</span></p>
+    <script>
+      // firstChild属性返回当前节点的第一个子节点，如果当前节点没有子节点，则返回null。
+      var p1 = document.getElementById("p1");
+      console.log(p1.firstChild.nodeName);
+    </script>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+    </ul>
+    <script>
+      var children = document.querySelector("ul").childNodes;
+      console.log(children);
+
+      var children = document.childNodes;
+      for (var i = 0; i < children.length; i++) {
+        console.log(children[i].nodeType);
+      }
+    </script>
+
+    <!-- 方法 -->
+    <!-- appendChild()方法接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点。该方法的返回值就是插入文档的子节点。
+     -->
+    <script>
+      var p = document.createElement("p");
+      document.body.appendChild(p);
+    </script>
+    <!-- hasChildNodes方法返回一个布尔值，表示当前节点是否有子节点。 -->
+    <script>
+      var foo = document.getElementById("foo");
+      if (foo.hasChildNodes()) {
+        foo.removeChild(foo.childNodes[0]);
+      }
+    </script>
+    <!-- cloneNode方法用于克隆一个节点。它接受一个布尔值作为参数，表示是否同时克隆子节点。它的返回值是一个克隆出来的新节点。 -->
+    <script>
+      var cloneUrl = document.querySelector("ul").cloneNode(true);
+      console.log(cloneUrl);
+    </script>
+
+    <!-- insertBefore方法用于将某个节点插入父节点内部的指定位置。 -->
+    <script>
+      var p = document.createElement("p");
+      document.body.insertBefore(p, document.body.firstChild);
+    </script>
+    <div id="A"></div>
+    <script>
+      var divA = document.getElementById("A");
+      divA.parentNode.removeChild(divA);
+    </script>
+    <!-- replaceChild方法用于将一个新的节点，替换当前节点的某一个子节点。 -->
+    <div id="divB"></div>
+    <script>
+      var divB = document.getElementById("divB");
+      var newSpan = document.createElement("span");
+      newSpan.textContent = "hello lala";
+      divB.parentNode.replaceChild(newSpan, divB);
+    </script>
+
+    <!-- nodelist接口 -->
+    <script>
+      var children = document.body.childNodes;
+      console.log(Array.isArray(children));
+      console.log(children.length);
+      // children.forEach(console.log);
+      console.log(document.body.childNodes.item(0));
+    </script>
+
+    <!-- htmlcollection接口 -->
+    <script>
+      console.log(document.links instanceof HTMLCollection);
+    </script>
+    <form name="myForm"></form>
+    <script>
+      console.log(document.myForm === document.forms.myForm); //true
+      console.log(document.referrer);
     </script>
   </body>
 </html>
