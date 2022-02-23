@@ -2,7 +2,7 @@
  * @Author: thomas373737
  * @Date: 2022-02-22 11:04:40
  * @LastEditors: thomas373737
- * @LastEditTime: 2022-02-22 16:38:55
+ * @LastEditTime: 2022-02-23 07:57:01
  * @FilePath: /GitHub/Full-stack/03、javascript/code/20DOM.html
  * @Description: 
  * 
@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DOM</title>
   </head>
+
   <body>
     <div id="d1">hello js</div>
 
@@ -144,6 +145,38 @@
     <script>
       console.log(document.myForm === document.forms.myForm); //true
       console.log(document.referrer);
+      document.write("弄好");
+    </script>
+
+    <!-- element -->
+    <i>zz</i>
+    <script>
+      var h = document.querySelector("i");
+      var attrs = h.attributes;
+      console.log(attrs);
+      for (var i = attrs.length - 1; i >= 0; i--) {
+        console.log(attrs[i].name + "->" + attrs[i].value);
+      }
+      console.log("111");
+    </script>
+
+    <div id="myDiv">myDiv</div>
+    <script>
+      var myDiv = document.getElementById("myDiv");
+      myDiv.classList.add("myCssClass");
+      myDiv.classList.add("foo", "bar");
+      console.log(myDiv.classList);
+      myDiv.classList.remove("myCssClass");
+      console.log(div.classList.toggle("myCssClass"));
+      console.log(myDiv.classList);
+    </script>
+    <div id="d"><p>Hello</p></div>
+    <script>
+      var d = document.getElementById("d");
+      console.log(d.outerHTML);
+      console.log(d);
+      console.log(document.body.clientHeight);
+      console.log(document.body.scrollHeight);
     </script>
   </body>
 </html>
