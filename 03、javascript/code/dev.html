@@ -1,0 +1,41 @@
+<!--
+ * @Author: thomas373737
+ * @Date: 2022-02-23 18:31:53
+ * @LastEditors: thomas373737
+ * @LastEditTime: 2022-02-23 18:54:59
+ * @FilePath: /GitHub/Full-stack/03、javascript/code/dev.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dev</title>
+  </head>
+  <body>
+    <script>
+      // var newDiv = document.createElement("div");
+      // var newContent = document.createTextNode("Hello");
+      // newDiv.appendChild(newContent);
+      var array = [2, 2, 1, 4];
+      // var arr = new Set(array)
+      // console.log(arr);
+
+      function repeat(array) {
+        var a = [];
+        for (let index = 0; index < array.length; index++) {
+          if (a.indexOf(array) == -1) {
+            a.push(array[index]);
+          }
+          
+        }
+        return a;
+      }
+      console.log(repeat(array));
+    </script>
+  </body>
+</html>
