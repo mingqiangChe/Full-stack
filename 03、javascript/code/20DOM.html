@@ -2,7 +2,7 @@
  * @Author: thomas373737
  * @Date: 2022-02-22 11:04:40
  * @LastEditors: thomas373737
- * @LastEditTime: 2022-02-23 07:57:01
+ * @LastEditTime: 2022-02-23 10:04:13
  * @FilePath: /GitHub/Full-stack/03、javascript/code/20DOM.html
  * @Description: 
  * 
@@ -177,6 +177,15 @@
       console.log(d);
       console.log(document.body.clientHeight);
       console.log(document.body.scrollHeight);
+    </script>
+    <script>
+      var divStyle = document.querySelector("div").style;
+
+      divStyle.cssText =
+        "background-color: red;" +
+        "border: 1px solid black;" +
+        "height: 100px;" +
+        "width: 100px;";
     </script>
   </body>
 </html>
