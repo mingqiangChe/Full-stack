@@ -1,0 +1,103 @@
+<!--
+ * @Author: thomas373737
+ * @Date: 2022-02-17 17:04:55
+ * @LastEditors: thomas373737
+ * @LastEditTime: 2022-02-18 16:22:17
+ * @FilePath: /GitHub/Full-stack/03、javascript/code/14this关键字.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>this</title>
+  </head>
+  <body>
+    <script>
+      var a = {
+        b: {
+          m: function () {
+            console.log(this.p);
+          },
+          p: "hello",
+        },
+      };
+      var hello = a.b.m;
+      hello();
+
+      let o = {
+        f1: function () {
+          console.log(this, "11");
+          let f2 = (function () {
+            console.log(this);
+          })();
+        },
+      };
+      o.f1();
+
+      //call
+      var obj = {};
+      var f = function () {
+        return this;
+      };
+      f() === window;
+
+      var n = 123;
+      var obj1 = { n: 423 };
+      function b() {
+        console.log(this.n);
+      }
+      b.call(obj1);
+
+      var a = { n: 1 };
+      var b = a;
+      //var b ={n:1}
+      a.x = a = { n: 2 };
+      //var a={n:2}
+      console.log(a); //n:2
+      console.log(b); //n:1
+      console.log(a.x); //underfined
+      console.log(b.x); //n:2
+
+      //apply
+      function z(x, y) {
+        console.log(x + y);
+      }
+      z.call(z, 1, 1);
+      z.apply(z, [1, 1]);
+
+      var a = ["a", "b"];
+      function print(i) {
+        console.log(i);
+      }
+
+      a.forEach(print);
+
+      Array.apply(null, a).forEach(print);
+
+      // 转换类数组
+      Array.prototype.slice.apply({ 0: 1, length: 1 });
+
+      //bind
+      var d = new Date();
+      console.log(d.getTime());
+
+      var counter = {
+        count: 0,
+        inc: function () {
+          this.count++;
+        },
+      };
+      var obj1 = {
+        count: 100,
+      };
+      var func = counter.inc.bind(obj1);
+      func();
+      console.log(obj1.count );
+    </script>
+  </body>
+</html>

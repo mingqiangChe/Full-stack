@@ -1,0 +1,42 @@
+<!--
+ * @Author: thomas373737
+ * @Date: 2022-02-16 01:20:16
+ * @LastEditors: thomas373737
+ * @LastEditTime: 2022-02-16 01:29:50
+ * @FilePath: /GitHub/Full-stack/03、javascript/code/05字符串.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var s = "abcd";
+      console.log(s.length);
+
+      //base64转码
+      var string = "hello";
+      console.log(btoa(string));
+      console.log(atob("aGVsbG8="));
+
+      //要将非 ASCII 码字符转为 Base64 编码，必须中间插入一个转码环节，再使用这两个方法。
+      function b64Encode(str) {
+        return btoa(encodeURIComponent(str));
+      }
+
+      function b64Decode(str) {
+        return decodeURIComponent(atob(str));
+      }
+
+      console.log(b64Encode("你好")); // "JUU0JUJEJUEwJUU1JUE1JUJE"
+      b64Decode("JUU0JUJEJUEwJUU1JUE1JUJE"); // "你好"
+    </script>
+  </body>
+</html>

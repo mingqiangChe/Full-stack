@@ -1,0 +1,43 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-12-31 00:02:51
+ * @LastEditTime: 2022-01-07 16:58:35
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /05、Vue/尚硅谷/代码/vue_basic/08_计算属性/2.姓名案例_methods实现.html
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>姓名案例_methods实现</title>
+		<!-- 引入Vue -->
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<!-- 准备好一个容器-->
+		<div id="root">
+			姓：<input type="text" v-model="firstName"> <br/><br/>
+			名：<input type="text" v-model="lastName"> <br/><br/>
+			全名：<span>{{fullName()}}</span>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+
+		new Vue({
+			el:'#root',
+			data:{
+				firstName:'张',
+				lastName:'三'
+			},
+			methods: {
+				fullName(){
+					console.log('@---fullName')
+					return this.firstName + '-' + this.lastName
+				}
+			},
+		})
+	</script>
+</html>

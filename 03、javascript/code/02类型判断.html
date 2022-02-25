@@ -1,0 +1,37 @@
+<!--
+ * @Author: your name
+ * @Date: 2022-02-15 22:36:38
+ * @LastEditTime: 2022-02-15 23:00:53
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /GitHub/Full-stack/03、javascript/code/02类型判断.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>类型判断</title>
+  </head>
+  <body>
+    <script>
+      //typrof
+      console.log(typeof 123); //number
+      console.log(typeof "123"); //string
+      console.log(typeof false); //boolean
+      function tp() {}
+      console.log(typeof tp); //function
+      console.log(typeof underfined); //underfined
+
+      console.log(typeof({}));//object
+      console.log(typeof([]));//object
+      console.log(typeof(null));//object
+      //instance 常用来区分数组和对象
+      var array =[]
+      var object ={}
+      console.log(array instanceof Array);//true
+      console.log(object instanceof Array);//false
+    </script>
+  </body>
+</html>

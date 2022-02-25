@@ -1,0 +1,257 @@
+html,
+body {
+	height: 100%;
+	width: 100%;
+	background: #000;
+	margin: 0;
+}
+
+.nowBox {
+	width: 100%;
+	height: 800px;
+	background: red;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 50px;
+	color: #fff;
+	z-index: 15;
+	position: relative;
+}
+
+/* 从暗到亮并显示相关文案动画效果  start */
+.box1 {
+	width: 100%;
+	height: 800px;
+	background: #000000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.box1>span,
+.peristalsis_imgBox>span {
+	font-size: 40px;
+	background: linear-gradient(90deg, #d95e00 30%, #ffa353, #d95e00 70%);
+	-webkit-background-clip: text;
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+	-webkit-box-decoration-break: clone;
+	background-size: 200% 100%;
+	font-weight: 600;
+	margin-bottom: 80px;
+}
+
+.box1_content {
+	margin-bottom: 50px;
+	width: 910px;
+	height: 450px;
+	position: relative;
+}
+
+.box1_mask {
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 1);
+	opacity: .9;
+	position: absolute;
+	top: 0;
+	z-index: 10;
+}
+
+.box1_imgBox {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	z-index: 9;
+}
+
+.box1_imgBox>img {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.box1_imgBox .imgBox_info {
+	position: absolute;
+	width: 370px;
+	border-top: 1px solid rgba(255, 255, 255, .5);
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	padding-top: 15px;
+	box-sizing: border-box;
+	top: 280px;
+	left: 20px;
+	transition: all .5;
+	opacity: 0;
+}
+
+.box1_imgBox .imgBox_info>span,
+.children_left>div>span,
+.switchImg_Info>h2 {
+	background: linear-gradient(90deg, #d95e00 30%, #ffa353, #d95e00 70%);
+	-webkit-background-clip: text;
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+	-webkit-box-decoration-break: clone;
+	background-size: 200% 100%;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* 从暗到亮并显示相关文案动画效果  end */
+
+
+/* 滚动缩放并伴随暗度增强动画效果 start */
+.box2_scrollScale {
+	width: 100%;
+	height: auto;
+	background: #000;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	/* margin-top: 100px; */
+}
+
+.sticky {
+	color: #FFFFFF;
+	z-index: 13;
+}
+
+.children_left {
+	display: flex;
+	flex-direction: column;
+	margin-left: -500px;
+	box-sizing: border-box;
+}
+
+.children_left>div {
+	width: 500px;
+	height: 800px;
+	/* margin-top: 200px; */
+}
+
+.children_left>div:last-child {
+	height: 300px;
+}
+
+.children_left>div>span {
+	font-size: 50px;
+	display: inline-block;
+	margin-bottom: 30px;
+}
+
+.children_left>div>p {
+	font-size: 20px;
+}
+
+.nowSticky {
+	width: 910px !important;
+	height: 900px;
+	position: absolute;
+	z-index: 9;
+	top: 0;
+	background: url('../img/1.jpg') no-repeat;
+	background-size: 100%;
+	background-position: center;
+	transform: scale(1);
+}
+
+.box2_mask {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: #000;
+	z-index: 12;
+	opacity: .9;
+}
+
+/* 滚动缩放并伴随暗度增强动画效果 end */
+
+
+/* 判断鼠标滚动向下还是向上并给予图片蠕动效果 start */
+.peristalsis_imgBox {
+	width: 100%;
+	height: 800px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 20;
+	position: relative;
+	background: #000;
+}
+
+.peristalsis_imgBox .peristalsis_img {
+	width: 100%;
+	height: 700px;
+	overflow: auto;
+	background-image: url('../img/2.jpg');
+	background-repeat: no-repeat;
+	background-position: 50% -50px;
+	background-size: auto calc(100% + 200px);
+	transition: all 1s;
+}
+
+.peristalsis_imgBox>span {
+	position: absolute;
+	top: 100px;
+}
+
+/* 判断鼠标滚动向下还是向上并给予图片蠕动效果 end */
+
+/* 滚动切换相应图片及文案 start */
+.switchImg_Info {
+	width: 100%;
+	height: 862px;
+	overflow: hidden;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 50;
+	background: #000;
+}
+
+.switchImg_Info>h2 {
+	text-align: left;
+	color: seashell;
+	font-size: 36px;
+	position: absolute;
+	top: 35%;
+	left:20%;
+	transition: all 2s;
+}
+
+.switchImg_Info>img {
+	display: block;
+	width: 1000px;
+	height: 450px;
+}
+
+.switchImg_Info .one {
+	position: absolute;
+	right: 5%;
+	top: 20%;
+	opacity: 1;
+	transition: all 2s;
+}
+
+.switchImg_Info .two {
+	position: absolute;
+	right: 5%;
+	top: 20%;
+	opacity: 1;
+	transition: all 2s;
+}
+.switchImg_Info span{
+	position: absolute;
+	color: #fff;
+	top: 30%;
+	left: 20%;
+	font-size: 40px;
+}
+/* 滚动切换相应图片及文案 end */

@@ -1,0 +1,55 @@
+<!--
+ * @Author: thomas373737
+ * @Date: 2022-02-22 00:04:52
+ * @LastEditors: thomas373737
+ * @LastEditTime: 2022-02-22 11:02:41
+ * @FilePath: /GitHub/Full-stack/03、javascript/code/19promise对象.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>promise</title>
+  </head>
+  <body>
+    <script>
+      var p1 = new Promise(function (resolve, reject) {
+        reject("error");
+      });
+      p1.then(console.log, console.error);
+
+      var p2 = new Promise(function (resolve, reject) {
+        resolve("成功");
+      });
+      p2.then(console.log, console.error);
+
+      // var p3 = new Promise(function (resolve, reject) {
+      //   reject(new Error("失败"));
+      // });
+      // p3.then(console.log, log.error);
+
+      //实例 图片加载
+      var preloadImage = function (path) {
+        return new Promise(function (resolve, reject) {
+          var image = new Image();
+          image.onload = resolve;
+          image.onerror = reject;
+          image.src = path;
+        });
+      };
+      preloadImage("https://example.com/my.jpg")
+        .then(function (e) {
+          document.body.append(e.target);
+        })
+        .then(function () {
+          console.log("加载成功");
+        });
+
+    </script>
+  </body>
+</html>

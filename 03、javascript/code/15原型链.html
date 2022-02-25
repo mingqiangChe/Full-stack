@@ -1,0 +1,106 @@
+<!--
+ * @Author: thomas373737
+ * @Date: 2022-02-18 17:03:03
+ * @LastEditors: thomas373737
+ * @LastEditTime: 2022-02-21 14:08:58
+ * @FilePath: /GitHub/Full-stack/03、javascript/code/15原型链.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>原型链</title>
+  </head>
+  <body>
+    <script>
+      function Animal(name) {
+        this.name = name;
+      }
+      Animal.prototype.color = "white";
+      var cat1 = new Animal("大");
+      var cat2 = new Animal("小");
+      console.log(cat1.color);
+      console.log(cat2.color);
+
+      var MyArray = function () {};
+      MyArray.prototype = new Array();
+      MyArray.prototype.constructor = MyArray;
+
+      var mine = new MyArray();
+      mine.push(1, 2, 3);
+      console.log(mine);
+      console.log(mine.length);
+      console.log(mine instanceof Array);
+
+      //构造函数
+      // function Sub(value) {
+      //   Super.call(this);
+      //   this.prop = value;
+      // }
+
+      // Sub.prototype = Object.create(Super.prototype);
+      // Sub.prototype.constructor = Sub;
+      // Sub.prototype.method = "....";
+
+      function Shape() {
+        this.x = 0;
+        this.y = 0;
+      }
+
+      Shape.prototype.move = function (x, y) {
+        this.x += x;
+        this.y += y;
+        console.info("Shape moved");
+      };
+
+      function Rectangle() {
+        Shape.call(this);
+      }
+
+      Rectangle.prototype = Object.create(Shape.prototype);
+      Rectangle.prototype.constructor.Rectangle;
+
+      var rect = new Rectangle();
+      console.log(rect instanceof Rectangle);
+      rect instanceof Shape;
+
+      //多重继承
+      function M1() {
+        this.hello = "hello";
+      }
+
+      function M2() {
+        this.world = "world";
+      }
+      function S() {
+        M1.call(this);
+        M2.call(this);
+      }
+
+      S.prototype = Object.create(M1.prototype);
+      Object.assign(S.prototype, M2.prototype);
+      S.prototype.constructor = S;
+      var s = new S();
+
+      console.log(s.hello);
+      console.log(s.world);
+
+      function StringBuilder() {
+        var buffe = [];
+        this.add = function (str) {
+          buffe.push(str);
+        };
+        this.toString = function () {
+          return buffe.join("");
+        };
+      }
+      let zz = ["aa"];
+      console.log(this.add());
+    </script>
+  </body>
+</html>

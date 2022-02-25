@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>一维数组转换</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="content"></div>
+    </body>
+    <script>
+        window.onload = function () {
+            var old_arr = [
+                    {
+                        "Id": 1,
+                        "parentId": null,
+                        "Sort": 0,
+                        "Name": "菜单1"
+                    },
+                    {
+                        "Id": 2,
+                        "parentId": 1,
+                        "Sort": 0,
+                        "Name": "菜单1-1"
+                    },
+                    {
+                        "Id": 3,
+                        "parentId": 1,
+                        "Sort": 0,
+                        "Name": "菜单1-2"
+                    },
+                    {
+                        "Id": 4,
+                        "parentId": 2,
+                        "Sort": 2,
+                        "Name": "菜单1-1-2"
+                    }, {
+                        "Id": 5,
+                        "parentId": 2,
+                        "Sort": 1,
+                        "Name": "菜单1-1-1"
+                    }, {
+                        "Id": 6,
+                        "parentId": null,
+                        "Sort": 0,
+                        "Name": "菜单2"
+                    }, {
+                        "Id": 7,
+                        "parentId": 6,
+                        "Sort": 0,
+                        "Name": "菜单2-1"
+                    }, {
+                        "Id": 8,
+                        "parentId": 6,
+                        "Sort": 0,
+                        "Name": "菜单2-2"
+                    }, {
+                        "Id": 9,
+                        "parentId": 8,
+                        "Sort": 2,
+                        "Name": "菜单2-2-2"
+                    }, {
+                        "Id": 10,
+                        "parentId": 8,
+                        "Sort": 1,
+                        "Name": "菜单2-2-1"
+                    }, {
+                        "Id": 11,
+                        "parentId": 10,
+                        "Sort": 0,
+                        "Name": "菜单2-2-1-1"
+                    }, {
+                        "Id": 12,
+                        "parentId": 10,
+                        "Sort": 0,
+                        "Name": "菜单2-2-1-2"
+                    }, {
+                        "Id": 13,
+                        "parentId": null,
+                        "Sort": 0,
+                        "Name": "菜单3"
+                    }, {
+                        "Id": 14,
+                        "parentId": 13,
+                        "Sort": 0,
+                        "Name": "菜单3-1"
+                    }, {
+                        "Id": 15,
+                        "parentId": 13,
+                        "Sort": 0,
+                        "Name": "菜单3-2"
+                    }, {
+                        "Id": 16,
+                        "parentId": 15,
+                        "Sort": 2,
+                        "Name": "菜单3-2-2"
+                    }, {
+                        "Id": 17,
+                        "parentId": 15,
+                        "Sort": 1,
+                        "Name": "菜单3-2-1"
+                    }, {
+                        "Id": 18,
+                        "parentId": 17,
+                        "Sort": 0,
+                        "Name": "菜单3-2-1-1"
+                    }, {
+                        "Id": 19,
+                        "parentId": 17,
+                        "Sort": 0,
+                        "Name": "菜单3-2-1-2"
+                    }
+                ],
+                arr = new Array(),
+                // StrHtml = "",
+                str; // 创建一个新的数组
+
+            function arrayToTree(array, pid) {
+                let result = []
+                array.forEach((item, i) => {
+                    if (item.parentId == pid) {
+                        array.splice(i, 1)
+                        item.son_data = arrayToTree(array, item.Id)
+                        result.push(item)
+                        result = result.sort((a,b)=>{
+                            return a.Sort - b.Sort
+                        })
+                    }
+                })
+                return result
+            }
+             arr = arrayToTree(old_arr, null)
+            console.log(arr);
+            // 循环数组
+
+            /* 请将数组 组装成联动的格式 start */
+            // 根据 parentId 来判断父级   根据 Sort 来判断顺序  子级 用 son_data 来存储
+            // 结果例子: [{"Id":1,"parentId":null,"Sort":0,"Name":"菜单1","son_data":[{"Id":2,"parentId":2,"Sort":0,"Name":"菜单1-1","son_data":[{}]}]}]
+
+            /* 请将数组 组装成联动的格式 end */
+
+        }
+    </script>
+</html>

@@ -1416,7 +1416,7 @@ setTimeout(function() {
 
   * 3. 点击“不活了”按钮从界面中卸载组件
 
-  ![输入图片说明](/Users/chemingqiang/Desktop/Full-stack/06、React/images/component.gif "QQ截图20201229183512.png")
+  )![component](images/component.gif)
 
  * #### 2.6.2. 理解
 
@@ -3649,9 +3649,36 @@ const mapStateToprops = function (state) {
 
 ### 7.7.2. 下载工具依赖包
 
+* 安装
+  1. 安装chrome插件
+  2. 安装依赖
+
 ```
-npm install --save-dev redux-devtools-extension
+install i redux-devtools-extension
 ```
+
+* 配置
+
+```jsx
+import {composeWithDevtools} from 'redux-devtools-extension'
+createStore(
+    reducer, //内部会第一次调用reducer来初始化state
+composeWithDevtools(applyMiddleware(thunk))
+)
+```
+
+### 使用redux管理多个reducer
+
+* 使用redux的combineReducers将需要管理的属性封装成一个对象
+
+```jsx
+export default combineReducers({
+    counter,
+    comments
+})
+```
+
+
 
 ## 7.8. 纯函数和高阶函数
 
@@ -6012,5 +6039,4 @@ componentDidCatch(error, info) {
 ​            (2).HashRouter刷新后会导致路由state参数的丢失！！！
 
 ​      4.备注：HashRouter可以用于解决一些路径错误相关的问题。
-
 

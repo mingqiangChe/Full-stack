@@ -1,0 +1,68 @@
+<!--
+ * @Author: thomas373737
+ * @Date: 2022-02-16 01:30:32
+ * @LastEditors: thomas373737
+ * @LastEditTime: 2022-02-17 00:17:31
+ * @FilePath: /GitHub/Full-stack/03、javascript/code/06对象.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>对象</title>
+  </head>
+  <body>
+    <script>
+      var obj = {
+        foo: "hello",
+        bar: "world",
+      };
+      console.log(obj.foo);
+      console.log(obj["bar"]);
+
+      // 方法函数对象
+      var obj = {
+        p: function (x) {
+          return 2 * x;
+        },
+      };
+
+      console.log(obj.p(1)); // 2
+
+      var foo = "bar";
+      var obj = {
+        foo: 1,
+        bar: 2,
+      };
+      console.log(obj.foo); //1
+      console.log(obj[foo]); //2
+      console.log(obj["foo"]); //1
+
+      var obj1 = {};
+      obj1.foo = "hello";
+      obj1["bar"] = "world";
+      console.log(obj1);
+
+      var obj2 = {
+        key1: 1,
+        key2: 2,
+      };
+      console.log(Object.keys(obj2));
+
+      var obj = { p: 1 };
+      Object.keys(obj); // ["p"]
+
+      delete obj.p; // true
+      obj.p; // undefined
+      Object.keys(obj); // []
+
+
+      
+    </script>
+  </body>
+</html>
