@@ -1,0 +1,116 @@
+<!--
+ * @Author: thomas373737
+ * @Date: 2022-02-25 09:48:03
+ * @LastEditors: thomas373737
+ * @LastEditTime: 2022-02-25 12:28:51
+ * @FilePath: /Full-stack/02、CSS/grid/code/dev.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>grid网格布局</title>
+  </head>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+    }
+    #box {
+      /* width: 80px; */
+      /* height: 80px;  */
+      background-color: blue;
+      /*❤️❤️ 容器属性 */
+      display: grid;
+      /*❤️ 列宽 */
+      grid-template-columns: 100px 100px 100px;
+      /*❤️ 行高 */
+      grid-template-rows: 100px 100px 100px;
+      /* ❤️行间距 */
+      row-gap: 66px;
+      /* ❤️列间距 */
+      column-gap: 20px;
+      /* ❤️grid-template-areas属性用于定义区域。 */
+      grid-template-areas:
+        "header header header"
+        "main main sidebar"
+        "footer footer footer";
+      /* ❤️先行后列 默认*/
+      /* grid-auto-flow: row; */
+      /* ❤️先列后行 */
+      grid-auto-flow: column;
+      /* ❤️justify-items属性设置单元格内容的水平位置（左中右） */
+      /* justify-items: start; */
+      /* justify-items: end; */
+      /* justify-items: center; */
+      justify-items: stretch;
+      /* ❤️align-items属性设置单元格内容的垂直位置（上中下）。 */
+      /* align-items: stretch; */
+      align-items: start;
+      /* align-items: end; */
+      /* align-items: center; */
+      /* ❤️justify-content属性是整个内容区域在容器里面的水平位置（左中右）， */
+      /* justify-content: start; */
+      /* justify-content: center; */
+      justify-content: end;
+      /* justify-content: stretch; */
+      /* justify-content: space-around; */
+      /* ❤️align-content属性是整个内容区域的垂直位置（上中下）。 */
+      /* align-content: start; */
+      align-content: center;
+      /* align-content: end; */
+      /* align-content: stretch; */
+      /* align-content: space-around; */
+      /* ❤️grid-auto-columns属性用来设置，浏览器自动创建的多余网格的列宽和行高。 */
+      grid-template-columns: 200px 100px 100px;
+      /* ❤️grid-auto-rows属性 用来设置，浏览器自动创建的多余网格的行高。*/
+      grid-template-rows: 200px 100px 100px;
+    }
+    .pp {
+      /* width: 20px;
+      height: 20px; */
+      background-color: red;
+      /* ❤️❤️项目属性 */
+      /* ❤️grid-column-start属性：左边框所在的垂直网格线 */
+      /* grid-column-start: 2; */
+      /* ❤️grid-column-end属性：右边框所在的垂直网格线 */
+      /* grid-column-end: 4; */
+      /* ❤️grid-row-start属性：上边框所在的水平网格线 */
+      /* grid-row-start: 1; */
+      /* ❤️grid-row-end属性：下边框所在的水平网格线 */
+      /* grid-row-end: 2; */
+      /*❤️ grid-area属性指定项目放在哪一个区域。 */
+      /* grid-area: 1 / 1 / 3 / 3; */
+      /* grid-area: e; */
+      /* ❤️justify-self属性设置单元格内容的水平位置（左中右） */
+      /* justify-content: start; */
+      justify-content: center;
+      /* justify-content: end; */
+      /* justify-content: stretch; */
+      /* ❤️align-self 属性设置单元格内容的垂直位置（上中下） */
+      /* align-self: start; */
+      align-self: center;
+      /* align-self: end; */
+      align-self: stretch;
+    }
+  </style>
+  <body>
+    <div id="box">
+      <div class="pp">1</div>
+      <div class="pp">2</div>
+      <div class="pp">3</div>
+      <div class="pp">4</div>
+      <div class="pp">5</div>
+      <div class="pp">6</div>
+      <div class="pp">7</div>
+      <div class="pp">8</div>
+      <div class="pp">9</div>
+    </div>
+  </body>
+</html>
