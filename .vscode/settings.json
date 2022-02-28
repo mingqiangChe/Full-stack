@@ -1,2 +1,38 @@
 {
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true, // 保存时自动格式化
+  "editor.wordWrap": "on",
+  "vetur.format.defaultFormatter.html": "js-beautify-html", // 因为prettier不能格式化vue文件template  因此使用js-beautify-html格式化
+  "vetur.format.defaultFormatterOptions":{
+    "js-beautify-html":{
+        "wrap_attributes":"auto"
+    }
+  },
+  /* eslint的配置 */
+  "eslint.enable": true,
+  "eslint.run": "onSave",
+  "eslint.options": {
+    "extensions": [
+     ".js",
+     ".vue"
+    ]
+   },
+   "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true // 保存时自动修复
+   },
+   // 关闭 vscode 默认的检查工具
+   "html.validate.scripts": false,
+   "javascript.validate.enable": false,
+   "eslint.alwaysShowStatus": true,
+   "eslint.format.enable": true,
+   "scss.lint.duplicateProperties": "error",
+   "css.lint.duplicateProperties": "error",
+   "less.lint.zeroUnits": "error",
+   "eslint.validate": [ // 验证文件类型
+    "javascript",
+    "javascriptreact",
+    "vue-html",
+    "vue",
+    "html"
+   ]
 }
