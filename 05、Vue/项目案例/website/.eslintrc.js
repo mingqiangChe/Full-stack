@@ -20,7 +20,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 只有开发环境可以使用console
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 只有开发环境可以使用debugger
     'vue/attribute-hyphenation': 0, // 忽略属性连字
-    'vue/max-attributes-per-line':[2, { singleline: 10, multiline: { max: 1, allowFirstLine: false } }], // 每行最大属性
+    'vue/max-attributes-per-line': [2, { singleline: 10, multiline: { max: 1, allowFirstLine: false } }], // 每行最大属性
     'vue/singleline-html-element-content-newline': 'off', // 单行html元素内容在新的一行
     'vue/multiline-html-element-content-newline': 'off', // 多行html元素内容在新的一行
     'vue/html-closing-bracket-newline': 'off', // html右括号在新的一行
