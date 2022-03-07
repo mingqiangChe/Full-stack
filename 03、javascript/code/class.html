@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class</title>
+  </head>
+  <body>
+    <p>1</p>
+    <p>2</p>
+    <p>3s</p>
+    <script>
+      class Student {
+        constructor(name, number) {
+          this.name = name;
+          this.number = number;
+          // this.gender="male"
+        }
+        sayHi() {
+          console.log(`姓名：${this.name} 学号:${this.number}`);
+        }
+        // study(){
+        // }
+      }
+      // 通过类声明对象/实例
+      // const xialuo = new Student("下落", 100);
+      // xialuo.sayHi();
+      // console.log(xialuo.name);
+
+      //继承❤️
+      //父类
+      class People {
+        constructor(name) {
+          this.name = name;
+        }
+        eat() {
+          console.log(`${this.name} 吃东西`);
+        }
+      }
+      // 子类
+      class Students extends People {
+        constructor(name, number) {
+          super(name);
+          this.number = number;
+        }
+        sayHi() {
+          console.log(`姓名${this.name} 学号${this.number}`);
+        }
+      }
+
+      // 子类
+      class Teacher extends People {
+        constructor(name, major) {
+          super(name);
+          this.major = major;
+        }
+        teach() {
+          console.log(`${this.name}老师，教授专业${this.major}`);
+        }
+      }
+      //实例
+      const xialuo = new Students("下落", 100);
+      xialuo.sayHi();
+      console.log(xialuo.name);
+      console.log(xialuo.number);
+      xialuo.eat();
+
+      xialuo instanceof Student;
+      xialuo instanceof People;
+      xialuo instanceof Object;
+
+      //实例
+      const wanglaoshi = new Teacher("王老师", "语文");
+      console.log(wanglaoshi.name);
+      console.log(wanglaoshi.major);
+      wanglaoshi.teach();
+      wanglaoshi.eat();
+
+      //手写jq
+      class jQuery {
+        constructor(seletor) {
+          const result = document.querySelectorAll(seletor);
+          const length = result.length;
+          for (let i = 0; i < length; i++) {
+            this[i] = result[i];
+          }
+          this.length = length;
+          this.seletor = seletor;
+          // 类数组
+        }
+        get(index) {
+          return this[index];
+        }
+        each(fn) {
+          for (let i = 0; i < this.length; i++) {
+            const elem = this[i];
+            fn(elem);
+          }
+        }
+        on(type, fn) {
+          return this.each((elem) => {
+            elem.addEventListener(type, fn, false);
+          });
+        }
+      }
+      const $p = new jQuery("p");
+      console.log($p.get(1));
+      $p.each((elem) => console.log(elem.nodeName));
+
+      //插件
+      jQuery.prototype.dialog = function (info) {
+        alert(info);
+      };
+
+      //造轮子
+      class myJQuery extends jQuery {
+        constructor(seletor) {
+          super(seletor);
+        }
+        //扩展自己方法
+        addClass(className) {}
+      }
+    </script>
+  </body>
+</html>
