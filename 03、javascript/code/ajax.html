@@ -18,6 +18,58 @@
         }
       };
       xhr.send(null);
+
+      function ajax(url) {
+        const p = new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", url, "true");
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                resolve(JSON.parse(xhr.responseText));
+              } else if (xhr.status === 200) {
+                reject(new Error("404 NOT FOUND"));
+              }
+            }
+          };
+          xhr.send(null);
+        });
+        return p;
+      }
+
+      const url = "/test,json";
+      ajax(url)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(Error);
+        });
+
+      //jq
+      $(function () {
+        //请求参数
+        var list = {};
+        $.ajax({
+          //请求方式
+          type: "POST",
+          //请求媒体类型
+          contentType: "application/json;charset=UTF-8",
+          //请求地址
+          url: "http://127.0.0.1/admin/list/",
+          //数据，json字符串
+          data: JSON.stringify(list),
+          //请求成功
+          success: function (result) {
+            console.log(result);
+          },
+          //请求失败，包含具体错误信息
+          error: function (e) {
+            console.log(e.status);
+            console.log(e.responseText);
+          },
+        });
+      });
     </script>
   </body>
 </html>
