@@ -8,12 +8,12 @@
   </head>
   <body>
     <script>
-      function bindEvent(elemetn, type, selector, fn) {
+      function bindEvent(element, type, selector, fn) {
         if (fn == null) {
           fn = selector;
           selector = null;
         }
-        elem.addEventListener(type, (event) => {
+        element.addEventListener(type, (event) => {
           const target = event.target;
           if (selector) {
             //代理绑定
