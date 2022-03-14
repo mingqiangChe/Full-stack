@@ -206,6 +206,10 @@ make install
 
 启动nginx
 
+```
+cd /usr/local/nginx/sbin
+```
+
 进入 **/usr/local/nginx/sbin**目录 输入
 
 ```
@@ -238,7 +242,9 @@ make install
 
 重启nginx
 
+```
 ./nginx -s reload
+```
 
 报错解决  
 [(24条消息) nginx: [error] open() “/usr/local/nginx/logs/nginx.pid“ failed (2: No such file or directory)_流楚丶格念的博客-CSDN博客](https://blog.csdn.net/weixin_45525272/article/details/107980445)
