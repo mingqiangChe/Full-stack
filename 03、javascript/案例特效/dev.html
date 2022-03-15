@@ -26,16 +26,55 @@
   <body>
     <div class="xx"></div>
     <img src="https://apikey.net/?type=Mimg" />
+
+    <p data-name>ds</p>
+    <p>ss</p>
     <script>
-      var x = 10;
-      function fn() {
-        console.log(x);
-      }
-      function show(f) {
-        var x = 20;
-        f(); // 10
-      }
-      show(fn);
+      // String.prototype.trim = function () {
+      //   return this.replace(/^\s+/, "").replace(/\s+$/, "");
+      // };
+      // let arr = [1, 2, 3];
+      // let brr = [2, 3];
+      // let zz = arr.concat(brr);
+      // console.log(zz);
+      // zz.forEach((element) => {
+      //   console.log(element);
+      // });
+
+      // let arr = new Map();
+      // console.log(arr);
+      // let keyObj = {};
+      // let keyFunc = function () {};
+      // let keyString = "a string";
+      // arr.set(keyObj, "关联key");
+      // arr.set(keyFunc, "函数");
+      // arr.set(keyString, "string");
+      // arr.get(keyObj);
+      //       function ajax(url) {
+      //         const p = new Promise((resolve, reject) => {
+      //           const xhr =  new XMLHttpRequest();
+      //           xhr.open('GET',url,"true"){
+      //           xhr.onreadystatechange=function(){
+      //             if(xhr.readyState=4){
+      //               if(xhr.status===200){
+      //                 resolve(JSON.parse(xhr.responseText))
+      //               }else if(xhr.status===400|| xhr.status===500){
+      // reject(new Error('error'))
+      //               }
+      //             }
+      //           }
+      //           }
+      //           xhr.send(null)
+      //         });
+
+      //         return p;
+      //       }
+      const pList = document.querySelectorAll("p");
+      console.log(pList);
+      const p = pList[0];
+      p.getAttribute("date-name");
+      p.setAttribute("data-name", "imoc");
+      console.log(p.getAttribute("style"));
     </script>
   </body>
 </html>

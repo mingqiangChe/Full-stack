@@ -10,7 +10,7 @@
    * ###### [2.中文官网: https://react.docschina.org/](https://react.docschina.org/)
 
 * #### 1.1.2.介绍描述
-   * ######  1.用于动态构建用户界面的 JavaScript 库(只关注于视图)
+   * ######  1.**用于动态构建用户界面的 JavaScript 库(只关注于视图)**
    * ######  2.由Facebook开源
 
 * #### 1.1.3.React的特点
@@ -33,7 +33,7 @@
 
    * ###### 4.高效（优秀的Diffing算法）  
 
-   已经缓存的虚拟dom想上寻找不会在重新渲染真实dom树
+   已经缓存的虚拟dom树上寻找不会在重新渲染真实dom树
 
 * #### 1.1.4.React高效的原因
    * ######  1.React高效的原因
@@ -257,8 +257,6 @@ export default class App extends Component{
 * #### 1.4.4.组件化
   * ######  当应用是以多组件的方式实现, 这个应用就是一个组件化的应用
   ![输入图片说明](images/图片4.png "QQ截图20201229183512.png")
-
-### 
 
 # 2.基本使用
 
@@ -1437,10 +1435,10 @@ setTimeout(function() {
        * 4.componentDidMount()
 
   * 2. 更新阶段: 由组件内部this.setSate()或父组件重新render触发
-       * 1.shouldComponentUpdate()
-       * 2.componentWillUpdate()
-       * 3.render()
-       * 4.componentDidUpdate()
+       * 1.shouldComponentUpdate() //应该组件更新
+       * 2.componentWillUpdate() //组件将要更新
+       * 3.render()//模版
+       * 4.componentDidUpdate()//组件更新完成
 
   * 3. 卸载组件: 由ReactDOM.unmountComponentAtNode()触发
        * 1.componentWillUnmount()
@@ -2548,8 +2546,6 @@ export default class App extends Component {
 		)
 	}
 }
-
-
 ```
 
 
