@@ -1,0 +1,14 @@
+<style>
+  .special{
+    color: red;
+  }
+</style>
+<html>
+  
+  <p>这是一串文字</p>
+  <script>
+    console.log(  document.querySelectorAll('p')[0]);
+    const addClass =(el,className)=> el.classList.add(className);
+    addClass(document.querySelectorAll('p')[0],'special')
+  </script>
+</html>
