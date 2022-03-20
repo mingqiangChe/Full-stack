@@ -1,0 +1,9 @@
+<html>
+  <script>
+    //将String.prototype.replace()与正则表达式一起使用，用单个空格替换所有出现的2个或更多空格字符。
+
+    const compactWhitespace = str =>str.replace(/\s{2,}/g,' ');
+    console.log(compactWhitespace('che    che')); 
+    console.log(compactWhitespace('che che'));
+  </script>
+</html>

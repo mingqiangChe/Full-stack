@@ -1,0 +1,9 @@
+<html>
+  <script>
+    // 使用Array.prototype.reduce()、Array.prototype.map()和传播运算符(...)从两个数组生成所有可能的元素对。
+    const cartesianProduct = (a, b) =>
+      a.reduce((p, x) => [...p, ...b.map((y) => [x, y])], []);
+    const res = cartesianProduct(["x", "y"], [1, 2]);
+    console.log(res);//// [['x', 1], ['x', 2], ['y', 1], ['y', 2]]
+  </script>
+</html>
