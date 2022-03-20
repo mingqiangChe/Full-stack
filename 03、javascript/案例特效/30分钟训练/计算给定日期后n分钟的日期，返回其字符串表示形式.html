@@ -1,0 +1,17 @@
+<html>
+  <script>
+    // 使用新的Date()从第一个参数创建日期对象。
+
+    // 使用Date.prototype.getTime()和Date.prototype.setTime()为给定日期添加n分钟。
+
+    // 使用Date.prototype.toISOString()、String.prototype.split()和String.prototype.replace()以yyy-mm-dd HH:MM:SS格式返回字符串。
+
+    const addMinutesToDate = (date, n) => {
+      const d = new Date(date)
+      d.setTime(d.getTime() + n * 60000)
+      return d.toISOString().split(".")[0].replace("T", "")
+    }
+
+    console.log(addMinutesToDate("2020-10-19 12:00:00", 10)) //2020-10-1904:10:00
+  </script>
+</html>
