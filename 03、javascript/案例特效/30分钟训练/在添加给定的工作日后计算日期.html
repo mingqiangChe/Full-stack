@@ -1,0 +1,22 @@
+<html>
+  <!-- 使用Array.from()构造一个长度等于要添加的工作日数的数组。
+
+使用Array.prototype.reduce()迭代数组，从startDate开始和增量，使用Date.prototype.getDate()和Date.prototype.setDate()。
+
+如果当前日期是在周末，请通过添加一天或两天来再次更新它，使其成为工作日。
+
+注意：不考虑法定节假日。 -->
+  <script>
+    const addWeekDays = (startDate, count) =>
+      Array.from({ length: count }).reduce((date) => {
+        date = new Date(date.setDate(date.getDate() + 1))
+        if (date.getDay() % 6 === 0)
+          date = new Date(
+            date.setDate(date.getDate() + (date.getDay() / 6 + 1))
+          )
+        return date
+      }, startDate)
+
+    console.log(addWeekDays(new Date("Oct 09,2020"), 5)) //Fri Oct 16 2020 00:00:00 GMT+0800 (中国标准时间)
+  </script>
+</html>

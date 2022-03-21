@@ -1,0 +1,12 @@
+<html>
+  <!-- 使用Object.assign()和ElementCSSInlineStyle.style将提供的样式对象合并到给定元素的样式中。 -->
+  <div id="my-element">1</div>
+  <script>
+    const addStyles = (el, styles) => Object.assign(el.style, styles)
+    addStyles(document.getElementById("my-element"), {
+      background: "red",
+      color: "#fff",
+      fontSize: "3rem",
+    })
+  </script>
+</html>
