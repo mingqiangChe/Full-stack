@@ -1,0 +1,19 @@
+<html>
+  <!-- 使用Array.prototype.forEach()和EventTarget.addEventListener()将多个事件侦听器与分配的回调函数添加到元素中。 -->
+  <div class="my-element">1</div>
+  <script>
+    const addMultipleListeners = (el, types, listener, options, useCapture) => {
+      types.forEach((type) =>
+        el.addEventListener(type, listener, options, useCapture)
+      )
+    }
+
+    addMultipleListeners(
+      document.querySelector(".my-element"),
+      ["click", "mouseover"],
+      () => {
+        console.log("hello")
+      }
+    )
+  </script>
+</html>
