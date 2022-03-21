@@ -1,0 +1,9 @@
+<html>
+  使用Array.prototype.every()测试集合中的所有元素是否基于fn返回true。
+  省略第二个参数fn，以默认使用布尔值。
+  <script>
+    const all = (arr, fn = Boolean) => arr.every(fn)
+    console.log(all([1, 2, 3], (x) => x > 1)) //false
+    console.log(all([1, 2, 3]))
+  </script>
+</html>

@@ -1,0 +1,11 @@
+<html>
+  <!-- 使用Array.prototype.every()检查数组的所有元素是否与第一个元素相同。
+
+使用严格的比较运算符比较数组中的元素，该运算符不考虑NaN自不等式。 -->
+  <script>
+    //判断是否和数组第一个相等
+    const allEqual = (arr) => arr.every((val) => val === arr[0])
+    console.log(allEqual([1, 2, 3, 5])) //false
+    console.log(allEqual([1, 1])) //true
+  </script>
+</html>

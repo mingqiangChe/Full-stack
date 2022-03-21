@@ -1,0 +1,9 @@
+<html>
+  <!-- 使用按位左移运算符（<<）和Number.prototype.toString（16）将给定的RGB参数转换为十六进制字符串。
+  使用String.prototype.padStart（6，'0'）获得6位十六进制值。 -->
+  <script>
+    const RGBToHex = (r, g, b) =>
+      ((r << 16) + (g << 8) + b).toString(16).padStart(6, "0")
+    console.log(RGBToHex(255, 123, 1)) //ff7b01
+  </script>
+</html>
