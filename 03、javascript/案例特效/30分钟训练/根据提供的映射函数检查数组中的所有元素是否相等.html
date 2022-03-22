@@ -1,0 +1,15 @@
+<html>
+  <!-- 将fn应用于arr的第一个元素。
+
+使用Array.prototype.every()检查fn是否为数组中的所有元素返回与第一个元素相同的值。
+
+使用严格的比较运算符比较数组中的元素，该运算符不考虑NaN自不等式。 -->
+  <script>
+    const allEqualBy = (arr, fn) => {
+      const eql = fn(arr[0])
+      return arr.every((val) => fn(val) === eql)
+    }
+    console.log(allEqualBy([1, 2, 3], Math.round)) //false
+    console.log(allEqualBy([1.1, 1.2, 1.3], Math.round)) // true
+  </script>
+</html>

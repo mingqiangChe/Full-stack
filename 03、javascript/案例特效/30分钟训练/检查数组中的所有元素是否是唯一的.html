@@ -1,0 +1,10 @@
+<html>
+  <!-- 从映射的值创建一个新集合，以仅保留唯一的事件。
+
+使用Array.prototype.length和Set.prototype.size将唯一值的长度与原始数组进行比较。 -->
+  <script>
+    const allUnique = (arr) => arr.length === new Set(arr).size
+    console.log(allUnique([1, 2, 6])) //true
+    console.log(allUnique([1, 2, 2])) //false
+  </script>
+</html>
