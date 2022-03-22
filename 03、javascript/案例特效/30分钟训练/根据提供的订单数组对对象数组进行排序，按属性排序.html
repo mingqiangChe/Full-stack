@@ -1,0 +1,27 @@
+<html>
+  <!-- 使用Array.prototype.reduce()从顺序数组创建一个对象，将值作为键，其原始索引作为值。
+
+使用Array.prototype.sort()对给定的数组进行排序，跳过道具在顺序数组中为空或不为空的元素。 -->
+  <script>
+    const orderWidth = (arr, prop, order) => {
+      const orderValues = order.reduce((acc, v, i) => {
+        acc[v] = i
+        return acc
+      }, {})
+      return [...arr].sort((a, b) => {
+        if (orderValues[a[prop]] === undefined) return 1
+        if (orderValues[b[prop]] === undefined) return -1
+        return orderValues[a[prop]] - orderValues[b[prop]]
+      })
+    }
+
+    const users = [
+      { name: "fred", language: "javascript" },
+      { name: "barney", language: "ts" },
+    ]
+
+    console.log(orderWidth(users, "language", ["javascript", "ts"]))
+    // 0: language: "javascript" name: "fred"
+    // 1: language: "ts" name: "barney"
+  </script>
+</html>

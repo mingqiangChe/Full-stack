@@ -1,0 +1,12 @@
+<html>
+  <div id="myListID"></div>
+  <!-- 使用Array.prototype.map()和Document.querySelector()创建html标签列表。 -->
+  <script>
+    const arrayToHTMLList = (arr, listID) =>
+      (document.querySelector(`#${listID}`).innerHTML += arr
+        .map((item) => `<li>${item}</li>`)
+        .join(""))
+
+    arrayToHTMLList(["item 1", "item 2"], "myListID")
+  </script>
+</html>

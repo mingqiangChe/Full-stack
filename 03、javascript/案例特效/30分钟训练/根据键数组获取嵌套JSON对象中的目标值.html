@@ -1,0 +1,26 @@
+<html>
+  <!-- 将嵌套JSON对象中想要的键作为数组进行比较。
+
+使用Array.prototype.reduce()逐一获取嵌套JSON对象中的值。
+
+如果对象中存在密钥，请返回目标值，否则返回null。 -->
+  <script>
+    const deepGet = (obj, keys) =>
+      keys.reduce(
+        (xs, x) => (xs && xs[x] !== null && xs[x] !== undefined ? xs[x] : null),
+        obj
+      )
+
+    let index = 2
+    const data = {
+      foo: {
+        foz: [1, 2, 3],
+        bar: {
+          baz: ["a", "b", "c"],
+        },
+      },
+    }
+    console.log(deepGet(data, ["foo", "foz", index])) //3
+    console.log(deepGet(data, ["foo", "bar", "baz", 8, "foz"])) //null
+  </script>
+</html>

@@ -1,0 +1,10 @@
+<html>
+  <!-- 使用Math.abs()将两个值与ε的绝对差异进行比较。
+
+省略第三个参数epsilon，使用默认值为0.001。 -->
+  <script>
+    const approximatelyEqual = (v1, v2, epsilon = 0.001) =>
+      Math.abs(v1 - v2) < epsilon
+    console.log(approximatelyEqual(Math.PI / 2.0, 1.5708)) //true
+  </script>
+</html>

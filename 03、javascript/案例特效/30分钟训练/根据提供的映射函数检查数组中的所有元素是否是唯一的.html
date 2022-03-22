@@ -1,0 +1,14 @@
+<html>
+  <!-- 使用Array.prototype.map()将fn应用于arr中的所有元素。
+
+从映射的值创建一个新集合，以仅保留唯一的事件。
+
+使用Array.prototype.length和Set.prototype.size将唯一映射值的长度与原始数组进行比较。 -->
+  <script>
+    const allUniqueBy = (arr, fn) => arr.length === new Set(arr.map(fn)).size
+    console.log(allUniqueBy([1, 2, 3], Math.round)) //true
+    console.log(allUniqueBy([1.2, 2.4, 2.4], Math.round)) //false
+    console.log(allUniqueBy([1.2, 2.4, 2.9], Math.round)) // true
+    console.log(allUniqueBy([1.2, 2.3, 2.4], Math.round)) // false
+  </script>
+</html>

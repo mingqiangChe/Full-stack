@@ -1,0 +1,18 @@
+<html>
+  <!-- 返回一个使用Function.prototype.apply()将给定上下文应用于fn的函数。
+
+使用传播运算符（`...`）在参数的任何其他提供的参数之前。 -->
+  <script>
+    const bind =
+      (fn, context, ...boundArgs) =>
+      (...args) =>
+        fn.apply(context, [...boundArgs, ...args])
+    function greet(greeting, punctuation) {
+      return greeting + "" + this.user + punctuation
+    }
+
+    const freddy = { user: "fred" }
+    const freddyBound = bind(greet, freddy)
+    console.log(freddyBound("hi", "!"))
+  </script>
+</html>

@@ -1,0 +1,8 @@
+<html>
+  <!-- 使用Array.from()创建一个所需长度、lim/n的数组和一个映射函数，以填充给定范围内所需的值。 -->
+  <script>
+    const arithmeticProgression = (n, lim) =>
+      Array.from({ length: Math.ceil(lim / n) }, (_, i) => (i + 1) * n)
+    console.log(arithmeticProgression(5, 25)) //5,10,15,20,25
+  </script>
+</html>

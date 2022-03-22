@@ -1,0 +1,13 @@
+<html>
+  <!-- 使用Array.prototype.slice()和Array.prototype.map()创建一个适当长度的数组。
+
+用arr中连续元素的n个组填充数组。
+
+如果n大于arr的长度，则返回一个空数组。 -->
+  <script>
+    const aperture = (n, arr) =>
+      n > arr.length ? [] : arr.slice(n - 1).map((v, i) => arr.slice(i, i + n))
+    console.log(aperture(2, [1, 2, 3, 4])) //Array(3)0: (2) [1, 2]  1: (2) [2, 3] 2: (2) [3,4]
+    console.log(aperture(3, [1, 2, 3, 4]))
+  </script>
+</html>

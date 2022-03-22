@@ -1,0 +1,10 @@
+<html>
+  <!-- 使用Array.prototype.some()来测试集合中的任何元素是否基于fn返回true。
+
+省略第二个参数fn，以默认使用布尔值。 -->
+  <script>
+    const any = (arr, fn = Boolean) => arr.some(fn)
+    console.log(any([0, 1, 2, 3], (x) => x >= 2)) //true
+    console.log(any([0, 1, 2, 3]))
+  </script>
+</html>
