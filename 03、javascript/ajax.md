@@ -66,6 +66,41 @@ xhr.onreadystatechange = function(){
 ## 兼容方案
 * 对于IE5/6需要使用兼容方案
 `xhr = XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('microsoft.XMLHTTP')`
+## promise封装
+
+```js
+
+function ajax(url) {
+        const p = new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", url, "true");
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                resolve(JSON.parse(xhr.responseText));
+              } else if (xhr.status === 400  || xhr.status === 500) {
+                reject(new Error("404 NOT FOUND"));
+              }
+            }
+          };
+          xhr.send(null);
+        });
+        return p;
+      }
+
+      const url = "/test,json";
+      ajax(url)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(Error);
+        });
+
+```
+
+
+
 ## jQuery中的封装
 ### 快速入门
 ```javascript
