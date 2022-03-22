@@ -2,10 +2,6 @@
 
 
 
-![img](http://mmbiz.qpic.cn/sz_mmbiz_png/zHYsKHjf0nhKDp83A5wcarjQibWMd4EneFCib2rMb7recuom2fH8hwZZIYJiaoG6VDP1qP91iasV3pB3NgxLZQ22tA/0?wx_fmt=png)
-
-
-
 ## 一、命名规范
 
 市面上常用的命名规范：

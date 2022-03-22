@@ -32,7 +32,7 @@ npx create-nuxt-app <project-name>
       </li>
     </ul>
   </div>
-</template>
+   </template>
 <script>
   export default {
     data() {
@@ -96,7 +96,9 @@ npx create-nuxt-app <project-name>
    ```bash
    npm install --save-dev sass sass-loader@10 fibers
    ```
+   
 * static    目录直接映射到服务器根目录，并且包含必须保留其名称（例如robots.txt）或可能不会更改（例如favicon）的文件
+
 * layouts    当您想改变Nuxt应用程序的外观时，布局是一个很大的帮助。您是否要包含侧边栏或具有针对移动设备和台式机的独特布局
    * 您可以在此处添加更多组件，例如导航，页眉，页脚等。，当在模板中使用Nuxt时，它可以自动导入您的组件。要激活此功能，请在您的配置中进行设置：
    ```vue
@@ -106,7 +108,7 @@ npx create-nuxt-app <project-name>
           <Nuxt />
         <TheFooter />
       </div>
-</template>
+  </template>
    ```
 
    * 自定义布局,目录中的每个文件（）  都将创建一个自定义布局，可使用 页面组件中的属性进行访问 。layouts/blog.vue:
@@ -128,14 +130,13 @@ npx create-nuxt-app <project-name>
       return 'blog'
     }
   }
-</script>
+  </script>
   base/
       foo/
          Button.vue
   ```
 
    * 错误页面是一个 ，在发生错误时始终显示该 页面（不会在服务器端抛出）。layouts/error.vue 文件,错误页面,您可以通过添加 文件来自定义错误页面 ：页面组件 ，该组件在发生错误时始终显示（未在服务器端抛出）。然后，您必须告诉页面使用自定义布局<Nuxt> 在其模板中。必须看到这布局发生错误时（一个组件显示404， 500等）。与其他页面组件类似，您也可以使用通常的方式为错误页面设置自定义布局。
-   ```vue
 <template>
     <div class="container">
         <h1 v-if="error.statusCode === 404">Page not found</h1>
@@ -163,7 +164,7 @@ npx create-nuxt-app <project-name>
 
  #### 因为 红框、黄框内的周期都不存在Window对象，所以不能直接使用window
 
- ```
+   ```
  <script>
 export default {
   asyncData() {
@@ -212,7 +213,7 @@ fetch 方法用于在渲染页面前填充应用的状态树（store）数据，
 fetch 方法的第一个参数是页面组件的上下文对象 context，我们可以用 fetch 方法来获取数据填充应用的状态树。为了让获取过程可以异步，你需要返回一个 Promise，Nuxt.js 会等这个 promise 完成后再渲染组件。
 注意，在fetch阶段是无法使用this获取组件实例，fetch是在组件初始化之前被调用（好像fetch函数也会在created和beforeMount之间执行一次）
 
-```
+ ```
 <template>
   <h1>Stars: {{ $store.state.stars }}</h1>
 </template>
@@ -367,7 +368,7 @@ export default {
         '@/assets/css/main.css',
         'vue-social-share/dist/client.css'
     ],
-
+    
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [{
             src: '@/plugins/view-ui',
@@ -441,10 +442,10 @@ export default {
     },
     // Auto import components: https://go.nuxtjs.dev/config-components
     components: true,
-
+    
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [],
-
+    
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
         //cookie
@@ -502,7 +503,7 @@ export default function({ store, redirect, app: { $axios, $cookies } }) {
 
     // 数据访问前缀,指定配置的环境变量接口地址
     $axios.defaults.baseURL = process.env.baseUrl
-
+    
     // request拦截器，我这里设置了一个token，当然你可以不要
     $axios.onRequest(config => {
         //请求超时时间
@@ -538,8 +539,8 @@ export default function({ store, redirect, app: { $axios, $cookies } }) {
             ssr: true
         }
  }]
-```
 
+```
 #### 使用
 ```
 async getList(param) {
@@ -758,11 +759,11 @@ export const actions = {
                 // 定义字符常量：需要从cookie中取出的值的名称
             const tk = 'token='
             const u = 'user='
-
+    
             // 需要持久化的值
             let token = ''
             let user = ''
-
+    
             // 遍历Cookie，取得需要的值
             cookie.forEach((e) => {
                 if (e.includes(tk)) {
@@ -771,7 +772,7 @@ export const actions = {
                     user = e.split(u)[1]
                 }
             })
-
+    
             // 提交mutation
             commit('setUserInfo', {
                 token,
@@ -780,4 +781,5 @@ export const actions = {
         }
     }
 }
+
 ```

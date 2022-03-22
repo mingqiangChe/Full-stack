@@ -1948,7 +1948,7 @@ exit
 cd /docker/nginx/conf/
 # 6、容器id替换自己生成的
 docker cp 1eb88ad2fb93:/etc/nginx/nginx.conf .
-ps：文件copy成功后 把nginx容器先删除掉
+//ps：文件copy成功后 把nginx容器先删除掉
 # 7、
 docker rm -f nginx01
 # 8、
