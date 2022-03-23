@@ -9,7 +9,7 @@ export default {
         path: "/",
         name: "blog",
         label: "个人",
-        icon: "blog",
+        icon: "home",
       },
     ],
   },
@@ -22,7 +22,7 @@ export default {
     selectMenu(state, val) {
       // val.name === 'home' ? (state.currentMenu = null) : state.currentMenu = val
 
-      if (val.name == "blog") {
+      if (val.name == "home") {
         state.currentMenu = null;
       } else {
         state.currentMenu = val;

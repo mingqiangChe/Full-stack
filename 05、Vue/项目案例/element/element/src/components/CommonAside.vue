@@ -54,12 +54,19 @@ export default {
     return {
       // isCollapse: false,
       menu: [
+        // {
+        //   path: "/",
+        //   name: "home",
+        //   label: "首页",
+        //   icon: "s-home",
+        //   url: "Home/Home",
+        // },
         {
           path: "/",
-          name: "home",
+          name: "blog",
           label: "首页",
           icon: "s-home",
-          url: "Home/Home",
+          url: "Blog/Blog",
         },
         {
           path: "/mall",
@@ -76,11 +83,11 @@ export default {
           url: "UserManage/UserManage",
         },
         {
-          path: "/Blog",
-          name: "blog",
-          label: "个人简介",
+          path: "/home",
+          name: "home",
+          label: "图表展示",
           icon: "user",
-          url: "UserManage/UserManage",
+          url: "Home/Home",
         },
         {
           label: "其他",
@@ -153,6 +160,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .el-menu-vertical-demo:not(.el-menu--collapse) {
+  min-height: 100vh;
   height: 100%;
 }
 </style>

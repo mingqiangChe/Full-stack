@@ -18,7 +18,9 @@
     <div class="manage-header">
       <el-button type="primary" @click="addUser">+ 新增</el-button>
       <common-form :inline="true" :formLabel="formLabel" :form="searchFrom">
-        <el-button type="primary" @click="getList(searchFrom.keyword)">搜索</el-button>
+        <el-button type="primary" @click="getList(searchFrom.keyword)"
+          >搜索</el-button
+        >
       </common-form>
     </div>
   </div>

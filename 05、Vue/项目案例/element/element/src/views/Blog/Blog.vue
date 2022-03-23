@@ -21,7 +21,7 @@ export default {
   name: "blog",
   data() {
     return {
-      openId: Blog,
+      openId: Home,
     };
   },
   components: {
@@ -44,18 +44,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .blog {
-  /* width: 100vw; */
   min-height: 100vh;
-  padding: 66px 36px 0;
+  /* padding: 66px 36px 0; */
   text-align: left;
-  /* color: skyblue; */
-  /* font-size: 32px; */
   background-color: antiquewhite;
-}
-#header {
-  width: 100vw;
-  position: fixed;
-  right: 0;
-  top: 0;
 }
 </style>
