@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2021-12-12 11:46:53
- * @LastEditTime: 2021-12-13 12:50:13
- * @LastEditors: Please set LastEditors
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: /Full-stack/05、Vue/element/src/components/CommonHeader.vue
--->
 <!-- 头部 -->
 <template>
   <header>
@@ -55,7 +47,7 @@ export default {
   //监听属性 类似于data概念
   computed: {
     ...mapState({
-      current: (state)=>state.tab.currentMenu,
+      current: (state) => state.tab.currentMenu,
     }),
   },
   //监控data中的数据变化
@@ -79,7 +71,7 @@ export default {
   activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 header {
   height: 100%;
   display: flex;

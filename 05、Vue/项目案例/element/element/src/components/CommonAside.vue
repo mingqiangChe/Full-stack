@@ -161,6 +161,7 @@ export default {
 <style lang="scss" scoped>
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   min-height: 100vh;
+  // position: fixed;
   height: 100%;
 }
 </style>
