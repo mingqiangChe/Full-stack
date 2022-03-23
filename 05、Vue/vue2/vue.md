@@ -1,4 +1,4 @@
-# revue
+# vue
 
 * [官方网站](https://cn.vuejs.org)
 * 遵循MVVM的模式

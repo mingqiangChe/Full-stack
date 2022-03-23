@@ -8,7 +8,7 @@
     active-text-color="#ffd04b"
   >
     <template>
-      <h1 v-show="!isCollapse" style="color: white">通用后台管理系统</h1>
+      <h1 v-show="!isCollapse" style="color: white">che系统</h1>
       <h1 v-show="isCollapse" style="color: white">后台</h1>
     </template>
     <!-- 数组形式导航菜单 -->
