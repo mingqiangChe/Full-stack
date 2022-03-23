@@ -76,6 +76,13 @@ export default {
           url: "UserManage/UserManage",
         },
         {
+          path: "/Blog",
+          name: "blog",
+          label: "个人简介",
+          icon: "user",
+          url: "UserManage/UserManage",
+        },
+        {
           label: "其他",
           icon: "location",
           children: [
@@ -146,13 +153,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  /* width: 200px; */
-  /* min-height: 400px; */
-  height: 100vh;
+  height: 100%;
 }
-/* .left-hh {
-  color: white;
-  line-height: 36px;
-  padding-top: 16px;
-} */
 </style>

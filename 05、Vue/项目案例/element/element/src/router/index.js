@@ -32,6 +32,12 @@ const routes = [
         // 组件懒加载
         component: () => import("@/views/User/User"),
       },
+      {
+        path: "/blog",
+        name: "blog",
+        // 组件懒加载
+        component: () => import("@/views/Blog/Blog"),
+      },
     ],
   },
 ];
