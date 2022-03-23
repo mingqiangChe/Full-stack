@@ -1,8 +1,0 @@
-{
-  "backgroundColor": "#2c61b4",
-  "usingComponents": {
-    "l-tabs":"/miniprogram_npm/lin-ui/tabs/index",
-    "l-tabpanel":"/miniprogram_npm/lin-ui/tabpanel/index",
-    "l-textarea":"/miniprogram_npm/lin-ui/textarea/index"
-  }
-}

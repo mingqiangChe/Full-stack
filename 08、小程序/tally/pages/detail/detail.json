@@ -1,7 +1,0 @@
-{
-  "components":true,
-  "backgroundColor": "#2c61b4",
-  "usingComponents": {
-    "s-detail-list":"./childCpns/s-detail-list/s-detail-list"
-  }
-}

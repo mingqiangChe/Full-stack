@@ -1,9 +1,0 @@
-{
-  "backgroundColor": "#2c61b4",
-  "usingComponents": {
-    "l-grid":"/miniprogram_npm/lin-ui/grid/index",
-    "l-grid-item":"/miniprogram_npm/lin-ui/grid-item/index",
-    "l-textarea":"/miniprogram_npm/lin-ui/textarea/index" ,
-    "l-icon":"/miniprogram_npm/lin-ui/icon/index" 
-  }
-}

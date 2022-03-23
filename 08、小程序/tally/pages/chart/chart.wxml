@@ -1,4 +1,0 @@
-<!--pages/chart/chart.wxml-->
-<view class="chart">
-  <l-tab-bar list="{{list}}" bind:lintab="{{2}}"/>
-</view>
