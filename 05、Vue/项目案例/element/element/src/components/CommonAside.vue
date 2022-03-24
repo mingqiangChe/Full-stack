@@ -54,13 +54,6 @@ export default {
     return {
       // isCollapse: false,
       menu: [
-        // {
-        //   path: "/",
-        //   name: "home",
-        //   label: "首页",
-        //   icon: "s-home",
-        //   url: "Home/Home",
-        // },
         {
           path: "/",
           name: "blog",
@@ -88,6 +81,13 @@ export default {
           label: "图表展示",
           icon: "user",
           url: "Home/Home",
+        },
+        {
+          path: "/component",
+          name: "home",
+          label: "封装组件",
+          icon: "user",
+          url: "component/component",
         },
         {
           label: "其他",

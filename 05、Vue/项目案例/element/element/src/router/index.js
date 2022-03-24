@@ -38,6 +38,12 @@ const routes = [
         // 组件懒加载
         component: () => import("@/views/Home/Home"),
       },
+      {
+        path: "/component",
+        name: "component",
+        // 组件懒加载
+        component: () => import("@/views/Component/Component"),
+      },
     ],
   },
 ];
