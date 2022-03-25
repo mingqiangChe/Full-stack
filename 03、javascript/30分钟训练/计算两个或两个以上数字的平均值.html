@@ -1,0 +1,12 @@
+<html>
+  <!-- 使用Array.prototype.reduce()将每个值添加到累加器中，初始化值为0。 -->
+
+  <!-- 将生成的数组除以其长度。 -->
+  <script>
+    const average = (...nums) =>
+      nums.reduce((acc, val) => acc + val, 0) / nums.length
+
+    console.log(average(...[1, 2, 3])) //2
+    average(1, 2, 3) //2
+  </script>
+</html>

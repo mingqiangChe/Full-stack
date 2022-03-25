@@ -1,0 +1,15 @@
+<html>
+  <!-- 使用Array.prototype.map()将每个元素映射到fn返回的值。 -->
+
+  <!-- 使用Array.prototype.reduce()将每个值添加到累加器中，初始化值为0。 -->
+
+  <!-- 将生成的数组除以其长度。 -->
+  <script>
+    const averageBy = (arr, fn) =>
+      arr
+        .map(typeof fn === "function" ? fn : (val) => val[fn])
+        .reduce((acc, val) => acc + val, 0) / arr.length
+
+    console.log(averageBy([{ n: 4 }, { n: 2 }, { n: 8 }, { n: 6 }], (o) => o.n)) //5
+  </script>
+</html>
