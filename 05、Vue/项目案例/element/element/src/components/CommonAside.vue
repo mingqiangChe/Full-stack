@@ -84,7 +84,7 @@ export default {
         },
         {
           path: "/component",
-          name: "home",
+          name: "component",
           label: "封装组件",
           icon: "user",
           url: "component/component",

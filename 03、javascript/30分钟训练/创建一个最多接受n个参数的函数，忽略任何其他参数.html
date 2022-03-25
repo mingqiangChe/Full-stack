@@ -1,0 +1,12 @@
+<html>
+  <!-- 使用Array.prototype.slice（0，n）和扩展运算符（...）调用最多n个参数的函数fn。 -->
+  <script>
+    const ary =
+      (fn, n) =>
+      (...args) =>
+        fn(...args.slice(0, n))
+
+    const firstTwoMax = ary(Math.max, 2)
+    console.log([[2, 6, "a"], [6, 4, 8], [10]].map((x) => firstTwoMax(...x))) //[6,6,10]
+  </script>
+</html>

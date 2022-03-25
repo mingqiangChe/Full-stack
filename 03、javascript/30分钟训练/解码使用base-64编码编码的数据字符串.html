@@ -1,0 +1,8 @@
+<html>
+  <!-- 使用base-64编码为给定字符串创建一个缓冲区，并使用Buffer.toString（“二进制”）返回解码的字符串。 -->
+  <script>
+    const atob = (str) => Buffer.from(str, "base64").toString("binary")
+
+    console.log(atob("Zm9vYmFy"))
+  </script>
+</html>

@@ -1,0 +1,10 @@
+<html>
+  <!-- 使用Object.keys()获取给定对象obj的键。
+  使用Array.prototype.every()和Array.prototype.includes()验证对象中的每个键是否在键数组中指定。 -->
+  <script>
+    const assertValidkeys = (obj, keys) =>
+      Object.keys(obj).every((key) => keys.includes(key))
+
+    console.log(assertValidkeys({ id: 10, name: "apple" }, ["id", "name"])) //true
+  </script>
+</html>
