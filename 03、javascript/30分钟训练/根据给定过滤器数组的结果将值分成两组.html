@@ -1,0 +1,16 @@
+<html>
+  <!-- 使用Array.prototype.reduce()和Array.prototype.push()根据过滤器向组添加元素。 -->
+
+  <!-- 如果过滤器对任何元素都有真值，请将其添加到第一组，否则将其添加到第二组。 -->
+  <script>
+    const bifurcate = (arr, filter) =>
+      arr.reduce(
+        (acc, val, i) => (acc[filter[i] ? 0 : 1].push(val), acc),
+        [[], []]
+      )
+
+    console.log(
+      bifurcate(["beep", "boop", "foo", "bar"], [true, true, false, true])
+    ) //// [ ['beep', 'boop', 'bar'], ['foo']]
+  </script>
+</html>

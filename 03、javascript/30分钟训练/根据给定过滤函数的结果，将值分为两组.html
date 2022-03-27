@@ -1,0 +1,13 @@
+<html>
+  <!-- 使用Array.prototype.reduce()和Array.prototype.push()根据fn为每个元素返回的值向组添加元素。 -->
+
+  <!-- 如果fn返回任何元素的真值，请将其添加到第一组，否则将其添加到第二组。 -->
+  <script>
+    const bifurcateBy = (arr, fn) =>
+      arr.reduce(
+        (acc, val, i) => (acc[fn(val, i) ? 0 : 1].push(val), acc),
+        [[], []]
+      )
+    console.log(bifurcateBy(["beep", "boop", "foo"], (x) => x[0] === "b")) // [ ['beep', 'boop'], ['foo'] ]
+  </script>
+</html>
