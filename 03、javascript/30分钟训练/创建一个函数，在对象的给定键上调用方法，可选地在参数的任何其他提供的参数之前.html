@@ -1,0 +1,20 @@
+<html>
+  <!-- 返回一个使用Function.prototype.apply()将context[fn]绑定到context的函数。 -->
+
+  <!-- 使用扩展运算符（...）在参数的任何其他提供的参数之前。 -->
+  <script>
+    const bindKey =
+      (context, fn, ...boundArgs) =>
+      (...args) =>
+        context[fn].apply(context, [...boundArgs, ...args])
+
+    const fredy = {
+      user: "fred",
+      greet: function (gretting, punctuation) {
+        return gretting + " " + this.user + punctuation
+      },
+    }
+    const freddyBound = bindKey(fredy, "greet")
+    console.log(freddyBound("hi", "!")) //hi fred!
+  </script>
+</html>
