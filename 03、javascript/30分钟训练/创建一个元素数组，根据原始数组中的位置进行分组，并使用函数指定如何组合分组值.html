@@ -1,0 +1,32 @@
+<html>
+  <!-- 检查提供的最后一个参数是否是一个函数。 -->
+
+  <!-- 使用Math.max()获取参数中最长的数组。 -->
+
+  <!-- 使用Array.from()创建一个具有适当长度的数组和一个映射函数来创建分组元素数组。 -->
+
+  <!-- 如果参数数组的长度不同，则在找不到值的地方使用未定义。 -->
+
+  <!-- 该函数与每个组的元素一起调用。 -->
+  <script>
+    const zipWith = (...array) => {
+      const fn =
+        typeof array[array.length - 1] === "function" ? array.pop() : undefined
+      return Array.from(
+        { length: Math.max(...array.map((a) => a.length)) },
+        (_, i) => (fn ? fn(...array.map((a) => a[i])) : array.map((a) => a[i]))
+      )
+    }
+
+    zipWith([1, 2], [10, 20], [100, 200], (a, b, c) => a + b + c) // [111, 222]
+    console.log(
+      zipWith(
+        [1, 2, 3],
+        [10, 20],
+        [100, 200],
+        (a, b, c) =>
+          (a != null ? a : "a") + (b != null ? b : "b") + (c != null ? c : "c")
+      )
+    ) // [111, 222, '3bc']
+  </script>
+</html>

@@ -1,0 +1,13 @@
+<html>
+  <!-- 使用Array.prototype.reduce()从两个数组构建对象。 -->
+
+  <!-- 如果道具的长度长于值，剩余的键将未定义。 -->
+
+  <!-- 如果值的长度长于道具，剩余的值将被忽略。 -->
+  <script>
+    const zipObject = (props, values) =>
+      props.reduce((obj, prop, index) => ((obj[prop] = values[index]), obj), {})
+
+    console.log(zipObject(["a", "b", "c"], [1, 2]))
+  </script>
+</html>
