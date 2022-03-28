@@ -1,0 +1,27 @@
+<html>
+  <!-- 使用Array.prototype.forEach()迭代给定的fns。 -->
+  <div class="zz">5555</div>
+  <!-- 为每个函数返回一个函数，使用Function.prototype.apply()将给定的上下文（obj）应用于fn -->
+  <script>
+    const bindAll = (obj, ...fns) =>
+      fns.forEach(
+        (fn) => (
+          (f = obj[fn]),
+          (obj[fn] = function () {
+            return f.apply(obj)
+          })
+        )
+      )
+
+    var view = {
+      label: "docs",
+      click: function () {
+        console.log("clicked " + this.label)
+      },
+    }
+    bindAll(view, "click")
+    document
+      .getElementsByClassName("zz")[0]
+      .addEventListener("click", view.click) // 'clicked docs'
+  </script>
+</html>
