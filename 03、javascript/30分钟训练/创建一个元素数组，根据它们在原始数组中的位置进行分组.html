@@ -1,0 +1,15 @@
+<html>
+  <!-- 使用Math.max()、Function.prototype.apply()获取参数中最长的数组。 -->
+  <!-- 创建一个以该长度作为返回值的数组，并使用带有映射函数的Array.from()创建分组元素数组。 -->
+  <!-- 如果参数数组的长度不同，则在找不到值的地方使用未定义。 -->
+  <script>
+    const zip = (...arrays) => {
+      const maxLength = Math.max(...arrays.map((x) => x.length))
+      return Array.from({ length: maxLength }).map((_, i) => {
+        return Array.from({ length: arrays.length }, (_, k) => arrays[k][i])
+      })
+    }
+    console.log(zip(["a", "b"], [1, 2])) //['a','1']  ['b',2]
+    console.log(zip(["a"], [1, 2], [true, false])) //[['a', 1, true], [undefined, 2, false]]
+  </script>
+</html>
