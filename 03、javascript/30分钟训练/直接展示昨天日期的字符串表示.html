@@ -1,0 +1,17 @@
+<html>
+  <!-- 使用新的Date()获取当前日期。 -->
+
+  <!-- 使用Date.prototype.getDate()将其减少一个，并使用Date.prototype.setDate()将值设置为结果。 -->
+
+  <!-- 使用Date.prototype.toISOString()返回yyyy-mm-dd格式的字符串。 -->
+  <script>
+    const yesterday = () => {
+      let d = new Date()
+      d.setDate(d.getDate() - 1)
+      return d.toISOString().split("T")[0]
+    }
+
+    console.log(yesterday())
+    // 2022-03-28
+  </script>
+</html>
