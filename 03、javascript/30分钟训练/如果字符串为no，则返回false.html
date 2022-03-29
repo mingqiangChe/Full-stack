@@ -1,0 +1,14 @@
+<html>
+  <!-- 使用RegExp.prototype.test()检查字符串是否计算为y/yes或n/no。 -->
+
+  <!-- 省略第二个参数，def将默认答案设置为否 -->
+  <script>
+    const yesNo = (val, def = false) =>
+      /^(y|yes)$/i.test(val) ? true : /^(n|no)$/i.test(val) ? false : def
+
+    console.log(yesNo("Y")) //true
+    yesNo("yes") // true
+    yesNo("No") // false
+    yesNo("Foo", true) // true
+  </script>
+</html>
