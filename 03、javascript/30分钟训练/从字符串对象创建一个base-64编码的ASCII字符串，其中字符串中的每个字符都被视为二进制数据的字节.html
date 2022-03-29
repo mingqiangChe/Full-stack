@@ -1,0 +1,9 @@
+<html>
+  <!-- 使用二进制编码为给定字符串创建一个缓冲区，并使用Buffer.toString（'base64'）返回编码的字符串。 -->
+  <script>
+    const btoa = (str) => Buffer.from(str, "binary").toString("base64")
+    btoa("foobar") //'Zm9vYmFy'
+
+    // 注意：buffer方法报错
+  </script>
+</html>
