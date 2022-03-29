@@ -1,0 +1,11 @@
+<html>
+  <!-- 将Date.prototype.toLocaleDateString()与{工作日：'long'}选项一起使用来检索工作日。 -->
+
+  <!-- 使用可选的第二个参数获取特定于语言的名称，或省略它以使用默认区域设置。 -->
+  <script>
+    const dayName = (date, locale) =>
+      date.toLocaleDateString(locale, { weekday: "long" })
+    console.log(dayName(new Date())) //星期二
+    console.log(dayName(new Date("09/23/2020"), "de-DE")) //Mittwoch
+  </script>
+</html>

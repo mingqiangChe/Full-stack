@@ -1,0 +1,13 @@
+<html>
+  <!-- 使用Math.sign()检查这两个数字是否具有相同的符号。 -->
+
+  <!-- 如果他们这样做了，请返回x，否则返回-x。 -->
+  <script>
+    const copySign = (x, y) => (Math.sign(x) === Math.sign(y) ? x : -x)
+
+    console.log(copySign(2, 3)) //2
+    copySign(2, -3) // -2
+    copySign(-2, 3) // 2
+    copySign(-2, -3) // -2
+  </script>
+</html>
