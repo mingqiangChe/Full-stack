@@ -6,5 +6,13 @@
   <!-- 使用Array.prototype.pop()获取过滤数组中的最后一个元素。 -->
 
   <!-- 如果没有匹配元素，则返回-1。 -->
-  <script></script>
+  <script>
+    const findLastIndex = (arr, fn) =>
+      (arr
+        .map((val, i) => [i, val])
+        .filter(([i, val]) => fn(val, i, arr))
+        .pop() || [-1])[0]
+
+    console.log(findLastIndex([1, 2, 3, 4], (n) => n % 2 === 1)) //2
+  </script>
 </html>
