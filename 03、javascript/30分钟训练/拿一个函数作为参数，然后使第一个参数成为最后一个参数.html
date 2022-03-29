@@ -1,0 +1,19 @@
+<html>
+  <!-- 使用参数解构和带有变参数的闭包。 -->
+
+  <!-- 使用扩展运算符（...）拼接第一个参数，使其成为应用其余参数之前的最后一个参数。 -->
+  <script>
+    const flip =
+      (fn) =>
+      (first, ...rest) =>
+        fn(...rest, first)
+
+    let a = { name: "John Smith" }
+    let b = {}
+    const mergeFrom = flip(Object.assign)
+    let mergePerson = mergeFrom.bind(null, a)
+    console.log(mergePerson(b)) // John Smith
+    b = {}
+    console.log(Object.assign(b, a)) // John Smith;
+  </script>
+</html>
