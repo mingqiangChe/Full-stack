@@ -1,0 +1,20 @@
+<html>
+  <!-- 使用Object.keys(obj)获取对象的所有属性，Array.prototype.find()使用fn测试每个键值对。 -->
+
+  <!-- 回调接收三个参数-值、键和对象。 -->
+  <script>
+    const findKey = (obj, fn) =>
+      Object.keys(obj).find((key) => fn(obj[key], key, obj))
+
+    console.log(
+      findKey(
+        {
+          barney: { age: 36, active: true },
+          fred: { age: 40, active: false },
+          pebbles: { age: 1, active: true },
+        },
+        (x) => x["active"]
+      )
+    ) //barney
+  </script>
+</html>

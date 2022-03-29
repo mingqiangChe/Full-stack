@@ -1,0 +1,62 @@
+<html>
+  <!-- 使用递归。 -->
+
+  <!--  定义一个生成器函数，步行，它接受一个对象和一个键数组。 -->
+
+  <!-- 使用for...of loop和Object.keys()迭代对象的键。 -->
+
+  <!-- 使用typeof检查给定对象中的每个值本身是否是一个对象。 -->
+
+  <!-- 如果是这样，请使用 yield* 表达式递归委托给相同的生成器函数，步行，将当前键附加到键数组中。否则，生成表示当前路径和给定密钥值的键数组。 -->
+
+  <!-- 使用 yield* 表达式委托给步行生成器函数 -->
+  <script>
+    const walkThrough = function* (obj) {
+      const walk = function* (x, previous = []) {
+        for (let key of Object.keys(x)) {
+          if (typeof x[key] === "object")
+            yield* walk(x[key], [...previous, key])
+          else yield [[...previous, key], x[key]]
+        }
+      }
+      yield* walk(obj)
+    }
+
+    const obj = {
+      a: 10,
+      b: 20,
+      c: {
+        d: 10,
+        e: 20,
+        f: [30, 40],
+      },
+      g: [
+        {
+          h: 10,
+          i: 20,
+        },
+        {
+          j: 30,
+        },
+        40,
+      ],
+    }
+
+    console.log([...walkThrough(obj)])
+
+    /*
+[
+  [['a'], 10],
+  [['b'], 20],
+  [['c', 'd'], 10],
+  [['c', 'e'], 20],
+  [['c', 'f', '0'], 30],
+  [['c', 'f', '1'], 40],
+  [['g', '0', 'h'], 10],
+  [['g', '0', 'i'], 20],
+  [['g', '1', 'j'], 30],
+  [['g', '2'], 40]
+]
+*/
+  </script>
+</html>

@@ -1,0 +1,15 @@
+<html>
+  <!-- 使用提供当前Node.js进程信息的进程全局对象。 -->
+
+  <!-- 检查是否定义了process、process.versions和process.versions.node。 -->
+  <script>
+    const isNode = () =>
+      typeof process !== "undefined" &&
+      !!process.versions &&
+      !!process.versions.node
+
+    console.log(isNode())
+    isNode() // true (Node)
+    isNode() // false (browser)
+  </script>
+</html>

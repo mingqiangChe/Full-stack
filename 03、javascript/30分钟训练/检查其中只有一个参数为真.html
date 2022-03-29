@@ -1,0 +1,13 @@
+<html>
+  <!-- 使用逻辑或（||），和（&&）而不是（！）两个给定值上的运算符来创建逻辑xor -->
+  <script>
+    const xor = (a, b) => (a || b) && !(a && b)
+
+    console.log(xor(true, true)) //false
+
+    xor(true, true) // false
+    xor(true, false) // true
+    xor(false, true) // true
+    xor(false, false) // false
+  </script>
+</html>

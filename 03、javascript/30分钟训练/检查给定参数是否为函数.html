@@ -1,0 +1,9 @@
+<html>
+  <!-- 使用typeof检查值是否被归类为函数原语。 -->
+  <script>
+    const isFunction = (val) => typeof val === "function" //true
+
+    isFunction("x")
+    console.log(isFunction((x) => x)) //true
+  </script>
+</html>

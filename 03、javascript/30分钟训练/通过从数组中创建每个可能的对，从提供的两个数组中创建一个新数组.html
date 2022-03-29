@@ -1,0 +1,9 @@
+<html>
+  <!-- 使用Array.prototype.reduce()、Array.prototype.map()和Array.prototype.concat()从两个数组的元素中生成所有可能的对。 -->
+  <script>
+    const xProd = (a, b) =>
+      a.reduce((acc, x) => acc.concat(b.map((y) => [x, y])), [])
+
+    console.log(xProd([1, 2], ["a", "b"])) //0: (2) [1, 'a'] 1: (2) [1, 'b'] 2: (2) [2, 'a'] 3: (2) [2, 'b']
+  </script>
+</html>
