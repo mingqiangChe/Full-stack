@@ -1,0 +1,24 @@
+<html>
+  <!-- 使用String.prototype.match()获取带有数字值的3个字符串数组。 -->
+
+  <!-- 将Array.prototype.map()与Number结合使用，将它们转换为数字值数组。 -->
+
+  <!-- 使用Math.max（）和Math.min（）确保亮度在有效范围内（0到100之间）。 -->
+
+  <!-- 使用模板文字创建一个具有更新值的新hsl()字符串。 -->
+  <script>
+    const changeLightness = (delta, hslStr) => {
+      const [hue, saturation, lightness] = hslStr.match(/\d+/g).map(Number)
+
+      const newLightness = Math.max(
+        0,
+        Math.min(100, lightness + parseFloat(delta))
+      )
+
+      return `hsl(${hue}, ${saturation}%, ${newLightness}%)`
+    }
+
+    changeLightness(10, "hsl(330, 50%, 50%)") // 'hsl(330, 50%, 60%)'
+    changeLightness(-10, "hsl(330, 50%, 50%)") // 'hsl(330, 50%, 40%)'
+  </script>
+</html>
