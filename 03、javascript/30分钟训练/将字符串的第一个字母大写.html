@@ -1,0 +1,14 @@
+<html>
+  <!-- 使用数组解构和String.prototype.toUpperCase()将字符串的第一个字母大写。 -->
+
+  <!-- 使用Array.prototype.join('')将大写字母与...其后字母组合在一起。 -->
+
+  <!-- 省略 lowerRest 参数以保持字符串的其余部分完好无损，或将其设置为 true 转换为小写。 -->
+  <script>
+    const capitalize = ([first, ...rest], lowerRest = false) =>
+      first.toUpperCase() +
+      (lowerRest ? rest.join("").toLowerCase() : rest.join(""))
+    console.log(capitalize("fooBar")) //FooBar
+    capitalize("fooBar", true) // 'Foobar'
+  </script>
+</html>

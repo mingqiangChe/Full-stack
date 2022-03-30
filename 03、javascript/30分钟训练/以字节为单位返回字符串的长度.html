@@ -1,0 +1,11 @@
+<html>
+  <!-- 将给定字符串转换为Blob对象。 -->
+
+  <!-- 使用Blob.size获取字符串的长度（以字节为单位）。 -->
+  <script>
+    const byteSize = (str) => new Blob([str]).size
+
+    console.log(byteSize("❤️")) //6
+    byteSize("Hello World") // 11
+  </script>
+</html>
