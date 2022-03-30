@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用Array.from()创建一个新的数组，该数组适合将生成的块数。 -->
+
+  <!-- 使用Array.prototype.slice()将新数组的每个元素映射到大小长度的块。 -->
+
+  <!-- 如果原始数组无法均匀拆分，则最后一个块将包含剩余的元素。 -->
+  <script>
+    const chunk = (arr, size) =>
+      Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+        arr.slice(i * size, i * size + size)
+      )
+    console.log(console.log(chunk([1, 2, 3, 4, 5], 2))) // [[1, 2], [3, 4], [5]]
+  </script>
+</html>
