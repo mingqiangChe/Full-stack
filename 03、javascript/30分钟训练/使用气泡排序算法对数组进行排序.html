@@ -1,0 +1,29 @@
+<html>
+  <!-- 声明一个变量，交换，指示在当前迭代期间是否交换了任何值。 -->
+
+  <!-- 使用扩展运算符（...）克隆原始数组arr。 -->
+
+  <!-- 使用for循环迭代克隆数组的元素，在最后一个元素之前终止。 -->
+
+  <!-- 使用嵌套for循环迭代0和i之间的数组段，交换任何相邻的不按顺序的元素，并将设置为true。 -->
+
+  <!-- 如果迭代后交换为false，则不需要更多更改，因此返回克隆数组。 -->
+  <script>
+    const bubbleSort = (arr) => {
+      let swapped = false
+      const a = [...arr]
+      for (let i = 1; i < a.length; i++) {
+        swapped = false
+        for (let j = 0; j < a.length - i; j++) {
+          if (a[j + 1] < a[j]) {
+            ;[a[j], a[j + 1]] = [a[j + 1], a[j]]
+            swapped = true
+          }
+        }
+        if (!swapped) return a
+      }
+      return a
+    }
+    console.log(bubbleSort([2, 1, 4, 3])) //[1,2,3,4]
+  </script>
+</html>
