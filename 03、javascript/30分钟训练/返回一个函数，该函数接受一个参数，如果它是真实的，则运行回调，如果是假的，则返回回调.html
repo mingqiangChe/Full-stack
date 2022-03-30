@@ -1,0 +1,12 @@
+<html>
+  <!-- 返回一个期望单个值x的函数，该值基于pred返回适当的值。 -->
+  <script>
+    const when = (pred, whenTrue) => (x) => pred(x) ? whenTrue(x) : x
+    const doubleEvenNumbers = when(
+      (x) => x % 2 === 0,
+      (x) => x * 2
+    )
+    console.log(doubleEvenNumbers(2)) //4
+    doubleEvenNumbers(1) // 1
+  </script>
+</html>

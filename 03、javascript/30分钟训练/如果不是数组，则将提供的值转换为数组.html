@@ -1,0 +1,7 @@
+<html>
+  <!-- 使用Array.prototype.isArray()确定val是否为数组，并按原样返回或相应地封装在数组中。 -->
+  <script>
+    const castArray = (val) => (Array.isArray(val) ? val : [val])
+    console.log(castArray("foo"))//['foo']
+  </script>
+</html>
