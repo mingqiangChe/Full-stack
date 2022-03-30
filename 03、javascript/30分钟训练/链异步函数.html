@@ -1,0 +1,27 @@
+<html>
+  <!-- 循环浏览包含异步事件的函数数组，在每个异步事件完成后调用下一步。 -->
+  <script>
+    const chainAsync = (fns) => {
+      let curr = 0
+      const last = fns[fns.length - 1]
+      const next = () => {
+        const fn = fns[curr++]
+        fn === last ? fn() : fn(next)
+      }
+      next()
+    }
+    chainAsync([
+      (next) => {
+        console.log("0 seconds")
+        setTimeout(next, 1000)
+      },
+      (next) => {
+        console.log("1 second")
+        setTimeout(next, 1000)
+      },
+      () => {
+        console.log("2 second")
+      },
+    ])
+  </script>
+</html>
