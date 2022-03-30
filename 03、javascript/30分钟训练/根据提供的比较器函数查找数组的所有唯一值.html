@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 基于比较器函数fn，对仅包含每个值首次唯一出现的数组使用Array.prototype.reduce()和Array.prototype.some()。 -->
+  <!-- 比较器函数接受两个参数：被比较的两个元素的值。 -->
+  <script>
+    const uniqueElementsBy = (arr, fn) =>
+      arr.reduce((acc, v) => {
+        if (!acc.some((x) => fn(v, x))) acc.push(v)
+        return acc
+      }, [])
+    uniqueElementsBy(
+      [
+        { id: 0, value: "a" },
+        { id: 1, value: "b" },
+        { id: 2, value: "c" },
+        { id: 1, value: "d" },
+        { id: 0, value: "e" },
+      ],
+      (a, b) => a.id == b.id
+    ) // [ { id: 0, value: 'a' }, { id: 1, value: 'b' }, { id: 2, value: 'c' } ]
+  </script>
+</html>

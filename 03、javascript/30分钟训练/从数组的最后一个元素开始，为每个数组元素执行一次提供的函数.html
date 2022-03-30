@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <!-- 使用Array.prototype.slice()克隆给定数组，并使用Array.prototype.reverse()将其反转。 -->
+  <!-- 使用Array.prototype.forEach()迭代反向数组。 -->
+  <script>
+    const forEachRight = (arr, callback) =>
+      arr.slice().reverse().forEach(callback)
+
+    forEachRight([1, 2, 3, 4], (val) => console.log(val)) // '4', '3', '2', '1'
+  </script>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 如果num在范围内，返回num。 -->
+
+  <!-- 否则，返回范围内最近的数字。 -->
+  <script>
+    const clampNumber = (num, a, b) =>
+      Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b))
+
+    clampNumber(2, 3, 5) // 3
+    clampNumber(1, -1, -5) // -1
+    console.log(clampNumber(2, 3, 5, 6)) //3
+  </script>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <!-- 使用Math.ceil()和Array.prototype.length获取每个块的大小。 -->
+
+  <!-- 使用Array.from()创建一个大小为n的新数组。 -->
+
+  <!-- 使用Array.prototype.slice()将新数组的每个元素映射到大小长度的块。 -->
+
+  <!-- 如果原始数组无法均匀拆分，则最后一个块将包含剩余的元素。 -->
+  <script>
+    const chunkIntoN = (arr, n) => {
+      const size = Math.ceil(arr.length / n)
+      return Array.from({ length: n }, (v, i) =>
+        arr.slice(i * size, i * size + size)
+      )
+    }
+    console.log(chunkIntoN([1, 2, 3, 4, 5, 6, 7], 4)) // [[1, 2], [3, 4], [5, 6], [7]]
+  </script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用递归。 -->
+
+  <!-- 使用Object.keys(obj)与Array.prototype.reduce()相结合，将每个叶子节点转换为扁平的路径节点。 -->
+
+  <!-- 如果键的值是对象，则函数使用适当的前缀调用自己，使用Object.assign()创建路径。 -->
+
+  <!-- 否则，它会将适当的前缀键值对添加到累加器对象中。 -->
+
+  <!-- 您应该始终省略第二个参数，前缀，除非您希望每个键都有前缀。 -->
+  <script>
+    const flattenObject = (obj, prefix = "") =>
+      Object.keys(obj).reduce((acc, k) => {
+        const pre = prefix.length ? `${prefix}.` : ""
+        if (
+          typeof obj[k] === "object" &&
+          obj[k] !== null &&
+          Object.keys(obj[k]).length > 0
+        )
+          Object.assign(acc, flattenObject(obj[k], pre + k))
+        else acc[pre + k] = obj[k]
+        return acc
+      }, {})
+    flattenObject({ a: { b: { c: 1 } }, d: 1 }) // { 'a.b.c': 1, d: 1 }
+  </script>
+</html>

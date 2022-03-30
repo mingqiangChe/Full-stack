@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用带有提供的模式的String.prototype.split()（默认为非alpha作为regexp）转换为字符串数组。 -->
+
+  <!-- 使用Array.prototype.filter()删除任何空字符串。 -->
+
+  <!-- 省略第二个参数，模式，以使用默认regexp。 -->
+  <script>
+    const words = (str, pattern = /[^a-zA-Z-]+/) =>
+      str.split(pattern).filter(Boolean)
+    words("I love javaScript!!") // ['I', 'love', 'javaScript']
+    words("python, javaScript & coffee") // ['python', 'javaScript', 'coffee']
+  </script>
+</html>

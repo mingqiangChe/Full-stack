@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 返回已删除的元素。 -->
+
+  <!-- 使用扩展运算符（...）和Array.prototype.reverse（）创建数组的反向副本。 -->
+
+  <!-- 在反向副本中循环，在Array.prototype.entries()上使用for...of循环，直到函数返回的值为falsy。 -->
+
+  <!-- 使用Array.prototype.slice()返回已删除的元素。 -->
+
+  <!-- 回调函数fn接受单个参数，即元素的值。 -->
+  <script>
+    const takeRightWhile = (arr, fn) => {
+      for (const [i, val] of [...arr].reverse().entries())
+        if (!fn(val)) return i === 0 ? [] : arr.slice(-i)
+      return arr
+    }
+    takeRightWhile([1, 2, 3, 4], (n) => n >= 3) // [3, 4]
+  </script>
+</html>

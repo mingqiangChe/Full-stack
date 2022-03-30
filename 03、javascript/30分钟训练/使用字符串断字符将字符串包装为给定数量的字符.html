@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用String.prototype.replace()和正则表达式在最近的最大字符空格处插入给定的断字符。 -->
+  <!-- 省略第三个参数br，以使用'\n'的默认值。 -->
+  <script>
+    const wordWrap = (str, max, br = "\n") =>
+      str.replace(
+        new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, "g"),
+        "$1" + br
+      )
+    wordWrap(
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus.",
+      32
+    )
+    // 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nFusce tempus.'
+    wordWrap(
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus.",
+      32,
+      "\r\n"
+    )
+    // 'Lorem ipsum dolor sit amet,\r\nconsectetur adipiscing elit.\r\nFusce tempus.'
+  </script>
+</html>

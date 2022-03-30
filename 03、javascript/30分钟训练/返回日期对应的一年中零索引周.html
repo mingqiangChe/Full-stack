@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用新的Date()和Date.prototype.getFullYear()将一年中的第一天作为Date对象。 -->
+
+  <!-- 使用Date.prototype.setDate()、Date.prototype.getDate()和Date.prototype.getDay()以及modulo (%)运算符获取一年的第一个星期一。 -->
+
+  <!-- 从给定日期中减去一年中的第一个星期一，然后除以一周内的毫秒数。 -->
+
+  <!-- 使用Math.round()获取与给定日期相对应的一年中零索引周。 -->
+
+  <!-- 如果给定日期在一年的第一个星期一之前，则返回-0。 -->
+  <script>
+    const weekOfYear = (date) => {
+      const startOfYear = new Date(date.getFullYear(), 0, 1)
+      startOfYear.setDate(startOfYear.getDate() + (startOfYear.getDay() % 7))
+      return Math.round((date - startOfYear) / (7 * 24 * 3600 * 1000))
+    }
+    weekOfYear(new Date("2021-06-18")) // 23
+
+    console.log(weekOfYear(new Date("2021-05-18"))) //19
+  </script>
+</html>

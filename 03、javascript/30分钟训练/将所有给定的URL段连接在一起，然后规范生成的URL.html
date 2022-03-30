@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用String.prototype.join('/')组合URL段。 -->
+
+  <!-- 使用一系列具有各种regexps的String.prototype.replace()调用来规范生成的URL（删除双斜杠，为协议添加适当的斜杠，删除参数之前的斜杠，将参数与'&'组合，并规范化第一个参数分隔符）。 -->
+  <script>
+    const URLJoin = (...args) =>
+      args
+        .join("/")
+        .replace(/[\/]+/g, "/")
+        .replace(/^(.+):\//, "$1://")
+        .replace(/^file:/, "file:/")
+        .replace(/\/(\?|&|#[^!])/g, "$1")
+        .replace(/\?/g, "&")
+        .replace("&", "?")
+
+    URLJoin("http://www.google.com", "a", "/b/cd", "?foo=123", "?bar=foo")
+    // 'http://www.google.com/a/b/cd?foo=123&bar=foo'
+  </script>
+</html>
