@@ -1,0 +1,24 @@
+<html>
+  <!-- 返回一个curried函数，该函数将为obj上的指定道具调用谓词并返回布尔值。 -->
+  <script>
+    const checkProp = (predicate, prop) => (obj) => !!predicate(obj[prop])
+
+    const lengthIs4 = checkProp((l) => l === 4, "length")
+    lengthIs4([]) // false
+    lengthIs4([1, 2, 3, 4]) // true
+    lengthIs4(new Set([1, 2, 3, 4])) // false (Set uses Size, not length)
+
+    const session = { user: {} }
+    const validUserSession = checkProp((u) => u.active && !u.disabled, "user")
+
+    console.log(validUserSession(session)) // false
+
+    session.user.active = true
+    validUserSession(session) // true
+
+    const noLength = checkProp((l) => l === undefined, "length")
+    noLength([]) // false
+    noLength({}) // true
+    noLength(new Set()) // true
+  </script>
+</html>
