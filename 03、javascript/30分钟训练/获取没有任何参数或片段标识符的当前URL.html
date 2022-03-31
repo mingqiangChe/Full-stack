@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用带有适当正则表达式的String.prototype.replace()删除任一“?”之后的所有内容或者'#'，如果找到的话。 -->
+  <script>
+    const getBaseURL = (url) => url.replace(/[?#].*$/, "")
+
+    console.log(getBaseURL("http://url.com/page?name=Adam&surname=Smith")) //http://url.com/page
+  </script>
+</html>
