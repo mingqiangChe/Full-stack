@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用Node.parentNode和while循环向上移动元素的祖先树。 -->
+
+  <!-- 使用Array.prototype.unshift()将每个新祖先添加到数组的开头。 -->
+
+  <li class="nav">231654</li>
+
+  <script>
+    const getAncestors = (el) => {
+      let ancestors = []
+      while (el) {
+        ancestors.unshift(el)
+        el = el.parentNode
+      }
+      return ancestors
+    }
+
+    console.log(getAncestors(document.querySelector("nav"))) //// [document, html, body, header, nav]
+  </script>
+</html>
