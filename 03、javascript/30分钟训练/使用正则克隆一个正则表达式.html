@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用新的RegExp()、RegExp.prototype.source和RegExp.prototype.flags克隆给定的正则表达式。 -->
+  <script>
+    const cloneRegExp = (regExp) => new RegExp(regExp.source, regExp.flags)
+
+    const regExp = /lorem ipsum/gi
+    const regExp2 = cloneRegExp(regExp)
+    console.log(regExp2) // /lorem ipsum/gi
+  </script>
+</html>

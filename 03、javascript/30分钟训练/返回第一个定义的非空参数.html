@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<!-- 使用Array.prototype.find()和Array.prototype.includes()查找不等于未定义或空的第一个值。 -->
+<html lang="en">
+  <script>
+    const coalesce = (...args) =>
+      args.find((v) => ![undefined, null].includes(v))
+
+    console.log(coalesce(null, undefined, "", NaN, "waldo"))
+  </script>
+</html>
