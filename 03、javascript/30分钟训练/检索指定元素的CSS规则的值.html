@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用Window.getComputedStyle()获取指定元素的CSS规则的值。 -->
+  <p style="font-size: 56px">我你爹</p>
+  <script>
+    const getStyle = (el, ruleName) => getComputedStyle(el)[ruleName]
+
+    console.log(getStyle(document.querySelector("p"), "font-size")) //56px
+  </script>
+</html>
