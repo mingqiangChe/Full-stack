@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.replace()和正则表达式在每行开头添加缩进计数时间指定的字符。
+  省略第三个参数缩进，以使用''的默认缩进字符。
+  <script>
+    const indentString = (str, count, indent = " ") =>
+      str.replace(/^/gm, indent.repeat(count))
+
+    indentString("Lorem\nIpsum", 2) // '  Lorem\n  Ipsum'
+    indentString("Lorem\nIpsum", 2, "_") // '__Lorem\n__Ipsum'
+  </script>
+</html>

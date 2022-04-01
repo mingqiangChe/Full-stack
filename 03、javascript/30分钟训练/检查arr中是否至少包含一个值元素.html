@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.some()和Array.prototype.includes()检查arr中是否至少包含一个值元素。
+  <script>
+    const includesAny = (arr, values) => values.some((v) => arr.includes(v))
+    includesAny([1, 2, 3, 4], [2, 9]) // true
+    includesAny([1, 2, 3, 4], [8, 9]) // false
+  </script>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  从b创建一个集合，以获取b中的唯一值。
+  使用Set.prototype.has()，在a上使用Array.prototype.filter()仅保留b中未包含的值
+  <script>
+    const difference = (a, b) => {
+      const s = new Set(b)
+      return a.filter((x) => !s.has(x))
+    }
+    difference([1, 2, 3, 3], [1, 2, 4]) // [3, 3]
+  </script>
+</html>
