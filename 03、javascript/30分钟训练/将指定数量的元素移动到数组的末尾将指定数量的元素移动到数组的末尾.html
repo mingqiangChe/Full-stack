@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.slice()两次获取指定索引之后的元素和之前的元素。
+  使用扩展运算符（...）将两者组合成一个数组。
+  如果偏移量为负，元素将从头移动到头。
+  <script>
+    const offset = (arr, offset) => [
+      ...arr.slice(offset),
+      ...arr.slice(0, offset),
+    ]
+    offset([1, 2, 3, 4, 5], 2) // [3, 4, 5, 1, 2]
+    offset([1, 2, 3, 4, 5], -2) // [4, 5, 1, 2, 3]
+  </script>
+</html>

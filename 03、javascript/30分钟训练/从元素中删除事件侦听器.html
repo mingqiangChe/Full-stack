@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用EventTarget.removeEventListener()从元素中删除事件侦听器。
+  省略第四个参数，选择使用false或根据添加事件侦听器时使用的选项指定它。
+  <script>
+    const off = (el, evt, fn, opts = false) =>
+      el.removeEventListener(evt, fn, opts)
+
+    const fn = () => console.log("!")
+    document.body.addEventListener("click", fn)
+    off(document.body, "click", fn) // no longer logs '!' upon clicking on the page
+  </script>
+</html>
