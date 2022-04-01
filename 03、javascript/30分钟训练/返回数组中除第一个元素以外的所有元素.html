@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  如果Array.prototype.length大于1，则返回Array.prototype.slice（1），否则返回整个数组。
+  <script>
+    const tail = (arr) => (arr.length > 1 ? arr.slice(1) : arr)
+    tail([1, 2, 3]) // [2, 3]
+    tail([1]) // [1]
+  </script>
+</html>

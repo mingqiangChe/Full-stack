@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用新的Set()构造函数从每个迭代器创建一个新的Set对象。
+  使用Array.prototype.every()和Set.prototype.has()检查第二个可迭代中的每个值是否包含在第一个值中
+  <script>
+    const superSet = (a, b) => {
+      const sA = new Set(a),
+        sB = new Set(b)
+      return [...sB].every((v) => sA.has(v))
+    }
+
+    superSet(new Set([1, 2, 3, 4]), new Set([1, 2])) // true
+    superSet(new Set([1, 2, 3, 4]), new Set([1, 5])) // false
+  </script>
+</html>
