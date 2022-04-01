@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查键是否为空，并使用Array.prototype.every()按顺序检查其键到对象obj的内部深度。
+  使用Object.prototype.hasOwnProperty()检查obj是否没有当前键或不是对象，停止传播并返回false。
+  否则，将键的值分配给obj，以便在下一次迭代中使用。
+  如果给定的密钥列表为空，请提前返回false。
+  <script>
+    const hasKey = (obj, keys) => {
+      return (
+        keys.length > 0 &&
+        keys.every((key) => {
+          if (typeof obj !== "object" || !obj.hasOwnProperty(key)) return false
+          obj = obj[key]
+          return true
+        })
+      )
+    }
+
+    let obj = {
+      a: 1,
+      b: { c: 4 },
+      "b.d": 5,
+    }
+    hasKey(obj, ["a"]) // true
+    hasKey(obj, ["b"]) // true
+    hasKey(obj, ["b", "c"]) // true
+    hasKey(obj, ["b.d"]) // true
+    hasKey(obj, ["d"]) // false
+    hasKey(obj, ["c"]) // false
+    hasKey(obj, ["b", "f"]) // false
+  </script>
+</html>

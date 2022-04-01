@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.every()和Array.prototype.includes()检查arr中是否包含所有值元素。
+  <script>
+    const includesAll = (arr, values) => values.every((v) => arr.includes(v))
+    includesAll([1, 2, 3, 4], [1, 4]) // true
+    console.log(includesAll([1, 2, 3, 4], [1, 5])) // false
+  </script>
+</html>
