@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  将String.prototype.match()与适当的正则表达式一起使用，以获取所有键值对。
+  使用Array.prototype.reduce()将它们映射并组合成单个对象。 Pass
+  location.search作为应用于当前网址的参数。
+  <script>
+    const getURLParameters = (url) =>
+      (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
+        (a, v) => (
+          (a[v.slice(0, v.indexOf("="))] = v.slice(v.indexOf("=") + 1)), a
+        ),
+        {}
+      )
+
+    getURLParameters("google.com") // {}
+    console.log(getURLParameters("http://url.com/page?name=Adam&surname=Smith"))
+    // {name: 'Adam', surname: 'Smith'}
+  </script>
+</html>
+\

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  如果值未定义或为空，则返回“未定义”或“空”。
+  否则，请使用Object.prototype.constructor.name获取构造函数的名称。
+  <script>
+    const getType = (v) =>
+      v === undefined ? "undefined" : v === null ? "null" : v.constructor.name
+
+    console.log(getType(new Set([1, 2, 3]))) // 'Set'
+  </script>
+</html>

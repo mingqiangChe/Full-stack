@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用Node.parentNode和Node.childNodes获取元素父元素中包含的所有元素的NodeList。 -->
+
+  <!-- 使用扩展运算符（...）和Array.prototype.filter（）转换为数组并从中移除给定元素。 -->
+  <script>
+    const getSiblings = (el) =>
+      [...el.parentNode.childNodes].filter((node) => node !== el)
+
+    console.log(getSiblings(document.querySelector("head"))) // ['body']
+  </script>
+</html>
