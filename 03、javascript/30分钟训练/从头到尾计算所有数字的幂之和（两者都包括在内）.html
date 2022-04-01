@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.fill()创建目标范围内所有数字的数组。
+  使用Array.prototype.map()和指数运算符(**)将它们提高到电源，并使用Array.prototype.reduce()将它们添加到一起。
+  省略第二个参数，power，使用默认2的power。
+  省略第三个参数start，以使用默认起始值1。
+  <script>
+    const sumPower = (end, power = 2, start = 1) =>
+      Array(end + 1 - start)
+        .fill(0)
+        .map((x, i) => (i + start) ** power)
+        .reduce((a, b) => a + b, 0)
+
+    sumPower(10) // 385
+    sumPower(10, 3) // 3025
+    sumPower(10, 3, 5) // 2925
+  </script>
+</html>
