@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用正则表达式测试navigator.userAgent属性，以确定设备是移动设备还是台式机。
+  <script>
+    const detectDeviceType = () =>
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+        ? "Mobile"
+        : "Desktop"
+
+    console.log(detectDeviceType()) // 'Mobile' or 'Desktop'
+  </script>
+</html>

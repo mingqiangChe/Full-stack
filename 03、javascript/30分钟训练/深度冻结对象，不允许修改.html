@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.keys()获取传递对象Array.prototype.forEach()的所有属性来迭代它们。
+  对所有属性递归调用Object.freeze(obj)，必要时应用deepFreeze()。
+  最后，使用Object.freeze()冻结给定的对象。
+  <script>
+      const deepFreeze = (obj) => {
+        Object.keys(obj).forEach((prop) => {
+          if (typeof obj[prop] === "object") deepFreeze(obj[prop])
+        })
+        return Object.freeze(obj)
+      }
+
+      ;("use strict")
+
+      const val = deepFreeze([1, [2, 3]])
+
+      console.log((val[0] = 3)) //3
+      console.log((val[1][0] = 4)) // 4
+
+    注：不能冻结参考
+  </script>
+</html>

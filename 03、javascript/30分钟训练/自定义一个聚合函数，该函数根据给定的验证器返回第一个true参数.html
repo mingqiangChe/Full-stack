@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.find()返回第一个从提供的参数验证函数返回true的参数，有效。
+  <script>
+    const coalesceFactory =
+      (valid) =>
+      (...args) =>
+        args.find(valid)
+
+    const customCoalesce = coalesceFactory(
+      (v) => ![null, undefined, "", NaN].includes(v)
+    )
+    customCoalesce(undefined, null, NaN, "", "Waldo") // 'Waldo'
+  </script>
+</html>

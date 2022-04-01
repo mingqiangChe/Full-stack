@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用while loop和Array.prototype.push()反复调用函数，直到它返回false。
+  迭代器函数接受一个参数（种子），并且必须始终返回具有两个元素（[value，
+  nextSeed]）或false的数组才能终止。
+  <script>
+    const unfold = (fn, seed) => {
+      let result = [],
+        val = [null, seed]
+      while ((val = fn(val[1]))) result.push(val[0])
+      return result
+    }
+    var f = (n) => (n > 50 ? false : [-n, n + 10])
+    unfold(f, 10) // [-10, -20, -30, -40, -50]
+  </script>
+</html>

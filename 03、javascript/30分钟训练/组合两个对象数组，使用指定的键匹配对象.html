@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  将Array.prototype.reduce()与对象累加器一起使用，根据给定的道具组合两个数组中的所有对象。
+  使用Object.values()将生成的对象转换为数组并返回。
+  <script>
+    const combine = (a, b, prop) =>
+      Object.values(
+        [...a, ...b].reduce((acc, v) => {
+          if (v[prop])
+            acc[v[prop]] = acc[v[prop]] ? { ...acc[v[prop]], ...v } : { ...v }
+          return acc
+        }, {})
+      )
+
+    const x = [
+      { id: 1, name: "John" },
+      { id: 2, name: "Maria" },
+    ]
+    const y = [{ id: 1, age: 28 }, { id: 3, age: 26 }, { age: 3 }]
+    combine(x, y, "id")
+    // [
+    //  { id: 1, name: 'John', age: 28 },
+    //  { id: 2, name: 'Maria' },
+    //  { id: 3, age: 26 }
+    // ]
+  </script>
+</html>
