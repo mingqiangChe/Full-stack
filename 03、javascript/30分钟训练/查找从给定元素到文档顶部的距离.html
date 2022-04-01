@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用while loop和HTMLElement.offsetParent向上移动给定元素的偏移父元素。 -->
+
+  <!-- 为每个元素添加HTMLElement.offsetTop并返回结果。 -->
+  <div class="my" style="margin-top: 20px; padding-top: 10px">cheche</div>
+  <script>
+    const getVerticalOffset = (el) => {
+      let offset = el.offsetTop,
+        _el = el
+      while (_el.offsetParent) {
+        _el = _el.offsetParent
+        offset += _el.offsetTop
+      }
+      return offset
+    }
+
+    console.log(getVerticalOffset(document.querySelector(".my"))) //20
+  </script>
+</html>
