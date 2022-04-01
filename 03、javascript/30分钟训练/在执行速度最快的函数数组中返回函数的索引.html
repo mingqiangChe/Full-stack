@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.map()生成一个数组，其中每个值都是迭代后执行函数的总时间。
+  在之前和之后使用 performance.now()
+  值的差异，使总时间（以毫秒为单位）具有高度的准确性。
+  使用Math.min()找到最小执行时间，并返回与性能最高函数的索引相对应的最短时间的索引。
+  省略第二个参数，迭代，以使用10000次迭代的默认值。
+  迭代越多，结果就越可靠，但需要的时间就越长。
+  <script>
+    const mostPerformant = (fns, iterations = 10000) => {
+      const times = fns.map((fn) => {
+        const before = performance.now()
+        for (let i = 0; i < iterations; i++) fn()
+        return performance.now() - before
+      })
+      return times.indexOf(Math.min(...times))
+    }
+
+    mostPerformant([
+      () => {
+        // Loops through the entire array before returning `false`
+        ;[1, 2, 3, 4, 5, 6, 7, 8, 9, "10"].every((el) => typeof el === "number")
+      },
+      () => {
+        // Only needs to reach index `1` before returning `false`
+        ;[1, "2", 3, 4, 5, 6, 7, 8, 9, 10].every((el) => typeof el === "number")
+      },
+    ]) // 1
+  </script>
+</html>

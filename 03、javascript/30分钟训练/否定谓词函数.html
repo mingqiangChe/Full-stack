@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  取谓词函数并应用非运算符（！）带着它的论点。
+  <script>
+    const negate =
+      (func) =>
+      (...args) =>
+        !func(...args)[(1, 2, 3, 4, 5, 6)].filter(negate((n) => n % 2 === 0)) // [ 1, 3, 5 ]
+  </script>
+</html>
