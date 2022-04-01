@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.slice()创建数组的切片，其中包含从头开始的n个元素。
+  <script>
+    const take = (arr, n = 1) => arr.slice(0, n)
+
+    take([1, 2, 3], 5) // [1, 2, 3]
+    take([1, 2, 3], 0) // []
+  </script>
+</html>
