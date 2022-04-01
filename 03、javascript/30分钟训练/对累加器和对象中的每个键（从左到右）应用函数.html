@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.keys()迭代对象中的每个键。
+  使用Array.prototype.reduce()将指定的函数应用于给定的累加器。
+  <script>
+    const transform = (obj, fn, acc) =>
+      Object.keys(obj).reduce((a, k) => fn(a, obj[k], k, obj), acc)
+
+    transform(
+      { a: 1, b: 2, c: 1 },
+      (r, v, k) => {
+        ;(r[v] || (r[v] = [])).push(k)
+        return r
+      },
+      {}
+    ) // { '1': ['a', 'c'], '2': ['b'] }
+  </script>
+</html>

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  确定String.prototype.length是否大于num。
+  返回截断到所需长度的字符串，在末尾或原始字符串上附加“...”。
+  <script>
+    const truncateString = (str, num) =>
+      str.length > num ? str.slice(0, num > 3 ? num - 3 : num) + "..." : str
+    console.log(truncateString("boomerang", 7)) // 'boom...'
+  </script>
+</html>

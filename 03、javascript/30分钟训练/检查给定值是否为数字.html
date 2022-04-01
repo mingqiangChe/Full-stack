@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用parseFloat（）尝试将n转换为数字。 使用！Number.isNaN()检查num是否为数字。
+  使用Number.isFinite()检查num是否有限。
+  使用Number()和松散等式运算符（==)来检查胁迫是否成立。
+  <script>
+    const validateNumber = (n) => {
+      const num = parseFloat(n)
+      return !Number.isNaN(num) && Number.isFinite(num) && Number(n) == n
+    }
+    validateNumber("10") // true
+    validateNumber("a") // false
+  </script>
+</html>
