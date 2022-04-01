@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Function.prototype.call()调用fnn次或直到它返回false。
+  省略最后一个参数，上下文，以使用未定义的对象（或非严格模式下的全局对象）。
+  <script>
+    const times = (n, fn, context = undefined) => {
+      let i = 0
+      while (fn.call(context, i) !== false && ++i < n) {}
+    }
+    var output = ""
+    times(5, (i) => (output += i))
+    console.log(output) // 01234
+  </script>
+</html>
