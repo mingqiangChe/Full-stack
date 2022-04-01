@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用XMLHttpRequest Web API向给定的URL发出POST请求。
+  使用setRequestHeader方法设置HTTP请求头的值。
+  通过将给定的回调称为responseText来处理加载事件。
+  通过运行提供的错误函数来处理错误事件。
+  省略第四个参数，错误，默认情况下将错误记录到控制台的错误流中。
+  <script>
+    const httpPost = (url, data, callback, err = console.error) => {
+      const request = new XMLHttpRequest()
+      request.open("POST", url, true)
+      request.setRequestHeader(
+        "Content-type",
+        "application/json; charset=utf-8"
+      )
+      request.onload = () => callback(request.responseText)
+      request.onerror = () => err(request)
+      request.send(data)
+    }
+
+    const newPost = {
+      userId: 1,
+      id: 1337,
+      title: "Foo",
+      body: "bar bar bar",
+    }
+    const data = JSON.stringify(newPost)
+    httpPost("https://jsonplaceholder.typicode.com/posts", data, console.log) /*
+Logs: {
+  "userId": 1,
+  "id": 1337,
+  "title": "Foo",
+  "body": "bar bar bar"
+}
+*/
+    httpPost(
+      "https://jsonplaceholder.typicode.com/posts",
+      null, // does not send a body
+      console.log
+    ) /*
+Logs: {
+  "id": 101
+}
+*/
+  </script>
+</html>

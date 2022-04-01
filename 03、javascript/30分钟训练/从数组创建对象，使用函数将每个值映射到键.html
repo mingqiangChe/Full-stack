@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.reduce()从arr创建对象。
+  将fn应用于arr的每个值，以生成密钥并将键值对添加到对象中。
+  <script>
+    const indexBy = (arr, fn) =>
+      arr.reduce((obj, v, i) => {
+        obj[fn(v, i, arr)] = v
+        return obj
+      }, {})
+    indexBy(
+      [
+        { id: 10, name: "apple" },
+        { id: 20, name: "orange" },
+      ],
+      (x) => x.id
+    )
+    // { '10': { id: 10, name: 'apple' }, '20': { id: 20, name: 'orange' } }
+  </script>
+</html>

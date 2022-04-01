@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 如果val从未发生，则返回一个空数组。
+  使用Array.prototype.reduce()在元素上循环并存储匹配元素的索引。 -->
+  <script>
+    const indexOfAll = (arr, val) =>
+      arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), [])
+
+    indexOfAll([1, 2, 3, 1, 2, 3], 1) // [0, 3]
+    indexOfAll([1, 2, 3], 4) // []
+  </script>
+</html>

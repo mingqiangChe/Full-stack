@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.indexOf()在str中查找searchValue。
+  如果找到该值，请使用收益率返回索引并更新索引，即
+  使用while循环，该循环将在从Array.prototype.indexOf()返回的值为-1时立即终止生成器。
+  <script>
+        const indexOfSubstrings = function* (str, searchValue) {
+          let i = 0
+          while (true) {
+            const r = str.indexOf(searchValue, i)
+            if (r !== -1) {
+              yield r
+              i = r + 1
+            } else return
+          }
+        }
+    [...indexOfSubstrings('tiktok tok tok tik tok tik', 'tik')]; // [0, 15, 23]
+    [...indexOfSubstrings('tutut tut tut', 'tut')]; // [0, 2, 6, 10]
+    [...indexOfSubstrings('hello', 'hi')]; // []
+  </script>
+</html>
