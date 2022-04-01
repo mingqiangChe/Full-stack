@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 使用Element.classList和DOMTokenList.contains()检查元素是否具有指定的类。 -->
+  <p class="special"></p>
+  <script>
+    const hasClass = (el, className) => el.classList.contains(className)
+
+    console.log(hasClass(document.querySelector("p"), "special")) //true
+  </script>
+</html>
