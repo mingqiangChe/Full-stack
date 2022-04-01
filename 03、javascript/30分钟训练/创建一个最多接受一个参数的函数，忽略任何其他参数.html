@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  调用提供的函数fn，仅提供第一个参数。
+  <script>
+    const unary = (fn) => (val) => fn(val)
+
+    console.log([("6", "8", "10")].map(unary(parseInt))) // [10]
+  </script>
+</html>

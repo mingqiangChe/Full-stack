@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.replace()与正则表达式和os.homedir()将路径开头的~替换为主目录。
+  <script>
+    const untildify = (str) =>
+      str.replace(/^~($|\/|\\)/, `${require("os").homedir()}$1`)
+
+    untildify("~/node") // '/Users/aUser/node'
+  </script>
+</html>

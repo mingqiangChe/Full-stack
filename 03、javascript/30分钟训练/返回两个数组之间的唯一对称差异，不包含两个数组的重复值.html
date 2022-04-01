@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  在每个数组上使用Array.prototype.filter()和Array.prototype.includes()删除另一个数组中包含的值。
+  从结果中创建一个新的Set()，删除重复值。
+  <script>
+    const uniqueSymmetricDifference = (a, b) => [
+      ...new Set([
+        ...a.filter((v) => !b.includes(v)),
+        ...b.filter((v) => !a.includes(v)),
+      ]),
+    ]
+    uniqueSymmetricDifference([1, 2, 3], [1, 2, 4]) // [3, 4]
+    uniqueSymmetricDifference([1, 2, 2], [1, 3, 1]) // [2, 3]
+  </script>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  确定String.prototype.length是否大于或等于lim。如果没有，请按原样返回。
+  使用String.prototype.slice()和String.prototype.lastIndexOf()查找所需lim以下最后一个空格的索引。
+  使用String.prototype.slice()根据lastSpace适当截断str，如果可能，请尊重空格，并在末尾添加结尾。
+  省略第三个参数，结尾，使用'...'的默认结尾。
+  <script>
+    const truncateStringAtWhitespace = (str, lim, ending = "...") => {
+      if (str.length <= lim) return str
+      const lastSpace = str.slice(0, lim - ending.length + 1).lastIndexOf(" ")
+      return (
+        str.slice(0, lastSpace > 0 ? lastSpace : lim - ending.length) + ending
+      )
+    }
+
+    truncateStringAtWhitespace("short", 10) // 'short'
+    truncateStringAtWhitespace("not so short", 10) // 'not so...'
+    truncateStringAtWhitespace("trying a thing", 10) // 'trying...'
+    truncateStringAtWhitespace("javascripting", 10) // 'javascr...'
+  </script>
+</html>

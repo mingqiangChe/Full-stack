@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.replace()和正则表达式将行尾与规范化版本匹配和替换。
+  省略第二个规范化的参数，以使用'\r\n'的默认值。
+  <script>
+    const normalizeLineEndings = (str, normalized = "\r\n") =>
+      str.replace(/\r?\n/g, normalized)
+
+    normalizeLineEndings("This\r\nis a\nmultiline\nstring.\r\n")
+    // 'This\r\nis a\r\nmultiline\r\nstring.\r\n'
+    normalizeLineEndings("This\r\nis a\nmultiline\nstring.\r\n", "\n")
+    // 'This\nis a\nmultiline\nstring.\n'
+  </script>
+</html>

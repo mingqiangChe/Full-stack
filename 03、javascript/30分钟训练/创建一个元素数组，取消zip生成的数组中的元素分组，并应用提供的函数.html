@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Math.max()、Function.prototype.apply()获取数组中最长的子数组Array.prototype.map()使每个元素成为数组。
+  使用Array.prototype.reduce()和Array.prototype.forEach()将分组值映射到单个数组。
+  使用Array.prototype.map()和传播运算符（...）将fn应用于每组元素。
+  <script>
+    const unzipWith = (arr, fn) =>
+      arr
+        .reduce(
+          (acc, val) => (val.forEach((v, i) => acc[i].push(v)), acc),
+          Array.from({
+            length: Math.max(...arr.map((x) => x.length)),
+          }).map((x) => [])
+        )
+        .map((val) => fn(...val))
+
+    unzipWith(
+      [
+        [1, 10, 100],
+        [2, 20, 200],
+      ],
+      (...args) => args.reduce((acc, v) => acc + v, 0)
+    )
+    // [3, 30, 300]
+  </script>
+</html>
