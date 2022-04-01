@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用XMLHttpRequest Web API向给定的URL发出DELETE请求。
+  通过运行提供的回调函数来处理加载事件。 通过运行提供的错误函数来处理错误事件。
+  省略第三个参数，默认情况下将请求记录到控制台的错误流是错误的。
+  <script>
+    const httpDelete = (url, callback, err = console.error) => {
+      const request = new XMLHttpRequest()
+      request.open("DELETE", url, true)
+      request.onload = () => callback(request)
+      request.onerror = () => err(request)
+      request.send()
+    }
+    httpDelete("https://jsonplaceholder.typicode.com/posts/1", (request) => {
+      console.log(request.responseText)
+    }) // Logs: {}
+  </script>
+</html>

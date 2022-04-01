@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用XMLHttpRequest web api向给定网址发出PUT请求。
+  使用setRequestHeader方法设置HTTP请求头的值。
+  通过运行提供的回调函数来处理加载事件。 通过运行提供的错误函数来处理错误事件。
+  省略最后一个参数，默认情况下将请求记录到控制台的错误流是错误的。
+  <script>
+    const httpPut = (url, data, callback, err = console.error) => {
+      const request = new XMLHttpRequest()
+      request.open("PUT", url, true)
+      request.setRequestHeader(
+        "Content-type",
+        "application/json; charset=utf-8"
+      )
+      request.onload = () => callback(request)
+      request.onerror = () => err(request)
+      request.send(data)
+    }
+
+    const password = "fooBaz"
+    const data = JSON.stringify({
+      id: 1,
+      title: "foo",
+      body: "bar",
+      userId: 1,
+    })
+    httpPut("https://jsonplaceholder.typicode.com/posts/1", data, (request) => {
+      console.log(request.responseText)
+    }) /*
+Logs: {
+  id: 1,
+  title: 'foo',
+  body: 'bar',
+  userId: 1
+}
+*/
+  </script>
+</html>
