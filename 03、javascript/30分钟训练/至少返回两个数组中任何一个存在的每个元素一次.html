@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用a和b的所有值创建一个新的Set()，并将其转换为数组。
+  <script>
+    const union = (a, b) => Array.from(new Set([...a, ...b]))
+
+    union([1, 2, 3], [4, 3, 2]) // [1, 2, 3, 4]
+  </script>
+</html>

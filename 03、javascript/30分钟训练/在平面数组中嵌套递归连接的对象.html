@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用递归。 使用Array.prototype.filter()过滤ID与链接匹配的项目。
+  使用Array.prototype.map()将每个项目映射到具有子属性的新对象，该属性根据哪些项目是当前项目的子项递归嵌套项目。
+  省略第二个参数id，默认为null，这表明该对象没有链接到另一个参数（即它是顶级对象）。
+  省略第三个参数link，使用“parent_id”作为默认属性，该属性通过其id将对象链接到另一个对象。
+  <script>
+    const nest = (items, id = null, link = "parent_id") =>
+      items
+        .filter((item) => item[link] === id)
+        .map((item) => ({ ...item, children: nest(items, item.id, link) }))
+
+    const comments = [
+      { id: 1, parent_id: null },
+      { id: 2, parent_id: 1 },
+      { id: 3, parent_id: 1 },
+      { id: 4, parent_id: 2 },
+      { id: 5, parent_id: 4 },
+    ]
+    const nestedComments = nest(comments)
+    console.log(nestedComments)
+    // [{ id: 1, parent_id: null, children: [...] }]
+  </script>
+</html>

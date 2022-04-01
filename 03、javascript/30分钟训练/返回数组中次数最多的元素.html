@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.reduce()将唯一值映射到对象的键，每次遇到相同值时都会添加到现有键中。
+  将Object.entries()与Array.prototype.reduce()结合使用结果，以获得数组中最常见的值。
+  <script>
+    const mostFrequent = (arr) =>
+      Object.entries(
+        arr.reduce((a, v) => {
+          a[v] = a[v] ? a[v] + 1 : 1
+          return a
+        }, {})
+      ).reduce((a, v) => (v[1] >= a[1] ? v : a), [null, 0])[0]
+    mostFrequent(["a", "b", "a", "c", "a", "a", "b"]) // 'a'
+  </script>
+</html>

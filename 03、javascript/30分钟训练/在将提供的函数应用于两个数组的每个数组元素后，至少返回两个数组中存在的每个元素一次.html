@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  通过将所有fn应用于a的所有值来创建新的Set()。
+  从a和b中的所有元素创建一个新的Set()，其值在应用fn后与之前创建的集合中的值不匹配。
+  返回转换为数组的最后一个集合。
+  <script>
+    const unionBy = (a, b, fn) => {
+      const s = new Set(a.map(fn))
+      return Array.from(new Set([...a, ...b.filter((x) => !s.has(fn(x)))]))
+    }
+
+    unionBy([2.1], [1.2, 2.3], Math.floor) // [2.1, 1.2]
+    unionBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], (x) => x.id)
+    // [{ id: 1 }, { id: 2 }, { id: 3 }]
+  </script>
+</html>
