@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  如果对象中存在键，请使用Array.prototype.reduce()将过滤/选择的键转换为具有相应键值对的对象。
+  <script>
+    const pick = (obj, arr) =>
+      arr.reduce(
+        (acc, curr) => (curr in obj && (acc[curr] = obj[curr]), acc),
+        {}
+      )
+
+    pick({ a: 1, b: "2", c: 3 }, ["a", "c"]) // { 'a': 1, 'c': 3 }
+  </script>
+</html>
