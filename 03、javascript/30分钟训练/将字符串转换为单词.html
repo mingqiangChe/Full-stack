@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.match()使用适当的regexp将字符串分解为单词。
+  使用Array.prototype.map()、Array.prototype.slice()、Array.prototype.join()和String.prototype.toLowerCase()组合它们，添加_作为分隔符。
+  <script>
+    const toSnakeCase = (str) =>
+      str &&
+      str
+        .match(
+          /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
+        )
+        .map((x) => x.toLowerCase())
+        .join("_")
+
+    toSnakeCase("camelCase") // 'camel_case'
+    toSnakeCase("some text") // 'some_text'
+    toSnakeCase("some-mixed_string With spaces_underscores-and-hyphens")
+    // 'some_mixed_string_with_spaces_underscores_and_hyphens'
+    toSnakeCase("AllThe-small Things") // 'all_the_small_things'
+    toSnakeCase("IAmEditingSomeXMLAndHTML")
+    // 'i_am_editing_some_xml_and_html'
+  </script>
+</html>

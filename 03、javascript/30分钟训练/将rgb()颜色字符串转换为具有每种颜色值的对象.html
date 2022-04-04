@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.match()获取带有数字值的3个字符串数组。
+  将Array.prototype.map()与Number结合使用，将它们转换为数字值数组。
+  使用数组解构将值存储到命名变量中，并从中创建适当的对象。
+  <script>
+    const toRGBObject = (rgbStr) => {
+      const [red, green, blue] = rgbStr.match(/\d+/g).map(Number)
+      return { red, green, blue }
+    }
+
+    toRGBObject("rgb(255, 12, 0)") // {red: 255, green: 12, blue: 0}
+  </script>
+</html>

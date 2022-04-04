@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用新的CustomEvent()从指定的eventType和详细信息创建事件。
+  使用EventTarget.dispatchEvent()触发给定元素上新创建的事件。
+  如果您不想将自定义数据传递给触发的事件，请省略第三个参数，详细信息。
+  <script>
+    const triggerEvent = (el, eventType, detail) =>
+      el.dispatchEvent(new CustomEvent(eventType, { detail }))
+
+    triggerEvent(document.getElementById("myId"), "click")
+    triggerEvent(document.getElementById("myId"), "click", { username: "bob" })
+  </script>
+</html>

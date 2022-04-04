@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  接受1到3999之间的值（两者都包括在内）。
+  创建一个查找表，其中包含（roman值，整数）形式的2值数组。
+  使用Array.prototype.reduce()在查找中的值上循环，并反复将数字除以值。
+  使用String.prototype.repeat()将罗马数字表示添加到累加器中。
+  <script>
+    const toRomanNumeral = (num) => {
+      const lookup = [
+        ["M", 1000],
+        ["CM", 900],
+        ["D", 500],
+        ["CD", 400],
+        ["C", 100],
+        ["XC", 90],
+        ["L", 50],
+        ["XL", 40],
+        ["X", 10],
+        ["IX", 9],
+        ["V", 5],
+        ["IV", 4],
+        ["I", 1],
+      ]
+      return lookup.reduce((acc, [k, v]) => {
+        acc += k.repeat(Math.floor(num / v))
+        num = num % v
+        return acc
+      }, "")
+    }
+
+    toRomanNumeral(3) // 'III'
+    toRomanNumeral(11) // 'XI'
+    toRomanNumeral(1998) // 'MCMXCVIII'
+  </script>
+</html>
