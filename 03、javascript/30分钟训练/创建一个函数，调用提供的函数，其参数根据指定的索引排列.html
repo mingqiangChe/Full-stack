@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.map()根据索引对参数进行重新排序。
+  使用扩展运算符（...）将转换后的参数传递给fn。
+  <script>
+    const rearg =
+      (fn, indexes) =>
+      (...args) =>
+        fn(...indexes.map((i) => args[i]))
+
+    var rearged = rearg(
+      function (a, b, c) {
+        return [a, b, c]
+      },
+      [2, 0, 1]
+    )
+    rearged("b", "c", "a") // ['a', 'b', 'c']
+  </script>
+</html>

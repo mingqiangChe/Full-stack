@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查当前环境是否有TRAVIS和CI环境变量（参考）。
+  <script>
+    const isTravisCI = () => "TRAVIS" in process.env && "CI" in process.env
+
+    isTravisCI() // true (if code is running on Travis CI)
+  </script>
+</html>

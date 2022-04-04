@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用URL.protocol和URL.host检查两个URL是否具有相同的协议和主机。
+  <script>
+    const isSameOrigin = (origin, destination) =>
+          origin.protocol === destination.protocol &&
+          origin.host === destination.host
+
+    const origin = new URL('https://www.30secondsofcode.org/about');
+    const destination = new URL('https://www.30secondsofcode.org/contact');
+    isSameOrigin(origin, destination); // true
+    const other = new URL('https://developer.mozilla.org);
+    isSameOrigin(origin, other); // falses
+  </script>
+</html>
