@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用typeof检查一个值是否被归类为数字原语。 为了防止NaN，请检查val ===
+  val（因为NaN的类型等于数字，并且是唯一不等于自身的值）。
+  <script>
+    const isNumber = (val) => typeof val === "number" && val === val
+
+    isNumber(1) // true
+    isNumber("1") // false
+    isNumber(NaN) // false
+  </script>
+</html>

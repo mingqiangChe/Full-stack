@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查从2到给定数字的平方根的数字。
+  如果其中任何一个除以给定数字，则返回false，否则返回true，除非数字小于2。
+  <script>
+    const isPrime = (num) => {
+      const boundary = Math.floor(Math.sqrt(num))
+      for (let i = 2; i <= boundary; i++) if (num % i === 0) return false
+      return num >= 2
+    }
+
+    isPrime(11) // true
+  </script>
+</html>

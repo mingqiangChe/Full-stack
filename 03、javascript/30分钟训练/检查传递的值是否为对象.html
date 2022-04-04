@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用对象构造函数为给定值创建对象包装器。
+  如果值为空或未定义，请创建并返回空对象。
+  否则，返回与给定值相对应的类型的对象。
+  <script>
+    const isObject = (obj) => obj === Object(obj)
+
+    isObject([1, 2, 3, 4]) // true
+    isObject([]) // true
+    isObject(["Hello!"]) // true
+    isObject({ a: 1 }) // true
+    isObject({}) // true
+    isObject(true) // false
+  </script>
+</html>

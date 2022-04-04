@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  从val创建一个对象，并将其与val进行比较，以确定传递的值是否是原始的（即不等于创建的对象）。
+  <script>
+    const isPrimitive = (val) => Object(val) !== val
+
+    isPrimitive(null) // true
+    isPrimitive(undefined) // true
+    isPrimitive(50) // true
+    isPrimitive("Hello!") // true
+    isPrimitive(false) // true
+    isPrimitive(Symbol()) // true
+    isPrimitive([]) // false
+    isPrimitive({}) // falses
+  </script>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查值是否与null不同。
+  使用typeof检查值是否为类型对象，管道属性是否为类型函数。
+  此外，检查_read和_readableState属性的类型是否分别是函数和对象。
+  <script>
+    const isReadableStream = (val) =>
+      val !== null &&
+      typeof val === "object" &&
+      typeof val.pipe === "function" &&
+      typeof val._read === "function" &&
+      typeof val._readableState === "object"
+
+    const fs = require("fs")
+
+    isReadableStream(fs.createReadStream("test.txt")) // true
+  </script>
+</html>

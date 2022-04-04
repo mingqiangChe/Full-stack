@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查对象是否为空，其类型与对象或函数匹配，以及它是否具有.then属性，该属性也是一个函数。
+  <script>
+    const isPromiseLike = (obj) =>
+      obj !== null &&
+      (typeof obj === "object" || typeof obj === "function") &&
+      typeof obj.then === "function"
+
+    isPromiseLike({
+      then: function () {
+        return ""
+      },
+    }) // true
+    isPromiseLike(null) // false
+    isPromiseLike({}) // false
+  </script>
+</html>

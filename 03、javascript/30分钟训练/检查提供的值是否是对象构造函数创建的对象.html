@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查提供的值是否真实。
+  使用typeof检查它是否是object，并使用Object.prototype.constructor来确保构造函数等于Object。
+  <script>
+    const isPlainObject = (val) =>
+      !!val && typeof val === "object" && val.constructor === Object
+
+    isPlainObject({ a: 1 }) // true
+    isPlainObject(new Map()) // false
+  </script>
+</html>

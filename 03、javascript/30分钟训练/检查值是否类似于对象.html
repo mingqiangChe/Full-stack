@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查提供的值是否为空，其类型是否等于“对象”。
+  <script>
+    const isObjectLike = (val) => val !== null && typeof val === "object"
+
+    isObjectLike({}) // true
+    isObjectLike([1, 2, 3]) // true
+    isObjectLike((x) => x) // false
+    isObjectLike(null) // false
+  </script>
+</html>

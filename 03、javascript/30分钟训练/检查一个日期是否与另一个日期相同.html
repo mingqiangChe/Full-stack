@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Date.prototype.toISOString()和严格的等式检查（===)来检查第一个日期是否与第二个日期相同。
+  <script>
+    const isSameDate = (dateA, dateB) =>
+      dateA.toISOString() === dateB.toISOString()
+
+    isSameDate(new Date(2010, 10, 20), new Date(2010, 10, 20)) // true
+  </script>
+</html>

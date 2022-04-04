@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Math.log10()和模运算符（%）来确定n是否为10的幂
+  <script>
+    const isPowerOfTen = (n) => Math.log10(n) % 1 === 0
+
+    isPowerOfTen(1) // true
+    isPowerOfTen(10) // true
+    isPowerOfTen(20) // false
+  </script>
+</html>
