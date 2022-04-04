@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用location.protocol获取当前正在使用的协议。
+  如果不是HTTPS，请使用location.replace()将现有页面替换为页面的HTTPS版本。
+  使用location.href获取完整地址，将其与String.prototype.split()拆分，并删除URL的协议部分。
+  请注意，按下后退按钮不会将其带回HTTP页面，因为它在历史记录中被替换。
+  <script>
+    const httpsRedirect = () => {
+      if (location.protocol !== "https:")
+        location.replace("https://" + location.href.split("//")[1])
+    }
+
+    httpsRedirect()
+    // If you are on http://mydomain.com, you are redirected to https://mydomain.com
+  </script>
+</html>
