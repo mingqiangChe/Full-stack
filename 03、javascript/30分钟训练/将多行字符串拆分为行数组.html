@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.split()和正则表达式来匹配换行符并创建数组。
+  <script>
+    const splitLines = (str) => str.split(/\r?\n/)
+
+    splitLines("This\nis a\nmultiline\nstring.\n")
+    // ['This', 'is a', 'multiline', 'string.' , '']
+  </script>
+</html>

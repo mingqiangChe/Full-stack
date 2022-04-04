@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用setTimeout()和clearTimeout()来限制给定的方法fn。
+  使用`Function.prototype.apply()`将此上下文应用于函数并提供必要的参数。
+  使用Date.now()跟踪上次调用节流函数的时间。 使用变量
+  inThrottle，以防止第一次执行fn和下一个循环之间的竞争条件。
+  省略第二个参数，等待，将超时设置为默认为0毫秒。
+  <script>
+    const throttle = (fn, wait) => {
+      let inThrottle, lastFn, lastTime
+      return function () {
+        const context = this,
+          args = arguments
+        if (!inThrottle) {
+          fn.apply(context, args)
+          lastTime = Date.now()
+          inThrottle = true
+        } else {
+          clearTimeout(lastFn)
+          lastFn = setTimeout(function () {
+            if (Date.now() - lastTime >= wait) {
+              fn.apply(context, args)
+              lastTime = Date.now()
+            }
+          }, Math.max(wait - (Date.now() - lastTime), 0))
+        }
+      }
+    }
+
+    window.addEventListener(
+      "resize",
+      throttle(function (evt) {
+        console.log(window.innerWidth)
+        console.log(window.innerHeight)
+      }, 250)
+    ) // Will log the window dimensions at most every 250ms
+  </script>
+</html>

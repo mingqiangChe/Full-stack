@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用传播运算符（...）将str转换为字符数组。
+  使用String.prototype.toLowerCase()和String.prototype.toUpperCase()将小写字符转换为大写字符，反之亦然。
+  使用Array.prototype.map()将转换应用于每个字符，Array.prototype.join()重新组合成字符串。
+  请注意，swapCase(swapCase(str)) === str不一定正确。
+  <script>
+    const swapCase = (str) =>
+      [...str]
+        .map((c) => (c === c.toLowerCase() ? c.toUpperCase() : c.toLowerCase()))
+        .join("")
+
+    swapCase("Hello world!") // 'hELLO WORLD!'
+  </script>
+</html>
