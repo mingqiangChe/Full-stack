@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.reduce()从arr创建对象。
+  使用对象解构获取给定密钥和相关数据的值，并将键值对添加到对象中。
+  <script>
+    const indexOn = (arr, key) =>
+      arr.reduce((obj, v) => {
+        const { [key]: id, ...data } = v
+        obj[id] = data
+        return obj
+      }, {})
+
+    indexOn(
+      [
+        { id: 10, name: "apple" },
+        { id: 20, name: "orange" },
+      ],
+      "id"
+    )
+    // { '10': { name: 'apple' }, '20': { name: 'orange' } }
+  </script>
+</html>
