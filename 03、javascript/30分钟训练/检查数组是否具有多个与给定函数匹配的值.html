@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  将Array.prototype.filter()与fn结合使用，找到所有匹配的数组元素。
+  使用Array.prototype.length检查多个元素是否与fn匹配。
+  <script>
+    const hasMany = (arr, fn) => arr.filter(fn).length > 1
+
+    hasMany([1, 3], (x) => x % 2) // true
+    hasMany([1, 2], (x) => x % 2) // false
+  </script>
+</html>

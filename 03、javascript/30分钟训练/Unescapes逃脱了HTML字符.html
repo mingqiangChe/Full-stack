@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  将String.prototype.replace()与需要取消转义的字符匹配的regexp一起使用。
+  使用函数的回调使用字典（对象）将每个转义字符实例替换为其关联的未转义字符。
+  <script>
+    const unescapeHTML = (str) =>
+      str.replace(
+        /&amp;|&lt;|&gt;|&#39;|&quot;/g,
+        (tag) =>
+          ({
+            "&amp;": "&",
+            "&lt;": "<",
+            "&gt;": ">",
+            "&#39;": "'",
+            "&quot;": '"',
+          }[tag] || tag)
+      )
+
+    unescapeHTML("&lt;a href=&quot;#&quot;&gt;Me &amp; you&lt;/a&gt;")
+    // '<a href="#">Me & you</a>'
+  </script>
+</html>

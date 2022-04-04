@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.from()创建一个所需长度的数组，使用Array.prototype.fill()用所需的值填充它。
+  省略最后一个参数val，使用默认值为0。
+  <script>
+    const initializeArrayWithValues = (n, val = 0) =>
+      Array.from({ length: n }).fill(val)
+
+    initializeArrayWithValues(5, 2) // [2, 2, 2, 2, 2]
+  </script>
+</html>

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用传播运算符（...）和Array.prototype.forEach（）对指定的每个元素应用显示：无。
+  <script>
+    const hide = (...el) => [...el].forEach((e) => (e.style.display = "none"))
+
+    hide(...document.querySelectorAll("img")) // Hides all <img> elements on the page
+  </script>
+</html>

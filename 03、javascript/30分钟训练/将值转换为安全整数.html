@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Math.max()和Math.min()找到最接近的安全值。 使用Math.round()转换为整数。
+  <script>
+    const toSafeInteger = (num) =>
+      Math.round(
+        Math.max(
+          Math.min(num, Number.MAX_SAFE_INTEGER),
+          Number.MIN_SAFE_INTEGER
+        )
+      )
+
+    toSafeInteger("3.2") // 3
+    toSafeInteger(Infinity) // 9007199254740991
+  </script>
+</html>

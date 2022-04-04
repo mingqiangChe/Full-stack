@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  基于比较器函数fn，对于仅包含每个值最后一次唯一出现的数组，请使用Array.prototype.reduceRight()和Array.prototype.some()。
+  比较器函数接受两个参数：被比较的两个元素的值。
+  <script>
+    const uniqueElementsByRight = (arr, fn) =>
+      arr.reduceRight((acc, v) => {
+        if (!acc.some((x) => fn(v, x))) acc.push(v)
+        return acc
+      }, [])
+
+    uniqueElementsByRight(
+      [
+        { id: 0, value: "a" },
+        { id: 1, value: "b" },
+        { id: 2, value: "c" },
+        { id: 1, value: "d" },
+        { id: 0, value: "e" },
+      ],
+      (a, b) => a.id == b.id
+    ) // [ { id: 0, value: 'e' }, { id: 1, value: 'd' }, { id: 2, value: 'c' } ]s
+  </script>
+</html>

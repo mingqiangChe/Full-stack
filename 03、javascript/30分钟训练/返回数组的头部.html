@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查arr是否真实并具有长度属性。
+  如果可能，请使用arr[0]返回第一个元素，否则返回未定义。
+  <script>
+    const head = (arr) => (arr && arr.length ? arr[0] : undefined)
+
+    head([1, 2, 3]) // 1
+    head([]) // undefined
+    head(null) // undefined
+    head(undefined) // undefined
+  </script>
+</html>

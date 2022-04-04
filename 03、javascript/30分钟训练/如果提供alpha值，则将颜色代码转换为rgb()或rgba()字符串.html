@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用带&（和）运算符的按位右移运算符和掩码位将十六进制颜色代码（带或不带#的前缀）转换为具有RGB值的字符串。
+  如果是3位数的颜色代码，请先转换为6位数版本。
+  如果与6位十六进制一起提供alpha值，则返回rgba()字符串。
+  <script>
+    const hexToRGB = (hex) => {
+      let alpha = false,
+        h = hex.slice(hex.startsWith("#") ? 1 : 0)
+      if (h.length === 3) h = [...h].map((x) => x + x).join("")
+      else if (h.length === 8) alpha = true
+      h = parseInt(h, 16)
+      return (
+        "rgb" +
+        (alpha ? "a" : "") +
+        "(" +
+        (h >>> (alpha ? 24 : 16)) +
+        ", " +
+        ((h & (alpha ? 0x00ff0000 : 0x00ff00)) >>> (alpha ? 16 : 8)) +
+        ", " +
+        ((h & (alpha ? 0x0000ff00 : 0x0000ff)) >>> (alpha ? 8 : 0)) +
+        (alpha ? `, ${h & 0x000000ff}` : "") +
+        ")"
+      )
+    }
+    hexToRGB("#27ae60ff") // 'rgba(39, 174, 96, 255)'
+    hexToRGB("27ae60") // 'rgb(39, 174, 96)'
+    hexToRGB("#fff") // 'rgb(255, 255, 255)'
+  </script>
+</html>
