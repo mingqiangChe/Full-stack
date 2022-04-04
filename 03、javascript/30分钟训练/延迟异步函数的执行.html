@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  通过将其置于睡眠状态，返回新的Promise()来延迟执行异步函数的一部分。
+  <script>
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+    async function sleepyWork() {
+      console.log("I'm going to sleep for 1 second.")
+      await sleep(1000)
+      console.log("I woke up after 1 second.")
+    }
+  </script>
+</html>

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.normalize()将字符串转换为规范化的Unicode格式。
+  使用String.prototype.replace()将给定Unicode范围内的变音符号替换为空字符串。
+  <script>
+    const removeAccents = (str) =>
+      str.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+
+    removeAccents("Antoine de Saint-Exupéry") // 'Antoine de Saint-Exupery'
+  </script>
+</html>

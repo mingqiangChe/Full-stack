@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.filter()与谓词函数pred相结合，仅返回false的值。
+  <script>
+    const reject = (pred, array) => array.filter((...args) => !pred(...args))
+
+    reject((x) => x % 2 === 0, [1, 2, 3, 4, 5]) // [1, 3, 5]
+    reject((word) => word.length > 4, ["Apple", "Pear", "Kiwi", "Banana"])
+    // ['Pear', 'Kiwi']
+  </script>
+</html>

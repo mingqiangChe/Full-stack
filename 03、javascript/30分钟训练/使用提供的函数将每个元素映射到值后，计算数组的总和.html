@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.map()将每个元素映射到fn返回的值。
+  使用Array.prototype.reduce()将每个值添加到累加器中，初始化值为0。
+  <script>
+    const sumBy = (arr, fn) =>
+      arr
+        .map(typeof fn === "function" ? fn : (val) => val[fn])
+        .reduce((acc, val) => acc + val, 0)
+
+    sumBy([{ n: 4 }, { n: 2 }, { n: 8 }, { n: 6 }], (x) => x.n) // 20
+    sumBy([{ n: 4 }, { n: 2 }, { n: 8 }, { n: 6 }], "n") // 20
+  </script>
+</html>

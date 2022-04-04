@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用递归。 对于给定数组中的每个元素，为其其余元素创建所有部分置换。
+  使用Array.prototype.map()将元素与每个部分置换相结合，然后使用Array.prototype.reduce()将所有置换合并到一个数组中。
+  基本情况适用于Array.prototype.length等于2或1。
+  ⚠️警告：此函数的执行时间随着每个数组元素呈指数增长。任何超过8到10个条目都可能导致您的浏览器在试图解决所有不同组合时挂起。
+  <script>
+    const permutations = (arr) => {
+      if (arr.length <= 2)
+        return arr.length === 2 ? [arr, [arr[1], arr[0]]] : arr
+      return arr.reduce(
+        (acc, item, i) =>
+          acc.concat(
+            permutations([...arr.slice(0, i), ...arr.slice(i + 1)]).map(
+              (val) => [item, ...val]
+            )
+          ),
+        []
+      )
+    }
+
+    permutations([1, 33, 5])
+    // [ [1, 33, 5], [1, 5, 33], [33, 1, 5], [33, 5, 1], [5, 1, 33], [5, 33, 1] ]
+  </script>
+</html>
