@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  松散地检查数组是否按降序排序。
+  使用Array.prototype.findIndex()根据迭代器函数fn找到应该插入元素的适当索引
+  <script>
+    const sortedIndexBy = (arr, n, fn) => {
+      const isDescending = fn(arr[0]) > fn(arr[arr.length - 1])
+      const val = fn(n)
+      const index = arr.findIndex((el) =>
+        isDescending ? val >= fn(el) : val <= fn(el)
+      )
+      return index === -1 ? arr.length : index
+    }
+
+    sortedIndexBy([{ x: 4 }, { x: 5 }], { x: 4 }, (o) => o.x) // 0
+  </script>
+</html>

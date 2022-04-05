@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.toLowerCase()和String.prototype.trim()规范字符串。
+  使用String.prototype.replace()将空格、破折号和下划线替换为-并删除特殊字符。
+  <script>
+    const slugify = (str) =>
+      str
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/[\s_-]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+
+    slugify("Hello World!") // 'hello-world'
+  </script>
+</html>

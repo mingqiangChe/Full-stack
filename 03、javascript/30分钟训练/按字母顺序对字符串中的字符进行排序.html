@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用传播运算符（...）、Array.prototype.sort（）和String.prototype.localeCompare（）对str中的字符进行排序。
+  使用String.prototype.join（''）重新重组。
+  <script>
+    const sortCharactersInString = (str) =>
+      [...str].sort((a, b) => a.localeCompare(b)).join("")
+
+    sortCharactersInString("cabbage") // 'aabbceg'
+  </script>
+</html>

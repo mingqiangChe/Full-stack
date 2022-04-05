@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  松散地检查数组是否按降序排序。
+  使用Array.prototype.reverse()和Array.prototype.findIndex()找到应该插入元素的适当最后一个索引。
+  <script>
+    const sortedLastIndex = (arr, n) => {
+      const isDescending = arr[0] > arr[arr.length - 1]
+      const index = arr
+        .reverse()
+        .findIndex((el) => (isDescending ? n <= el : n >= el))
+      return index === -1 ? 0 : arr.length - index
+    }
+
+    sortedLastIndex([10, 20, 30, 30, 40], 30) // 4
+  </script>
+</html>

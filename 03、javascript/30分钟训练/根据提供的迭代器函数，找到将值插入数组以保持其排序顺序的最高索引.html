@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  松散地检查数组是否按降序排序。
+  使用Array.prototype.map()将迭代器函数应用于数组的所有元素。
+  根据提供的迭代器函数，使用Array.prototype.reverse()和Array.prototype.findIndex()找到应该插入元素的适当最后一个索引。
+  <script>
+    const sortedLastIndexBy = (arr, n, fn) => {
+      const isDescending = fn(arr[0]) > fn(arr[arr.length - 1])
+      const val = fn(n)
+      const index = arr
+        .map(fn)
+        .reverse()
+        .findIndex((el) => (isDescending ? val <= el : val >= el))
+      return index === -1 ? 0 : arr.length - index
+    }
+
+    sortedLastIndexBy([{ x: 4 }, { x: 5 }], { x: 4 }, (o) => o.x) // 1
+  </script>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Element.scrollIntoView()滚动元素。 使用{行为：'smooth'}顺利滚动。
+  <script>
+    const smoothScroll = (element) =>
+      document.querySelector(element).scrollIntoView({
+        behavior: "smooth",
+      })
+
+    smoothScroll("#fooBar") // scrolls smoothly to the element with the id fooBar
+    smoothScroll(".fooBar")
+    // scrolls smoothly to the first element with a class of fooBar
+  </script>
+</html>

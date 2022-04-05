@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Document.documentElement或Document.body和Element.scrollTop与顶部保持距离。
+  滚动距离顶部的一小部分。 使用Window.requestAnimationFrame()为滚动动画。
+  <script>
+    const scrollToTop = () => {
+      const c = document.documentElement.scrollTop || document.body.scrollTop
+      if (c > 0) {
+        window.requestAnimationFrame(scrollToTop)
+        window.scrollTo(0, c - c / 8)
+      }
+    }
+
+    scrollToTop() // Smooth-scrolls to the top of the page
+  </script>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  获取val的类型（数组、对象或字符串）。 对数组使用Array.prototype.length属性。
+  如果可用，请使用长度或大小值或对象的键数。
+  使用从val创建的Blob对象的大小进行字符串。
+  将字符串拆分为带有split('')的字符数组，并返回其长度。
+  <script>
+    const size = (val) =>
+      Array.isArray(val)
+        ? val.length
+        : val && typeof val === "object"
+        ? val.size || val.length || Object.keys(val).length
+        : typeof val === "string"
+        ? new Blob([val]).size
+        : 0
+
+    size([1, 2, 3, 4, 5]) // 5
+    size("size") // 4
+    size({ one: 1, two: 2, three: 3 }) // 3
+  </script>
+</html>
