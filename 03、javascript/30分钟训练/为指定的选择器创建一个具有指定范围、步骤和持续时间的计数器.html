@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查步骤是否具有正确的符号，并相应地更改它。
+  使用setInterval()与Math.abs()和Math.floor()结合使用，计算每个新文本绘制之间的时间。
+  使用Document.querySelector()，Element.innerHTML更新所选元素的值。
+  省略第四个参数，步骤，使用默认步骤1。
+  省略第五个参数，持续时间，以使用2000ms的默认持续时间。
+  <script>
+    const counter = (selector, start, end, step = 1, duration = 2000) => {
+      let current = start,
+        _step = (end - start) * step < 0 ? -step : step,
+        timer = setInterval(() => {
+          current += _step
+          document.querySelector(selector).innerHTML = current
+          if (current >= end) document.querySelector(selector).innerHTML = end
+          if (current >= end) clearInterval(timer)
+        }, Math.abs(Math.floor(duration / (end - start))))
+      return timer
+    }
+
+    counter("#my-id", 1, 1000, 5, 2000)
+    // Creates a 2-second timer for the element with id="my-id"
+  </script>
+</html>
