@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.slice()创建数组的切片，其中包含从末尾提取的n个元素。
+  <script>
+    const takeRight = (arr, n = 1) => arr.slice(arr.length - n, arr.length)
+
+    takeRight([1, 2, 3], 2) // [ 2, 3 ]
+    takeRight([1, 2, 3]) // [3]
+  </script>
+</html>

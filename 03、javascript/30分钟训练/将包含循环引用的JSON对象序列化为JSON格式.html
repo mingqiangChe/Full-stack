@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用WeakSet.prototype.add()和WeakSet.prototype.has()创建一个新的WeakSet()来存储和检查可见值。
+  将JSON.stringify()与自定义替换函数一起使用，该函数省略已看到的值，并根据需要添加新值。
+  ⚠️注意：此函数查找并删除循环引用，这会导致序列化JSON中的循环数据丢失。
+  <script>
+    const stringifyCircularJSON = (obj) => {
+      const seen = new WeakSet()
+      return JSON.stringify(obj, (k, v) => {
+        if (v !== null && typeof v === "object") {
+          if (seen.has(v)) return
+          seen.add(v)
+        }
+        return v
+      })
+    }
+
+    const obj = { n: 42 }
+    obj.obj = obj
+    stringifyCircularJSON(obj) // '{"n": 42}'
+  </script>
+</html>

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用传播运算符（...）和Array.prototype.forEach（）清除指定每个元素的显示属性。
+  <script>
+    const show = (...el) => [...el].forEach((e) => (e.style.display = ""))
+
+    show(...document.querySelectorAll("img"))
+    // Shows all <img> elements on the page
+  </script>
+</html>

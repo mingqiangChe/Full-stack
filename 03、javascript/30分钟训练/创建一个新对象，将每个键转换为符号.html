@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.keys()获取obj的键。
+  使用Array.prototype.reduce()和Symbol()创建一个新对象，其中每个键都转换为符号。
+  <script>
+    const symbolizeKeys = (obj) =>
+      Object.keys(obj).reduce(
+        (acc, key) => ({ ...acc, [Symbol(key)]: obj[key] }),
+        {}
+      )
+
+    symbolizeKeys({ id: 10, name: "apple" })
+    // { [Symbol(id)]: 10, [Symbol(name)]: 'apple' }
+  </script>
+</html>

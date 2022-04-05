@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用递归。 对于给定字符串中的每个字母，为其其余字母创建所有部分排列。
+  使用Array.prototype.map()将字母与每个部分排列结合起来。
+  使用Array.prototype.reduce()将所有排列组合在一个数组中。
+  基本情况适用于String.prototype.length等于2或1。
+  ⚠️警告：每个字符的执行时间呈指数级增长。任何超过8到10个字符的东西都会导致您的环境在试图解决所有不同的组合时挂起。
+  <script>
+    const stringPermutations = (str) => {
+      if (str.length <= 2)
+        return str.length === 2 ? [str, str[1] + str[0]] : [str]
+      return str
+        .split("")
+        .reduce(
+          (acc, letter, i) =>
+            acc.concat(
+              stringPermutations(str.slice(0, i) + str.slice(i + 1)).map(
+                (val) => letter + val
+              )
+            ),
+          []
+        )
+    }
+
+    stringPermutations("abc") // ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
+  </script>
+</html>

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.includes()确定不属于值的值。
+  使用Array.prototype.filter()删除它们。
+  <script>
+    const similarity = (arr, values) => arr.filter((v) => values.includes(v))
+
+    similarity([1, 2, 3], [1, 2, 4]) // [1, 2]
+  </script>
+</html>
