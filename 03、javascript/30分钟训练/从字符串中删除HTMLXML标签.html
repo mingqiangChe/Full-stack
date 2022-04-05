@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用正则表达式从字符串中删除HTML/XML标签。
+  <script>
+    const stripHTMLTags = (str) => str.replace(/<[^>]*>/g, "")
+
+    stripHTMLTags("<p><em>lorem</em> <strong>ipsum</strong></p>") // 'lorem ipsum'
+  </script>
+</html>

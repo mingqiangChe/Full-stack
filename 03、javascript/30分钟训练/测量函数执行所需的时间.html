@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Console.time()和Console.timeEnd()测量开始和结束时间之间的差异，以确定回调执行需要多长时间。
+  <script>
+    const timeTaken = (callback) => {
+      console.time("timeTaken")
+      const r = callback()
+      console.timeEnd("timeTaken")
+      return r
+    }
+
+    timeTaken(() => Math.pow(2, 10)) // 1024, (logged): timeTaken: 0.02099609375ms
+  </script>
+</html>

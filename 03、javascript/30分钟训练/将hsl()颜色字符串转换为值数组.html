@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.match()获取带有数字值的3个字符串数组。
+  将Array.prototype.map()与Number结合使用，将它们转换为数字值数组。
+  <script>
+    const toHSLArray = (hslStr) => hslStr.match(/\d+/g).map(Number)
+
+    toHSLArray("hsl(50, 10%, 10%)") // [50, 10, 10]
+  </script>
+</html>
