@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  在删除现有元素和/或添加新元素后，使用Array.prototype.slice()和Array.prototype.concat()获取包含新内容的数组。
+  省略第二个参数，索引，从0开始。 省略第三个参数delCount，以删除0个元素。
+  省略第四个参数，元素，以免添加任何新元素。
+  <script>
+    const shank = (arr, index = 0, delCount = 0, ...elements) =>
+      arr
+        .slice(0, index)
+        .concat(elements)
+        .concat(arr.slice(index + delCount))
+
+    const names = ["alpha", "bravo", "charlie"]
+    const namesAndDelta = shank(names, 1, 0, "delta")
+    // [ 'alpha', 'delta', 'bravo', 'charlie' ]
+    const namesNoBravo = shank(names, 1, 1) // [ 'alpha', 'charlie' ]
+    console.log(names) // ['alpha', 'bravo', 'charlie']
+  </script>
+</html>

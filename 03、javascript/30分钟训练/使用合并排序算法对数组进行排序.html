@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用递归。 如果数组的长度小于2，则返回数组。
+  使用Math.floor()计算数组的中间点。
+  使用Array.prototype.slice()将数组切成两半，并在创建的子数组上递归调用mergeSort()。
+  最后，使用Array.from()和Array.prototype.shift()将两个排序的子阵列合并为一个。
+  <script>
+    const mergeSort = (arr) => {
+      if (arr.length < 2) return arr
+      const mid = Math.floor(arr.length / 2)
+      const l = mergeSort(arr.slice(0, mid))
+      const r = mergeSort(arr.slice(mid, arr.length))
+      return Array.from({ length: l.length + r.length }, () => {
+        if (!l.length) return r.shift()
+        else if (!r.length) return l.shift()
+        else return l[0] > r[0] ? r.shift() : l.shift()
+      })
+    }
+
+    mergeSort([5, 1, 4, 2, 3]) // [1, 2, 3, 4, 5]
+  </script>
+</html>

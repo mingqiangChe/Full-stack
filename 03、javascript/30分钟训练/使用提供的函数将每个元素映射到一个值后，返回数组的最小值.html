@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.map()将每个元素映射到fn返回的值。
+  使用Math.min()获取最小值。
+  <script>
+    const minBy = (arr, fn) =>
+      Math.min(...arr.map(typeof fn === "function" ? fn : (val) => val[fn]))
+
+    minBy([{ n: 4 }, { n: 2 }, { n: 8 }, { n: 6 }], (x) => x.n) // 2
+    minBy([{ n: 4 }, { n: 2 }, { n: 8 }, { n: 6 }], "n") // 2
+  </script>
+</html>

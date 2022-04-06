@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用FormData构造函数将HTML表单转换为FormData。
+  使用Array.from()转换为数组，传递映射函数作为第二个参数。
+  使用Array.prototype.map()和encodeURIComponent()对每个字段的值进行编码。
+  使用带有适当参数的Array.prototype.join()来生成适当的查询字符串。
+  <script>
+    const serializeForm = (form) =>
+      Array.from(new FormData(form), (field) =>
+        field.map(encodeURIComponent).join("=")
+      ).join("&")
+
+    serializeForm(document.querySelector("#form"))
+    // email=test%40email.com&name=Test%20Name
+  </script>
+</html>

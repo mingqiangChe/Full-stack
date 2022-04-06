@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.from()创建一个特定长度的空数组。
+  使用Math.random()生成随机数并将其映射到所需的范围，使用Math.floor()使它们成为整数。
+  <script>
+    const randomIntArrayInRange = (min, max, n = 1) =>
+      Array.from(
+        { length: n },
+        () => Math.floor(Math.random() * (max - min + 1)) + min
+      )
+
+    randomIntArrayInRange(12, 35, 10) // [ 34, 14, 27, 17, 30, 27, 20, 26, 21, 14 ]
+  </script>
+</html>

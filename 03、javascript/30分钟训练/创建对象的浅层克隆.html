@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.assign（）和空对象（{}）创建原始的浅克隆。
+  <script>
+    const shallowClone = (obj) => Object.assign({}, obj)
+
+    const a = { x: true, y: 1 }
+    const b = shallowClone(a) // a !== b
+  </script>
+</html>

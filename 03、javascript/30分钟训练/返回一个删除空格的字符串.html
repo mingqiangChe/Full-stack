@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  将String.prototype.replace()与正则表达式一起使用，用空字符串替换所有空格字符。
+  <script>
+    const removeWhitespace = (str) => str.replace(/\s+/g, "")
+
+    removeWhitespace("Lorem ipsum.\n Dolor sit amet. ")
+    // 'Loremipsum.Dolorsitamet.'
+  </script>
+</html>

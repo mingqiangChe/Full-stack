@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Math.random()生成一个随机数，并将其映射到所需的范围。
+  使用Math.floor()使其成为一个整数。
+  <script>
+    const randomIntegerInRange = (min, max) =>
+      Math.floor(Math.random() * (max - min + 1)) + min
+
+    randomIntegerInRange(0, 5) // 2
+  </script>
+</html>

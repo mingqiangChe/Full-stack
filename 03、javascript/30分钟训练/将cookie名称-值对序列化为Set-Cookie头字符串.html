@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用模板文字和encodeURIComponent()创建适当的字符串
+  <script>
+    const serializeCookie = (name, val) =>
+      `${encodeURIComponent(name)}=${encodeURIComponent(val)}`
+
+    serializeCookie("foo", "bar") // 'foo=bar'
+  </script>
+</html>
