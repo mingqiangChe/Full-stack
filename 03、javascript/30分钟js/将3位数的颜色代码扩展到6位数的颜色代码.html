@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.map()、String.prototype.split()和Array.prototype.join()加入映射数组，将3位RGB标有十六进制颜色代码转换为6位形式。
+  Array.prototype.slice()用于从字符串开始中删除#，因为它添加了一次。
+  <script>
+    const extendHex = (shortHex) =>
+      "#" +
+      shortHex
+        .slice(shortHex.startsWith("#") ? 1 : 0)
+        .split("")
+        .map((x) => x + x)
+        .join("")
+
+    extendHex("#03f") // '#0033ff'
+    extendHex("05a") // '#0055aa'
+  </script>
+</html>

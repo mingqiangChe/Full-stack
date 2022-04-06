@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  通过将fn应用于b中的每个元素来创建集合。
+  使用Array.prototype.map()将fn应用于a中的每个元素。
+  使用Set.prototype.has()，将Array.prototype.filter()与a上的fn结合使用，只保留b中未包含的值。
+  <script>
+    const differenceBy = (a, b, fn) => {
+      const s = new Set(b.map(fn))
+      return a.map(fn).filter((el) => !s.has(el))
+    }
+
+    differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor) // [1]
+    differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], (v) => v.x) // [2]
+  </script>
+</html>

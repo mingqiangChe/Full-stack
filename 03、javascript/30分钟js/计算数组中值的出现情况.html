@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  每次在数组中遇到特定值时，使用Array.prototype.reduce()增加计数器
+  <script>
+    const countOccurrences = (arr, val) =>
+      arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
+
+    countOccurrences([1, 1, 2, 1, 2, 3], 1) // 3
+  </script>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 仅作为用户操作的结果（即在单击事件监听器中）工作。 -->
+
+  <!-- 创建一个新的<textarea>元素，用提供的数据填充它，并将其添加到HTML文档中。 -->
+
+  <!-- 使用Selecting.getRangeAt()存储所选范围（如果有的话）。 -->
+  <!-- 使用Document.execCommand（“复制”）复制到剪贴板。 -->
+
+  <!-- 从HTML文档中删除<textarea>元素。 -->
+
+  <!-- 最后，使用Selection().addRange()恢复原始选择的范围（如果有的话）。 -->
+  <!-- ⚠️注意：使用新的异步剪贴板API可以轻松实现相同的功能，该API仍然是实验性的，但将来应该使用，而不是此片段。在此处了解更多信息。 -->
+  <script>
+    const copyToClipboard = (str) => {
+      const el = document.createElement("textarea")
+      el.value = str
+      el.setAttribute("readonly", "")
+      el.style.position = "absolute"
+      el.style.left = "-9999px"
+      document.body.appendChild(el)
+      const selected =
+        document.getSelection().rangeCount > 0
+          ? document.getSelection().getRangeAt(0)
+          : false
+      el.select()
+      document.execCommand("copy")
+      document.body.removeChild(el)
+      if (selected) {
+        document.getSelection().removeAllRanges()
+        document.getSelection().addRange(selected)
+      }
+    }
+    copyToClipboard("Lorem ipsum") // 'Lorem ipsum' copied to clipboard.
+  </script>
+</html>
