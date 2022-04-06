@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.keys()和Array.prototype.map()迭代对象的键，并生成具有键值对的数组。
+  <script>
+    const objectToEntries = (obj) => Object.keys(obj).map((k) => [k, obj[k]])
+
+    objectToEntries({ a: 1, b: 2 }) // [ ['a', 1], ['b', 2] ]
+  </script>
+</html>

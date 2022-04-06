@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.prototype.toString()将n转换为字符串。
+  使用String.prototype.split('')、Array.prototype.reverse()和String.prototype.join('')获取n的反向值作为字符串。
+  使用parseFloat()将字符串转换为数字，并使用Math.sign()保留其符号。
+  <script>
+    const reverseNumber = (n) =>
+      parseFloat(`${n}`.split("").reverse().join("")) * Math.sign(n)
+
+    reverseNumber(981) // 189
+    reverseNumber(-500) // -5
+    reverseNumber(73.6) // 6.37
+    reverseNumber(-5.23) // -32.5
+  </script>
+</html>

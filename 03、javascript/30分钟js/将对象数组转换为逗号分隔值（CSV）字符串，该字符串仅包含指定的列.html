@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.join（分隔符）合并列中的所有名称来创建第一行。
+  使用Array.prototype.map()和Array.prototype.reduce()为每个对象创建一个行，用空字符串替换不存在的值，仅映射列中的值。
+  使用Array.prototype.join（'\n'）将所有行组合成字符串。
+  省略第三个参数，分隔符，以使用默认分隔符。
+  <script>
+    const JSONtoCSV = (arr, columns, delimiter = ",") =>
+      [
+        columns.join(delimiter),
+        ...arr.map((obj) =>
+          columns.reduce(
+            (acc, key) =>
+              `${acc}${!acc.length ? "" : delimiter}"${
+                !obj[key] ? "" : obj[key]
+              }"`,
+            ""
+          )
+        ),
+      ].join("\n")
+
+    JSONtoCSV(
+      [{ a: 1, b: 2 }, { a: 3, b: 4, c: 5 }, { a: 6 }, { b: 7 }],
+      ["a", "b"]
+    ) // 'a,b\n"1","2"\n"3","4"\n"6",""\n"","7"'
+    JSONtoCSV(
+      [{ a: 1, b: 2 }, { a: 3, b: 4, c: 5 }, { a: 6 }, { b: 7 }],
+      ["a", "b"],
+      ";"
+    ) // 'a;b\n"1";"2"\n"3";"4"\n"6";""\n"";"7"'
+  </script>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用EventTarget.addEventListener()将事件侦听器添加到元素中。 使用{ once: true
+  }作为选项，仅运行一次给定的回调。
+  <script>
+    const listenOnce = (el, evt, fn) =>
+      el.addEventListener(evt, fn, { once: true })
+
+    listenOnce(document.getElementById("my-id"), "click", () =>
+      console.log("Hello world")
+    ) // 'Hello world' will only be logged on the first click
+  </script>
+</html>

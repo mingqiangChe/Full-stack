@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Date.prototype.getDay（）使用模运算符（%）检查周末。
+  省略参数d，将当前日期用作默认日期
+  <script>
+    const isWeekend = (d = new Date()) => d.getDay() % 6 === 0
+
+    isWeekend() // 2018-10-19 (if current date is 2018-10-18)
+  </script>
+</html>
