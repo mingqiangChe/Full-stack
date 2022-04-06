@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用传播运算符（...）将部分附加到fn的参数列表中。
+  <script>
+    const partialRight =
+      (fn, ...partials) =>
+      (...args) =>
+        fn(...args, ...partials)
+
+    const greet = (greeting, name) => greeting + " " + name + "!"
+    const greetJohn = partialRight(greet, "John")
+    greetJohn("Hello") // 'Hello John!'
+  </script>
+</html>

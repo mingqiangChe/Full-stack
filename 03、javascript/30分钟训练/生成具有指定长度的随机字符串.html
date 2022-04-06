@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.from()创建一个具有指定长度的新数组。
+  使用Math.random()生成随机浮点数Number.prototype.toString(36)将其转换为字母数字字符串。
+  使用String.prototype.slice（2）从每个生成的数字中删除积分部分和小数点。
+  使用Array.prototype.some()根据需要多次重复此过程，直到长度，因为它每次都会产生一个可变长度的字符串。
+  最后，如果生成的字符串长于给定长度，请使用String.prototype.slice()修剪生成的字符串。
+  <script>
+    const randomAlphaNumeric = (length) => {
+      let s = ""
+      Array.from({ length }).some(() => {
+        s += Math.random().toString(36).slice(2)
+        return s.length >= length
+      })
+      return s.slice(0, length)
+    }
+
+    randomAlphaNumeric(5) // '0afad'
+  </script>
+</html>
