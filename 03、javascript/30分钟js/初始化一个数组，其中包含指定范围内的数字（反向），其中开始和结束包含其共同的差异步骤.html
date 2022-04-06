@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.from（Math.ceil((end+1-start)/step)）创建一个所需长度的数组（元素数量等于（end-start）/step或（end+1-start）/step，用于包容性结束），Array.prototype.map()填充范围内所需的值。
+  省略第二个参数start，以使用默认值0。 省略最后一个参数，步骤，使用默认值为1。
+  <script>
+    const initializeArrayWithRangeRight = (end, start = 0, step = 1) =>
+      Array.from({ length: Math.ceil((end + 1 - start) / step) }).map(
+        (v, i, arr) => (arr.length - i - 1) * step + start
+      )
+
+    initializeArrayWithRangeRight(5) // [5, 4, 3, 2, 1, 0]
+    initializeArrayWithRangeRight(7, 3) // [7, 6, 5, 4, 3]
+    initializeArrayWithRangeRight(9, 0, 2) // [8, 6, 4, 2, 0]
+  </script>
+</html>

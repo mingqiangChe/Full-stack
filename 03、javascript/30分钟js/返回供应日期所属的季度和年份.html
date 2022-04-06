@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Date.prototype.getMonth()获取范围内的当前月份（0，11），添加1将其映射到范围（1，12）。
+  使用Math.ceil()将月份除以3来获得当前季度。
+  使用Date.prototype.getFullYear()获取给定日期的年份。
+  省略参数，日期，默认使用当前日期。
+  <script>
+    const quarterOfYear = (date = new Date()) => [
+      Math.ceil((date.getMonth() + 1) / 3),
+      date.getFullYear(),
+    ]
+
+    quarterOfYear(new Date("07/10/2018")) // [ 3, 2018 ]
+    quarterOfYear() // [ 4, 2020 ]
+  </script>
+</html>

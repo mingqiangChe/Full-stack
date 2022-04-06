@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.reduce()创建和组合键值对。
+  <script>
+    const objectFromPairs = (arr) =>
+      arr.reduce((a, [key, val]) => ((a[key] = val), a), {})
+
+    objectFromPairs([
+      ["a", 1],
+      ["b", 2],
+    ]) // {a: 1, b: 2}
+  </script>
+</html>

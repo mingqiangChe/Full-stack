@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.keys()、Array.prototype.filter()和Array.prototype.includes()删除提供的键。
+  使用Array.prototype.reduce()将过滤的键转换回具有相应键值对的对象
+  <script>
+    const omit = (obj, arr) =>
+      Object.keys(obj)
+        .filter((k) => !arr.includes(k))
+        .reduce((acc, key) => ((acc[key] = obj[key]), acc), {})
+
+    omit({ a: 1, b: "2", c: 3 }, ["b"]) // { 'a': 1, 'c': 3 }
+  </script>
+</html>

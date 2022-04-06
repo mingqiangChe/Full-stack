@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.filter()查找返回真实值的数组元素。
+  使用Array.prototype.reduce()使用Array.prototype.splice()删除元素。
+  回调函数由三个参数（值、索引、数组）调用。
+  <script>
+    const remove = (arr, func) =>
+      Array.isArray(arr)
+        ? arr.filter(func).reduce((acc, val) => {
+            arr.splice(arr.indexOf(val), 1)
+            return acc.concat(val)
+          }, [])
+        : []
+
+    remove([1, 2, 3, 4], (n) => n % 2 === 0) // [2, 4]
+  </script>
+</html>

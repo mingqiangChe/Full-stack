@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.keys()与Array.prototype.reduce()和传播运算符(...)相结合，获取对象的键，并根据keysMap重命名它们。
+  <script>
+    const renameKeys = (keysMap, obj) =>
+      Object.keys(obj).reduce(
+        (acc, key) => ({
+          ...acc,
+          ...{ [keysMap[key] || key]: obj[key] },
+        }),
+        {}
+      )
+
+    const obj = { name: "Bobo", job: "Front-End Master", shoeSize: 100 }
+    renameKeys({ name: "firstName", job: "passion" }, obj)
+    // { firstName: 'Bobo', passion: 'Front-End Master', shoeSize: 100 }
+  </script>
+</html>

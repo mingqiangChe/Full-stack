@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用while循环从头到尾迭代，使用收益率返回每个值，然后逐步增加。
+  省略第三个参数，步骤，使用默认值为1。
+  <script>
+    const rangeGenerator = function* (start, end, step = 1) {
+      let i = start
+      while (i < end) {
+        yield i
+        i += step
+      }
+    }
+
+    for (let i of rangeGenerator(6, 10)) console.log(i)
+    // Logs 6, 7, 8, 9
+  </script>
+</html>

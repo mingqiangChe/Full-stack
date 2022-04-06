@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用 performance.now() 获得迭代循环前后的毫秒差异，以计算执行函数迭代时间。
+  通过将毫秒转换为秒并将其除以经过的时间来返回每秒的周期数。
+  省略第二个参数，迭代，以使用100次迭代的默认值。
+  <script>
+    const hz = (fn, iterations = 100) => {
+      const before = performance.now()
+      for (let i = 0; i < iterations; i++) fn()
+      return (1000 * iterations) / (performance.now() - before)
+    }
+
+    const numbers = Array(10000)
+      .fill()
+      .map((_, i) => i)
+
+    const sumReduce = () => numbers.reduce((acc, n) => acc + n, 0)
+    const sumForLoop = () => {
+      let sum = 0
+      for (let i = 0; i < numbers.length; i++) sum += numbers[i]
+      return sum
+    }
+
+    Math.round(hz(sumReduce)) // 572
+    Math.round(hz(sumForLoop)) // 4784
+  </script>
+</html>

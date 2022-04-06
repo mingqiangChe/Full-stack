@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.some()来测试集合中的任何元素是否基于fn返回true。
+  省略第二个参数fn，以默认使用布尔值。
+  <script>
+    const none = (arr, fn = Boolean) => !arr.some(fn)
+
+    none([0, 1, 3, 0], (x) => x == 2) // true
+    none([0, 0, 0]) // true
+  </script>
+</html>

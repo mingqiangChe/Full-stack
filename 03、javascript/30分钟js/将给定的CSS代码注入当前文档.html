@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Document.createElement()创建一个新的样式元素，并将其类型设置为text/css。
+  使用Element.innerText将值设置为给定的CSS字符串。
+  使用Document.head和Element.appendChild()将新元素附加到文档头。
+  返回新建的样式元素。
+  <script>
+    const injectCSS = (css) => {
+      let el = document.createElement("style")
+      el.type = "text/css"
+      el.innerText = css
+      document.head.appendChild(el)
+      return el
+    }
+
+    injectCSS("body { background-color: #000 }")
+    // '<style type="text/css">body { background-color: #000 }</style>'
+  </script>
+</html>

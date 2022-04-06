@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.reduce()将fn应用于arr中的每个元素，并将结果组合成一个对象。
+  使用el作为每个属性的键，使用fn的结果作为值。
+  <script>
+    const mapObject = (arr, fn) =>
+      arr.reduce((acc, el, i) => {
+        acc[el] = fn(el, i, arr)
+        return acc
+      }, {})
+
+    mapObject([1, 2, 3], (a) => a * a) // { 1: 1, 2: 4, 3: 9 }
+  </script>
+</html>

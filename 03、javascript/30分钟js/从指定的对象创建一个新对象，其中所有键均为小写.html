@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.keys()和Array.prototype.reduce()从指定的对象创建新对象。
+  使用String.prototype.toLowerCase()将原始对象中的每个键转换为小写。
+  <script>
+    const lowercaseKeys = (obj) =>
+      Object.keys(obj).reduce((acc, key) => {
+        acc[key.toLowerCase()] = obj[key]
+        return acc
+      }, {})
+
+    const myObj = { Name: "Adam", sUrnAME: "Smith" }
+    const myObjLower = lowercaseKeys(myObj) // {name: 'Adam', surname: 'Smith'};
+  </script>
+</html>

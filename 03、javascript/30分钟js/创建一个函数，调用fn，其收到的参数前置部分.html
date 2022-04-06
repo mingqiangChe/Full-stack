@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用传播运算符（...）在fn参数列表的偏序之前。
+  <script>
+    const partial =
+      (fn, ...partials) =>
+      (...args) =>
+        fn(...partials, ...args)
+
+    const greet = (greeting, name) => greeting + " " + name + "!"
+    const greetHello = partial(greet, "Hello")
+    greetHello("John") // 'Hello John!'
+  </script>
+</html>
