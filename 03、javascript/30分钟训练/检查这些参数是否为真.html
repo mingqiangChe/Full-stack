@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用逻辑而不是（！）运算符返回两个给定值的逻辑或（||）的逆值。
+  <script>
+    const nor = (a, b) => !(a || b)
+
+    nor(true, true) // false
+    nor(true, false) // false
+    nor(false, false) // true
+  </script>
+</html>

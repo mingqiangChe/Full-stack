@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用EventTarget.addEventListener()监听“滚动”事件。
+  使用setTimeout()等待150毫秒，直到调用给定的回调。
+  如果新的“滚动”事件在150毫秒以下触发，请使用clearTimeout()清除超时。
+  <script>
+    const onScrollStop = (callback) => {
+      let isScrolling
+      window.addEventListener(
+        "scroll",
+        (e) => {
+          clearTimeout(isScrolling)
+          isScrolling = setTimeout(() => {
+            callback()
+          }, 150)
+        },
+        false
+      )
+    }
+
+    onScrollStop(() => {
+      console.log("The user has stopped scrolling")
+    })
+  </script>
+</html>

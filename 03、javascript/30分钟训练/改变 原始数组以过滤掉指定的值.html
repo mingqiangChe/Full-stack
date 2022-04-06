@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  返回已删除的元素。
+  使用Array.prototype.filter()和Array.prototype.includes()提取不需要的值。
+  设置Array.prototype.length，通过将其长度重置为0来突变数组中传递的。
+  使用Array.prototype.push()仅用拉出的值重新填充它。
+  使用Array.prototype.push()跟踪拉出的值。
+  <script>
+    const pullAtValue = (arr, pullArr) => {
+      let removed = [],
+        pushToRemove = arr.forEach((v, i) =>
+          pullArr.includes(v) ? removed.push(v) : v
+        ),
+        mutateTo = arr.filter((v, i) => !pullArr.includes(v))
+      arr.length = 0
+      mutateTo.forEach((v) => arr.push(v))
+      return removed
+    }
+
+    let myArray = ["a", "b", "c", "d"]
+    let pulled = pullAtValue(myArray, ["b", "d"])
+    // myArray = [ 'a', 'c' ] , pulled = [ 'b', 'd' ]
+  </script>
+</html>

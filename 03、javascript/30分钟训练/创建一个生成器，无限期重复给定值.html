@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用非终止while循环，每次调用Generator.prototype.next()时都会产生一个值。
+  如果传递的值不是未定义的，请使用收益率语句的返回值来更新返回的值。
+  <script>
+    const repeatGenerator = function* (val) {
+      let v = val
+      while (true) {
+        let newV = yield v
+        if (newV !== undefined) v = newV
+      }
+    }
+
+    const repeater = repeatGenerator(5)
+    repeater.next() // { value: 5, done: false }
+    repeater.next() // { value: 5, done: false }
+    repeater.next(4) // { value: 4, done: false }
+    repeater.next() // { value: 4, done: false }
+  </script>
+</html>

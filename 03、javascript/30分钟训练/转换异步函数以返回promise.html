@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用currying返回返回调用原始函数的Promise的函数。
+  使用其余运算符（...）传递所有参数。 注意：在Node
+  8+中，您可以使用util.promisify。
+  <script>
+    const promisify =
+      (func) =>
+      (...args) =>
+        new Promise((resolve, reject) =>
+          func(...args, (err, result) => (err ? reject(err) : resolve(result)))
+        )
+
+    const delay = promisify((d, cb) => setTimeout(cb, d))
+    delay(2000).then(() => console.log("Hi!")) // Promise resolves after 2s
+  </script>
+</html>

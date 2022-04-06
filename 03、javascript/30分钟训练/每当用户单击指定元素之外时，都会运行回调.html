@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用EventTarget.addEventListener()监听“单击”事件。
+  使用Node.contains()检查Event.target是否是元素的后代，如果没有，请运行回调。
+  <script>
+    const onClickOutside = (element, callback) => {
+      document.addEventListener("click", (e) => {
+        if (!element.contains(e.target)) callback()
+      })
+    }
+    onClickOutside("#my-element", () => console.log("Hello"))
+    // Will log 'Hello' whenever the user clicks outside of #my-element
+  </script>
+</html>

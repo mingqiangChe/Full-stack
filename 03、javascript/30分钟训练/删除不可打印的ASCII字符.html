@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用带有正则表达式的String.prototype.replace()删除不可打印的ASCII字符。
+  <script>
+    const removeNonASCII = (str) => str.replace(/[^\x20-\x7E]/g, "")
+
+    removeNonASCII("äÄçÇéÉêlorem-ipsumöÖÐþúÚ") // 'lorem-ipsum'
+  </script>
+</html>

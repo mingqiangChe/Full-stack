@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.filter()创建一个包含给定数组每个n个元素的新数组。
+  <script>
+    const everyNth = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1)
+
+    everyNth([1, 2, 3, 4, 5, 6], 2) // [ 2, 4, 6 ]
+  </script>
+</html>

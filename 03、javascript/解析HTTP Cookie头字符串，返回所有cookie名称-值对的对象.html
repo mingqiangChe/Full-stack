@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.split(';')将键值对分开。
+  使用Array.prototype.map()和String.prototype.split('=')将键与每对中的值分开。
+  使用Array.prototype.reduce()和decodeURIComponent()创建一个具有所有键值对的对象。
+  <script>
+    const parseCookie = (str) =>
+      str
+        .split(";")
+        .map((v) => v.split("="))
+        .reduce((acc, v) => {
+          acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim())
+          return acc
+        }, {})
+
+    parseCookie("foo=bar; equation=E%3Dmc%5E2")
+    // { foo: 'bar', equation: 'E=mc^2' }
+  </script>
+</html>

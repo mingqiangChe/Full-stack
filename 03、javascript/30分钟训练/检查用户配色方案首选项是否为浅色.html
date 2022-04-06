@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  将Window.matchMedia()与适当的媒体查询一起使用，以检查用户的配色方案首选项。
+  <script>
+    const prefersLightColorScheme = () =>
+      window &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: light)").matches
+
+    prefersLightColorScheme() // true
+  </script>
+</html>

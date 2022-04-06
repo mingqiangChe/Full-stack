@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.padStart()和String.prototype.padEnd()填充给定字符串的两侧。
+  省略第三个参数char，将空格字符用作默认填充字符。
+  <script>
+    const pad = (str, length, char = " ") =>
+      str.padStart((str.length + length) / 2, char).padEnd(length, char)
+
+    pad("cat", 8) // '  cat   '
+    pad(String(42), 6, "0") // '004200'
+    pad("foobar", 3) // 'foobar'
+  </script>
+</html>

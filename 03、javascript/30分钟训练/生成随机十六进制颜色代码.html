@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Math.random()生成随机的24位（6*4位）十六进制数字。
+  使用位移位，然后使用Number.prototype.toString（16）将其转换为十六进制字符串。
+  <script>
+    const randomHexColorCode = () => {
+      let n = (Math.random() * 0xfffff * 1000000).toString(16)
+      return "#" + n.slice(0, 6)
+    }
+
+    randomHexColorCode() // '#e34155'
+  </script>
+</html>

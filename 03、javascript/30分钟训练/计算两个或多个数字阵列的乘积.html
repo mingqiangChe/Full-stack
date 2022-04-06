@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.reduce()将每个值乘以累加器，初始化值为1。
+  <script>
+    const prod = (...arr) => [...arr].reduce((acc, val) => acc * val, 1)
+
+    prod(1, 2, 3, 4) // 24
+    prod(...[1, 2, 3, 4]) // 24
+  </script>
+</html>

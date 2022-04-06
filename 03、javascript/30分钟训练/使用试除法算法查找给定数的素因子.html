@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用while循环迭代所有可能的素数因子，从2开始。
+  如果当前因子f恰好除以n，则将f添加到因子数组中，并将n除以f。否则，增量f乘以1。
+  <script>
+    const primeFactors = (n) => {
+      let a = [],
+        f = 2
+      while (n > 1) {
+        if (n % f === 0) {
+          a.push(f)
+          n /= f
+        } else {
+          f++
+        }
+      }
+      return a
+    }
+
+    primeFactors(147) // [3, 7, 7]
+  </script>
+</html>
