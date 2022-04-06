@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.split（''）、Array.prototype.reverse（）和Array.prototype.map（）与parseInt（）相结合来获取数字数组。
+  使用Array.prototype.splice（0，1）获取最后一个数字。
+  使用Array.prototype.reduce()实现Luhn算法。
+  如果和可以除以10，则返回true，否则返回false。
+  <script>
+    const luhnCheck = (num) => {
+      let arr = (num + "")
+        .split("")
+        .reverse()
+        .map((x) => parseInt(x))
+      let lastDigit = arr.splice(0, 1)[0]
+      let sum = arr.reduce(
+        (acc, val, i) =>
+          i % 2 !== 0 ? acc + val : acc + ((val *= 2) > 9 ? val - 9 : val),
+        0
+      )
+      sum += lastDigit
+      return sum % 10 === 0
+    }
+
+    luhnCheck("4485275742308327") // true
+    luhnCheck(6011329933655299) //  true
+    luhnCheck(123456789) // false
+  </script>
+</html>

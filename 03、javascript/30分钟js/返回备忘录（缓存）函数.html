@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  通过实例化新的地图对象来创建空缓存。
+  通过首先检查该函数对该特定输入值的输出是否已缓存，返回一个将单个参数提供给被存储函数的函数，如果没有，则存储并返回。
+  必须使用函数关键字，以便在必要时允许被备忘录的函数更改其上下文。
+  通过将其设置为返回函数上的属性来允许访问缓存。
+  <script>
+    const memoize = (fn) => {
+      const cache = new Map()
+      const cached = function (val) {
+        return cache.has(val)
+          ? cache.get(val)
+          : cache.set(val, fn.call(this, val)) && cache.get(val)
+      }
+      cached.cache = cache
+      return cached
+    }
+
+    // See the `anagrams` snippet.
+    const anagramsCached = memoize(anagrams)
+    anagramsCached("javascript") // takes a long time
+    anagramsCached("javascript") // returns virtually instantly since it's cached
+    console.log(anagramsCached.cache) // The cached anagrams map
+  </script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  如果两个字符串中的任何一个长度为零，则返回另一个字符串的长度。
+  使用for循环迭代目标字符串的字母，使用嵌套for循环迭代源字符串的字母。
+  计算分别在目标和源中替换与i-1和j-1相对应的字母的成本（如果它们相同，则为0，否则为1）。
+  使用Math.min()填充2D数组中的每个元素，上面单元格的最小值增加一个，左边的单元格增加一个，或左上角的单元格按之前计算的成本增加。
+  返回生成数组最后一行的最后一个元素。
+  <script>
+    const levenshteinDistance = (s, t) => {
+      if (!s.length) return t.length
+      if (!t.length) return s.length
+      const arr = []
+      for (let i = 0; i <= t.length; i++) {
+        arr[i] = [i]
+        for (let j = 1; j <= s.length; j++) {
+          arr[i][j] =
+            i === 0
+              ? j
+              : Math.min(
+                  arr[i - 1][j] + 1,
+                  arr[i][j - 1] + 1,
+                  arr[i - 1][j - 1] + (s[j - 1] === t[i - 1] ? 0 : 1)
+                )
+        }
+      }
+      return arr[t.length][s.length]
+    }
+
+    levenshteinDistance("duck", "dark") // 2
+  </script>
+</html>

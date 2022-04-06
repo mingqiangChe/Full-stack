@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.map()将每个元素映射到fn返回的值。
+  使用Math.max()获取最大值。
+  <script>
+    const maxBy = (arr, fn) =>
+      Math.max(...arr.map(typeof fn === "function" ? fn : (val) => val[fn]))
+
+    maxBy([{ n: 4 }, { n: 2 }, { n: 8 }, { n: 6 }], (x) => x.n) // 8
+    maxBy([{ n: 4 }, { n: 2 }, { n: 8 }, { n: 6 }], "n") // 8
+  </script>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.slice()抓取将保持不屏蔽的字符部分。
+  使用String.padStart()用掩码字符填充字符串的开头，直到原始长度。
+  如果num为负数，则未屏蔽的字符将位于字符串的开头。
+  省略第二个参数num，以保持默认的4个字符不屏蔽。
+  省略第三个参数，掩码，为掩码使用“*”的默认字符。
+  <script>
+    const mask = (cc, num = 4, mask = "*") =>
+      `${cc}`.slice(-num).padStart(`${cc}`.length, mask)
+
+    mask(1234567890) // '******7890'
+    mask(1234567890, 3) // '*******890'
+    mask(1234567890, -4, "$") // '$$$$567890'
+  </script>
+</html>

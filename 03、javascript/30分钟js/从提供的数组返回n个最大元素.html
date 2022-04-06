@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.sort()与扩展运算符（...）相结合，创建数组的浅克隆，并按降序排序。
+  使用Array.prototype.slice()获取指定数量的元素。
+  省略第二个参数n，以获得一个元素数组。
+  如果n大于或等于提供的数组的长度，则返回原始数组（按降序排序）。
+  <script>
+    const maxN = (arr, n = 1) => [...arr].sort((a, b) => b - a).slice(0, n)
+
+    maxN([1, 2, 3]) // [3]
+    maxN([1, 2, 3], 2) // [3, 2]
+  </script>
+</html>
