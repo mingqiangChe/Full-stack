@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Date.prototype.getTime()检查这两个值是否相同，是否都是同一时间的Date对象，或者它们是否都是具有等效值的非对象值（严格比较）。
+  检查只有一个值为空或未定义，或者它们的原型是否不同。
+  如果不符合上述条件，请使用Object.keys()检查两个值是否具有相同数量的键。
+  使用Array.prototype.every()通过递归调用equals()来检查a中的每个键是否存在于b中，以及它们是否等价。
+  <script>
+    const equals = (a, b) => {
+      if (a === b) return true
+
+      if (a instanceof Date && b instanceof Date)
+        return a.getTime() === b.getTime()
+
+      if (!a || !b || (typeof a !== "object" && typeof b !== "object"))
+        return a === b
+
+      if (a.prototype !== b.prototype) return false
+
+      const keys = Object.keys(a)
+      if (keys.length !== Object.keys(b).length) return false
+
+      return keys.every((k) => equals(a[k], b[k]))
+    }
+
+    equals(
+      { a: [2, { e: 3 }], b: [4], c: "foo" },
+      { a: [2, { e: 3 }], b: [4], c: "foo" }
+    ) // true
+    equals([1, 2, 3], { 0: 1, 1: 2, 2: 3 }) // true
+  </script>
+</html>

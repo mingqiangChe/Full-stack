@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.replace()转义特殊字符。
+  <script>
+    const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+
+    escapeRegExp("(test)") // \\(test\\)
+  </script>
+</html>

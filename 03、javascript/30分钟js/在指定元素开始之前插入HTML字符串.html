@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用位置为“beforebegin”的Element.insertAdjacentHTML()解析htmlString，并在el开始之前插入它。
+  <script>
+    const insertBefore = (el, htmlString) =>
+      el.insertAdjacentHTML("beforebegin", htmlString)
+
+    insertBefore(document.getElementById("myId"), "<p>before</p>")
+    // <p>before</p> <div id="myId">...</div>
+  </script>
+</html>

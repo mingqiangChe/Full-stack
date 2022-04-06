@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用console.debug()和传递函数的名称属性将函数的名称记录到控制台的调试通道。
+  返回给定的函数fn。
+  <script>
+    const functionName = (fn) => (console.debug(fn.name), fn)
+
+    let m = functionName(Math.max)(5, 6)
+    // max (logged in debug channel of console)
+    // m = 6
+  </script>
+</html>

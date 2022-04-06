@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.from()创建一个特定长度的空数组，使用每个新创建元素的索引调用fn。
+  回调需要一个参数-每个元素的索引。
+  <script>
+    const generateItems = (n, fn) => Array.from({ length: n }, (_, i) => fn(i))
+
+    generateItems(10, Math.random)
+    // [0.21, 0.08, 0.40, 0.96, 0.96, 0.24, 0.19, 0.96, 0.42, 0.70]
+  </script>
+</html>

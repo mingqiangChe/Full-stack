@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用setTimeout()延迟fn的执行。 使用扩展（...）运算符为函数提供任意数量的参数。
+  <script>
+    const delay = (fn, ms, ...args) => setTimeout(fn, ms, ...args)
+
+    delay(
+      function (text) {
+        console.log(text)
+      },
+      1000,
+      "later"
+    ) // Logs 'later' after one second.
+  </script>
+</html>

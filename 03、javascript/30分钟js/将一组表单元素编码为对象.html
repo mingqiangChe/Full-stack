@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用FormData构造函数将HTML表单转换为FormData，并使用Array.from()转换为数组。
+  使用Array.prototype.reduce()从数组中收集对象。
+  <script>
+    const formToObject = (form) =>
+      Array.from(new FormData(form)).reduce(
+        (acc, [key, value]) => ({
+          ...acc,
+          [key]: value,
+        }),
+        {}
+      )
+
+    formToObject(document.querySelector("#form"))
+    // { email: 'test@email.com', name: 'Test Name' }
+  </script>
+</html>

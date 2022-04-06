@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  将String.prototype.replace()与需要转义的字符匹配的regexp一起使用。
+  使用回调函数使用字典（对象）将每个字符实例替换为其关联的转义字符。
+  <script>
+    const escapeHTML = (str) =>
+      str.replace(
+        /[&<>'"]/g,
+        (tag) =>
+          ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "'": "&#39;",
+            '"': "&quot;",
+          }[tag] || tag)
+      )
+
+    escapeHTML('<a href="#">Me & you</a>')
+    // '&lt;a href=&quot;#&quot;&gt;Me &amp; you&lt;/a&gt;'
+  </script>
+</html>

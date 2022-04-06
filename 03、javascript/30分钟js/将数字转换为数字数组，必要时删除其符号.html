@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Math.abs()剥离数字符号。
+  将数字转换为字符串，使用扩展运算符（...）构建数组。
+  使用Array.prototype.map()和parseInt()将每个值转换为整数。
+  <script>
+    const digitize = (n) => [...`${Math.abs(n)}`].map((i) => parseInt(i))
+
+    digitize(123) // [1, 2, 3]
+    digitize(-123) // [1, 2, 3]
+  </script>
+</html>

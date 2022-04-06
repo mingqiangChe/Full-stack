@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用for循环和Node.parentNode从给定节点向上遍历节点树。
+  使用Node.nodeName和String.prototype.toLowerCase()检查任何给定节点是否是锚点（'a'）。
+  如果没有找到匹配的节点，则返回null。
+  <script>
+    const findClosestAnchor = (node) => {
+      for (let n = node; n.parentNode; n = n.parentNode)
+        if (n.nodeName.toLowerCase() === "a") return n
+      return null
+    }
+
+    findClosestAnchor(document.querySelector("a > span")) // a
+  </script>
+</html>

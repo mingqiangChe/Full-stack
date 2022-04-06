@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查值是否与null不同。
+  使用typeof检查值是否为类型对象，管道属性是否为类型函数。
+  <script>
+    const isStream = (val) =>
+      val !== null && typeof val === "object" && typeof val.pipe === "function"
+
+    const fs = require("fs")
+
+    isStream(fs.createReadStream("test.txt")) // true
+  </script>
+</html>

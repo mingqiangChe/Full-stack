@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用NavigationLanguage.language或第一个NavigationLanguage.languages（如果有），否则返回defaultLang。
+  省略第二个参数defaultLang，使用“en-US”作为默认语言代码
+  <script>
+    const detectLanguage = (defaultLang = "en-US") =>
+      navigator.language ||
+      (Array.isArray(navigator.languages) && navigator.languages[0]) ||
+      defaultLang
+
+    detectLanguage() // 'nl-NL'
+  </script>
+</html>

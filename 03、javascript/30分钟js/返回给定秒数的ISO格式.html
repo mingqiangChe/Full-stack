@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  将s与适当的值除以获得小时、分钟和秒的适当值。
+  将符号存储在变量中，使其在结果之前。
+  使用Array.prototype.map()与Array.prototype.floor()和String.prototype.padStart()结合使用，对每个段进行字符串化和格式化。
+  使用String.prototype.join(':')将值组合成字符串。
+  <script>
+    const formatSeconds = (s) => {
+      const [hour, minute, second, sign] =
+        s > 0
+          ? [s / 3600, (s / 60) % 60, s % 60, ""]
+          : [-s / 3600, (-s / 60) % 60, -s % 60, "-"]
+
+      return (
+        sign +
+        [hour, minute, second]
+          .map((v) => `${Math.floor(v)}`.padStart(2, "0"))
+          .join(":")
+      )
+    }
+
+    formatSeconds(200) // '00:03:20'
+    formatSeconds(-200) // '-00:03:20'
+    formatSeconds(99999) // '27:46:39'
+  </script>
+</html>

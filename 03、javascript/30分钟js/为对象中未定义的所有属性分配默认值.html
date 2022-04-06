@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.assign()创建一个新的空对象，并复制原始对象以保持键顺序。
+  使用Array.prototype.reverse()和传播运算符（...）从左到右组合默认值。
+  最后，再次使用obj覆盖最初具有值的属性。
+  <script>
+    const defaults = (obj, ...defs) =>
+      Object.assign({}, obj, ...defs.reverse(), obj)
+
+    defaults({ a: 1 }, { b: 2 }, { b: 6 }, { a: 3 }) // { a: 1, b: 2 }
+  </script>
+</html>

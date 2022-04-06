@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.slice()从左侧删除指定数量的元素。
+  省略最后一个参数n，使用默认值为1。
+  <script>
+    const drop = (arr, n = 1) => arr.slice(n)
+    drop([1, 2, 3]) // [2, 3]
+    drop([1, 2, 3], 2) // [3]
+    drop([1, 2, 3], 42) // []
+  </script>
+</html>

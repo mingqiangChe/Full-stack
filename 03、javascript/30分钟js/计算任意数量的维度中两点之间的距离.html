@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.keys()和Array.prototype.map()将每个坐标映射到两点之间的差异。
+  使用Math.hypot()计算两点之间的欧几里得距离
+  <script>
+    const euclideanDistance = (a, b) =>
+      Math.hypot(...Object.keys(a).map((k) => b[k] - a[k]))
+
+    euclideanDistance([1, 1], [2, 3]) // ~2.2361
+    euclideanDistance([1, 1, 1], [2, 3, 2]) // ~2.4495
+  </script>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.filter()和Array.prototype.every()基于比较器函数fn创建一个仅包含唯一值的数组。
+  比较器函数需要四个参数：被比较的两个元素的值及其索引。
+  <script>
+    const filterNonUniqueBy = (arr, fn) =>
+      arr.filter((v, i) => arr.every((x, j) => (i === j) === fn(v, x, i, j)))
+
+    filterNonUniqueBy(
+      [
+        { id: 0, value: "a" },
+        { id: 1, value: "b" },
+        { id: 2, value: "c" },
+        { id: 1, value: "d" },
+        { id: 0, value: "e" },
+      ],
+      (a, b) => a.id === b.id
+    ) // [ { id: 2, value: 'c' } ]
+  </script>
+</html>

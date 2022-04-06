@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用数组解构和String.prototype.toLowerCase()去大写第一个字母，...rest在第一个字母后获取字符数组，然后使用Array.prototype.join('')再次将其设置为字符串。
+  省略上Rest参数以保持字符串的其余部分完好无损，或将其设置为true以转换为大写。
+  <script>
+    const decapitalize = ([first, ...rest], upperRest = false) =>
+      first.toLowerCase() +
+      (upperRest ? rest.join("").toUpperCase() : rest.join(""))
+
+    decapitalize("FooBar") // 'fooBar'
+    decapitalize("FooBar", true) // 'fOOBAR'
+  </script>
+</html>

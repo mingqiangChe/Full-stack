@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.keys（obj）获取对象的所有属性。
+  使用Array.prototype.filter()测试每个键值对，并返回所有等于给定值的键。
+  <script>
+    const findKeys = (obj, val) =>
+      Object.keys(obj).filter((key) => obj[key] === val)
+
+    const ages = {
+      Leo: 20,
+      Zoey: 21,
+      Jane: 20,
+    }
+    findKeys(ages, 20) // [ 'Leo', 'Jane' ]
+  </script>
+</html>

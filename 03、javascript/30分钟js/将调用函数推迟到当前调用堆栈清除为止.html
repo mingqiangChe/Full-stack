@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用超时为1毫秒的setTimeout()向事件队列添加新事件，并允许渲染引擎完成其工作。
+  使用扩展（...）运算符为函数提供任意数量的参数。
+  <script>
+    const defer = (fn, ...args) => setTimeout(fn, 1, ...args)
+
+    // Example A:
+    defer(console.log, "a"), console.log("b") // logs 'b' then 'a'
+
+    // Example B:
+    document.querySelector("#someElement").innerHTML = "Hello"
+    longRunningFunction()
+    // Browser will not update the HTML until this has finished
+    defer(longRunningFunction)
+    // Browser will update the HTML then run the function
+  </script>
+</html>

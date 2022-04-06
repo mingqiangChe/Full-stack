@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用具有“后端”位置的Element.insertAdjacentHTML()解析htmlString并在el末尾后插入。
+  <script>
+    const insertAfter = (el, htmlString) =>
+      el.insertAdjacentHTML("afterend", htmlString)
+
+    insertAfter(document.getElementById("myId"), "<p>after</p>")
+    // <div id="myId">...</div> <p>after</p>
+  </script>
+</html>
