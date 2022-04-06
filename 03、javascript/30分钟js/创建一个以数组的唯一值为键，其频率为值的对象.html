@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.reduce()将唯一值映射到对象的键，每次遇到相同值时都会添加到现有键中。
+  <script>
+    const frequencies = (arr) =>
+      arr.reduce((a, v) => {
+        a[v] = a[v] ? a[v] + 1 : 1
+        return a
+      }, {})
+
+    frequencies(["a", "b", "a", "c", "a", "a", "b"]) // { a: 4, b: 2, c: 1 }
+    frequencies([..."ball"]) // { b: 1, a: 1, l: 2 }
+  </script>
+</html>

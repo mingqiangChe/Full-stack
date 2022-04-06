@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.from()和Array.prototype.map()生成h行，其中每行都是大小为w的新数组。
+  使用Array.prototype.fill()初始化所有值为val的项目。
+  省略最后一个参数val，以使用null的默认值。
+  <script>
+    const initialize2DArray = (w, h, val = null) =>
+      Array.from({ length: h }).map(() => Array.from({ length: w }).fill(val))
+
+    initialize2DArray(2, 2, 0) // [[0, 0], [0, 0]]
+  </script>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用新的Set()构造函数从迭代创建一个新的Set对象。
+  将新创建对象的添加、删除和清除方法设置为未定义，以便无法使用它们，从而几乎冻结对象。
+  <script>
+    const frozenSet = (iterable) => {
+      const s = new Set(iterable)
+      s.add = undefined
+      s.delete = undefined
+      s.clear = undefined
+      return s
+    }
+
+    frozenSet([1, 2, 3, 1, 2])
+    // Set { 1, 2, 3, add: undefined, delete: undefined, clear: undefined }
+  </script>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用HTMLElement.offsetWidth获取文档的宽度。
+  在Document.querySelectorAll()的结果上使用Array.prototype.filter()检查文档中所有元素的宽度。
+  <script>
+    const getElementsBiggerThanViewport = () => {
+      const docWidth = document.documentElement.offsetWidth
+      return [...document.querySelectorAll("*")].filter(
+        (el) => el.offsetWidth > docWidth
+      )
+    }
+
+    getElementsBiggerThanViewport() // <div id="ultra-wide-item" />
+  </script>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  回报一个承诺。 使用SubtleCrypto API为给定值创建哈希值。
+  创建一个新的TextEncoder并使用它来编码val，将其值传递给SubtleCrypto.digest()以生成给定数据的摘要。
+  使用DataView.prototype.getUint32()从解析的ArrayBuffer读取数据。
+  使用Number.prototype.toString（16）将数据转换为十六进制表示后，使用Array.prototype.push()将数据添加到数组中。
+  最后，使用Array.prototype.join()将十六进制数组中的值组合成字符串。
+  <script>
+    const hashBrowser = (val) =>
+      crypto.subtle
+        .digest("SHA-256", new TextEncoder("utf-8").encode(val))
+        .then((h) => {
+          let hexes = [],
+            view = new DataView(h)
+          for (let i = 0; i < view.byteLength; i += 4)
+            hexes.push(("00000000" + view.getUint32(i).toString(16)).slice(-8))
+          return hexes.join("")
+        })
+
+    hashBrowser(
+      JSON.stringify({ a: "a", b: [1, 2, 3, 4], foo: { c: "bar" } })
+    ).then(console.log)
+    // '04aa106279f5977f59f9067fa9712afc4aedc6f5862a8defc34552d8c7206393'
+  </script>
+</html>

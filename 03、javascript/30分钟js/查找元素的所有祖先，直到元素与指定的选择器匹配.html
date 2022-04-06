@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Node.parentNode和while循环向上移动元素的祖先树。
+  使用Array.prototype.unshift()将每个新祖先添加到数组的开头。
+  使用Element.matches()检查当前元素是否与指定的选择器匹配。
+  <script>
+    const getParentsUntil = (el, selector) => {
+      let parents = [],
+        _el = el.parentNode
+      while (_el && typeof _el.matches === "function") {
+        parents.unshift(_el)
+        if (_el.matches(selector)) return parents
+        else _el = _el.parentNode
+      }
+      return []
+    }
+
+    getParentsUntil(document.querySelector("#home-link"), "header")
+    // [header, nav, ul, li]
+  </script>
+</html>

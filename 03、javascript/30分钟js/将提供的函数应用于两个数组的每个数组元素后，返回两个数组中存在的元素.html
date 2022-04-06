@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  通过将fn应用于b中的所有元素来创建集合。
+  在a上使用Array.prototype.filter()只保留元素，当fn应用于它们时，元素会产生b中包含的值。
+  <script>
+    const intersectionBy = (a, b, fn) => {
+      const s = new Set(b.map(fn))
+      return [...new Set(a)].filter((x) => s.has(fn(x)))
+    }
+
+    intersectionBy([2.1, 1.2], [2.3, 3.4], Math.floor) // [2.1]
+    intersectionBy(
+      [{ title: "Apple" }, { title: "Orange" }],
+      [{ title: "Orange" }, { title: "Melon" }],
+      (x) => x.title
+    ) // [{ title: 'Orange' }]
+  </script>
+</html>

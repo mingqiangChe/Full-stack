@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.reduce()迭代给定数组中的所有元素。
+  如果累加器的长度为0，请将当前元素添加到其中。
+  使用Array.prototype.some()在累加器中迭代结果，直到找到正确的位置。
+  使用Array.prototype.splice()将当前元素插入累加器。
+  <script>
+    const insertionSort = (arr) =>
+      arr.reduce((acc, x) => {
+        if (!acc.length) return [x]
+        acc.some((y, j) => {
+          if (x <= y) {
+            acc.splice(j, 0, x)
+            return true
+          }
+          if (x > y && j === acc.length - 1) {
+            acc.splice(j + 1, 0, x)
+            return true
+          }
+          return false
+        })
+        return acc
+      }, [])
+
+    insertionSort([6, 3, 4, 1]) // [1, 3, 4, 6]
+  </script>
+</html>

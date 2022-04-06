@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用RegExp.prototype.test()检查给定的字符串是否与字母regexp模式匹配。
+  <script>
+    const isAlpha = (str) => /^[a-zA-Z]*$/.test(str)
+
+    isAlpha("sampleInput") // true
+    isAlpha("this Will fail") // false
+    isAlpha("123") // false
+  </script>
+</html>
