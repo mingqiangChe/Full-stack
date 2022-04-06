@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用递归。 如果提供的参数（args）数量足够，请调用传递的函数fn。
+  否则，请使用Function.prototype.bind()返回一个需要其余参数的咖喱函数fn。
+  如果您想尝试一个接受可变数量参数的函数（变函数，例如Math.min())，您可以选择将参数数量传递给第二个参数arity。
+  <script>
+    const curry = (fn, arity = fn.length, ...args) =>
+      arity <= args.length ? fn(...args) : curry.bind(null, fn, arity, ...args)
+
+    curry(Math.pow)(2)(10) // 1024
+    curry(Math.min, 3)(10)(50)(2) // 2
+  </script>
+</html>

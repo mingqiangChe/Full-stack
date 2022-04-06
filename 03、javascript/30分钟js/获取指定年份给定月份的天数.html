@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用新的Date()构造函数从给定年份和月份创建日期。
+  将天数参数设置为0，以获得上个月的最后一天，因为月份为零索引。
+  使用Date.prototype.getDate()返回给定月份的天数。
+  <script>
+        const daysInMonth = (year, month) => new Date(year, month, 0).getDate()
+
+        daysInMonth(2020, 12)); // 31
+    daysInMonth(2024, 2)); // 29
+  </script>
+</html>

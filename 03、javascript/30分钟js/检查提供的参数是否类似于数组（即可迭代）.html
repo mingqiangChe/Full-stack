@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查提供的参数是否为空，其Symbol.iterator属性是否为函数。
+  <script>
+    const isArrayLike = (obj) =>
+      obj != null && typeof obj[Symbol.iterator] === "function"
+
+    isArrayLike([1, 2, 3]) // true
+    isArrayLike(document.querySelectorAll(".className")) // true
+    isArrayLike("abc") // true
+    isArrayLike(null) // false
+  </script>
+</html>

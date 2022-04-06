@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.toLowerCase()和String.prototype.replace()与适当的正则表达式来删除不必要的字符。
+  在两个字符串上使用String.prototype.split('')、Array.prototype.sort()和Array.prototype.join('')对其进行规范化，然后检查它们的规范化形式是否相等。
+  <script>
+    const isAnagram = (str1, str2) => {
+      const normalize = (str) =>
+        str
+          .toLowerCase()
+          .replace(/[^a-z0-9]/gi, "")
+          .split("")
+          .sort()
+          .join("")
+      return normalize(str1) === normalize(str2)
+    }
+
+    isAnagram("iceman", "cinema") // true
+  </script>
+</html>

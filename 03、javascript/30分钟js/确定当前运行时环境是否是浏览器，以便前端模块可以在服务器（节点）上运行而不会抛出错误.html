@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  在窗口和文档的值类型上使用Array.prototype.includes()（除非显式定义，否则全局通常仅在浏览器环境中可用），如果其中一个未定义，则返回true。
+  typeof允许在不抛出ReferenceError的情况下检查全局变量的存在。
+  如果两者都不是未定义的，那么假设当前环境是浏览器。
+  <script>
+    const isBrowser = () =>
+      ![typeof window, typeof document].includes("undefined")
+
+    isBrowser() // true (browser)
+    isBrowser() // false (Node)
+  </script>
+</html>

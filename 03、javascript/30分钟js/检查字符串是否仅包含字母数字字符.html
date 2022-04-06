@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用RegExp.prototype.test()检查输入字符串是否与字母数字regexp模式匹配
+  <script>
+    const isAlphaNumeric = (str) => /^[a-z0-9]+$/gi.test(str)
+
+    isAlphaNumeric("hello123") // true
+    isAlphaNumeric("123") // true
+    isAlphaNumeric("hello 123") // false (space character is not alphanumeric)
+    isAlphaNumeric("#$hello") // false
+  </script>
+</html>

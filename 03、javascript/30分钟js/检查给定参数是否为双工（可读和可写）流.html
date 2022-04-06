@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查值是否与null不同。
+  使用typeof检查值是否为类型对象，管道属性是否为类型函数。
+  此外，检查_read、_write和_readableState、_writableState属性的类型是否分别是函数和对象。
+  <script>
+    const isDuplexStream = (val) =>
+      val !== null &&
+      typeof val === "object" &&
+      typeof val.pipe === "function" &&
+      typeof val._read === "function" &&
+      typeof val._readableState === "object" &&
+      typeof val._write === "function" &&
+      typeof val._writableState === "object"
+
+    const Stream = require("stream")
+
+    isDuplexStream(new Stream.Duplex()) // true
+  </script>
+</html>

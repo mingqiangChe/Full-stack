@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用递归。 如果n小于或等于1，返回1。 否则，返回n的乘积和n-1的阶乘。
+  如果n是负数，则抛出TypeError。
+  <script>
+    const factorial = (n) =>
+      n < 0
+        ? (() => {
+            throw new TypeError("Negative numbers are not allowed!")
+          })()
+        : n <= 1
+        ? 1
+        : n * factorial(n - 1)
+
+    factorial(6) // 720
+  </script>
+</html>

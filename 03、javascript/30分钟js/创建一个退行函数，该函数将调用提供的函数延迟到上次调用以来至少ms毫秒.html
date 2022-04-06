@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  每次调用退行函数时，使用clearTimeout()清除当前挂起的超时，并使用setTimeout()创建一个新的超时，将调用函数延迟到至少毫秒。
+  使用Function.prototype.apply()将此上下文应用于函数并提供必要的参数。
+  省略第二个参数ms，将超时设置为默认为0毫秒。
+  <script>
+    const debounce = (fn, ms = 0) => {
+      let timeoutId
+      return function (...args) {
+        clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => fn.apply(this, args), ms)
+      }
+    }
+
+    window.addEventListener(
+      "resize",
+      debounce(() => {
+        console.log(window.innerWidth)
+        console.log(window.innerHeight)
+      }, 250)
+    ) // Will log the window dimensions at most every 250ms
+  </script>
+</html>

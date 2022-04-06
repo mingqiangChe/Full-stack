@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.map()返回一个可以接受可变数量args的fn。
+  调用fn时，返回一个数组，其中包含将每个fn应用于args的结果。
+  <script>
+    const juxt =
+      (...fns) =>
+      (...args) =>
+        [...fns].map((fn) => [...args].map(fn))
+
+    juxt(
+      (x) => x + 1,
+      (x) => x - 1,
+      (x) => x * 10
+    )(1, 2, 3) // [[2, 3, 4], [0, 1, 2], [10, 20, 30]]
+    juxt(
+      (s) => s.length,
+      (s) => s.split(" ").join("-")
+    )("30 seconds of code") // [[18], ['30-seconds-of-code']]
+  </script>
+</html>

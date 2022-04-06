@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用大于（>）和小于（<）的运算符来检查日期是否介于dateStart和dateEnd之间。
+  <script>
+    const isBetweenDates = (dateStart, dateEnd, date) =>
+      date > dateStart && date < dateEnd
+
+    isBetweenDates(
+      new Date(2010, 11, 20),
+      new Date(2010, 11, 30),
+      new Date(2010, 11, 19)
+    ) // false
+    isBetweenDates(
+      new Date(2010, 11, 20),
+      new Date(2010, 11, 30),
+      new Date(2010, 11, 25)
+    ) // true
+  </script>
+</html>

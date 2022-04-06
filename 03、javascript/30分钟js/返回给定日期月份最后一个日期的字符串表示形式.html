@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Date.prototype.getFullYear()、Date.prototype.getMonth()获取给定日期的当前年份和月份。
+  使用新的Date()构造函数创建一个新的日期，给定的年份和月份增加1，并将日期设置为0（上个月的最后一天）。
+  省略参数，日期，默认使用当前日期。
+  <script>
+    const lastDateOfMonth = (date = new Date()) => {
+      let d = new Date(date.getFullYear(), date.getMonth() + 1, 0)
+      return d.toISOString().split("T")[0]
+    }
+
+    lastDateOfMonth(new Date("2015-08-11")) // '2015-08-30'
+  </script>
+</html>

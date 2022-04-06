@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用fs.readFileSync()从文件创建缓冲区。
+  使用buf.toString（编码）函数将缓冲区转换为字符串。
+  使用String.prototype.split（\n）从文件内容创建行数组。
+  <script>
+    const fs = require("fs")
+
+    const readFileLines = (filename) =>
+      fs.readFileSync(filename).toString("UTF8").split("\n")
+
+    /*
+contents of test.txt :
+  line1
+  line2
+  line3
+  ___________________________
+*/
+    let arr = readFileLines("test.txt")
+    console.log(arr) // ['line1', 'line2', 'line3']
+  </script>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.reduce()，比较对象的长度以找到最长的对象。
+  如果多个对象的长度相同，将返回第一个对象。 如果没有提供参数，则返回未定义。
+  <script>
+    const longestItem = (...vals) =>
+      vals.reduce((a, x) => (x.length > a.length ? x : a))
+
+    longestItem("this", "is", "a", "testcase") // 'testcase'
+    longestItem(...["a", "ab", "abc"]) // 'abc'
+    longestItem(...["a", "ab", "abc"], "abcd") // 'abcd'
+    longestItem([1, 2, 3], [1, 2], [1, 2, 3, 4, 5]) // [1, 2, 3, 4, 5]
+    longestItem([1, 2, 3], "foobar") // 'foobar'
+  </script>
+</html>
