@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  如果省略FirstRow为真，请使用Array.prototype.slice()和Array.prototype.indexOf('\n')删除第一行（标题行）。
+  使用String.prototype.split（'\n'）为每行创建一个字符串，然后使用String.prototype.split（分隔符）分隔每行中的值。
+  省略第二个参数，分隔符，以使用默认分隔符。
+  省略第三个参数，省略FirstRow，以包含CSV字符串的第一行（标题行）。
+  <script>
+    const CSVToArray = (data, delimiter = ",", omitFirstRow = false) =>
+      data
+        .slice(omitFirstRow ? data.indexOf("\n") + 1 : 0)
+        .split("\n")
+        .map((v) => v.split(delimiter))
+
+    CSVToArray("a,b\nc,d") // [['a', 'b'], ['c', 'd']];
+    CSVToArray("a;b\nc;d", ";") // [['a', 'b'], ['c', 'd']];
+    CSVToArray("col1,col2\na,b\nc,d", ",", true) // [['a', 'b'], ['c', 'd']];
+  </script>
+</html>

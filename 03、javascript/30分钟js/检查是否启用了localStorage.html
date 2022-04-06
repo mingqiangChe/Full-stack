@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  如果所有操作都成功完成，请使用try...catch块返回true，否则返回false。
+  使用Storage.setItem()和Storage.removeItem()测试在window.localStorage中存储和删除值。
+  <script>
+    const isLocalStorageEnabled = () => {
+      try {
+        const key = `__storage__test`
+        window.localStorage.setItem(key, null)
+        window.localStorage.removeItem(key)
+        return true
+      } catch (e) {
+        return false
+      }
+    }
+
+    isLocalStorageEnabled() // true, if localStorage is accessible
+  </script>
+</html>

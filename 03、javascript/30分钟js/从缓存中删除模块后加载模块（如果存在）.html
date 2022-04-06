@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用删除从缓存中删除模块（如果存在）。 使用require()再次加载模块。
+  <script>
+    const requireUncached = (module) => {
+      delete require.cache[require.resolve(module)]
+      return require(module)
+    }
+
+    const fs = requireUncached("fs") // 'fs' will be loaded fresh every time
+  </script>
+</html>

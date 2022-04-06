@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.map()将数据映射到包含每个元素与点的欧几里得距离的对象，使用Math.hypot()、Object.keys()及其标签计算。
+  使用Array.prototype.sort()和Array.prototype.slice()获取点的k个最近邻居。
+  将Array.prototype.reduce()与Object.keys()和Array.prototype.indexOf()结合使用，找到其中最常见的标签。
+  <script>
+    const kNearestNeighbors = (data, labels, point, k = 3) => {
+      const kNearest = data
+        .map((el, i) => ({
+          dist: Math.hypot(
+            ...Object.keys(el).map((key) => point[key] - el[key])
+          ),
+          label: labels[i],
+        }))
+        .sort((a, b) => a.dist - b.dist)
+        .slice(0, k)
+
+      return kNearest.reduce(
+        (acc, { label }, i) => {
+          acc.classCounts[label] =
+            Object.keys(acc.classCounts).indexOf(label) !== -1
+              ? acc.classCounts[label] + 1
+              : 1
+          if (acc.classCounts[label] > acc.topClassCount) {
+            acc.topClassCount = acc.classCounts[label]
+            acc.topClass = label
+          }
+          return acc
+        },
+        {
+          classCounts: {},
+          topClass: kNearest[0].label,
+          topClassCount: 0,
+        }
+      ).topClass
+    }
+
+    const data = [
+      [0, 0],
+      [0, 1],
+      [1, 3],
+      [2, 0],
+    ]
+    const labels = [0, 1, 1, 0]
+
+    kNearestNeighbors(data, labels, [1, 2], 2) // 1
+    kNearestNeighbors(data, labels, [1, 0], 2) // 0
+  </script>
+</html>

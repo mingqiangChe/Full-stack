@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用新的Date()获取当前日期，Math.abs()和'Date.prototype.getDate()`相应地更新日期，并使用Date.prototype.setDate()设置为结果。
+  使用Date.prototype.toISOString()返回yyyy-mm-dd格式的字符串。
+  <script>
+    const daysAgo = (n) => {
+      let d = new Date()
+      d.setDate(d.getDate() - Math.abs(n))
+      return d.toISOString().split("T")[0]
+    }
+
+    daysAgo(20) // 2020-09-16 (if current date is 2020-10-06)
+  </script>
+</html>

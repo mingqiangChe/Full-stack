@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  从2到给定数字生成数组。
+  使用Array.prototype.filter()过滤掉可被任何数字整除的值，从2到所提供数字的平方根。
+  <script>
+    const primes = (num) => {
+      let arr = Array.from({ length: num - 1 }).map((x, i) => i + 2),
+        sqroot = Math.floor(Math.sqrt(num)),
+        numsTillSqroot = Array.from({ length: sqroot - 1 }).map((x, i) => i + 2)
+      numsTillSqroot.forEach(
+        (x) => (arr = arr.filter((y) => y % x !== 0 || y === x))
+      )
+      return arr
+    }
+
+    primes(10) // [2, 3, 5, 7]
+  </script>
+</html>

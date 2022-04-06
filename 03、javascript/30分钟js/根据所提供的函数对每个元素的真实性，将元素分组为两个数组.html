@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.reduce()创建两个数组的数组。
+  使用Array.prototype.push()添加fn返回第一个数组为true的元素，fn返回false到第二个数组的元素。
+  <script>
+    const partition = (arr, fn) =>
+      arr.reduce(
+        (acc, val, i, arr) => {
+          acc[fn(val, i, arr) ? 0 : 1].push(val)
+          return acc
+        },
+        [[], []]
+      )
+
+    const users = [
+      { user: "barney", age: 36, active: false },
+      { user: "fred", age: 40, active: true },
+    ]
+    partition(users, (o) => o.active)
+    // [
+    //   [{ user: 'fred', age: 40, active: true }],
+    //   [{ user: 'barney', age: 36, active: false }]
+    // ]
+  </script>
+</html>

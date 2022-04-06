@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  如果所有操作都成功完成，请使用try...catch块返回true，否则返回false。
+  使用Storage.setItem()和Storage.removeItem()在window.sessionStorage中测试存储和删除值。
+  <script>
+    const isSessionStorageEnabled = () => {
+      try {
+        const key = `__storage__test`
+        window.sessionStorage.setItem(key, null)
+        window.sessionStorage.removeItem(key)
+        return true
+      } catch (e) {
+        return false
+      }
+    }
+
+    isSessionStorageEnabled() // true, if sessionStorage is accessible
+  </script>
+</html>

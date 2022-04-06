@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  检查arr是否真实并具有长度属性。 使用Array.prototype.length -
+  1计算给定数组最后一个元素的索引并返回，否则返回未定义。
+  <script>
+    const last = (arr) => (arr && arr.length ? arr[arr.length - 1] : undefined)
+
+    last([1, 2, 3]) // 3
+    last([]) // undefined
+    last(null) // undefined
+    last(undefined) // undefined
+  </script>
+</html>
