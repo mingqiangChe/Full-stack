@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Document.querySelector()和Element.requestFullscreen()在全屏中打开给定元素。
+  使用Document.exitFullscreen()退出全屏模式。
+  省略第二个参数el，使用body作为默认元素。
+  默认情况下，省略第一个元素模式，以全屏模式打开元素。
+  <script>
+    const fullscreen = (mode = true, el = "body") =>
+      mode
+        ? document.querySelector(el).requestFullscreen()
+        : document.exitFullscreen()
+
+    fullscreen() // Opens `body` in fullscreen mode
+    fullscreen(false) // Exits fullscreen mode
+  </script>
+</html>

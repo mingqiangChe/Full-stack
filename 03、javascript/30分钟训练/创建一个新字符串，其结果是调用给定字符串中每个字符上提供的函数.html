@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用String.prototype.split('')和Array.prototype.map()为str中的每个字符调用提供的函数fn。
+  使用Array.prototype.join('')将字符数组重新组合成字符串。
+  回调函数fn接受三个参数（调用了当前字符、当前字符的索引和字符串mapString）。
+  <script>
+    const mapString = (str, fn) =>
+      str
+        .split("")
+        .map((c, i) => fn(c, i, str))
+        .join("")
+
+    mapString("lorem ipsum", (c) => c.toUpperCase()) // 'LOREM IPSUM'
+  </script>
+</html>

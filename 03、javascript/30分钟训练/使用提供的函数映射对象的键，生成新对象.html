@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.keys()迭代对象的键。
+  使用Array.prototype.reduce()使用fn创建一个具有相同值和映射键的新对象。
+  <script>
+    const mapKeys = (obj, fn) =>
+      Object.keys(obj).reduce((acc, k) => {
+        acc[fn(obj[k], k, obj)] = obj[k]
+        return acc
+      }, {})
+
+    mapKeys({ a: 1, b: 2 }, (val, key) => key + val) // { a1: 1, b2: 2 }
+  </script>
+</html>

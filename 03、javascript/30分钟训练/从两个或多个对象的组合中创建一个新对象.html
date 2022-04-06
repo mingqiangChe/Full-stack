@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.reduce()与Object.keys()相结合来迭代所有对象和键。
+  使用'Object.prototype.hasOwnProperty()`和Array.prototype.concat()为多个对象中存在的键附加值。
+  <script>
+    const merge = (...objs) =>
+      [...objs].reduce(
+        (acc, obj) =>
+          Object.keys(obj).reduce((a, k) => {
+            acc[k] = acc.hasOwnProperty(k)
+              ? [].concat(acc[k]).concat(obj[k])
+              : obj[k]
+            return acc
+          }, {}),
+        {}
+      )
+
+    const object = {
+      a: [{ x: 2 }, { y: 4 }],
+      b: 1,
+    }
+    const other = {
+      a: { z: 3 },
+      b: [2, 3],
+      c: "foo",
+    }
+    merge(object, other)
+    // { a: [ { x: 2 }, { y: 4 }, { z: 3 } ], b: [ 1, 2, 3 ], c: 'foo' }
+  </script>
+</html>
