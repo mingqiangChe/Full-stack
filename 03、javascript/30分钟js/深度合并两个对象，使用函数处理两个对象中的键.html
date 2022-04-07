@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.keys()获取两个对象的键，从它们创建集合，并使用传播运算符（...）创建所有唯一键的数组。
+  使用Array.prototype.reduce()将每个唯一键添加到对象中，使用fn组合两个给定对象的值。
+  <script>
+    const deepMerge = (a, b, fn) =>
+      [...new Set([...Object.keys(a), ...Object.keys(b)])].reduce(
+        (acc, key) => ({ ...acc, [key]: fn(key, a[key], b[key]) }),
+        {}
+      )
+
+    deepMerge(
+      { a: true, b: { c: [1, 2, 3] } },
+      { a: false, b: { d: [1, 2, 3] } },
+      (key, a, b) => (key === "a" ? a && b : Object.assign({}, a, b))
+    )
+    // { a: false, b: { c: [ 1, 2, 3 ], d: [ 1, 2, 3 ] } }
+  </script>
+</html>

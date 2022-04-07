@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用for循环和Node.parentNode从给定节点向上遍历节点树。
+  使用Element.matches()检查任何给定的元素节点是否与提供的选择器匹配。
+  如果没有找到匹配的节点，则返回null。
+  <script>
+    const findClosestMatchingNode = (node, selector) => {
+      for (let n = node; n.parentNode; n = n.parentNode)
+        if (n.matches && n.matches(selector)) return n
+      return null
+    }
+
+    findClosestMatchingNode(document.querySelector("span"), "body") // body
+  </script>
+</html>

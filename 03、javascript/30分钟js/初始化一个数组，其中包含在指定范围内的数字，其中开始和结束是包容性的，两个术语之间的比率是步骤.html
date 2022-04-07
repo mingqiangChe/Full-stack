@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  如果步骤等于1，则返回错误。
+  使用Array.from()、Math.log()和Math.floor()创建所需长度的数组，使用Array.prototype.map()在一定范围内填充所需的值。
+  省略第二个参数，开始，使用默认值为1。 省略第三个参数，步骤，使用默认值2。
+  <script>
+    const geometricProgression = (end, start = 1, step = 2) =>
+      Array.from({
+        length: Math.floor(Math.log(end / start) / Math.log(step)) + 1,
+      }).map((_, i) => start * step ** i)
+
+    geometricProgression(256) // [1, 2, 4, 8, 16, 32, 64, 128, 256]
+    geometricProgression(256, 3) // [3, 6, 12, 24, 48, 96, 192]
+    geometricProgression(256, 1, 4) // [1, 4, 16, 64, 256]
+  </script>
+</html>

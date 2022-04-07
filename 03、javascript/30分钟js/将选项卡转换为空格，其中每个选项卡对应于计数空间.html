@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用带有正则表达式的String.prototype.replace()和String.prototype.repeat()将每个选项卡字符替换为计数空格。
+  <script>
+    const expandTabs = (str, count) => str.replace(/\t/g, " ".repeat(count))
+
+    expandTabs("\t\tlorem", 3) // '      lorem'
+  </script>
+</html>

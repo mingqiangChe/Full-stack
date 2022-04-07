@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  在此期间返回的所有承诺都将返回相同的数据。
+  每次调用退行函数时，使用clearTimeout()清除当前挂起的超时，并使用setTimeout()创建一个新的超时，将调用函数延迟到至少毫秒。
+  使用Function.prototype.apply()将此上下文应用于函数并提供必要的参数。
+  创建一个新的Promise，并将其解析和拒绝回调添加到待处理的承诺堆栈中。
+  当调用setTimeout时，复制当前堆栈（因为它可以在提供的函数调用及其分辨率之间更改），清除它并调用提供的函数。
+  当提供的函数解析/拒绝时，用返回的数据解析/拒绝堆栈中的所有承诺（在调用函数时复制）。
+  省略第二个参数ms，将超时设置为默认为0毫秒。
+  <script>
+    const debouncePromise = (fn, ms = 0) => {
+      let timeoutId
+      const pending = []
+      return (...args) =>
+        new Promise((res, rej) => {
+          clearTimeout(timeoutId)
+          timeoutId = setTimeout(() => {
+            const currentPending = [...pending]
+            pending.length = 0
+            Promise.resolve(fn.apply(this, args)).then(
+              (data) => {
+                currentPending.forEach(({ resolve }) => resolve(data))
+              },
+              (error) => {
+                currentPending.forEach(({ reject }) => reject(error))
+              }
+            )
+          }, ms)
+          pending.push({ resolve: res, reject: rej })
+        })
+    }
+
+    const fn = (arg) =>
+      new Promise((resolve) => {
+        setTimeout(resolve, 1000, ["resolved", arg])
+      })
+    const debounced = debouncePromise(fn, 200)
+    debounced("foo").then(console.log)
+    debounced("bar").then(console.log)
+    // Will log ['resolved', 'bar'] both times
+  </script>
+</html>

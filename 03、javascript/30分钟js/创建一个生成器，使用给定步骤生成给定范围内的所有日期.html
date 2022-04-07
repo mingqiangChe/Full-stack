@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用while循环从头到尾迭代，使用收益率返回范围内的每个日期，使用日期构造函数。
+  使用Date.prototype.getDate()和Date.prototype.setDate()在返回每个后续值后一步增加。
+  省略第三个参数，步骤，使用默认值为1。
+  <script>
+        const dateRangeGenerator = function* (start, end, step = 1) {
+          let d = start
+          while (d < end) {
+            yield new Date(d)
+            d.setDate(d.getDate() + step)
+          }
+        }
+
+        [...dateRangeGenerator(new Date('2021-06-01'), new Date('2021-06-04'))];
+    // [ 2021-06-01, 2021-06-02, 2021-06-03 ]
+  </script>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用逻辑而不是（！）使用任何提供的args调用fn的结果的运算符。
+  <script>
+    const complement =
+      (fn) =>
+      (...args) =>
+        !fn(...args)
+
+    const isEven = (num) => num % 2 === 0
+    const isOdd = complement(isEven)
+    isOdd(2) // false
+    isOdd(3) // true
+  </script>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用递归。
+  使用Array.isArray()、Array.prototype.filter()和布尔数组初始化可迭代数据，以避免稀疏的数组。
+  使用Object.keys()和Array.prototype.reduce()用适当的初始值迭代每个键。
+  使用布尔值来确定每个键值的真实性，如果是真值，则将其添加到累加器中。
+  使用typeof确定给定值是否为对象，并再次调用函数以深度压缩它。
+  <script>
+    const compactObject = (val) => {
+      const data = Array.isArray(val) ? val.filter(Boolean) : val
+      return Object.keys(data).reduce(
+        (acc, key) => {
+          const value = data[key]
+          if (Boolean(value))
+            acc[key] = typeof value === "object" ? compactObject(value) : value
+          return acc
+        },
+        Array.isArray(val) ? [] : {}
+      )
+    }
+
+    const obj = {
+      a: null,
+      b: false,
+      c: true,
+      d: 0,
+      e: 1,
+      f: "",
+      g: "a",
+      h: [null, false, "", true, 1, "a"],
+      i: { j: 0, k: false, l: "a" },
+    }
+    compactObject(obj)
+    // { c: true, e: 1, g: 'a', h: [ true, 1, 'a' ], i: { l: 'a' } }
+  </script>
+</html>

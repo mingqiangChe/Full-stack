@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用递归。 在给定的对象上使用Object.isFrozen()。
+  使用Object.keys()、Array.prototype.every()检查所有键是否都是深度冻结的对象或非对象值。
+  <script>
+    const isDeepFrozen = (obj) =>
+      Object.isFrozen(obj) &&
+      Object.keys(obj).every(
+        (prop) => typeof obj[prop] !== "object" || isDeepFrozen(obj[prop])
+      )
+
+    const x = Object.freeze({ a: 1 })
+    const y = Object.freeze({ b: { c: 2 } })
+    isDeepFrozen(x) // true
+    isDeepFrozen(y) // false
+  </script>
+</html>

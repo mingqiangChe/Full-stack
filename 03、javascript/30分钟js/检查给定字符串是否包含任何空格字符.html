@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  将RegExp.prototype.test()与适当的正则表达式一起使用，以检查给定的字符串是否包含任何空格字符。
+  <script>
+    const containsWhitespace = (str) => /\s/.test(str)
+
+    containsWhitespace("lorem") // false
+    containsWhitespace("lorem ipsum") // true
+  </script>
+</html>

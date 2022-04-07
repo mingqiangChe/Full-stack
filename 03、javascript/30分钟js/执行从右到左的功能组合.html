@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.reduce()执行从右到左的函数组合。
+  最后（最右边）函数可以接受一个或多个参数；剩余的函数必须是一元的
+  <script>
+    const compose = (...fns) =>
+      fns.reduce(
+        (f, g) =>
+          (...args) =>
+            f(g(...args))
+      )
+
+    const add5 = (x) => x + 5
+    const multiply = (x, y) => x * y
+    const multiplyAndAdd5 = compose(add5, multiply)
+    multiplyAndAdd5(5, 2) // 15
+  </script>
+</html>

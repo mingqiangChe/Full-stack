@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  减去两个日期对象，并在一小时内除以毫秒数，以获得它们之间的差异（以小时为单位）。
+  <script>
+    const getHoursDiffBetweenDates = (dateInitial, dateFinal) =>
+      (dateFinal - dateInitial) / (1000 * 3600)
+
+    getHoursDiffBetweenDates(
+      new Date("2021-04-24 10:25:00"),
+      new Date("2021-04-25 10:25:00")
+    ) // 24
+  </script>
+</html>

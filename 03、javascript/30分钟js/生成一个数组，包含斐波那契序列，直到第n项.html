@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.from()创建一个特定长度的空数组，初始化前两个值（0和1）。
+  使用Array.prototype.reduce()和Array.prototype.concat()将值添加到数组中，使用前两个值的总和，前两个值除外。
+  <script>
+    const fibonacci = (n) =>
+      Array.from({ length: n }).reduce(
+        (acc, val, i) => acc.concat(i > 1 ? acc[i - 1] + acc[i - 2] : i),
+        []
+      )
+
+    fibonacci(6) // [0, 1, 1, 2, 3, 5]
+  </script>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  如果定义了Window.pageXOffset和Window.pageYOffset，否则使用Element.scrollLeft和Element.scrollTop。
+  省略单个参数el，以使用窗口的默认值。
+  <script>
+    const getScrollPosition = (el = window) => ({
+      x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+      y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop,
+    })
+
+    getScrollPosition() // {x: 0, y: 200}
+  </script>
+</html>

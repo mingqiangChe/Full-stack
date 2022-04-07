@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.from()创建所需长度的数组。
+  使用（结束-开始+1）/步骤和映射函数在给定范围内用所需的值填充数组。
+  省略第二个参数start，以使用默认值0。 省略最后一个参数，步骤，使用默认值为1。
+  <script>
+    const initializeArrayWithRange = (end, start = 0, step = 1) =>
+      Array.from(
+        { length: Math.ceil((end - start + 1) / step) },
+        (_, i) => i * step + start
+      )
+
+    initializeArrayWithRange(5) // [0, 1, 2, 3, 4, 5]
+    initializeArrayWithRange(7, 3) // [3, 4, 5, 6, 7]
+    initializeArrayWithRange(9, 0, 2) // [0, 2, 4, 6, 8]
+  </script>
+</html>

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.filter()过滤掉false值（false、null、0、undefined和NaN）
+  <script>
+    const compact = (arr) => arr.filter(Boolean)
+
+    compact([0, 1, false, 2, "", 3, "a", "e" * 23, NaN, "s", 34])
+    // [ 1, 2, 3, 'a', 's', 34 ]
+  </script>
+</html>

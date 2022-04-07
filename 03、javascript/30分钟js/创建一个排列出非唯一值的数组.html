@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用新的Set()和扩展运算符（...）在arr中创建唯一值的数组。
+  使用Array.prototype.filter()创建一个仅包含唯一值的数组。
+  <script>
+    const filterNonUnique = (arr) =>
+      [...new Set(arr)].filter((i) => arr.indexOf(i) === arr.lastIndexOf(i))
+
+    filterNonUnique([1, 2, 2, 3, 4, 4, 5]) // [1, 3, 5]
+  </script>
+</html>

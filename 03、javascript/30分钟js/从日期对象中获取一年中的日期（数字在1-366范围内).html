@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用新的Date()和Date.prototype.getFullYear()将一年中的第一天作为Date对象。
+  从日期中减去一年中的第一天，然后除以每天的毫秒以获得结果。
+  使用Math.floor()将生成的日数适当地四舍五入为整数。
+  <script>
+    const dayOfYear = (date) =>
+      Math.floor(
+        (date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24
+      )
+
+    dayOfYear(new Date()) // 272
+  </script>
+</html>

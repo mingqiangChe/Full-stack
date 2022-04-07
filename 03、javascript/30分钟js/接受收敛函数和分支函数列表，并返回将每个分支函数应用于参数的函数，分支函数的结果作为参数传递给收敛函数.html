@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Array.prototype.map()和Function.prototype.apply()将每个函数应用于给定的参数。
+  使用扩展运算符（...）使用所有其他函数的结果调用收敛器。
+  <script>
+    const converge =
+      (converger, fns) =>
+      (...args) =>
+        converger(...fns.map((fn) => fn.apply(null, args)))
+
+    const average = converge(
+      (a, b) => a / b,
+      [(arr) => arr.reduce((a, v) => a + v, 0), (arr) => arr.length]
+    )
+    average([1, 2, 3, 4, 5, 6, 7]) // 4
+  </script>
+</html>

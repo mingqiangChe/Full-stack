@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  使用Object.create（null）创建一个不从Object.prototype继承属性的空集线器对象。
+  对于发射，请根据事件参数解析处理程序数组，然后通过将数据作为参数传递来使用Array.prototype.forEach()运行每个处理程序数组。
+  对于on，如果事件还不存在，请为事件创建一个数组，然后使用Array.prototype.push()添加处理程序
+  到数组。
+  对于关闭，请使用Array.prototype.findIndex()在事件数组中找到处理程序的索引，并使用Array.prototype.splice()将其删除。
+  <script>
+    const createEventHub = () => ({
+      hub: Object.create(null),
+      emit(event, data) {
+        ;(this.hub[event] || []).forEach((handler) => handler(data))
+      },
+      on(event, handler) {
+        if (!this.hub[event]) this.hub[event] = []
+        this.hub[event].push(handler)
+      },
+      off(event, handler) {
+        const i = (this.hub[event] || []).findIndex((h) => h === handler)
+        if (i > -1) this.hub[event].splice(i, 1)
+        if (this.hub[event].length === 0) delete this.hub[event]
+      },
+    })
+
+    const handler = (data) => console.log(data)
+    const hub = createEventHub()
+    let increment = 0
+
+    // Subscribe: listen for different types of events
+    hub.on("message", handler)
+    hub.on("message", () => console.log("Message event fired"))
+    hub.on("increment", () => increment++)
+
+    // Publish: emit events to invoke all handlers subscribed to them, passing the data to them as an argument
+    hub.emit("message", "hello world") // logs 'hello world' and 'Message event fired'
+    hub.emit("message", { hello: "world" }) // logs the object and 'Message event fired'
+    hub.emit("increment") // `increment` variable is now 1
+
+    // Unsubscribe: stop a specific handler from listening to the 'message' event
+    hub.off("message", handler)
+  </script>
+</html>
