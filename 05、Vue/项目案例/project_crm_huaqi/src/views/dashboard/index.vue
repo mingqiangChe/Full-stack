@@ -230,7 +230,7 @@ export default {
           }
         }
         console.log(this.dataFive)
-        this.initPieChart();
+        this.initPieChat();
         this.initBinChart();
       }).catch(error=>{
         console.log(error)
