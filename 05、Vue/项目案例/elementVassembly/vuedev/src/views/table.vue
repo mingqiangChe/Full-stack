@@ -3,7 +3,7 @@
   <div class="table">
     <div class="tables">
       <div class="main">
-        <!-- <div class="radio">
+        <div class="radio">
           <el-radio
             :indeterminate="isIndeterminate"
             v-model="checkAll"
@@ -11,10 +11,21 @@
             :label="true"
             >是</el-radio
           >
-          <el-radio v-model="radio" :label="false">否</el-radio>
-        </div> -->
+          <el-radio
+            v-model="checkAll"
+            :indeterminate="isIndeterminate"
+            @change="selAll()"
+            :label="false"
+            >否</el-radio
+          >
+        </div>
         <div class="picker">
-          <el-date-picker v-model="time" type="date" placeholder="选择日期">
+          <el-date-picker
+            v-model="time"
+            @change="changeTime"
+            type="date"
+            placeholder="选择日期"
+          >
           </el-date-picker>
         </div>
       </div>
@@ -65,12 +76,13 @@
         </el-table>
       </div>
       <!-- //表格外部的全选按钮 -->
-      <el-checkbox
+      <!-- <el-checkbox
+        style="display: block !important"
         label="全选"
         :indeterminate="isIndeterminate"
         v-model="checkAll"
         @change="selAll()"
-      ></el-checkbox>
+      ></el-checkbox> -->
     </div>
     <h1 style="color: red">table</h1>
   </div>
@@ -119,9 +131,9 @@ export default {
   computed: {},
   //监控data中的数据变化
   watch: {
-    radio(newValue, oldValue) {
+    checkAll(newValue, oldValue) {
       if (newValue) {
-        this.handleSelectionChange()
+        this.$message("现在可以批量处理时间了")
       }
     },
   },
@@ -141,7 +153,6 @@ export default {
     },
     //表格内checkbox触发的全选按钮状态变化
     selRow(val) {
-      alert("2")
       console.log(val)
       if (val.length < this.tabledata.length && val.length > 0) {
         this.isIndeterminate = true
@@ -151,6 +162,22 @@ export default {
       } else if (val.length == 0) {
         this.isIndeterminate = false
         this.checkAll = false
+      }
+    },
+    changeTime(val) {
+      if (this.checkAll) {
+        // console.log(this)
+        //处理时间格式  暂时写死
+        val = "2013-04-30"
+        // console.log(val, "val")
+        // console.log(this.time, "time")
+        // console.log(this.$refs.multipleTable.data)
+
+        for (let i = 0; i < this.$refs.multipleTable.data.length; i++) {
+          this.$refs.multipleTable.data[i].time = val
+          // console.log(this, "for this")
+        }
+        console.log(this.$refs.multipleTable.data)
       }
     },
   },
@@ -167,7 +194,7 @@ export default {
   activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .main {
   display: flex;
   // flex-direction: column;
@@ -176,5 +203,17 @@ export default {
 }
 .el-table__header-wrapper .el-checkbox {
   display: none !important;
+}
+.el-checkbox {
+  color: #606266;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: none;
+  margin-right: 30px;
 }
 </style>
