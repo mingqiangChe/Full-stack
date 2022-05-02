@@ -14,8 +14,6 @@ const map = (array, fn) => {
 // arr = map(arr, v => v * v)
 // console.log(arr)
 
-
-
 // every
 const every = (array, fn) => {
   let result = true
@@ -27,7 +25,6 @@ const every = (array, fn) => {
   }
   return result
 }
-
 
 // 测试
 // let arr = [9, 12, 14]
@@ -48,5 +45,5 @@ const some = (array, fn) => {
 
 // 测试
 let arr = [1, 3, 5, 9]
-let r = some(arr, v => v % 2 === 0)
+let r = some(arr, (v) => v % 2 === 0)
 console.log(r)
