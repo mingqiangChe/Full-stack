@@ -3833,7 +3833,7 @@ Vue.directive('color', function (el,binding) {
   * 3 .示例代码：   this.$store.state可以获取
 
 
-#### actions
+#### actions。 动作
 
 * 1 .值为一个对象，包含多个响应用户动作的回调函数
 
@@ -3847,21 +3847,69 @@ Vue.directive('color', function (el,binding) {
   * 包含多个对应事件回调函数的对象
   * 通过使用函数中的第一个参数commit来调用对应的mutation来间接实现更新
   * 第二个形参是state，第三个形参是dispatch传入的data
+  
+* 添加业务逻辑，类似于controller
 
-#### mutations
+```js
+export default new Vuex.Store({
+ actions: {
+	 add({ commit }) {
+ 		setTimeout(() => {
+		 commit('add')
+		 }, 1000);
+	 }
+	 }
+})
+```
 
-* 1 .值是一个对象，包含多个直接更新state的方法
+
+
+#### mutations   状态变更
+
+* 1 .值是一个对象，包含多个**直接更新state**的方法。注意：不能存放data 使用compouted方法
 * 2 .谁能调用mutations中的方法？如何调用？在action中使用： commit('对应的mutations方法名') 触发
 * 3 .mutations中方法的特点：不能写异步代码、只能单纯的操作state
   * 包含多个直接更新状态的函数的对象
   * 第一个形参是state，第二个形参是commit传入的data
 
-#### getters
+```js
+export default new Vuex.Store({
+ state:{
+   count:1
+ }
+ mutations: {
+ 		add(state,info) {
+ 			state.count=info
+			 }
+ 		}
+})
+
+
+vue
+
+this.$store.commit('count',1)
+```
+
+
+
+#### getters   派生状态
 
 * 1 .值为一个对象，包含多个用于返回数据的函数
 * 2 .如何使用？—— $store.getters.xxx
-  * 包含多个getter计算属性函数的对象
+  * 包含多个getter**计算属性**函数的对象
   * 函数中的第一个形参是state
+
+```
+export default new Vuex.Store({
+ getters: {
+ doubleCounter(state) { // 计算剩余数量
+ return state.counter * 2;
+ }
+ }
+})
+```
+
+
 
 
 #### modules
@@ -3869,6 +3917,8 @@ Vue.directive('color', function (el,binding) {
 * 1 .包含多个module
 * 2 .**一个module是一个store的配置对象**
 * 3 .与一个组件（包含有共享数据）对应
+
+就是将文件放module文件夹里 然后在index.js里引入调用
 
 
 
@@ -3887,6 +3937,114 @@ new Vue({
     store
 }
 ```
+
+### Vuex原理解析
+
+**任务分析**
+
+- 实现插件
+
+实现Store类
+
+维持⼀个响应式状态state
+
+实现commit()
+
+实现dispatch()
+
+getters
+
+挂载$store
+
+
+
+初始化：Store声明、install实现，kvuex.js：
+
+```js
+let Vue;
+class Store {
+ constructor(options = {}) {
+ this._vm = new Vue({
+ data: {
+ $$state:options.state
+ }
+ });
+ }
+ get state() { 
+ return this._vm._data.$$state
+ }
+ set state(v) {
+ console.error('please use replaceState to reset state');
+ }
+}
+function install(_Vue) {
+ Vue = _Vue;
+ 
+ Vue.mixin({
+ beforeCreate() {
+ if (this.$options.store) {
+ Vue.prototype.$store = this.$options.store;
+ }
+ }
+ });
+}
+export default { Store, install };
+```
+
+实现commit：根据⽤户传⼊type获取并执⾏对应mutation
+
+```js
+class Store {
+ constructor(options = {}) {
+ // 保存⽤户配置的mutations选项
+ this._mutations = options.mutations || {}
+ }
+ commit(type, payload) {
+ // 获取type对应的mutation
+ const entry = this._mutations[type]
+ if (!entry) {
+ console.error(`unknown mutation type: ${type}`);
+ return
+ }
+ // 指定上下⽂为Store实例
+ // 传递state给mutation
+ entry(this.state, payload);
+ }
+}
+```
+
+实现actions：根据⽤户传⼊type获取并执⾏对应action
+
+```js
+class Store {
+ constructor(options = {}) {
+ // 保存⽤户编写的actions选项
+ this._actions = options.actions || {}
+ // 绑定commit上下⽂否则action中调⽤commit时可能出问题!!
+ // 同时也把action绑了，因为action可以互调
+ const store = this
+ const {commit, action} = store
+ this.commit = function boundCommit(type, payload) {
+ commit.call(store, type, payload)
+ }
+ this.action = function boundAction(type, payload) {
+ return action.call(store, type, payload)
+ }
+ }
+ dispatch(type, payload) {
+ // 获取⽤户编写的type对应的action
+ const entry = this._actions[type]
+  if (!entry) {
+ console.error(`unknown action type: ${type}`);
+ return
+ }
+ // 异步结果处理常常需要返回Promise
+ return entry(this, payload);
+ }
+}
+```
+
+
 
 ## 路由
 
