@@ -1595,6 +1595,8 @@ key的值必须具有唯一性（即: key的值不能重复)
 
 **要用的属性不存在，要通过已有属性计算得来。**
 
+可以用作data中数据处理
+
 ###  2.原理：
 
 底层借助了Objcet.defineproperty方法提供的getter和setter。
@@ -4485,6 +4487,181 @@ export default {
 ② $router.forward()
 
 ⚫ 在历史记录中，前进到下一个页面
+
+
+
+### vue-router源码实现
+
+单⻚⾯应⽤程序中，url发⽣变化时候，不能刷新，显示对应视图内容
+
+#### **需求分析**
+
+- spa ⻚⾯不能刷新
+
+​		hash #/about
+
+​		History api /about
+
+- 根据url显示对应的内容
+
+​		router-view
+
+​		数据响应式：current变量持有url地址，⼀旦变化，动态重新执⾏render
+
+#### 任务
+
+- 实现⼀个插件
+
+实现VueRouter类
+
+​		处理路由选项
+
+​		监控url变化，hashchange
+
+​		响应这个变化
+
+实现install⽅法
+
+​		$router注册
+
+​		两个全局组件
+
+**实现⼀个插件：创建****VueRouter****类和****install****⽅法**
+
+创建kvue-router.js
+
+```js
+let Vue; // 引⽤构造函数，VueRouter中要使⽤
+// 保存选项
+class VueRouter {
+ constructor(options) {
+ this.$options = options;
+ }
+}
+// 插件：实现install⽅法，注册$router
+VueRouter.install = function(_Vue) {
+ // 引⽤构造函数，VueRouter中要使⽤
+ Vue = _Vue;
+ 
+ // 任务1：挂载$router
+ Vue.mixin({
+ beforeCreate() {
+ // 只有根组件拥有router选项
+ if (this.$options.router) {
+ // vm.$router
+ Vue.prototype.$router = this.$options.router;
+ }
+ }
+ });
+ 
+ // 任务2：实现两个全局组件router-link和router-view
+ Vue.component('router-link', Link)
+ Vue.component('router-view', View)
+};
+export default VueRouter;
+```
+
+**创建**router-view**和**router-link**
+
+创建krouter-link.js
+
+```js
+export default {
+ props: {
+ to: String,
+ required: true
+  },
+ render(h) {
+ // return <a href={'#'+this.to}>{this.$slots.default}</a>;
+ return h('a', {
+ attrs: {
+ href: '#' + this.to
+ }
+ }, [
+ this.$slots.default
+ ])
+ }
+}
+```
+
+创建krouter-view.js
+
+```js
+export default {
+ render(h) {
+ // 暂时先不渲染任何内容
+ return h(null);
+ }
+}
+```
+
+**监控**url**变化**
+
+定义响应式的current属性，监听hashchange事件
+
+```js
+class VueRouter {
+ constructor(options) { 
+ // 定义响应式的属性current
+ const initial = window.location.hash.slice(1) || '/'
+ Vue.util.defineReactive(this, 'current', initial)
+ // 监听hashchange事件
+ window.addEventListener('hashchange', this.onHashChange.bind(this))
+ window.addEventListener('load', this.onHashChange.bind(this))
+ }
+ 
+ onHashChange() { 
+ this.current = window.location.hash.slice(1)
+ }
+}
+```
+
+动态获取对应组件，krouter-view.js
+
+```js
+export default {
+ render(h) {
+ // 动态获取对应组件
+ let component = null;
+ const route = this.$router.$options.routes.find(route => route.path ===
+this.$router.current)
+ if(route) component = route.component
+ return h(component);
+ }
+}
+```
+
+**提前处理路由表**
+
+提前处理路由表避免每次都循环
+
+```js
+class VueRouter {
+ constructor(options) {
+ // 缓存path和route映射关系
+ this.routeMap = {}
+ this.$options.routes.forEach(route => {
+ this.routeMap[route.path] = route
+ });
+ }
+}
+```
+
+使⽤，krouter-view.js
+
+```js
+export default {
+ render(h) {
+ const {routeMap, current} = this.$router
+ const component = routeMap[current] ? routeMap[current].component : null;
+ return h(component);
+ }
+}
+```
+
+
+
+
 
 ## 导航守卫
 
