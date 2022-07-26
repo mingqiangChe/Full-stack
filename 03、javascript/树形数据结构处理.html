@@ -110,6 +110,51 @@
           ],
         },
       ]
+      var data = [
+        {
+          menu_id: "1",
+          title: "根节点",
+          parent_id: "0",
+          service_id: "0",
+          service_typel: "1",
+          service_name: "",
+          icon: "0",
+          children: [
+            {
+              menu_id: "3",
+              title: "开发",
+              parent_id: "1",
+              service_id: "1",
+              service_typel: "1",
+              service_name: "",
+              icon: "0",
+              children: [
+                {
+                  menu_id: "4",
+                  title: "移动服务",
+                  parent_id: "3",
+                  service_id: "1",
+                  service_typel: "1",
+                  service_name: "",
+                  icon: "0",
+                  children: [
+                    {
+                      menu_id: "5",
+                      title: "系统能力",
+                      parent_id: "4",
+                      service_id: "1",
+                      service_typel: "1",
+                      service_name: "",
+                      icon: "0",
+                      url: "www.baidu.com",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ]
     </script>
     <h1>递归查找当前节点</h1>
     <script>
@@ -151,7 +196,6 @@
       const idArr = getChildId(treeData, [])
       console.log("获取当前节点及以下的所有节点id", idArr)
     </script>
-
     <h1>递归判断所有后代节点中有无此节点中的一个</h1>
     <script>
       function judgeChildrenHad(data, keys) {
@@ -236,50 +280,62 @@
     </script>
     <h1>for 循环遍历</h1>
     <script>
-      var data = [
-        {
-          menu_id: "1",
-          title: "根节点",
-          parent_id: "0",
-          service_id: "0",
-          service_typel: "1",
-          service_name: "",
-          icon: "0",
-          children: [
-            {
-              menu_id: "3",
-              title: "开发",
-              parent_id: "1",
-              service_id: "1",
-              service_typel: "1",
-              service_name: "",
-              icon: "0",
-              children: [
-                {
-                  menu_id: "4",
-                  title: "移动服务",
-                  parent_id: "3",
-                  service_id: "1",
-                  service_typel: "1",
-                  service_name: "",
-                  icon: "0",
-                  children: [
-                    {
-                      menu_id: "5",
-                      title: "系统能力",
-                      parent_id: "4",
-                      service_id: "1",
-                      service_typel: "1",
-                      service_name: "",
-                      icon: "0",
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ]
+      // var datas = data.filter((item) => item.parent_id == 0)
+      // // connullsole.log(datas[0].children, "data")
+      // let b = putKey(datas, [])
+      // function putKey(data, arrList) {
+      //   console.log(data)
+      //   data.forEach((item) => {
+      //     let obj = {
+      //       id: item.menu_id,
+      //       level: +item.parent_id++,
+      //       jump_link: item.url ? item.url : "",
+      //       title: item.title,
+      //     }
+      //     arrList.push(obj)
+      //     console.log(arrList)
+      //     if (item.children?.length > 0) {
+      //       item.children.map((item) => {
+      //         children: putKey(item, arrList)
+      //         // putKey(...item, children: arrList, children)
+      //       })
+      //     }
+      //   })
+      //   return arrList
+      // }
+      // console.log(data)
+      // let b = function ass(data) {
+      //   let item = []
+      //   data.map((list, i) => {
+      //     let newData = {}
+      //     newData.id = list.menu_id
+      //     newData.level = +list.parent_id++
+      //     newData.jump_link = list.url ? list.url : ""
+      //     newData.children = list.children ? ass(children) : [] //如果还有子集，就再次调用自己
+      //     item.push(newData)
+      //   })
+      //   return item
+      // }
+      // console.log(b)
+      getTreeData(data)
+      function getTreeData(data) {
+        // 第二种 修改涉及级联选择器 最后一个空白的情况
+        // 循环遍历json数据
+        for (var i = 0; i < data.length; i++) {
+          data[i]["id"] = data[i].menu_id
+          data[i]["title"] = data[i].title
+          data[i]["level"] = +data[i].parent_id++
+          data[i]["jump_link"] = data[i].url ? data[i].url : ""
+          // delete data[i].menu_id
+          // delete data[i].title
+          if (data[i].children?.length > 0) {
+            // children若不为空数组，则继续 递归调用 本方法
+            this.getTreeData(data[i].children)
+          }
+        }
+        return data
+      }
+      console.log(data)
     </script>
   </body>
 </html>
