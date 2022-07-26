@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>树形数据结构处理</title>
+  </head>
+  <body>
+    <script>
+      // 用于测试的树形数据
+      const treeData = [
+        {
+          id: "1",
+          name: "测试1",
+          pId: "0",
+          children: [
+            {
+              id: "11",
+              name: "测试11",
+              pId: "1",
+              children: [
+                {
+                  id: "111",
+                  name: "测试111",
+                  pId: "11",
+                  children: [
+                    {
+                      id: "1111",
+                      name: "测试1111",
+                      pId: "111",
+                    },
+                    {
+                      id: "1112",
+                      name: "测试1112",
+                      pId: "111",
+                    },
+                  ],
+                },
+                {
+                  id: "112",
+                  name: "测试112",
+                  pId: "11",
+                  children: [
+                    {
+                      id: "1121",
+                      name: "测试1121",
+                      pId: "112",
+                    },
+                  ],
+                },
+                {
+                  id: "113",
+                  name: "测试113",
+                  pId: "11",
+                },
+              ],
+            },
+            {
+              id: "12",
+              name: "测试12",
+              pId: "1",
+              children: [
+                {
+                  id: "121",
+                  name: "测试121",
+                  pId: "12",
+                },
+              ],
+            },
+            {
+              id: "13",
+              name: "测试13",
+              pId: "1",
+            },
+            {
+              id: "14",
+              name: "测试14",
+              pId: "1",
+            },
+          ],
+        },
+        {
+          id: "2",
+          name: "测试2",
+          pId: "0",
+          children: [
+            {
+              id: "21",
+              name: "测试21",
+              pId: "2",
+              children: [
+                {
+                  id: "211",
+                  name: "测试211",
+                  pId: "21",
+                },
+                {
+                  id: "212",
+                  name: "测试212",
+                  pId: "21",
+                },
+              ],
+            },
+            {
+              id: "22",
+              name: "测试22",
+              pId: "2",
+            },
+          ],
+        },
+      ]
+    </script>
+    <h1>递归查找当前节点</h1>
+    <script>
+      function findRecursion(data, key, callback) {
+        data.forEach((item, index, arr) => {
+          if (item.id === key) {
+            return callback(item, index, arr)
+          }
+          if (item.children) {
+            return findRecursion(item.children, key, callback)
+          }
+        })
+      }
+      findRecursion(treeData, "1112", (item, index, arr) => {
+        console.log(
+          "递归查找当前节点：",
+          item,
+          "item",
+          index,
+          "index",
+          arr,
+          "arr"
+        )
+      })
+    </script>
+    <h1>递归获取当前节点及以下的所有节点id</h1>
+    <script>
+      function getChildId(data, idArr) {
+        data.forEach((item) => {
+          if (item.id) {
+            idArr.push(item.id)
+          }
+          if (item.children) {
+            getChildId(item.children, idArr)
+          }
+        })
+        return idArr
+      }
+      const idArr = getChildId(treeData, [])
+      console.log("获取当前节点及以下的所有节点id", idArr)
+    </script>
+
+    <h1>递归判断所有后代节点中有无此节点中的一个</h1>
+    <script>
+      function judgeChildrenHad(data, keys) {
+        let mark = false
+        const fn = (data, keys) => {
+          for (let i = 0; i < data.length; i++) {
+            if (keys.includes(data[i].id)) {
+              mark = true
+            } else if (data[i].children?.length) {
+              fn(data[i].children, keys)
+            }
+          }
+        }
+        fn(data, keys)
+        return mark
+      }
+      const mark1 = judgeChildrenHad(treeData, ["1112"])
+      console.log("有无节点", mark1)
+    </script>
+    <h1>递归树形数据扁平化</h1>
+    <script type="text/javascript">
+      function treeToFlat(data) {
+        const result = []
+        data.forEach((item) => {
+          const obj = {
+            name: item.name,
+            id: item.id,
+            pId: item.pId,
+          }
+          result.push(obj)
+          if (item.children?.length) {
+            result.push(...treeToFlat(item.children, item.id))
+          }
+        })
+        return result
+      }
+      const res1 = treeToFlat(treeData)
+      console.log("树形数据扁平化", res1)
+    </script>
+    <h1>扁平化数据转树形数据结构</h1>
+    <script>
+      function flatToTree(data) {
+        const result = []
+        const itemMap = {}
+        for (const item of data) {
+          const id = item.id
+          const pId = item.pId
+          if (itemMap[id]) {
+            itemMap[id] = {
+              ...itemMap[id],
+              ...item,
+            }
+          } else {
+            itemMap[id] = { ...item }
+          }
+          const treeItem = itemMap[id]
+          if (!pId || pId === "0") {
+            result.push(treeItem)
+          } else {
+            if (!itemMap[pId]) {
+              itemMap[pId] = {
+                children: [],
+              }
+            }
+            if (!itemMap[pId].children) {
+              itemMap[pId].children = []
+            }
+            itemMap[pId].children.push(treeItem)
+          }
+        }
+        return result
+      }
+      const r = JSON.parse(JSON.stringify(res1))
+      // r.unshift({
+      //   id: "999",
+      //   name: "yyyy",
+      //   pId: "1",
+      // })
+
+      const res2 = flatToTree(r)
+      console.log("扁平化数据转树形数据结构", res2)
+    </script>
+    <h1>for 循环遍历</h1>
+    <script>
+      var data = [
+        {
+          menu_id: "1",
+          title: "根节点",
+          parent_id: "0",
+          service_id: "0",
+          service_typel: "1",
+          service_name: "",
+          icon: "0",
+          children: [
+            {
+              menu_id: "3",
+              title: "开发",
+              parent_id: "1",
+              service_id: "1",
+              service_typel: "1",
+              service_name: "",
+              icon: "0",
+              children: [
+                {
+                  menu_id: "4",
+                  title: "移动服务",
+                  parent_id: "3",
+                  service_id: "1",
+                  service_typel: "1",
+                  service_name: "",
+                  icon: "0",
+                  children: [
+                    {
+                      menu_id: "5",
+                      title: "系统能力",
+                      parent_id: "4",
+                      service_id: "1",
+                      service_typel: "1",
+                      service_name: "",
+                      icon: "0",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ]
+    </script>
+  </body>
+</html>
