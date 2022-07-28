@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>对象学习</title>
+  </head>
+  <body>
+    <h1>Object.assign</h1>
+    <p>就是将一个对象没有的对象复制过去，如果已经有的属性就替换</p>
+    <script>
+      const a = {
+        a: 1,
+        b: 2,
+      }
+      const b = {
+        a: 1,
+        b: 3,
+      }
+      console.log(Object.assign(a, b), "======>assign")
+    </script>
+    <h1>Object.create</h1>
+    <p>
+      就是将一个对象（对象里可以有属性 方法）直接以protype原型链方式继承
+      可以直接.访问
+    </p>
+    <script>
+      const c = {
+        prototype: true,
+        run: function () {
+          console.log(`跑起来${this.name}====>create内prototype方法.`)
+        },
+      }
+      const d = Object.create(c)
+      console.log(c.prototype, "======>create")
+      d.run()
+      d.name = "车明强=====》create创建的新对象新添加的属性"
+      d.run()
+    </script>
+    <h1>Object.defineProperties</h1>
+    <p>定义一个新属性或者修改现有属性，并返回该对象</p>
+    <script>
+      const e = { a: 1 }
+      // 新增属性
+      Object.defineProperties(e, {
+        age: {
+          value: 12,
+        },
+      })
+      console.log(e, "defineProperties新增属性")
+      // 修改属性
+      Object.defineProperties(e, {
+        b: {
+          get: function () {
+            return this.a
+          },
+          set: function (data) {
+            // 可以固定死 拦截 防止修改
+            // return this.a ='胡'
+            return (this.a = data)
+          },
+        },
+      })
+      console.log(e.b, "get 内部获取")
+      e.b = "车"
+      console.log(e.b, "set方法修改内部属性")
+    </script>
+    <h1>Object.defineProperty</h1>
+    <p>一样 在对象上定义新属性或修改属性</p>
+    <script>
+      const f = { name: "车明强" }
+      Object.defineProperty(f, "age", {
+        value: 35,
+      })
+      console.log(f, "======>defineProperty新增属性")
+      Object.defineProperty(f, "name", {
+        value: "文强",
+      })
+      console.log(f, "======>defineProperty修改属性")
+    </script>
+  </body>
+</html>

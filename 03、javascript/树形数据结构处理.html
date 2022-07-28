@@ -280,47 +280,11 @@
     </script>
     <h1>for 循环遍历</h1>
     <script>
-      // var datas = data.filter((item) => item.parent_id == 0)
-      // // connullsole.log(datas[0].children, "data")
-      // let b = putKey(datas, [])
-      // function putKey(data, arrList) {
-      //   console.log(data)
-      //   data.forEach((item) => {
-      //     let obj = {
-      //       id: item.menu_id,
-      //       level: +item.parent_id++,
-      //       jump_link: item.url ? item.url : "",
-      //       title: item.title,
-      //     }
-      //     arrList.push(obj)
-      //     console.log(arrList)
-      //     if (item.children?.length > 0) {
-      //       item.children.map((item) => {
-      //         children: putKey(item, arrList)
-      //         // putKey(...item, children: arrList, children)
-      //       })
-      //     }
-      //   })
-      //   return arrList
-      // }
-      // console.log(data)
-      // let b = function ass(data) {
-      //   let item = []
-      //   data.map((list, i) => {
-      //     let newData = {}
-      //     newData.id = list.menu_id
-      //     newData.level = +list.parent_id++
-      //     newData.jump_link = list.url ? list.url : ""
-      //     newData.children = list.children ? ass(children) : [] //如果还有子集，就再次调用自己
-      //     item.push(newData)
-      //   })
-      //   return item
-      // }
-      // console.log(b)
       getTreeData(data)
       function getTreeData(data) {
         // 第二种 修改涉及级联选择器 最后一个空白的情况
         // 循环遍历json数据
+        console.log(data)
         for (var i = 0; i < data.length; i++) {
           data[i]["id"] = data[i].menu_id
           data[i]["title"] = data[i].title
