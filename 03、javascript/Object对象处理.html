@@ -19,6 +19,10 @@
         b: 3,
       }
       console.log(Object.assign(a, b), "======>assign")
+      // a = {
+      //   a: 1,
+      //   b: 3,
+      // }
     </script>
     <h1>Object.create</h1>
     <p>
@@ -30,13 +34,14 @@
         prototype: true,
         run: function () {
           console.log(`跑起来${this.name}====>create内prototype方法.`)
-        },
+        },®
       }
       const d = Object.create(c)
-      console.log(c.prototype, "======>create")
-      d.run()
+      console.log(c.prototype, "======>create") //true
+      d.run() //跑起来undefrined
       d.name = "车明强=====》create创建的新对象新添加的属性"
-      d.run()
+      console.log(c) //上述只是给a对象添加属性
+      d.run() //跑起来车明强
     </script>
     <h1>Object.defineProperties</h1>
     <p>定义一个新属性或者修改现有属性，并返回该对象</p>
@@ -49,6 +54,7 @@
         },
       })
       console.log(e, "defineProperties新增属性")
+      //{a:1,age:12}
       // 修改属性
       Object.defineProperties(e, {
         b: {
@@ -63,12 +69,15 @@
         },
       })
       console.log(e.b, "get 内部获取")
+      //1
       e.b = "车"
       console.log(e.b, "set方法修改内部属性")
+      //车
     </script>
     <h1>Object.defineProperty</h1>
     <p>一样 在对象上定义新属性或修改属性</p>
     <script>
+      //属性必须是字符串形式
       const f = { name: "车明强" }
       Object.defineProperty(f, "age", {
         value: 35,
@@ -78,6 +87,35 @@
         value: "文强",
       })
       console.log(f, "======>defineProperty修改属性")
+    </script>
+    <h1>Object.entries</h1>
+    <p>枚举key value 常常与循环遍历一起使用 🌟不改变原对象，直接返回新对象</p>
+    <script>
+      // 基本方法
+      const g = {
+        name: "车明强",
+        age: 25,
+      }
+      console.log(Object.entries(g), "====>entries 直接返回新对象")
+      // [
+      // ['name':'车明强'],
+      // ['age',25]
+      // ]
+      for (const [key, value] of Object.entries(g)) {
+        console.log(
+          `${key}:'${value}`,
+          "这里可以拼接 也可以用来与其他值比较做判断"
+        )
+      }
+    </script>
+    <h1>Object.freeze</h1>
+    <p>冻结一个对象，不能修改或添加属性</p>
+    <script>
+      const h = { age: 18 }
+      Object.freeze(h)
+      h.age = 20
+      console.log(h, "====>查看freeze是否成功阻止18修改为20")
+      //18
     </script>
   </body>
 </html>
