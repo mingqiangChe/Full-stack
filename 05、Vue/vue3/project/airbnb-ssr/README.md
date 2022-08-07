@@ -1,16 +1,22 @@
 # Vue 3 + TypeScript + Vite
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+支持国际化
+支持 seo 优化
+支持服务端渲染
+三方框架选择 element-plus
+技术栈 vue3 ts ssr
 
-## Recommended IDE Setup
+## 脚手架
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+基础配置 vue-router axios
+项目特定配置 element-plus eslint sass vuex indexedDB(本地处理数据)
 
-## Type Support For `.vue` Imports in TS
+## 目录结构
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
-
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
-
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+router 路由相关配置
+store vuex 状态管理
+utils 放置工具类
+api 放置接口
+indexedDB 放置数据库相关配置
+language 国际化语言包
+entry-client.ts、entry-server.js 服务端渲染相关配置
