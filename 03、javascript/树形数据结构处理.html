@@ -274,7 +274,6 @@
       //   name: "yyyy",
       //   pId: "1",
       // })
-
       const res2 = flatToTree(r)
       console.log("扁平化数据转树形数据结构", res2)
     </script>
@@ -284,7 +283,6 @@
       function getTreeData(data) {
         // 第二种 修改涉及级联选择器 最后一个空白的情况
         // 循环遍历json数据
-        console.log(data)
         for (var i = 0; i < data.length; i++) {
           data[i]["id"] = data[i].menu_id
           data[i]["title"] = data[i].title
