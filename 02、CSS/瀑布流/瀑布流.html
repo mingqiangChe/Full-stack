@@ -7,12 +7,36 @@
     <title>瀑布流</title>
     <style>
       #txtBlock {
+        width: 1000px;
+        margin: 0 auto;
+        height: 400px;
+        overflow: auto;
         column-count: 3;
         column-gap: 0px;
       }
       #txtBlock .item {
         width: 250px;
         break-inside: avoid;
+      }
+      #imgBlock {
+        width: 1000px;
+        margin: 0 auto;
+        column-count: 3;
+        column-gap: 0px;
+      }
+      #imgBlock .item {
+        width: 250px;
+        position: relative;
+        break-inside: avoid;
+      }
+      #imgBlock .item p {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
+      #imgBlock .item img {
+        width: 100%;
+        height: auto;
       }
     </style>
   </head>
@@ -33,9 +57,7 @@
       </div>
       <div class="item">
         <h1>03 文字</h1>
-        <p>
-          用户目的性不强的时候，瀑布流是更好的选择。如果用户有特定需要查找的信息，分页查找定位更方便，而当目的性较弱的时候，瀑布流可以增加用户停留的时间和意想不到的收获。
-        </p>
+        <p>用户目的户停留的时间和意想不到的收获。</p>
       </div>
       <div class="item">
         <h1>04 文字</h1>
@@ -43,17 +65,64 @@
           用户目的性不强的时候，瀑布流是更好的选择。如果用户有特定需要查找的信息，分页查找定位更方便，而当目的性较弱的时候，瀑布流可以增加用户停留的时间和意想不到的收获。
         </p>
       </div>
+    </div>
+    <h1>图片</h1>
+    <div id="imgBlock">
       <div class="item">
-        <h1>05 文字</h1>
-        <p>
-          用户目的性不强的时候，瀑布流是更好的选择。如果用户有特定需要查找的信息，分页查找定位更方便，而当目的性较弱的时候，瀑布流可以增加用户停留的时间和意想不到的收获。
-        </p>
+        <p>1</p>
+        <img
+          src="https://img1.baidu.com/it/u=4257154170,1697789946&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+          alt=""
+        />
       </div>
       <div class="item">
-        <h1>06 文字</h1>
-        <p>
-          用户目的性不强的时候，瀑布流是更好的选择。如果用户有特定需要查找的信息，分页查找定位更方便，而当目的性较弱的时候，瀑布流可以增加用户停留的时间和意想不到的收获。
-        </p>
+        <p>2</p>
+        <img
+          src="https://img0.baidu.com/it/u=3720733928,2624851617&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400"
+          alt=""
+        />
+      </div>
+      <div class="item">
+        <p>3</p>
+        <img
+          src="https://img2.baidu.com/it/u=2417716535,3029339557&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=750"
+          alt=""
+        />
+      </div>
+      <div class="item">
+        <p>4</p>
+        <img
+          src="https://img0.baidu.com/it/u=2090177032,1522387162&fm=253&fmt=auto&app=138&f=JPEG?w=501&h=500"
+          alt=""
+        />
+      </div>
+      <div class="item">
+        <p>5</p>
+        <img
+          src="https://img0.baidu.com/it/u=4057181399,1783174299&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+          alt=""
+        />
+      </div>
+      <div class="item">
+        <p>6</p>
+        <img
+          src="https://img1.baidu.com/it/u=4048963410,957103617&fm=253&fmt=auto&app=138&f=JPEG?w=236&h=236"
+          alt=""
+        />
+      </div>
+      <div class="item">
+        <p>7</p>
+        <img
+          src="https://img2.baidu.com/it/u=854625283,300536469&fm=253&fmt=auto&app=138&f=JPEG?w=440&h=440"
+          alt=""
+        />
+      </div>
+      <div class="item">
+        <p>8</p>
+        <img
+          src="https://img0.baidu.com/it/u=1241726144,709920511&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+          alt=""
+        />
       </div>
     </div>
   </body>
