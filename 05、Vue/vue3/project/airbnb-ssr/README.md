@@ -14,6 +14,10 @@
 ## 目录结构
 
 router 路由相关配置
+
+npm install vue-rou
+ter@next
+
 store vuex 状态管理
 utils 放置工具类
 api 放置接口

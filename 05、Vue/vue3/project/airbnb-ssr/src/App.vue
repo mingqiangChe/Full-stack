@@ -1,7 +1,7 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue"
+import { useRouter } from "vue-router"
+const router = useRouter()
 </script>
 
 <template>
@@ -14,6 +14,9 @@ import HelloWorld from './components/HelloWorld.vue'
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
+  <button @click="() => router.push({ path: '/home' })">首页</button>
+  <button @click="() => router.push({ path: '/mine' })">个人中心</button>
+  <router-view></router-view>
 </template>
 
 <style scoped>
