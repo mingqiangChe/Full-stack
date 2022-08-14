@@ -12,6 +12,7 @@
 
       //NaN非数字类型  数据类型number
       console.log(5 - "a"); //NaN
+
       console.log(typeof NaN);
 
       NaN === NaN  //false

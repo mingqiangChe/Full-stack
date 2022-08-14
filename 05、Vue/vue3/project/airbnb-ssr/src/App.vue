@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue"
 import { useRouter } from "vue-router"
 const router = useRouter()
 </script>
@@ -13,13 +12,13 @@ const router = useRouter()
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <HelloWorld msg="Vite + Vue" />
-  <button @click="() => router.push({ path: '/home' })">首页</button>
-  <button @click="() => router.push({ path: '/mine' })">个人中心</button>
+  <button>ss</button>
+  <el-button>我靠</el-button>
   <router-view></router-view>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "@/assets/scss/home/index.scss";
 .logo {
   height: 6em;
   padding: 1.5em;
