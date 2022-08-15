@@ -1,24 +1,17 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router"
-const router = useRouter()
+// import { useRouter } from "vue-router"
+// const router = useRouter()
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div id="app">
+    <router-view></router-view>
   </div>
-  <button>ss</button>
-  <el-button>我靠</el-button>
-  <router-view></router-view>
 </template>
 
 <style scoped lang="scss">
-@import "@/assets/scss/home/index.scss";
+// @import "@/assets/scss/home/index.scss";
+// import router from './router/index'
 .logo {
   height: 6em;
   padding: 1.5em;
