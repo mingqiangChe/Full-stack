@@ -22,9 +22,9 @@
       //  Infinity  无穷
 ```
 
-### boolean: 
+### boolean:   判断❤️
 
-​				<u>除了underfined null false 0 NaN “” ‘’为false，其余为true</u>
+​				<u>🌟除了underfined null false 0 NaN “” ‘’为false，其余为true</u>
 
 ### undefined:   
 
@@ -988,4 +988,26 @@ console.log(student)
 * 不能跨域加载js
 * worker内代码不能操作dom
 * 不是每个浏览器都支持
+
+# 细节
+
+在循环里return false时就是整个方法直接停止 如果是break是当前条件停止
+
+map使用映射方式 每次都会返回新数组。保留旧数组状态  sort会改变原数组所以需要使用map
+
+Const 不可修改 如果定义对象是个复杂数据类型的话 里面可以随意添加数据
+
+写在方法体的prototypt定义方法 在这个方法体使用这个方法需要经过.protype.方法名 调用 或者重定义方法通过new构造实例方法 直接调用
+
+
+
+
+
+
+
+
+
+
+
+
 

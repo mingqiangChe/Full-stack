@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body>
+  <section id="wrap">
+    <h2 class="title">百度音乐榜单</h2>
+    <ul id="list">
+      <li>
+        <input type="checkbox" class="check" />
+        <span>第一条信息</span>
+        <a href="javascript:;" class="collect">收藏</a>
+        <a href="javascript:;" class="cancelCollect">取消收藏</a>
+        <a href="javascript:;" class="remove">删除</a>
+      </li>
+
+    </ul>
+    <footer class="footer">
+      <label><input type="checkbox" id="checkAll" />全选/全不选</label>
+      <a href="javascript:;" id="remove">删除</a>
+      <input type="text" id="newInfo" />
+      <a href="javascript:;" id="add">添加</a>
+    </footer>
+  </section>
+  <script>
+    {
+      let data = [
+        {
+          id: 1,
+          title: "残酷月光 - 费启鸣",
+          checked: false,
+          collect: true
+        }, {
+          id: 2,
+          title: "兄弟 - 艾热",
+          checked: true,
+          collect: false
+        }, {
+          id: 3,
+          title: "毕生 - 夏增祥",
+          checked: true,
+          collect: true
+        }, {
+          id:4,
+          title: "公子向北去 - 李春花",
+          checked: false,
+          collect: false
+        }, {
+          id: 5,
+          title: "战场 - 沙漠五子",
+          checked: true,
+          collect: false //是否收藏 true 收藏 false 没有收藏
+        }
+      ];
+      // 数据驱动，数据优先；
+
+      function renderData(data) {
+        document.querySelector("#list").innerHTML = "";
+        data.forEach(item => {
+          let li = document.createElement("li");
+          li.innerHTML = `<input type="checkbox" class="check" ${item.checked ? 'checked' : ''} />
+        <span>${item.title}</span>
+        ${item.collect ? '<a href="javascript:;" class="cancelCollect">取消收藏</a>' : '<a href="javascript:;" class="collect">收藏</a>'}
+        <a href="javascript:;" class="remove">删除</a>`;
+          document.querySelector("#list").appendChild(li);
+        })
+        addEvent();
+      }
+      renderData(data);
+
+
+      function addEvent() {
+        let lis = document.querySelectorAll("#list li");
+        // console.log(lis);
+        [...lis].forEach((li, key) => {
+          // li.querySelector("input").onclick = function(){
+          //   console.log(111);
+          // }
+          li.onclick = function (e) {
+            // console.log(e.target.className);
+            // if(e.target.className==="check"){
+            //   console.log("点击了checkbox");s
+            // }else
+            switch (e.target.className) {
+              case "check":
+                console.log("点击了checkbox");
+                // console.log(e.target.checked);
+                // 改变原本数据
+                data[key].checked = e.target.checked;
+                break;
+              case 'collect':
+                console.log("点击了收藏");
+                data[key].collect = true;
+                break;
+              case 'cancelCollect':
+                console.log("点击了取消收藏");
+                data[key].collect = false;
+                break;
+              case 'remove':
+                console.log("点击了删除");
+                data.splice(key, 1);
+                break;
+            }
+            console.log(data);
+            // 渲染视图
+            renderData(data);
+          }
+
+        })
+      }
+
+      // 全选；
+      document.querySelector("#checkAll").onclick = function(){
+        console.log(this.checked);
+        data.forEach(item=>item.checked=this.checked);
+        // console.log(data);
+        renderData(data);
+      }
+      // 删除
+      document.querySelector("#remove").onclick = function(){
+          // 删除勾选的数据；
+        let newData = data.filter(item=>!item.checked);
+        // console.log(newData);
+        renderData(newData);
+      }
+      // 作业：完成添加数据；id 不要重复；
+
+      document.querySelector("#add").onclick = function(){
+          let title = document.querySelector("#newInfo").value;
+          let id = data[data.length-1].id +1;
+          let obj = {
+            id,
+            title,
+            checked: false,
+            collect: false //是否收藏 true 收藏 false 没有收藏
+          }
+          data.push(obj);
+          renderData(data);
+      }
+
+      // 持久化保存： 前端离线存储、 后端服务器存储； 
+        // localStorage.set(“data”,JSON.stringify) --->data ---》json存储 ---》获取localStorage.get()--->JSON.parse---》获取数据
+
+      
+
+    }
+  </script>
+</body>
+
+</html>
