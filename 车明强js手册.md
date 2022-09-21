@@ -20,7 +20,17 @@ Var 变量提升。只是提升变量 赋值并不会提升
 
 ![image-20220921230838066](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212308633.png)
 
-### let.
+全局声明（之前不曾知道的知识点）
+
+![image-20220921232521380](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212325450.png)
+
+for循环中的问题 var
+
+![image-20220921233953431](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212339469.png)
+
+连续打印5个5原因是在退出循环时，迭代变量保存导致循环退出值 5 在之后执行超时逻辑时 所有i是同一个变量。因而输出都是同一个最终值
+
+### let
 
 ### 块作用域 暂时性死区
 
@@ -41,6 +51,38 @@ Var 变量提升。只是提升变量 赋值并不会提升
 暂时性死区（可与var做对比）
 
 ![image-20220921231013098](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212310688.png)
+
+无法全局声明
+
+![image-20220921232709782](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212327823.png)
+
+for循环中的问题 let
+
+![image-20220921234812463](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212348495.png)
+
+在使用let声明迭代变量时，js引擎在后台会为每个迭代循环声明一个新的迭代变量。每个settimeout引用的都是不同的变量实例。
+
+const
+
+与let基本相同，但是不能定义空变量 必须定义初始值
+
+![image-20220921235206730](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212352777.png)
+
+const声明的限制只适用于它指向的变量的引用。如果const变量引用的是一个对象，那么**修改这个对象内部的属性不违反const限制**
+
+![image-20220922001427966](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209220014008.png)
+
+for循环
+
+for in 和for of有意义
+
+![image-20220922003134236](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209220031268.png)
+
+
+
+## 数据类型
+
+
 
 ### Promise
 
