@@ -112,11 +112,19 @@ undefined是由null派生所以==比较相等
 
 ![image-20220922010413887](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209220104914.png)
 
-技巧；数值型前面加+号 默认转boolean
+![image-20220922010647383](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209220106414.png)
+
+技巧；数值型前面加+号 默认转boolean或者Boolean(value)直接转
 
 注意：数据类型来进行判断时，null undefined ‘’ 为false其余为true
 
 
+
+### Number
+
+精度问题 
+
+![image-20220922011340327](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209220113363.png)
 
 
 
