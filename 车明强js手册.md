@@ -82,9 +82,29 @@ for in 和for of有意义
 
 ## 数据类型
 
+几种数据解释
+
+### undefined
+
+undefined只有一个undefined值，声明但是没有初始化。
+
+无论声明但是未初始化还是未声明返回结果typeof都是undefined
+
+![image-20220922004522788](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209220045837.png)
+
+### Null
 
 
-### Promise
+
+注意：数据类型来进行判断时，null undefined ‘’ 为false其余为true
+
+
+
+
+
+
+
+## Promise
 
 三种状态 pending resolve reject
 
