@@ -16,9 +16,31 @@ Var 变量提升。只是提升变量 赋值并不会提升
 
 ![image-20220919225837741](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209192258322.png)
 
-### let
+但是提升的变量**却不是赋值. 如下打印null
 
-块作用域
+![image-20220921230838066](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212308633.png)
+
+### let.
+
+### 块作用域 暂时性死区
+
+![image-20220921225513228](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212255812.png)
+
+不存在变量提升 以及不能重复声明
+
+![image-20220921225649214](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212256790.png)
+
+在不同块级作用域中可以重复声明
+
+![image-20220921230557160](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212305739.png)
+
+可以定义空值(这个地方主要与const做对比)
+
+![image-20220921225905400](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212259991.png)
+
+暂时性死区（可与var做对比）
+
+![image-20220921231013098](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209212310688.png)
 
 ### Promise
 
