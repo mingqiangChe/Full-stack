@@ -94,7 +94,25 @@ undefined只有一个undefined值，声明但是没有初始化。
 
 ### Null
 
+null类型只有一个特殊值null，null值表示一个空对象指针，所以typeof判断为object. 可以用于对一个对象的初始化 let obj = null;
 
+![image-20220922005156985](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209220051036.png)
+
+undefined是由null派生所以==比较相等
+
+![image-20220922005523003](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209220055022.png)
+
+条件判断 （就是上文提出的‘’ null undefined判断都为false）
+
+![image-20220922005835253](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209220058292.png)
+
+### Boolean
+
+有两个字面值：true和false不等同于数值，因此true不等于1，false不等于0.
+
+![image-20220922010413887](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209220104914.png)
+
+技巧；数值型前面加+号 默认转boolean
 
 注意：数据类型来进行判断时，null undefined ‘’ 为false其余为true
 
