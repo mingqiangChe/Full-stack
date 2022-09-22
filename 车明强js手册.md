@@ -114,7 +114,7 @@ undefined是由null派生所以==比较相等
 
 ![image-20220922010647383](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209220106414.png)
 
-技巧；数值型前面加+号 默认转boolean或者Boolean(value)直接转
+技巧；字符串里是数值前面加+号 默认转boolean或者Boolean(value)直接转
 
 注意：数据类型来进行判断时，null undefined ‘’ 为false其余为true
 
@@ -125,6 +125,34 @@ undefined是由null派生所以==比较相等
 精度问题 
 
 ![image-20220922011340327](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209220113363.png)
+
+NaN
+
+表示不是数值 用于表示本来要返回数值操作失败了（而不是抛出错误）
+
+涉及NaN的操作都会返回NaN。NaN不等于包括NaN在内任何值
+
+![image-20220922125227219](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209221252256.png)
+
+### 数值转换
+
+Number 可以转任何数值
+
+number可以将null转为0
+
+![image-20220922130200998](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209221302031.png)
+
+parseInt和parseFloat主要用于将字符串转数值
+
+需要得到整数时优先使用parseInt
+
+![image-20220922130704199](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209221307225.png)
+
+parseFloat 十六进制始终返回0 十进制格式开头0会被忽略
+
+![image-20220922131426710](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209221314743.png)
+
+### String
 
 
 
