@@ -216,13 +216,33 @@ Symbol()函数不能与new关键字一起作为构造函数使用。
 
 symbol.asyncIterator作为一个属性表示一个方法，该方法返回对象默认的AsyncIterator。这个符号表示实现异步迭代器API的函数
 
-synbol.hasIntance 作为一个属性表示一个方法，该方法决定一个构造器对象是否认可一个对象是它的实例。
+symbol.hasIntance 作为一个属性表示一个方法，该方法决定一个构造器对象是否认可一个对象是它的实例。
 
 ![image-20220922224720116](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209222247147.png)
 
+symbol.isConcatSpreadable 作为一个属性表示一个布尔值，如果是true则意味着对象应该用Array.protype.concat()打平其数组元素。
+
+symbol.ieterator 作为一个属性表示一个方法，该方法返回对象默认的迭代器。由for-of语句使用
+
+symbol.match作为一个属性表示一个正则表达式方法，该方法用正则表达式区匹配字符串由String.prototype.match()方法使用
+
+symbol.replace作为一个属性表示一个正则表达式方法，该方法替换一个字符串中匹配的子串。由String.prototype.replace()方法使用。
+
+Symbol.search 作为一个属性表示一个正则表达式方法，该方法返回字符串中匹配正则表达式的索引。search为键的函数来对正则表达式求值。
+
+symbol.species作为一个属性表示一个函数值，该函数作为创建派生对象的构造函数。这个属性在内置类型中最常用，用于对内置类型实例方法的返回值暴露实例化派生对象的方法。
+
+symbol.split作为一个属性表示一个正则表达式方法，该方法在匹配正则表达式的索引位置拆分字符串。由String.prototype.split()方法使用。
+
+symbol.toPrimitive作为一个属性表示一个方法，该方法将对象转换为相应的原始值。
+
+symbol.toStringTag作为一个属性表示一个字符串，该字符串用于创建对象的默认字符串描述。由内置方法Object.prototype.toString()使用
+
+Symbol.unscopables作为一个属性表示一个对象，该对象所有的以及继承的属性，都会从关联对象的with环境绑定中排出。
 
 
 
+### Object
 
 
 
