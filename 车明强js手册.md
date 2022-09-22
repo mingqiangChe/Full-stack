@@ -312,13 +312,97 @@ Symbol.unscopables作为一个属性表示一个对象，该对象所有的以�
 
 ![image-20220923001207495](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230012531.png)
 
-
-
 逻辑与  &&
 
+true true true
 
+false true false
+
+false false false
+
+![image-20220923001854118](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230018158.png)
 
 逻辑或   ||
+
+true false true
+
+true true true
+
+false false false
+
+![image-20220923001924548](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230019582.png)
+
+**利用这个规则 可以避免给变量赋值null或undefinde**
+
+![image-20220923002132106](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230021145.png)
+
+### 乘性操作符
+
+取模操作符
+
+![image-20220923002426853](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230024898.png)
+
+### 指数操作符
+
+Math.pow()
+
+![image-20220923002636835](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230026871.png)
+
+### 关系操作符
+
+![image-20220923002843935](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230028984.png)
+
+### 相等操作符
+
+null和underfined 相等
+
+如果有NaN 相等操作符也返回false
+
+如果两个都是对象，则比较是不是同一个对象。不是则false
+
+![image-20220923003214258](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230032297.png)
+
+全等与不全等 ==    ===
+
+![image-20220923003337280](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230033318.png)
+
+### 条件操作符
+
+即三目运算
+
+![image-20220923003629507](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230036544.png)
+
+### 赋值操作符
+
+![image-20220923003814300](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230038336.png)
+
+![image-20220923004004315](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230040355.png)
+
+
+
+### 逗号操作符
+
+可以在一条语句中执行多个操作
+
+![image-20220923004325363](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230043402.png)
+
+
+
+## 语句
+
+## if
+
+在循环里return false时就是整个方法直接停止 如果是break是当前条件停止
+
+
+
+
+
+
+
+
+
+
 
 
 
