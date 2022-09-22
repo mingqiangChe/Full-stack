@@ -154,6 +154,44 @@ parseFloat 十六进制始终返回0 十进制格式开头0会被忽略
 
 ### String
 
+字符串不可变，一旦创建，值不可变。如果修改，就必须先销毁原始字符串，然后将包含新值的另一个字符串保存到该变量。
+
+转换  
+
+toString 可见于数值 布尔值 对象和字符串值 默认可传入参数表示进制位 2 8 10 16
+
+![image-20220922132321625](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209221323657.png)
+
+模版字面量
+
+![image-20220922132751497](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209221327535.png)
+
+字符串插值   所有插入的值都会默认使用toString强制转型为字符串
+
+![image-20220922133104513](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209221331546.png)
+
+插值表达式可以调用函数和**方法**
+
+![image-20220922134127896](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209221341931.png)
+
+![image-20220922134538639](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209221345669.png)
+
+模版字面量标签函数
+
+通过标签函数可以自定义插值行为。标签函数会接收被插值记号分隔后的模版和对每个表达式求值的结果。
+
+![image-20220922212821649](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209222128680.png)
+
+
+
+对于有n个插值的模版字面量，传给标签函数的表达式参数的个数始终是n，而传给标签函数的第一个参数所包含的字符串个数则始终是n+1.需要如下操作
+
+![image-20220922214752606](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209222147641.png)
+
+
+
+### Symbol
+
 
 
 
