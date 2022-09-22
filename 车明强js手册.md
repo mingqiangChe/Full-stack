@@ -1,3 +1,5 @@
+
+
 初衷：方便查阅使用
 
 # 语言基础
@@ -392,7 +394,27 @@ null和underfined 相等
 
 ## if
 
-在循环里return false时就是整个方法直接停止 如果是break是当前条件停止
+在循环里return false时就是整个方法直接停止 如果是break是当前循环体停止
+
+break
+
+![image-20220923005610313](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230056350.png)
+
+return
+
+![image-20220923005854157](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230058197.png)
+
+## do-while
+
+循环体中的代码执行后才会对退出条件进行求值。循环体内代码至少执行一次
+
+![image-20220923004956149](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230049200.png)
+
+
+
+### while
+
+
 
 
 
