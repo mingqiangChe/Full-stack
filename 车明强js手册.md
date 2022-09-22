@@ -286,19 +286,39 @@ Symbol.unscopables作为一个属性表示一个对象，该对象所有的以�
 
 ### 一元加和减
 
-如果+放在数值字符串前边默认类型转换数值型
+如果+放在数值字符串前边默认类型转换数值型 包括布尔值true false
 
 ![image-20220922232939575](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209222329612.png)
 
 
 
+![image-20220922233401396](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209222334437.png)
+
+-则变成负值
+
+![image-20220922233453748](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209222334776.png)
+
+### 布尔操作符
+
+逻辑非  !
+
+**暗含规则 0 、‘’、null、undefined、NaN为false其余都为true**
+
+![image-20220923000701678](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230007721.png)
+
+![image-20220923000837407](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230008456.png)
+
+使用!!可以把任意值转换为布尔值。相当于使用Boolean()
+
+![image-20220923001207495](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209230012531.png)
 
 
 
+逻辑与  &&
 
 
 
-
+逻辑或   ||
 
 
 
