@@ -719,7 +719,47 @@ javascript中的内存泄漏大部分是由不合理的引用导致的。
 
 ## 基本引用类型
 
-引用值（或者对象）是某个特定引用类型的实例。引用类型是把数据和功能组织到一起的结构。虽然从技术上讲
+引用值（或者对象）是某个特定引用类型的实例。引用类型是把数据和功能组织到一起的结构。虽然从技术上讲javascript是一门面向对象语言，但ECMAScript缺少传统的面向对象编程语言所具备的某些基本机构，包括类和接口。引用类型被称为对象定义，因为描述自己的对象应有的属性和方法。
+
+对象被认为是某个特定引用类型的实例。新对象通过使用new操作符后跟一个构造函数来创建。构造函数就是创建新对象的函数。
+
+![image-20220929224629655](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209292246706.png)
+
+如上图，这行代码创建了引用类型Date的一个新实例，并将它保存在变量now中。Date()在这里就是构造函数，它负责创建一个只有默认属性和方法的简单对象。
+
+### Date
+
+#### 日期格式化方法
+
+![image-20220929230140981](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209292301023.png)
+
+![image-20220929230402356](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209292304400.png)
+
+#### 日期组件方法
+
+![image-20220929230613498](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209292306542.png)
+
+
+
+![image-20220929231315971](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209292313012.png)
+
+
+
+![image-20220929230632170](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209292306211.png)
+
+![image-20220929231433941](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209292314990.png)
+
+
+
+### RegExp
+
+ECMAScript通过RegExp类型支持正则表达式。
+
+正则表达式pattern可以是任何简单或复杂的正则表达式，包括字符类、限定符、分组、向前查找和反向引用。每个正则表达式可以带零个或多个flags（标记），用于控制正则表达式的行为。
+
+![image-20220929232443453](https://chemingqiang.oss-cn-shenzhen.aliyuncs.com/img/202209292324497.png)
+
+
 
 
 
