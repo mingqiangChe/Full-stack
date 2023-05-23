@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 定义原型方法
+    this.data={}
+    // console.log(this,'1');
+    const person=function(){
+      // console.log(this);
+      this.data={name:'lili'}
+    }
+    person.prototype.change=()=>{
+      console.log('30');
+    }
+    let cc =new person()
+    cc.change()
+  </script>
+</body>
+</html>

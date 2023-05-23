@@ -229,7 +229,6 @@
           if (item.children?.length) {
             result.push(...treeToFlat(item.children, item.id))
           }
-        })
         return result
       }
       const res1 = treeToFlat(treeData)
@@ -277,7 +276,7 @@
       const res2 = flatToTree(r)
       console.log("扁平化数据转树形数据结构", res2)
     </script>
-    <h1>for 循环遍历</h1>
+    <h1>for 循环遍历修改</h1>
     <script>
       getTreeData(data)
       function getTreeData(data) {

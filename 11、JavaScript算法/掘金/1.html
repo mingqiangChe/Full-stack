@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+              //    function deepClone(obj={}){
+              //  if(obj typeof != Object){
+              //    return obj
+              //  }
+              //  let result;
+              //  if(obj instanceof Array){
+              //    result=[]
+              //  }else{
+              //    result={}
+              //  }
+              // for (const key in obj) {
+              //  if (obj.hasOwnProperty(key)) {
+              //   result[key]=deepClone(obj[key])
+              //  }
+              // }
+              // return result
+              //    }
+            // class Promise{
+            //   constructor(executor){
+            //     this.status='pending'
+            //     this.result=undefined
+            //     this.reason=undefined
+            //   }
+            //   const resove =(res)=>{
+            //     this.status='fuilled'
+            //     this.result=res
+            //   }
+            //   const reject =(err)=>{
+            //     this.status='rejected'
+            //     this.reason=err
+            //   }
+            //   executor(resove,reject)
+            // }
+            const add=(x,y,z)=>{
+              return x+y+z
+            }
+            // console.log(add(1,2,2));
+            const mycurring=(fn,...args){
+      if(args.length>=fn.length){
+        return fn(...args)
+      }else{
+        return (...args2)=>{
+          mycurring(fn,...args,...args2)
+        }
+      }
+
+            }
+    </script>
+  </body>
+</html>
